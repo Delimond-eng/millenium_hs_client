@@ -10,7 +10,7 @@
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);"
+                                    <li class="breadcrumb-item"><a href="#/home/patients/list"
                                             class="btn btn-info btn-sm text-white"><i class="ri-list-check-2"></i> Voir la
                                             liste des patients</a></li>
                                 </ol>
@@ -71,7 +71,7 @@
                                                     class="text-danger">*</sup></label>
                                             <div class="form-icon">
                                                 <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>--------</option>
+                                                    <option selected label="Sélectionner un sexe"></option>
                                                     <option value="M">Masculin</option>
                                                     <option value="F">Féminin</option>
                                                 </select>
@@ -193,7 +193,8 @@
         </footer>
 
         <div class="customizer-setting d-block">
-            <div class="btn-info text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2">
+            <div class="btn-info text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2"
+                @click.prevent="$router.push('/home/patients/list')">
                 <i class="ri-list-check-2 fs-22"></i>
             </div>
         </div>
