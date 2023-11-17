@@ -44,7 +44,8 @@
                                     <a href="#" class="nav-link" data-key="t-chat"> Liste des patients </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-chat"> Création patient </a>
+                                    <a href="#/home/patient/create" class="nav-link" data-key="t-chat"> Création patient
+                                    </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link" data-key="t-chat"> Assignation patient </a>
