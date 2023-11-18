@@ -56,11 +56,11 @@
                                                             class="d-flex align-items-center justify-content-center w-100 mt-4">
 
                                                             <button type="button"
-                                                                class="btn btn-success btn-label right nexttab nexttab me-4 w-100 flex-fill"><i
+                                                                class="btn btn-success btn-border btn-label right nexttab nexttab me-4 w-100 flex-fill"><i
                                                                     class="ri-link label-icon align-middle fs-16 ms-2 "></i>Assigner</button>
 
                                                             <button type="button"
-                                                                class="btn btn-light btn-label right flex-fill w-100"><i
+                                                                class="btn btn-light btn-border btn-label right flex-fill w-100"><i
                                                                     class="ri-restart-line label-icon align-middle fs-16 ms-2"></i>
                                                                 Annuler</button>
                                                         </div>

@@ -11,7 +11,8 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="#/home/patients/list"
-                                            class="btn btn-info btn-sm text-white"><i class="ri-list-check-2"></i> Voir la
+                                            class="btn btn-info btn-border btn-sm text-white"><i
+                                                class="ri-list-check-2"></i> Voir la
                                             liste des patients</a></li>
                                 </ol>
                             </div>
@@ -157,9 +158,10 @@
 
                                 </div>
                                 <div class="d-flex align-items-start mt-4">
-                                    <button type="button" class="btn btn-success  btn-label right nexttab nexttab me-2"><i
+                                    <button type="button"
+                                        class="btn btn-success btn-border  btn-label right nexttab nexttab me-2"><i
                                             class="ri-check-double-fill label-icon align-middle fs-16 ms-2"></i>Enregistrer</button>
-                                    <button type="button" class="btn btn-light  btn-label right"><i
+                                    <button type="button" class="btn btn-light btn-border  btn-label right"><i
                                             class="ri-restart-line label-icon align-middle fs-16 ms-2"></i>
                                         Annuler</button>
                                 </div>

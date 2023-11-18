@@ -8,14 +8,6 @@
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Liste des médecins</h4>
 
-                            <div class="page-title-right">
-                                <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="#/home/med/create"
-                                            class="btn btn-success btn-sm text-white"><i class="ri-add-line"></i>
-                                            Création nouveau médecin</a></li>
-                                </ol>
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -103,7 +95,7 @@
 
         <div class="customizer-setting d-block">
             <div class="btn-success text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2"
-                @click.prevent="$router.push('/home/patient/create')">
+                @click.prevent="$router.push('/home/med/create')">
                 <i class="ri-add-line fs-22"></i>
             </div>
         </div>

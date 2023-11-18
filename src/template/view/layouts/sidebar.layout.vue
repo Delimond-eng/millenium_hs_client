@@ -84,10 +84,12 @@
                         <div class="collapse menu-dropdown" id="sidebarLanding">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-one-page"> Voir consultations </a>
+                                    <a href="#/home/consults/list" class="nav-link" data-key="t-one-page"> Liste des
+                                        consultations </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-nft-landing"> Création consultations
+                                    <a href="#/home/consult/create" class="nav-link" data-key="t-nft-landing"> Création
+                                        consultations
                                     </a>
                                 </li>
 
@@ -103,10 +105,12 @@
                         <div class="collapse menu-dropdown" id="consultLanding">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-one-page"> Voir prescriptions </a>
+                                    <a href="#/home/prescription/create" class="nav-link" data-key="t-one-page"> Liste des
+                                        prescriptions </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-nft-landing"> Création préscriptions
+                                    <a href="#/home/prescriptions/list" class="nav-link" data-key="t-nft-landing"> Création
+                                        préscriptions
                                     </a>
                                 </li>
                             </ul>
@@ -150,6 +154,5 @@
 <script>
 export default {
     name: "SidebarLayout",
-
 }
 </script>
