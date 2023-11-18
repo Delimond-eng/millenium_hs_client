@@ -36,10 +36,9 @@
                                             <label for="patientCode" class="form-label">Patient code</label>
                                             <div class="form-icon">
                                                 <input type="text" class="form-control form-control-icon" id="patientCode"
-                                                    value="A001" readonly>
+                                                    value="A001" disabled>
                                                 <i class="ri-account-pin-box-line"></i>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="col-md-5">
@@ -158,11 +157,11 @@
 
                                 </div>
                                 <div class="d-flex align-items-start mt-4">
-                                    <button type="button" class="btn btn-light btn-label previestab me-2"><i
-                                            class="ri-restart-line label-icon align-middle fs-16 me-2"></i>
-                                        Annuler</button>
-                                    <button type="button" class="btn btn-success btn-label right nexttab nexttab"><i
+                                    <button type="button" class="btn btn-success  btn-label right nexttab nexttab me-2"><i
                                             class="ri-check-double-fill label-icon align-middle fs-16 ms-2"></i>Enregistrer</button>
+                                    <button type="button" class="btn btn-light  btn-label right"><i
+                                            class="ri-restart-line label-icon align-middle fs-16 ms-2"></i>
+                                        Annuler</button>
                                 </div>
                             </div>
                         </div>

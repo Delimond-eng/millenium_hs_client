@@ -71,7 +71,7 @@
                                         </div>
 
                                         <div class="mt-4">
-                                            <button class="btn btn-success btn-lg btn-animation w-100"
+                                            <button class="btn btn-success text-uppercase w-100"
                                                 @click.prevent="$router.push('/home')" type="submit">Connecter</button>
                                         </div>
                                     </form>

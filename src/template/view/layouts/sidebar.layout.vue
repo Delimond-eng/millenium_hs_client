@@ -29,7 +29,7 @@
                 <ul class="navbar-nav" id="navbar-nav">
                     <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link">
+                        <a class="nav-link menu-link" href="#/home/dash">
                             <i class="ri-apps-2-line"></i> <span data-key="t-dashboards">Tableau de bord</span>
                         </a>
                     </li> <!-- end Dashboard Menu -->
@@ -49,7 +49,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-chat"> Assignation patient </a>
+                                    <a href="#/home/patients/assign" class="nav-link" data-key="t-chat"> Assignation patient
+                                    </a>
                                 </li>
 
                             </ul>
@@ -63,10 +64,10 @@
                         <div class="collapse menu-dropdown" id="med">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-chat"> Liste des médecins </a>
+                                    <a href="#/home/meds/list" class="nav-link" data-key="t-list"> Liste des médecins </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-chat"> Création médecin </a>
+                                    <a href="#/home/med/create" class="nav-link" data-key="t-create"> Création médecin </a>
                                 </li>
                             </ul>
                         </div>
@@ -149,5 +150,6 @@
 <script>
 export default {
     name: "SidebarLayout",
+
 }
 </script>
