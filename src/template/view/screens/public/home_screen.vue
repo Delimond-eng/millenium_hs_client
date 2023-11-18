@@ -5,7 +5,6 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col">
-
                         <div class="h-100">
                             <div class="row mb-3 pb-1">
                                 <div class="col-12">
@@ -16,53 +15,120 @@
                                                 travailler.
                                             </p>
                                         </div>
-                                        <div class="mt-3 mt-lg-0">
-                                            <form action="javascript:void(0);">
-                                                <div class="row g-3 mb-0 align-items-center">
-                                                    <div class="col-sm-auto">
-                                                        <div class="input-group">
-                                                            <input type="text"
-                                                                class="form-control border-0 dash-filter-picker shadow"
-                                                                data-provider="flatpickr" data-range-date="true"
-                                                                data-date-format="d M, Y"
-                                                                data-deafult-date="01 Jan 2022 to 31 Jan 2022">
-                                                            <div
-                                                                class="input-group-text bg-primary border-primary text-white">
-                                                                <i class="ri-calendar-2-line"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--end col-->
-                                                    <div class="col-auto">
-                                                        <button type="button" class="btn btn-soft-success"><i
-                                                                class="ri-add-circle-line align-middle me-1"></i> Add
-                                                            Product</button>
-                                                    </div>
-                                                    <!--end col-->
-                                                    <div class="col-auto">
-                                                        <button type="button"
-                                                            class="btn btn-soft-info btn-icon waves-effect waves-light layout-rightside-btn"><i
-                                                                class="ri-pulse-line"></i></button>
-                                                    </div>
-                                                    <!--end col-->
-                                                </div>
-                                                <!--end row-->
-                                            </form>
-                                        </div>
+
                                     </div><!-- end card header -->
                                 </div>
                                 <!--end col-->
                             </div>
+
+                            <div class="row">
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="dropdown float-end">
+                                                <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <span class="text-muted fs-18"><i
+                                                            class="mdi mdi-dots-vertical"></i></span>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" href="#!">Favorite</a>
+                                                    <a class="dropdown-item" href="#!">Apply Now</a>
+                                                </div>
+                                            </div>
+                                            <div class="mb-2 pb-2">
+                                                <img src="assets/images/companies/patient_1.png" alt="" class="avatar-sm">
+                                            </div>
+                                            <h6 class="fs-15 fw-semibold">201 </h6>
+                                            <p class="text-muted mb-0"><i class="ri-wheelchair-line align-bottom"></i>
+                                                Nombre des patients</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="dropdown float-end">
+                                                <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <span class="text-muted fs-18"><i
+                                                            class="mdi mdi-dots-vertical"></i></span>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" href="#!">Favorite</a>
+                                                    <a class="dropdown-item" href="#!">Apply Now</a>
+                                                </div>
+                                            </div>
+                                            <div class="mb-2 pb-2">
+                                                <img src="assets/images/companies/doctor.png" alt="" class="avatar-sm">
+                                            </div>
+                                            <h6 class="fs-15 fw-semibold">201 </h6>
+                                            <p class="text-muted mb-0"><i class=" ri-user-2-line align-bottom"></i>
+                                                Nombre des médecins</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="dropdown float-end">
+                                                <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <span class="text-muted fs-18"><i
+                                                            class="mdi mdi-dots-vertical"></i></span>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" href="#!">Favorite</a>
+                                                    <a class="dropdown-item" href="#!">Apply Now</a>
+                                                </div>
+                                            </div>
+                                            <div class="mb-2 pb-2">
+                                                <img src="assets/images/companies/prescription.png" alt=""
+                                                    class="avatar-sm">
+                                            </div>
+                                            <h6 class="fs-15 fw-semibold">201 </h6>
+                                            <p class="text-muted mb-0"><i class="bx bxs-first-aid align-bottom"></i>
+                                                Préscriptions en cours</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="dropdown float-end">
+                                                <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <span class="text-muted fs-18"><i
+                                                            class="mdi mdi-dots-vertical"></i></span>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" href="#!">Favorite</a>
+                                                    <a class="dropdown-item" href="#!">Apply Now</a>
+                                                </div>
+                                            </div>
+                                            <div class="mb-2 pb-2">
+                                                <img src="assets/images/companies/consult.png" alt="" class="avatar-sm">
+                                            </div>
+                                            <h6 class="fs-15 fw-semibold">201 </h6>
+                                            <p class="text-muted mb-0"><i class="ri-stethoscope-line align-bottom"></i>
+                                                Consultations journalières</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!--end row-->
-
-
                         </div> <!-- end .h-100-->
 
                     </div> <!-- end col -->
-
-
                 </div>
-
             </div>
             <!-- container-fluid -->
         </div>
