@@ -32,8 +32,11 @@
                                                             class="mdi mdi-dots-vertical"></i></span>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="#!">Favorite</a>
-                                                    <a class="dropdown-item" href="#!">Apply Now</a>
+                                                    <a class="dropdown-item" href="#/home/patient/create"> <i
+                                                            class="ri-add-line me-1"></i>
+                                                        Nouveau patient</a>
+                                                    <a class="dropdown-item" href="#/home/patients/list"><i
+                                                            class="ri-list-check-2 me-1"></i>Liste des patients</a>
                                                 </div>
                                             </div>
                                             <div class="mb-2 pb-2">
@@ -58,8 +61,11 @@
                                                             class="mdi mdi-dots-vertical"></i></span>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="#!">Favorite</a>
-                                                    <a class="dropdown-item" href="#!">Apply Now</a>
+                                                    <a class="dropdown-item" href="#/home/med/create"> <i
+                                                            class="ri-add-line me-1"></i>
+                                                        Nouveau médecin</a>
+                                                    <a class="dropdown-item" href="#/home/meds/list"><i
+                                                            class="ri-list-check-2 me-1"></i>Liste des médecin</a>
                                                 </div>
                                             </div>
                                             <div class="mb-2 pb-2">
@@ -83,8 +89,11 @@
                                                             class="mdi mdi-dots-vertical"></i></span>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="#!">Favorite</a>
-                                                    <a class="dropdown-item" href="#!">Apply Now</a>
+                                                    <a class="dropdown-item" href="#/home/prescription/create"> <i
+                                                            class="ri-add-line me-1"></i>
+                                                        Nouvelle préscription</a>
+                                                    <a class="dropdown-item" href="#/home/prescription/create"><i
+                                                            class="ri-list-check-2 me-1"></i>Liste des préscriptions</a>
                                                 </div>
                                             </div>
                                             <div class="mb-2 pb-2">
@@ -109,8 +118,11 @@
                                                             class="mdi mdi-dots-vertical"></i></span>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="#!">Favorite</a>
-                                                    <a class="dropdown-item" href="#!">Apply Now</a>
+                                                    <a class="dropdown-item" href="#/home/consult/create"> <i
+                                                            class="ri-add-line me-1"></i>
+                                                        Nouvelle consultation</a>
+                                                    <a class="dropdown-item" href="#/home/consults/list"><i
+                                                            class="ri-list-check-2 me-1"></i>Liste des consultations</a>
                                                 </div>
                                             </div>
                                             <div class="mb-2 pb-2">

@@ -5,7 +5,7 @@
         <div class="navbar-brand-box">
 
             <!-- Light Logo-->
-            <a href="#" class="logo logo-light">
+            <a href="#" class="logo logo-light" id="app-logo">
                 <span class="logo-lg d-flex align-items-center " style="height:80px;">
                     <svg width="28px" height="30px" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -120,7 +120,7 @@
 
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Administrations</span></li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" id="config-menu">
                         <a class="nav-link menu-link" href="#adminLanding" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="adminLanding">
                             <i class="ri-settings-2-line"></i> <span data-key="t-landing">Configurations</span>
@@ -136,7 +136,9 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-nft-landing"> Configuration services
+                                    <a href="javascript:void(0)" class="nav-link" data-bs-toggle="offcanvas"
+                                        data-bs-target="#theme-settings-offcanvas" aria-controls="theme-settings-offcanvas">
+                                        Configuration services
                                     </a>
                                 </li>
                             </ul>
@@ -149,10 +151,15 @@
 
         <div class="sidebar-background"></div>
     </div>
+    <service-settings-canvas />
 </template>
 
 <script>
+import ServiceSettingsCanvas from "../modals/modal_setting_service"
 export default {
     name: "SidebarLayout",
+    components: {
+        ServiceSettingsCanvas,
+    },
 }
 </script>
