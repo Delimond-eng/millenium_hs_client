@@ -7,14 +7,12 @@
                     <div class="col-12 col-md-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Création médecin</h4>
-
                         </div>
                     </div>
                 </div>
                 <!-- end page title -->
                 <div class="row">
                     <div class="col-md-12">
-
                         <div class="card">
                             <div class="card-header align-items-start justify-content-center d-flex flex-column">
                                 <h4 class="card-title mb-0 flex-grow-1">Médecin infos</h4>

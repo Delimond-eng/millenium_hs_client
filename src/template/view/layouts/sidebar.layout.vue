@@ -22,7 +22,7 @@
             </button>
         </div>
 
-        <div id="scrollbar">
+        <div data-simplebar-auto-hide="false" data-simplebar class="h-100">
             <div class="container-fluid">
                 <div id="two-column-menu">
                 </div>
@@ -105,13 +105,8 @@
                         <div class="collapse menu-dropdown" id="consultLanding">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="#/home/prescription/create" class="nav-link" data-key="t-one-page"> Liste des
+                                    <a href="#/home/prescriptions/list" class="nav-link" data-key="t-one-page"> Liste des
                                         prescriptions </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#/home/prescriptions/list" class="nav-link" data-key="t-nft-landing"> Création
-                                        préscriptions
-                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -151,15 +146,11 @@
 
         <div class="sidebar-background"></div>
     </div>
-    <service-settings-canvas />
 </template>
 
 <script>
-import ServiceSettingsCanvas from "../modals/modal_setting_service"
+
 export default {
-    name: "SidebarLayout",
-    components: {
-        ServiceSettingsCanvas,
-    },
+    name: "SidebarLayout"
 }
 </script>

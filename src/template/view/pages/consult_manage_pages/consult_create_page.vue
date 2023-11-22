@@ -7,101 +7,335 @@
                     <div class="col-12 col-md-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Consultation</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);"
+                                            class="btn btn-primary btn-sm text-white"> <i class="ri-phone-line"></i> Appeler
+                                            le patient</a></li>
+
+                                </ol>
+                            </div>
                         </div>
+
+
                     </div>
                 </div>
+
                 <!-- end page title -->
+
+
                 <div class="row">
                     <div class="col-md-12">
+                        <h6 class="mb-3">Veuillez consulter le patient sélectionné !</h6>
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title mb-0 flex-grow-1">Consultation du patient</h4>
-                            </div>
                             <div class="card-body">
-                                <div class="row ">
-                                    <div class="col-md-12">
-                                        <label for="patientCode" class="form-label">Sélectionnez un patient concerné
-                                            <sup class="text-danger">*</sup></label>
-                                        <select class="patient-select2 select2" name="state">
-                                            <option>--Sélectionnez un patient--</option>
-                                            <option value="AL">Alabama</option>
-                                            <option value="MA">Madrid</option>
-                                            <option value="TO">Toronto</option>
-                                            <option value="LO">Londan</option>
-                                            <option value="WY">Wyoming</option>
-                                        </select>
-                                    </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="nav nav-pills flex-column nav-pills-tab custom-verti-nav-pills text-center"
+                                            role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link d-flex flex-column justify-content-center align-items-center active show "
+                                                id="custom-v-pills-home-tab" data-bs-toggle="pill"
+                                                href="#custom-v-pills-home" role="tab" aria-controls="custom-v-pills-home"
+                                                aria-selected="true">
+                                                <img src="assets/images/companies/patient_3.png"
+                                                    class="d-block fs-20 mb-1 text-center" style="height: 40px;"> Patient
+                                                infos
+                                            </a>
+                                            <a class="nav-link d-flex flex-column justify-content-center align-items-center"
+                                                id="custom-v-pills-profile-tab" data-bs-toggle="pill"
+                                                href="#custom-v-pills-profile" role="tab"
+                                                aria-controls="custom-v-pills-profile" aria-selected="false">
+                                                <img src="assets/images/companies/consult.png"
+                                                    class="d-block fs-20 mb-1 text-center" style="height: 40px;">
+                                                Consultations
+                                            </a>
+                                            <a class="nav-link d-flex flex-column justify-content-center align-items-center"
+                                                id="custom-v-pills-messages-tab" data-bs-toggle="pill"
+                                                href="#custom-v-pills-messages" role="tab"
+                                                aria-controls="custom-v-pills-messages" aria-selected="false">
+                                                <!-- <i class="las la-file-alt  d-block fs-20 mb-1"></i> --> <img
+                                                    src="assets/images/companies/prescription2.png"
+                                                    class="d-block fs-20 mb-1 text-center" style="height: 40px;">
+                                                Prescriptions
+                                            </a>
+                                        </div>
+                                    </div> <!-- end col-->
+                                    <div class="col-lg-9">
+                                        <div class="tab-content text-muted mt-3 mt-lg-0">
+                                            <div class="tab-pane fade active show" id="custom-v-pills-home" role="tabpanel"
+                                                aria-labelledby="custom-v-pills-home-tab">
+                                                <form action="#">
+                                                    <div class="row g-3">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="firstnamefloatingInput" value="KUBI KAYEMBE"
+                                                                    readonly>
+                                                                <label for="firstnamefloatingInput" class="text-primary">Nom
+                                                                    & postnom</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="lastnamefloatingInput" value="FLORY" readonly>
+                                                                <label for="lastnamefloatingInput"
+                                                                    class="text-primary">Prénom</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="sexefloatingInput" value="M" readonly>
+                                                                <label for="sexefloatingInput"
+                                                                    class="text-primary">Sexe</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="phonefloatingInput" value="+(243) 813718833"
+                                                                    readonly>
+                                                                <label for="phonefloatingInput"
+                                                                    class="text-primary">Téléphone</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="adressefloatingInput1"
+                                                                    value="20, Bateke, Kingabwa, Limete Kinshasa" readonly>
+                                                                <label for="adressefloatingInput1"
+                                                                    class="text-primary">Adresse</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="agefloatingInput" value="25" readonly>
+                                                                <label for="agefloatingInput"
+                                                                    class="text-primary">Age</label>
+                                                            </div>
+                                                        </div>
 
-                                    <div class="col-md-12 mt-2">
-                                        <label for="consultMotif" class="form-label">Motif de la consultation
-                                            <sup class="text-danger">*</sup></label>
-                                        <textarea class="form-control" id="consultMotif"
-                                            placeholder="Entrer le motif de la consultation..."></textarea>
-                                    </div>
-                                </div>
-                            </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="taillefloatingInput" value="1,70" readonly>
+                                                                <label for="taillefloatingInput"
+                                                                    class="text-primary">Taille</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-3">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="poidsfloatingInput" value="63,70" readonly>
+                                                                <label for="poidsfloatingInput"
+                                                                    class="text-primary">Poids</label>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-lg-3">
+                                                            <div class="form-floating">
+                                                                <input type="text" class="form-control"
+                                                                    id="tempfloatingInput" value="34°C" readonly>
+                                                                <label for="tempfloatingInput"
+                                                                    class="text-primary">Temperature</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!--end tab-pane-->
+                                            <div class="tab-pane fade" id="custom-v-pills-profile" role="tabpanel"
+                                                aria-labelledby="custom-v-pills-profile-tab">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row ">
+                                                            <div class="col-md-12 mt-2">
+                                                                <label for="consultMotif" class="form-label">Motif
+                                                                    de la consultation
+                                                                    <sup class="text-danger">*</sup></label>
+                                                                <div class="form-icon right">
+                                                                    <input type="text"
+                                                                        class="form-control form-control-icon"
+                                                                        id="iconrightInput"
+                                                                        placeholder="Entrer le motif de la consultation...">
+                                                                    <i class="ri-edit-box-fill"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Les antécedents
+                                                        </h6>
+                                                        <div class="border border-dashed border-primary"></div>
+                                                        <div class="row mt-2">
+                                                            <div class="col-md-4">
+                                                                <label for="consultMotif" class="form-label">Familiaux
+                                                                </label>
+                                                                <textarea class="form-control"
+                                                                    placeholder="antécedents familiaux..."></textarea>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="consultMotif" class="form-label">Médicaux
+                                                                </label>
+                                                                <textarea class="form-control"
+                                                                    placeholder="antécedents médicaux..."></textarea>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <label for="consultMotif" class="form-label">Chirurgicaux
+                                                                </label>
+                                                                <textarea class="form-control"
+                                                                    placeholder="antécedents chirurgicaux..."></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Consultation
+                                                            détails</h6>
+                                                        <div class="border border-dashed border-primary mb-3"></div>
+                                                        <!-- <div class="row d-flex mt-2"
+                                                            v-for="(detail, index) in consultDetails" :key="index">
+                                                            <div class="col-md-5">
+                                                                <div>
+                                                                    <label for="iconrightInput"
+                                                                        class="form-label">Désignation</label>
+                                                                    <div class="form-icon right">
+                                                                        <input type="text"
+                                                                            class="form-control form-control-icon"
+                                                                            id="iconrightInput"
+                                                                            placeholder="Entrer la designation..."
+                                                                            v-model="detail.title">
+                                                                        <i class="bx bx-body"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <div>
+                                                                    <label for="iconrightInput"
+                                                                        class="form-label">Valeur</label>
+                                                                    <div class="form-icon right">
+                                                                        <input type="text"
+                                                                            class="form-control form-control-icon"
+                                                                            id="iconrightInput"
+                                                                            placeholder="Entrer la valeur..."
+                                                                            v-model="detail.value">
+                                                                        <i class="bx bx-body"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2 align-items-end">
+                                                                <div>
+                                                                    <label for="iconrightInput" class="form-label "
+                                                                        style="visibility: hidden;">Actions</label>
+                                                                    <div class="d-flex">
+                                                                        <button class="btn btn-info btn-border me-1"
+                                                                            @click.prevent="consultDetails.push({ title: '', value: '' })"><i
+                                                                                class="ri-add-line"></i></button>
+                                                                        <button class="btn btn-light btn-border me-1"
+                                                                            @click.prevent="consultDetails.splice(index, 1)"><i
+                                                                                class="ri-close-line"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+
+
+                                                        <!-- wizard editor -->
+
+                                                        <textarea class="editor"></textarea>
+                                                        <div class="d-flex align-items-end justify-content-end w-100 mt-4">
+                                                            <button type="button"
+                                                                class="btn btn-light btn-border btn-label right me-2"><i
+                                                                    class="ri-restart-line label-icon align-middle fs-16 ms-2"></i>
+                                                                Annuler</button>
+
+                                                            <button type="button" @click.prevent="getConsultValues"
+                                                                class="btn btn-success btn-border btn-label right nexttab nexttab "><i
+                                                                    class="ri-check-double-line label-icon align-middle fs-16 ms-2 "></i>Soumettre
+                                                                la
+                                                                consultation</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!--end tab-pane-->
+                                            <div class="tab-pane fade" id="custom-v-pills-messages" role="tabpanel"
+                                                aria-labelledby="custom-v-pills-messages-tab">
+                                                <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Veuillez prescrire le
+                                                    patient !</h6>
+                                                <div class="border border-dashed border-primary"></div>
+
+                                                <div class="row d-flex mt-2 p-2"
+                                                    v-for="(detail, index) in prescriptionDetails" :key="index">
+                                                    <div class="col-md-5">
+                                                        <div>
+                                                            <label for="iconrightInput"
+                                                                class="form-label">Traitement</label>
+                                                            <div class="form-icon right">
+                                                                <input type="text" class="form-control form-control-icon"
+                                                                    id="iconrightInput"
+                                                                    placeholder="Entrer la designation..."
+                                                                    v-model="detail.title">
+                                                                <i class="ri-health-book-line"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div>
+                                                            <label for="iconrightInput" class="form-label">Mode
+                                                                d'emploi</label>
+                                                            <div class="form-icon right">
+                                                                <input type="text" class="form-control form-control-icon"
+                                                                    id="iconrightInput" placeholder="Entrer la valeur..."
+                                                                    v-model="detail.value">
+                                                                <i class="ri-health-book-line"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 align-items-end">
+                                                        <div>
+                                                            <label for="iconrightInput" class="form-label "
+                                                                style="visibility: hidden;">Actions</label>
+                                                            <div class="d-flex">
+                                                                <button class="btn btn-outline-primary btn-icon me-1"
+                                                                    @click.prevent="prescriptionDetails.push({ title: '', value: '' })"><i
+                                                                        class="ri-add-line"></i></button>
+                                                                <button class="btn btn-light btn-icon"
+                                                                    @click.prevent="prescriptionDetails.splice(index, 1)"><i
+                                                                        class="ri-close-line"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex align-items-end justify-content-end w-100 mt-4">
+                                                    <button type="button"
+                                                        class="btn btn-light btn-border btn-label right me-2"><i
+                                                            class="ri-restart-line label-icon align-middle fs-16 ms-2"></i>
+                                                        Annuler</button>
+
+                                                    <button type="button"
+                                                        class="btn btn-success btn-border btn-label right nexttab nexttab "><i
+                                                            class="ri-check-double-line label-icon align-middle fs-16 ms-2 "></i>Valider
+                                                        & imprimer
+                                                        la prescription</button>
+                                                </div>
+                                            </div>
+                                            <!--end tab-pane-->
+                                        </div>
+                                    </div> <!-- end col-->
+                                </div> <!-- end row-->
+                            </div><!-- end card-body -->
                         </div>
+                        <!--end card-->
                     </div>
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body text-muted">
-                                <h5 class="fs-14 text-start mb-3">Consultation détails</h5>
-                                <div class="row d-flex mt-2" v-for="(detail, index) in consultDetails" :key="index">
-                                    <div class="col-md-5">
-                                        <div>
-                                            <label for="iconrightInput" class="form-label">Désignation</label>
-                                            <div class="form-icon right">
-                                                <input type="text" class="form-control form-control-icon"
-                                                    id="iconrightInput" placeholder="Entrer la designation..."
-                                                    v-model="detail.title">
-                                                <i class="bx bx-body"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div>
-                                            <label for="iconrightInput" class="form-label">Valeur</label>
-                                            <div class="form-icon right">
-                                                <input type="text" class="form-control form-control-icon"
-                                                    id="iconrightInput" placeholder="Entrer la valeur..."
-                                                    v-model="detail.value">
-                                                <i class="bx bx-body"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 align-items-end">
-                                        <div>
-                                            <label for="iconrightInput" class="form-label "
-                                                style="visibility: hidden;">Actions</label>
-                                            <div class="d-flex">
-                                                <button class="btn btn-info btn-border me-1"
-                                                    @click.prevent="consultDetails.push({ title: '', value: '' })"><i
-                                                        class="ri-add-line"></i></button>
-                                                <button class="btn btn-light btn-border me-1"
-                                                    @click.prevent="consultDetails.splice(index, 1)"><i
-                                                        class="ri-close-line"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="d-flex align-items-center justify-content-center w-100 mt-4">
-                                    <button type="button"
-                                        class="btn btn-success btn-border btn-label right nexttab nexttab me-4 w-100 flex-fill"><i
-                                            class="ri-check-double-line label-icon align-middle fs-16 ms-2 "></i>Soumettre
-                                        la
-                                        consultation</button>
-
-                                    <button type="button"
-                                        class="btn btn-light btn-border btn-label right flex-fill w-100"><i
-                                            class="ri-restart-line label-icon align-middle fs-16 ms-2"></i>
-                                        Annuler</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end col -->
                 </div>
 
             </div>
@@ -139,7 +373,14 @@ export default {
     data() {
         return {
             selectPatient: null,
+            editor: '',
             consultDetails: [
+                {
+                    title: '',
+                    value: ''
+                }
+            ],
+            prescriptionDetails: [
                 {
                     title: '',
                     value: ''
@@ -151,7 +392,32 @@ export default {
         this.selectPatient.select2('destroy');
     },
     mounted() {
-        this.selectPatient = $(".patient-select2").select2();
-    }
+        this.init();
+    },
+
+    methods: {
+
+        init() {
+            let self = this;
+            this.selectPatient = $(".patient-select2").select2();
+            ClassicEditor.create(document.querySelector(".editor"), {
+                placeholder: 'Veuillez saisir votre consultation pour le patient en cours...'
+            })
+                .then(function (e) {
+                    e.ui.view.editable.element.style.height = "200px";
+                    e.ui.view.editable.element.style.fontColor = "#000000";
+                    e.model.document.on('change', () => {
+                        self.editor = jQuery(e.getData()).text().replaceAll("\n\n", "\n");
+                    });
+                })
+                .catch(function (e) {
+                    console.error("Error from editor => ", e);
+                });
+        },
+
+        getConsultValues() {
+            console.log(this.editor);
+        }
+    },
 }
 </script>

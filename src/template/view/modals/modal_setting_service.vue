@@ -7,7 +7,7 @@
                 data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body p-0">
-            <div data-simplebar="init" class="h-100 simplebar-scrollable-y">
+            <div class="h-100">
                 <div>
                     <div class="p-3">
                         <h6 class="mb-0 fw-semibold text-uppercase">Création service</h6>

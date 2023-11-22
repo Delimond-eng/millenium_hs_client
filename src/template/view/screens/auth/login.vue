@@ -43,7 +43,7 @@
 
                             <div class="card-body p-4">
                                 <div class="text-center mt-2">
-                                    <h5 class="text-primary">Authentification</h5>
+                                    <img src="assets/images/companies/user.png" style="height:50px" class="mb-2" alt="">
                                     <p class="text-muted">Veuillez vous connecter pour continuer !</p>
                                 </div>
                                 <div class="p-2 mt-4">

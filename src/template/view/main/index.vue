@@ -17,6 +17,7 @@
         <!-- end main content-->
 
     </div>
+
     <!-- END layout-wrapper -->
 </template>
 
@@ -24,13 +25,15 @@
 
 import HeaderLayout from "@/template/view/layouts/header.layout";
 import sidebarLayout from "@/template/view/layouts/sidebar.layout";
+import ServiceSettingsCanvas from "../modals/modal_setting_service"
 
 export default {
     name: "HomeSecure",
 
     components: {
         HeaderLayout,
-        sidebarLayout
+        sidebarLayout,
+        ServiceSettingsCanvas,
     }
 }
 </script>
