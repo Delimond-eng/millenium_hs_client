@@ -42,25 +42,24 @@
                         <div class="card mt-2">
 
                             <div class="card-body p-4">
-                                <div class="text-center mt-2">
-                                    <img src="assets/images/companies/user.png" style="height:50px" class="mb-2" alt="">
-                                    <p class="text-muted">Veuillez vous connecter pour continuer !</p>
-                                </div>
-                                <div class="p-2 mt-4">
-                                    <form @submit.prevent="loggedIn">
+                                <div class="text-center">
+                                    <img src="assets/images/companies/user.png" style="height:70px" class="mb-1" alt="">
 
-                                        <div class="mb-3">
+                                </div>
+                                <div class="p-2">
+                                    <form @submit.prevent="loggedIn">
+                                        <div class="mb-2">
                                             <label for="username" class="form-label">Identifiant </label>
                                             <input type="text" class="form-control" id="username" v-model="form.email"
                                                 placeholder="Entrer identifiant utilisateur" required>
                                         </div>
 
-                                        <div class="mb-3">
+                                        <div class="mb-2">
                                             <div class="float-end">
                                                 <a href="#" class="text-muted">Mot de passe oublié?</a>
                                             </div>
                                             <label class="form-label" for="password-input">Mot de passe</label>
-                                            <div class="position-relative auth-pass-inputgroup mb-3">
+                                            <div class="position-relative auth-pass-inputgroup mb-2">
                                                 <input :type="inputType" class="form-control pe-5 password-input"
                                                     placeholder="Entrer mot de passe" id="password-input"
                                                     v-model="form.password" required>
@@ -74,7 +73,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="mt-4">
+                                        <div class="mt-3">
                                             <button :disabled="formLoading"
                                                 class="btn btn-success btn-border text-uppercase w-100 btn-load"
                                                 type="submit">
@@ -87,6 +86,21 @@
                                                     </span>
                                                 </span>
                                             </button>
+                                        </div>
+                                        <div id="borderedToast4"
+                                            class="toast toast-border-danger overflow-hidden w-100 mt-2" role="alert"
+                                            aria-live="assertive" aria-atomic="true">
+                                            <div class="toast-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-2">
+                                                        <i class="ri-alert-line align-middle"></i>
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Identifiant ou mot de passe invalide !
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -145,8 +159,8 @@ export default {
                         this.$router.push({ name: 'home' });
                     }
                     else {
-                        alert('Identifiant ou mot de passe invalide !');
-                        return;
+                        let toast = document.getElementById("borderedToast4")
+                        new bootstrap.Toast(toast).show();
                     }
                 })
                 .catch((err) => {

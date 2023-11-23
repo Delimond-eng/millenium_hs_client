@@ -11,7 +11,8 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);"
-                                            class="btn btn-primary btn-sm text-white"> <i class="ri-phone-line"></i> Appeler
+                                            class="btn btn-success btn-sm text-white btn-border"> <i
+                                                class="ri-phone-line"></i> Appeler
                                             le patient</a></li>
 
                                 </ol>
@@ -23,22 +24,13 @@
                 </div>
 
                 <!-- end page title -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h6 class="fs-14 text-start mb-2 text-primary">Veuillez sélectionnez un patient en
-                                    attente</h6>
-                                <div class="border border-dashed border-primary mb-2"></div>
-                                <select class="patient-select2">
-                                    <option></option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <select class="patient-select2">
+                            <option></option>
+                        </select>
+                    </div>
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
