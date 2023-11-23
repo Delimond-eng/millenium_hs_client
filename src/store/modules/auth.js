@@ -5,7 +5,7 @@ import { post } from "@/http";
  * @returns Object state
  * */
 const states = {
-  user: null,
+  user: {},
 };
 
 /**
@@ -35,14 +35,34 @@ const actions = {
    * @param form request formData,
    * @returns HttpResponse
    * */
-  async loggedIn(context, form) {},
+  async login(context, form) {
+    try {
+      let { data, status } = await post("/login", form);
+      if (status === 200) {
+        if (!data.errors) {
+          localStorage.setItem("user-token", data.token);
+          localStorage.setItem("user-data", JSON.stringify(data.user));
+          console.log(JSON.stringify(data));
+          return data;
+        } else {
+          return data.errors;
+        }
+      } else return null;
+    } catch (error) {
+      return null;
+    }
+  },
 
   /**
    * Refresh logged User
    * @param commit mutator
    * @returns void
    * */
-  async refreshLoggedUser({ commit }) {},
+  async refreshUser({ commit }) {
+    let localUserData = JSON.parse(localStorage.getItem("user-data"));
+    console.log("refresh callback: ", localStorage);
+    commit("SET_USER", localUserData);
+  },
 
   /**
    * Log Out

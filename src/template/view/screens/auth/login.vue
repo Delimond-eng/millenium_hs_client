@@ -47,12 +47,12 @@
                                     <p class="text-muted">Veuillez vous connecter pour continuer !</p>
                                 </div>
                                 <div class="p-2 mt-4">
-                                    <form action="https://themesbrand.com/velzon/html/default/index.html">
+                                    <form @submit.prevent="loggedIn">
 
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Identifiant </label>
-                                            <input type="text" class="form-control" id="username"
-                                                placeholder="Entrer identifiant utilisateur">
+                                            <input type="text" class="form-control" id="username" v-model="form.email"
+                                                placeholder="Entrer identifiant utilisateur" required>
                                         </div>
 
                                         <div class="mb-3">
@@ -61,18 +61,32 @@
                                             </div>
                                             <label class="form-label" for="password-input">Mot de passe</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
-                                                <input type="password" class="form-control pe-5 password-input"
-                                                    placeholder="Entrer mot de passe" id="password-input">
+                                                <input :type="inputType" class="form-control pe-5 password-input"
+                                                    placeholder="Entrer mot de passe" id="password-input"
+                                                    v-model="form.password" required>
                                                 <button
                                                     class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
-                                                    type="button" id="password-addon"><i
-                                                        class="ri-eye-fill align-middle"></i></button>
+                                                    type="button" id="password-addon" @mousedown="inputType = 'text'"
+                                                    @mouseup="inputType = 'password'">
+                                                    <i v-if="inputType === 'password'" class="ri-eye-fill align-middle"></i>
+                                                    <i v-else class="ri-eye-off-fill align-middle"></i>
+                                                </button>
                                             </div>
                                         </div>
 
                                         <div class="mt-4">
-                                            <button class="btn btn-success btn-border text-uppercase w-100"
-                                                @click.prevent="$router.push('/home')" type="submit">Connecter</button>
+                                            <button :disabled="formLoading"
+                                                class="btn btn-success btn-border text-uppercase w-100 btn-load"
+                                                type="submit">
+                                                <span class="d-flex align-items-center justify-content-center">
+                                                    <span class=" me-2">
+                                                        Connecter
+                                                    </span>
+                                                    <span class="spinner-border fs-10" v-show="formLoading" role="status">
+                                                        <span class="visually-hidden"></span>
+                                                    </span>
+                                                </span>
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
@@ -105,3 +119,41 @@
         <!-- end Footer -->
     </div>
 </template>
+
+<script>
+export default {
+    name: 'Login',
+    data() {
+        return {
+            form: {
+                email: '',
+                password: ''
+            },
+            inputType: 'password',
+            formLoading: false
+        }
+    },
+
+
+    methods: {
+        loggedIn(e) {
+            this.formLoading = true;
+            this.$store.dispatch('auth/login', this.form)
+                .then((res) => {
+                    this.formLoading = false;
+                    if (res !== null) {
+                        this.$router.push({ name: 'home' });
+                    }
+                    else {
+                        alert('Identifiant ou mot de passe invalide !');
+                        return;
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.formLoading = false;
+                })
+        }
+    },
+}
+</script>

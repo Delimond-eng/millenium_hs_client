@@ -23,11 +23,23 @@
                 </div>
 
                 <!-- end page title -->
-
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="fs-14 text-start mb-2 text-primary">Veuillez sélectionnez un patient en
+                                    attente</h6>
+                                <div class="border border-dashed border-primary mb-2"></div>
+                                <select class="patient-select2">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h6 class="mb-3">Veuillez consulter le patient sélectionné !</h6>
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
@@ -399,9 +411,19 @@ export default {
 
         init() {
             let self = this;
-            this.selectPatient = $(".patient-select2").select2();
+            this.selectPatient = $(".patient-select2").select2({
+                placeholder: 'Veuillez sélectionner un patient...',
+                searchInputPlaceholder: 'Recherche patient...',
+                data: [
+                    "Gaston delimond",
+                    "Lionnel Nawej",
+                    "Isaac Mabuki",
+                    "Daniel Engo"
+                ]
+            });
             ClassicEditor.create(document.querySelector(".editor"), {
-                placeholder: 'Veuillez saisir votre consultation pour le patient en cours...'
+                placeholder: 'Veuillez saisir votre consultation pour le patient en cours...',
+
             })
                 .then(function (e) {
                     e.ui.view.editable.element.style.height = "200px";

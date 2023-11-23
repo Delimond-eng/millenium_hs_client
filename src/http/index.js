@@ -8,7 +8,7 @@ const baseURL = "http://backend-millenium_hs.milleniumhorizon.com/";
 const instance = axios.create({
   baseURL: location.href.includes(".com")
     ? baseURL
-    : "http://127.0.0.1/backend-millenium_hs/",
+    : "http://127.0.0.1:8000/api",
 });
 
 instance.interceptors.request.use((config) => {
@@ -31,19 +31,21 @@ instance.interceptors.response.use((response) => {
  */
 
 export async function post(url, form) {
+  let userToken = localStorage.getItem("user-token");
   let { data, status } = await instance.post(url, form, {
     headers: {
-      Authorization: "",
+      Authorization: userToken,
     },
   });
   return { data, status };
 }
 
 export async function get(url) {
+  let userToken = localStorage.getItem("user-token");
   let { data, status } = await instance.get(url, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "",
+      Authorization: userToken,
     },
   });
   return { data, status };

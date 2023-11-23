@@ -10,7 +10,7 @@
                                 <div class="col-12">
                                     <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                                         <div class="flex-grow-1">
-                                            <h4 class="fs-16 mb-1">Bonjour, Dr. Gaston delimond</h4>
+                                            <h4 class="fs-16 mb-1">Bonjour, {{ user.name }}</h4>
                                             <p class="text-muted mb-0">Votre tableau de bord pour vous guider à bien
                                                 travailler.
                                             </p>
@@ -162,3 +162,13 @@
         </footer>
     </div>
 </template>
+
+<script>
+export default {
+    computed: {
+        user() {
+            return this.$store.getters['auth/GET_USER'];
+        }
+    },
+}
+</script>

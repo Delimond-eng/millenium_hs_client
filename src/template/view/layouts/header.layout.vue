@@ -165,22 +165,22 @@
                     </div>
 
 
-                    <div class="dropdown ms-sm-3 header-item topbar-user">
+                    <div class="dropdown ms-sm-3 header-item topbar-user" v-if="user">
                         <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <span class="d-flex align-items-center">
                                 <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
                                     alt="Header Avatar">
                                 <span class="text-start ms-xl-2">
-                                    <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Gaston
-                                        delimond</span>
-                                    <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Doctor</span>
+                                    <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ user.name
+                                    }}</span>
+                                    <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">{{ user.email }}</span>
                                 </span>
                             </span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
-                            <h6 class="dropdown-header">Welcome Dr. Gaston!</h6>
+                            <h6 class="dropdown-header">Bienvenue {{ user.name }}!</h6>
                             <a class="dropdown-item" href="pages-profile.html"><i
                                     class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Profil</span></a>
@@ -207,3 +207,16 @@
         </div>
     </header>
 </template>
+
+<script>
+export default {
+    mounted() {
+        this.$store.dispatch('auth/refreshUser');
+    },
+    computed: {
+        user() {
+            return this.$store.getters['auth/GET_USER']
+        }
+    },
+}
+</script>
