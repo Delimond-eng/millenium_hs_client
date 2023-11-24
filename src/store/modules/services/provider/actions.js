@@ -4,9 +4,10 @@ export default {
   /**
    * GET UNIQUE ALPHANUMERIC CODE
    */
-  async showCode() {
+  async showCode({ commit }) {
     let { data, status } = await get("/code");
     if (status === 200) {
+      commit("SET_CODE", data.code);
       return data.code;
     }
     return "";

@@ -37,7 +37,7 @@
                                             <label for="patientCode" class="form-label">Patient code</label>
                                             <div class="form-icon">
                                                 <input type="text" class="form-control form-control-icon" id="patientCode"
-                                                    v-model="form.patientCode" disabled>
+                                                    :value="pcode" disabled>
                                                 <i class="bx bx-hash"></i>
                                             </div>
                                         </div>
@@ -208,16 +208,35 @@ export default {
     data() {
         return {
             form: {
-                patientCode: ''
+                code: "",
+                nom: "",
+                prenom: "",
+                sexe: "",
+                telephone: "",
+                adresse: "",
+                datenais: "",
+                patient_id: "",
+                created_by: "",
+                patient_details: {},
+                form_details: {
+                    poids: "",
+                    taille: "",
+                    temperature: "",
+                    tension_art: "",
+                    age: ""
+                }
             }
         }
     },
 
     mounted() {
-        this.$store.dispatch('services/showCode').then((res) => {
-            console.log("random code", res);
-            this.form.patientCode = res
-        })
-    }
+        this.$store.dispatch('services/showCode')
+    },
+
+    computed: {
+        pcode() {
+            return this.$store.getters['services/GET_CODE'];
+        }
+    },
 }
 </script>

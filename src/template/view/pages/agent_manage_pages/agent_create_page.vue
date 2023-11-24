@@ -238,7 +238,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-end justify-content-end mt-4">
-                                    <button type="button"
+                                    <button type="button" @click.prevent="testPermission"
                                         class="btn btn-success btn-border btn-label right nexttab nexttab me-2"><i
                                             class="ri-check-double-fill label-icon align-middle fs-16 ms-2"></i>Enregistrer</button>
                                     <button type="button" class="btn btn-light btn-border btn-label right"><i
@@ -391,8 +391,15 @@ export default {
                     'Périnatalogie',
                 ]
             });
+        },
+
+        testPermission() {
+            let permission = this.$hasPermission('docteur');
+            console.log(permission);
         }
     },
+
+
 
     computed: {
         configs() {
@@ -400,7 +407,9 @@ export default {
         },
         user() {
             return this.$store.getters['auth/GET_USER']
-        }
+        },
+
+
     },
 }
 </script>

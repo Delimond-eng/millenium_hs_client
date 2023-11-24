@@ -1,0 +1,125 @@
+
+             Swal.fire({
+                 title: "Are you sure?",
+                 text: "You won't be able to revert this!",
+                 icon: "warning",
+                 showCancelButton: !0,
+                 confirmButtonText: "Yes, delete it!",
+                 cancelButtonText: "No, cancel!",
+                 confirmButtonClass: "btn btn-primary w-xs me-2 mt-2",
+                 cancelButtonClass: "btn btn-danger w-xs mt-2",
+                 buttonsStyling: !1,
+                 showCloseButton: !0,
+             }).then(function (t) {
+                 t.value
+                     ? Swal.fire({
+                         title: "Deleted!",
+                         text: "Your file has been deleted.",
+                         icon: "success",
+                         confirmButtonClass: "btn btn-primary w-xs mt-2",
+                         buttonsStyling: !1,
+                     })
+                     : t.dismiss === Swal.DismissReason.cancel &&
+                     Swal.fire({
+                         title: "Cancelled",
+                         text: "Your imaginary file is safe :)",
+                         icon: "error",
+                         confirmButtonClass: "btn btn-primary mt-2",
+                         buttonsStyling: !1,
+                     });
+             });
+
+            Swal.fire({
+                html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Well done !</h4><p class="text-muted mx-4 mb-0">Aww yeah, you successfully read this important message.</p></div></div>',
+                showCancelButton: !0,
+                showConfirmButton: !1,
+                cancelButtonClass: "btn btn-primary w-xs mb-1",
+                cancelButtonText: "Back",
+                buttonsStyling: !1,
+                showCloseButton: !0,
+            });
+
+            Swal.fire({
+                html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Oops...! Something went Wrong !</h4><p class="text-muted mx-4 mb-0">Your email Address is invalid</p></div></div>',
+                showCancelButton: false,
+                showConfirmButton: false,
+                cancelButtonClass: "btn btn-primary w-xs mb-1",
+                cancelButtonText: "Dismiss",
+                timer: 3000,
+                buttonsStyling: !1,
+                showCloseButton: !0,
+            });
+
+            Swal.fire({
+                html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon><div class="mt-4 pt-2 fs-15 mx-5"><h4>Are you Sure ?</h4><p class="text-muted mx-4 mb-0">Are you Sure You want to Delete this Account ?</p></div></div>',
+                showCancelButton: !0,
+                confirmButtonClass: "btn btn-primary w-xs me-2 mb-1",
+                confirmButtonText: "Yes, Delete It!",
+                cancelButtonClass: "btn btn-danger w-xs mb-1",
+                buttonsStyling: !1,
+                showCloseButton: !0,
+            });
+
+
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: !1,
+                timer: 1500,
+                showCloseButton: !0,
+            });
+
+
+
+            //BS TOAST 
+             app.config.globalProperties.$showBsToast = (title, text) => {
+                // Create a new toast element
+                let toastElement = document.createElement("div");
+                toastElement.classList.add("toast");
+                toastElement.classList.add("show"); // Show the toast
+
+                // Set toast attributes
+                toastElement.setAttribute("role", "alert");
+                toastElement.setAttribute("aria-live", "assertive");
+                toastElement.setAttribute("aria-atomic", "true");
+
+                // Create the toast header with title
+                let toastHeader = document.createElement("div");
+                toastHeader.classList.add("toast-header");
+                let headerTitle = document.createElement("strong");
+                headerTitle.classList.add("me-auto");
+                headerTitle.textContent = title;
+                toastHeader.appendChild(headerTitle);
+
+                // Create the close button for the toast
+                let closeButton = document.createElement("button");
+                closeButton.setAttribute("type", "button");
+                closeButton.classList.add("btn-close");
+                closeButton.setAttribute("data-bs-dismiss", "toast");
+                closeButton.setAttribute("aria-label", "Close");
+                toastHeader.appendChild(closeButton);
+
+                // Create the toast body with text
+                let toastBody = document.createElement("div");
+                toastBody.classList.add("toast-body");
+                toastBody.textContent = text;
+                // Append header and body to the toast element
+                toastElement.appendChild(toastHeader);
+                toastElement.appendChild(toastBody);
+
+                // Get the toast container or create one if it doesn't exist
+
+                let toastContainer = document.createElement("div");
+                toastContainer.classList.add("toast-container");
+                toastContainer.classList.add("position-fixed");
+                toastContainer.classList.add("top-0");
+                toastContainer.classList.add("end-0");
+                toastContainer.classList.add("p-3");
+                document.body.appendChild(toastContainer);
+                toastContainer.appendChild(toastElement);
+                // Initialize the Bootstrap toast and show it
+                let bootstrapToast = new bootstrap.Toast(toastElement);
+                bootstrapToast.show();
+            };
+
