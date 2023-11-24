@@ -174,7 +174,8 @@
                                 <span class="text-start ms-xl-2">
                                     <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ user.name
                                     }}</span>
-                                    <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">{{ user.email }}</span>
+                                    <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text" v-if="user.role">{{
+                                        user.role.role }}</span>
                                 </span>
                             </span>
                         </button>
