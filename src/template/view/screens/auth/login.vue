@@ -74,18 +74,9 @@
                                         </div>
 
                                         <div class="mt-3">
-                                            <button :disabled="formLoading"
-                                                class="btn btn-success btn-border text-uppercase w-100 btn-load"
-                                                type="submit">
-                                                <span class="d-flex align-items-center justify-content-center">
-                                                    <span class=" me-2">
-                                                        Connecter
-                                                    </span>
-                                                    <span class="spinner-border fs-10" v-show="formLoading" role="status">
-                                                        <span class="visually-hidden"></span>
-                                                    </span>
-                                                </span>
-                                            </button>
+                                            <load-button btn-type="submit" class-name="btn-success w-100"
+                                                :loading="formLoading">
+                                                <span class="text-uppercase fw-semibold">Connecter</span></load-button>
                                         </div>
                                         <div id="borderedToast4"
                                             class="toast toast-border-danger overflow-hidden w-100 mt-2" role="alert"

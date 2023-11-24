@@ -29,11 +29,13 @@ import ServiceSettingsCanvas from "../modals/modal_setting_service"
 
 export default {
     name: "HomeSecure",
-
     components: {
         HeaderLayout,
         sidebarLayout,
         ServiceSettingsCanvas,
+    },
+    mounted() {
+        this.$store.dispatch('services/showConfigs')
     }
 }
 </script>

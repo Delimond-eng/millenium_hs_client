@@ -37,8 +37,8 @@
                                             <label for="patientCode" class="form-label">Patient code</label>
                                             <div class="form-icon">
                                                 <input type="text" class="form-control form-control-icon" id="patientCode"
-                                                    value="A001" disabled>
-                                                <i class="ri-account-pin-box-line"></i>
+                                                    v-model="form.patientCode" disabled>
+                                                <i class="bx bx-hash"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -201,3 +201,23 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    name: "PatientCreate",
+    data() {
+        return {
+            form: {
+                patientCode: ''
+            }
+        }
+    },
+
+    mounted() {
+        this.$store.dispatch('services/showCode').then((res) => {
+            console.log("random code", res);
+            this.form.patientCode = res
+        })
+    }
+}
+</script>

@@ -29,10 +29,10 @@
                                             <thead class="table-light">
                                                 <tr>
                                                     <th scope="col">MATRICULE</th>
-                                                    <th scope="col">Nom</th>
-                                                    <th scope="col">Prénom</th>
+                                                    <th scope="col">Nom complet</th>
                                                     <th scope="col">Sexe</th>
                                                     <th scope="col">Téléphone</th>
+                                                    <th scope="col">Date naissance</th>
                                                     <th scope="col">Adresse</th>
                                                     <th scope="col">Spécialité</th>
                                                     <th scope="col">Grade</th>
@@ -42,17 +42,20 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>L2113</td>
-                                                    <td>Gaston Delimond</td>
-                                                    <td>Delimond</td>
-                                                    <td>M</td>
-                                                    <td>+243813719944</td>
-                                                    <td style="text-overflow: ellipsis;">03, Bateke kinshasa Kingabwa</td>
-                                                    <td>Cardiologie</td>
-                                                    <td>Cardiologie</td>
-                                                    <td>Chef de departement</td>
-                                                    <td>Médecin traiteur</td>
+                                                <tr v-for="(item, index) in agents" :key="index">
+                                                    <td>{{ item.agent_matricule }}</td>
+                                                    <td>{{ item.agent_nom }} {{ item.agent_prenom }}</td>
+
+                                                    <td>{{ item.agent_sexe }}</td>
+                                                    <td>{{ item.agent_telephone }}</td>
+                                                    <td>{{ item.agent_datenais }}</td>
+                                                    <td style="text-overflow: ellipsis;">{{ item.agent_adresse }}</td>
+                                                    <td>{{ item.agent_specialite }}</td>
+                                                    <td><span v-if="item.grade">{{ item.grade.grade_libelle }}</span></td>
+                                                    <td><span v-if="item.service">{{ item.service.service_libelle }}</span>
+                                                    </td>
+                                                    <td><span v-if="item.fonction">{{ item.fonction.fonction_libelle
+                                                    }}</span></td>
                                                     <td>
                                                         <button type="button"
                                                             class="btn btn-sm btn-info me-2">Editer</button>
@@ -104,6 +107,14 @@
 
 <script>
 export default {
-    name: "MedList"
+    name: "AgentList",
+    mounted() {
+        this.$store.dispatch('services/viewAllAgents')
+    },
+    computed: {
+        agents() {
+            return this.$store.getters['services/GET_AGENTS'];
+        }
+    },
 }
 </script>

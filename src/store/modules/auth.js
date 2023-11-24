@@ -60,7 +60,6 @@ const actions = {
    * */
   async refreshUser({ commit }) {
     let localUserData = JSON.parse(localStorage.getItem("user-data"));
-    console.log("refresh callback: ", localStorage);
     commit("SET_USER", localUserData);
   },
 
