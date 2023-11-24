@@ -10,8 +10,8 @@ import PatientListPage from "@/template/view/pages/patient_manage_pages/patient_
 import PatientAssignPage from "@/template/view/pages/patient_manage_pages/patient_assign_page";
 
 /* medecin manage pages */
-import MedCreatePage from "@/template/view/pages/medecin_manage_pages/med_create_page";
-import MedListPage from "@/template/view/pages/medecin_manage_pages/med_list_page";
+import AgentCreatePage from "@/template/view/pages/agent_manage_pages/agent_create_page";
+import AgentListPage from "@/template/view/pages/agent_manage_pages/agent_list_page";
 
 /* consult manage pages */
 import ConsultCreatePage from "@/template/view/pages/consult_manage_pages/consult_create_page";
@@ -57,12 +57,12 @@ const routes = [
       /* medecins routes */
       {
         path: "/home/med/create",
-        component: MedCreatePage,
+        component: AgentCreatePage,
         name: "med-create",
       },
       {
         path: "/home/meds/list",
-        component: MedListPage,
+        component: AgentListPage,
         name: "med-list",
       },
 

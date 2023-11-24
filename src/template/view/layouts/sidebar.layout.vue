@@ -59,15 +59,15 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#med" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="med">
-                            <i class="ri-nurse-line"></i> <span data-key="t-apps">Médecins</span>
+                            <i class="ri-nurse-line"></i> <span data-key="t-apps">Agents(médecins...)</span>
                         </a>
                         <div class="collapse menu-dropdown" id="med">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="#/home/meds/list" class="nav-link" data-key="t-list"> Liste des médecins </a>
+                                    <a href="#/home/meds/list" class="nav-link" data-key="t-list"> Liste des agents </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#/home/med/create" class="nav-link" data-key="t-create"> Création médecin </a>
+                                    <a href="#/home/med/create" class="nav-link" data-key="t-create"> Création agents </a>
                                 </li>
                             </ul>
                         </div>
