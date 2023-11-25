@@ -33,8 +33,24 @@ export default {
     try {
       let { data, status } = await get("/agents.all");
       if (status === 200) {
-        console.log(JSON.stringify(data));
         commit("SET_AGENTS", data.agents);
+        return data.agents;
+      } else return [];
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  },
+
+  /**
+   * GET PATIENTS LIST
+   */
+  async viewAllPatients({ commit }) {
+    try {
+      let { data, status } = await get("/patients.all");
+      if (status === 200) {
+        commit("SET_PATIENTS", data.patients);
+        return data.patients;
       } else return [];
     } catch (error) {
       console.log(error);
