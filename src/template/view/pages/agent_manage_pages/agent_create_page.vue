@@ -40,7 +40,7 @@
                                                     <label class="form-label">Matricule</label>
                                                     <div class="form-icon">
                                                         <input type="text" class="form-control form-control-icon"
-                                                            placeholder="n° matricule du médecin" v-model="form.matricule">
+                                                            placeholder="n° matricule ..." v-model="form.matricule">
                                                         <i class="bx bx-hash"></i>
                                                     </div>
                                                 </div>
@@ -119,7 +119,7 @@
                                                     <div class="form-icon">
                                                         <input type="text" class="form-control form-control-icon"
                                                             id="iconInputNom" v-model="form.adresse"
-                                                            placeholder="Saisir l'adresse du médecin... ex: N°/ av. / Q. /C">
+                                                            placeholder="Saisir l'adresse ...... ex: N°/ av. / Q. /C">
                                                         <i class="ri-map-pin-5-line"></i>
                                                     </div>
                                                 </div>

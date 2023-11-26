@@ -37,30 +37,49 @@
                                             <thead class="table-light">
                                                 <tr>
                                                     <th scope="col">CODE</th>
-                                                    <th scope="col">Nom</th>
-                                                    <th scope="col">Prénom</th>
-                                                    <th scope="col">Age</th>
+                                                    <th scope="col">Nom complet</th>
                                                     <th scope="col">Sexe</th>
+                                                    <th scope="col">Date naissance</th>
                                                     <th scope="col">Téléphone</th>
+                                                    <th scope="col">Adresse</th>
                                                     <th scope="col">Poids</th>
                                                     <th scope="col">Taille</th>
                                                     <th scope="col">Temperature</th>
-                                                    <th scope="col">Créé par</th>
+                                                    <th scope="col">Tension arterielle</th>
                                                     <th scope="col" style="width: 150px;"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>L2113</td>
-                                                    <td>Gaston Delimond</td>
-                                                    <td>Delimond</td>
-                                                    <td>29</td>
-                                                    <td>M</td>
-                                                    <td>+243813719944</td>
-                                                    <td>62kg</td>
-                                                    <td>1.70</td>
-                                                    <td>34°</td>
-                                                    <td><i class="ri-user-2-line me-1"></i>Lionnel</td>
+                                                <tr v-for="(item, index) in patients" :key="index">
+                                                    <td>{{ item.patient_code }}</td>
+                                                    <td>{{ item.patient_nom }} {{ item.patient_prenom }}</td>
+                                                    <td>{{ item.patient_sexe }}</td>
+                                                    <td>{{ item.patient_datenais }}</td>
+                                                    <td>{{ item.patient_telephone }}</td>
+                                                    <td class="text-ellipsis">{{ item.patient_telephone }}</td>
+                                                    <td>
+                                                        <span v-if="item.details">
+                                                            {{ item.details[item.details.length - 1].patient_detail_poids }}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span v-if="item.details">
+                                                            {{ item.details[item.details.length - 1].patient_detail_taille
+                                                            }}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span v-if="item.details">
+                                                            {{ item.details[item.details.length -
+                                                                1].patient_detail_temperature }}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span v-if="item.details">
+                                                            {{ item.details[item.details.length - 1].patient_tension_art }}
+                                                        </span>
+                                                    </td>
+                                                    <!-- <td><i class="ri-user-2-line me-1"></i>Lionnel</td> -->
                                                     <td>
                                                         <button type="button"
                                                             class="btn btn-sm btn-info me-2">Editer</button>
@@ -68,35 +87,14 @@
                                                                 class="ri-delete-bin-3-line"></i></button>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>L2100</td>
-                                                    <td>Lionnel Nawej</td>
-                                                    <td>Lionnel</td>
-                                                    <td>25</td>
-                                                    <td>M</td>
-                                                    <td>+243812345522</td>
-                                                    <td>70kg</td>
-                                                    <td>1.65</td>
-                                                    <td>34°</td>
-                                                    <td><i class="ri-user-2-line me-1"></i>Chris</td>
-                                                    <td>
-                                                        <button type="button"
-                                                            class="btn btn-sm btn-info me-2">Editer</button>
-                                                        <button type="button" class="btn btn-sm btn-light"><i
-                                                                class="ri-delete-bin-3-line"></i></button>
-                                                    </td>
-                                                </tr>
-
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                    </div> <!-- end col -->
-
-
+                    </div>
+                    <!-- end col -->
                 </div>
 
             </div>
@@ -127,3 +125,19 @@
         </div>
     </div>
 </template>
+<script>
+export default {
+    name: "PatientListPage",
+    computed: {
+        patients() {
+            return this.$store.getters['services/GET_PATIENTS'];
+        }
+    },
+}
+</script>
+
+<style>
+.text-ellipsis {
+    text-overflow: ellipsis !important;
+}
+</style>

@@ -2,7 +2,8 @@
     <div v-if="processing" style="height: 100% !important;"
         class="w-100 d-flex justify-content-center align-content-center align-items-center">
 
-        <svg fill="#697BB4" style="height: 60px; width: 120px;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <svg fill="#697BB4" :style="`height:${size}px; width:${size * 2}px`" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
             <circle class="spinner_S1WN" cx="4" cy="12" r="3" />
             <circle class="spinner_S1WN spinner_Km9P" cx="12" cy="12" r="3" />
             <circle class="spinner_S1WN spinner_JApP" cx="20" cy="12" r="3" />
@@ -20,6 +21,10 @@ export default {
         processing: {
             type: Boolean,
             default: false,
+        },
+        size: {
+            type: Number,
+            default: 60
         }
     }
 

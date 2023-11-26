@@ -25,52 +25,70 @@
                     <div class="col-md-12">
 
                         <div class="card">
-                            <div class="card-header align-items-start justify-content-center d-flex flex-column">
-                                <h4 class="card-title mb-0 flex-grow-1">Patient infos</h4>
-                                <p class="mt-2 text-muted">Veuillez renseigner tous les champs requis pour créer un patient
-                                    !</p>
+                            <div class="card-header align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Est-il nouveau ou ancien patient ??</h4>
+
+                                <div class="mx-4 flex-grow-1">
+                                    <load-state :processing="searchLoading" :size="30">
+                                        <select class="patient-select2" name="state">
+                                            <option></option>
+                                        </select>
+                                    </load-state>
+                                </div>
                             </div>
-                            <div class="card-body">
+                            <form class="card-body" @submit.prevent="submitForm">
+
+                                <h6 class="fs-14 text-start mb-2 text-primary">Infos personnelles</h6>
+                                <div class="border border-dashed border-primary mb-3"></div>
                                 <div class="row">
+
+                                    <!-- patient code input -->
                                     <div class="col-xxl-3 col-md-2">
                                         <div>
                                             <label for="patientCode" class="form-label">Patient code</label>
                                             <div class="form-icon">
                                                 <input type="text" class="form-control form-control-icon" id="patientCode"
-                                                    :value="pcode" disabled>
+                                                    v-model="pcode" disabled>
                                                 <i class="bx bx-hash"></i>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- nom input -->
                                     <div class="col-md-5">
                                         <div>
                                             <label for="iconInputNom" class="form-label">Nom <sup
                                                     class="text-danger">*</sup></label>
                                             <div class="form-icon">
-                                                <input type="text" class="form-control form-control-icon" id="iconInputNom"
-                                                    placeholder="Saisir le nom du patient...ex:Gaston">
+                                                <input type="text" v-model="form.nom" class="form-control form-control-icon"
+                                                    id="iconInputNom" placeholder="Saisir le nom du patient...ex:Gaston"
+                                                    required>
                                                 <i class="ri-user-2-line"></i>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- prenom input -->
                                     <div class="col-md-5">
                                         <div>
                                             <label for="iconInputNom" class="form-label">Prénom <sup
                                                     class="text-danger">*</sup></label>
                                             <div class="form-icon">
-                                                <input type="text" class="form-control form-control-icon" id="iconInputNom"
-                                                    placeholder="Saisir le prénom du patient...ex:Lionnel">
+                                                <input type="text" v-model="form.prenom"
+                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    placeholder="Saisir le prénom du patient...ex:Lionnel" required>
                                                 <i class="ri-user-2-line"></i>
                                             </div>
                                         </div>
                                     </div>
+
                                     <!-- patient sexe select -->
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="mt-3">
                                             <label for="iconInputPoids" class="form-label">Sexe <sup
                                                     class="text-danger">*</sup></label>
                                             <div class="form-icon">
-                                                <select class="form-select" id="inputGroupSelect01">
+                                                <select class="form-select" id="inputGroupSelect01" v-model="form.sexe">
                                                     <option selected label="Sélectionner un sexe"></option>
                                                     <option value="M">Masculin</option>
                                                     <option value="F">Féminin</option>
@@ -78,27 +96,63 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- patient age input -->
-                                    <div class="col-md-3">
+
+                                    <!-- telephone input -->
+                                    <div class="col-md-4">
                                         <div class="mt-3">
-                                            <label for="iconInputNom" class="form-label">Age<sup
+                                            <label for="iconInputNom" class="form-label">Téléphone<sup
                                                     class="text-danger">*</sup></label>
                                             <div class="form-icon">
-                                                <input type="number" class="form-control form-control-icon"
-                                                    id="iconInputNom" placeholder="Saisir l'âge... ex: 20">
-                                                <i class="ri-parent-line"></i>
+                                                <input type="text" v-model="form.telephone"
+                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    placeholder="Saisir le tél... ex: +(243) 810000000">
+                                                <i class="ri-phone-line"></i>
                                             </div>
                                         </div>
                                     </div>
 
+                                    <!-- sate naissance input -->
+                                    <div class="col-md-4">
+                                        <div class="mt-3">
+                                            <label for="iconInputNom" class="form-label">Date de naissance<sup
+                                                    class="text-danger">*</sup></label>
+                                            <div class="form-icon">
+                                                <input type="date" v-model="form.datenais"
+                                                    class="form-control form-control-icon" id="iconInputNom" required>
+                                                <i class="ri-phone-line"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- adresse input -->
+                                    <div class="col-md-12">
+                                        <div class="mt-3">
+                                            <label for="iconInputNom" class="form-label">Adresse<sup
+                                                    class="text-danger">*</sup></label>
+                                            <div class="form-icon">
+                                                <input type="text" v-model="form.adresse"
+                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    placeholder="Saisir l'adresse du patient... ex: N°/ av. / Q. /C"
+                                                    required>
+                                                <i class="ri-map-pin-5-line"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6 class="fs-14 text-start mb-2 mt-4 text-primary">Infos médicales
+                                </h6>
+                                <div class="border border-dashed border-primary"></div>
+                                <div class="row">
                                     <!-- patient poids input -->
                                     <div class="col-md-3">
                                         <div class="mt-3">
                                             <label for="iconInputNom" class="form-label">Poids<sup
                                                     class="text-danger">*</sup></label>
                                             <div class="form-icon">
-                                                <input type="number" class="form-control form-control-icon"
-                                                    id="iconInputNom" placeholder="Saisir le poids... ex: 63.3">
+                                                <input type="number" v-model="form_details.poids"
+                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    placeholder="Saisir le poids... ex: 63.3" required>
                                                 <i class="ri-scales-line"></i>
                                             </div>
                                         </div>
@@ -110,21 +164,10 @@
                                             <label for="iconInputNom" class="form-label">Temperature<sup
                                                     class="text-danger">*</sup></label>
                                             <div class="form-icon">
-                                                <input type="number" class="form-control form-control-icon"
-                                                    id="iconInputNom" placeholder="Saisir le T°... ex: 34.5">
+                                                <input type="number" v-model="form_details.temperature"
+                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    placeholder="Saisir le T°... ex: 34.5" required>
                                                 <i class="ri-contrast-drop-2-line "></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- telephone input -->
-                                    <div class="col-md-3">
-                                        <div class="mt-3">
-                                            <label for="iconInputNom" class="form-label">Téléphone<sup
-                                                    class="text-danger">*</sup></label>
-                                            <div class="form-icon">
-                                                <input type="text" class="form-control form-control-icon" id="iconInputNom"
-                                                    placeholder="Saisir le tél... ex: +(243) 810000000">
-                                                <i class="ri-phone-line"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -135,42 +178,43 @@
                                             <label for="iconInputNom" class="form-label">Taille<sup
                                                     class="text-danger">*</sup></label>
                                             <div class="form-icon">
-                                                <input type="text" class="form-control form-control-icon" id="iconInputNom"
-                                                    placeholder="Saisir la taille... ex: 1.70">
+                                                <input type="text" v-model="form_details.taille"
+                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    placeholder="Saisir la taille... ex: 1.70" required>
                                                 <i class=" ri-ruler-line"></i>
                                             </div>
                                         </div>
                                     </div>
 
-
-                                    <!-- adresse input -->
-                                    <div class="col-md-6">
+                                    <!-- tension arterielle input -->
+                                    <div class="col-md-3">
                                         <div class="mt-3">
-                                            <label for="iconInputNom" class="form-label">Adresse<sup
+                                            <label for="iconInputNom" class="form-label">Tension arterielle<sup
                                                     class="text-danger">*</sup></label>
                                             <div class="form-icon">
-                                                <input type="text" class="form-control form-control-icon" id="iconInputNom"
-                                                    placeholder="Saisir l'adresse du patient... ex: N°/ av. / Q. /C">
-                                                <i class="ri-map-pin-5-line"></i>
+                                                <input type="text" v-model="form_details.tension_art"
+                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    placeholder="Saisir la tension arterielle du patient..." required>
+                                                <i class="bx bx-pulse"></i>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-                                <div class="d-flex align-items-start mt-4">
-                                    <button type="button"
-                                        class="btn btn-success btn-border  btn-label right nexttab nexttab me-2"><i
-                                            class="ri-check-double-fill label-icon align-middle fs-16 ms-2"></i>Enregistrer</button>
-                                    <button type="button" class="btn btn-light btn-border  btn-label right"><i
+                                <bs-toast id="errorsToast" :msg="errors_msg" />
+                                <div div class=" d-flex align-items-end justify-content-end mt-4">
+                                    <load-button btn-type="submit" :loading="formLoading"
+                                        class-name="btn-success btn-border btn-label right nexttab nexttab me-2">
+                                        <span><i
+                                                class="ri-check-double-fill label-icon align-middle fs-16 ms-2"></i>Enregistrer</span>
+                                    </load-button>
+                                    <button type="button" class="btn btn-light btn-border  btn-label right"
+                                        @click.prevent="cleanField"><i
                                             class="ri-restart-line label-icon align-middle fs-16 ms-2"></i>
                                         Annuler</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-
                     </div> <!-- end col -->
-
-
                 </div>
 
             </div>
@@ -203,6 +247,7 @@
 </template>
 
 <script>
+import { calculateAge } from "@/utils"
 export default {
     name: "PatientCreate",
     data() {
@@ -218,19 +263,131 @@ export default {
                 patient_id: "",
                 created_by: "",
                 patient_details: {},
-                form_details: {
-                    poids: "",
-                    taille: "",
-                    temperature: "",
-                    tension_art: "",
-                    age: ""
-                }
-            }
+            },
+            form_details: {
+                poids: "",
+                taille: "",
+                temperature: "",
+                tension_art: "",
+                age: ""
+            },
+            formLoading: false,
+            isOld: false,
+            selectPatient: null,
+            searchLoading: false,
+            errors_msg: '',
         }
     },
 
-    mounted() {
-        this.$store.dispatch('services/showCode')
+    methods: {
+
+
+        /**
+         * SUBMIT FORM DATA TO SERVER
+        */
+        submitForm(e) {
+            let age = calculateAge(this.form.datenais);
+            this.form_details.age = age;
+            this.form.patient_details = this.form_details;
+            this.form.created_by = this.$user().agent_id;
+            this.formLoading = true;
+            this.$store.dispatch('services/createPatient', this.form).then((res) => {
+                this.formLoading = false;
+                if (res.status !== undefined) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Patient créé avec succès !",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        showCloseButton: false,
+                    });
+                    this.$store.dispatch('services/viewAllPatients');
+                    this.cleanField();
+                }
+                if (res.errors !== undefined) {
+                    this.errors_msg = res.errors.toString();
+                    let toast = document.getElementById("errorsToast")
+                    new bootstrap.Toast(toast, { delay: 1500 }).show();
+                }
+            }).catch((err) => this.formLoading = false);
+        },
+
+        async loadPatientsList() {
+            let self = this;
+            let patients = await this.$store.dispatch('services/viewAllPatients');
+            /**
+             * DESTROY AND SELECT PATIENTS
+            */
+            if (this.selectPatient !== null) this.selectPatient.select2('destroy');
+            this.selectPatient = $(".patient-select2").select2({
+                placeholder: 'Veuillez sélectionner un patient...',
+                data: $.map(patients, function (item) {
+                    return {
+                        text: `${item.patient_code} : ${item.patient_nom} ${item.patient_prenom}`,
+                        id: item.id
+                    }
+                })
+            }).on('change', function () {
+                let id = $(this).val();
+                if (id !== "") {
+                    self.searchLoading = true;
+                    self.$store.dispatch('services/showPatient', id).then((patient) => {
+                        self.searchLoading = false;
+                        /**
+                         * SHOW PATIENT DATA
+                        */
+                        if (patient !== null) {
+                            self.$store.commit('services/SET_CODE', patient.patient_code);
+                            self.form.code = patient.patient_code;
+                            self.form.nom = patient.patient_nom;
+                            self.form.prenom = patient.patient_prenom;
+                            self.form.sexe = patient.patient_sexe;
+                            self.form.adresse = patient.patient_adresse;
+                            self.form.datenais = patient.patient_datenais;
+                            self.form.patient_id = patient.id;
+                            self.form.telephone = patient.patient_telephone;
+                        }
+                        else {
+                            self.cleanField();
+                        }
+                    });
+                }
+            });
+        },
+
+
+
+        cleanField() {
+
+            this.form.patient_id = "";
+            this.form.code = "";
+            this.form.nom = "";
+            this.form.prenom = "";
+            this.form.sexe = "";
+            this.form.adresse = "";
+            this.form.datenais = "";
+            this.form.patient_id = "";
+            this.form.telephone = "";
+            this.form_details.poids = "";
+            this.form_details.taille = "";
+            this.form_details.temperature = "";
+            this.form_details.tension_art = "";
+
+            this.$store.dispatch('services/showCode');
+            $(".patient-select2").val('').trigger('change');
+
+        }
+    },
+
+    unmounted() {
+        if (this.selectPatient !== null) this.selectPatient.select2('destroy');
+    },
+
+    async mounted() {
+        this.$store.dispatch('services/showCode');
+        $(".patient-select2").select2({ placeholder: 'chargement des patients...' });
+        await this.loadPatientsList();
     },
 
     computed: {

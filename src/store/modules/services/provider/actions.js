@@ -43,6 +43,23 @@ export default {
   },
 
   /**
+   * CREATE NEW OR OLD PATIENT
+   */
+  async createPatient(context, form) {
+    try {
+      let { data, status } = await post("/patients.create", form);
+      console.log(data);
+      if (status === 200) {
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  /**
    * GET PATIENTS LIST
    */
   async viewAllPatients({ commit }) {
@@ -55,6 +72,18 @@ export default {
     } catch (error) {
       console.log(error);
       return [];
+    }
+  },
+
+  async showPatient(context, id) {
+    try {
+      let { data, status } = await get(`/patient.show/${id}`);
+      if (status === 200) {
+        return data.patient;
+      } else return null;
+    } catch (error) {
+      console.log(error);
+      return null;
     }
   },
 };

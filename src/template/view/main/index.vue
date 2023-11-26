@@ -35,7 +35,8 @@ export default {
         ServiceSettingsCanvas,
     },
     mounted() {
-        this.$store.dispatch('services/showConfigs')
+        this.$store.dispatch('services/showConfigs');
+        this.$store.dispatch('services/viewAllPatients');
     }
 }
 </script>

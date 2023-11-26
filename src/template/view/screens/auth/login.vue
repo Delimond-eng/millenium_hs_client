@@ -84,7 +84,9 @@
                                             <div class="toast-body">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 me-2">
-                                                        <i class="ri-alert-line align-middle"></i>
+                                                        <lord-icon src="https://cdn.lordicon.com/tdrtiskw.json"
+                                                            trigger="loop" colors="primary:#f06548,secondary:#F7704B"
+                                                            style="width:30px;height:30px"></lord-icon>
                                                     </div>
                                                     <div class="flex-grow-1">
                                                         <h6 class="mb-0">Identifiant ou mot de passe invalide !
@@ -151,7 +153,7 @@ export default {
                     }
                     else {
                         let toast = document.getElementById("borderedToast4")
-                        new bootstrap.Toast(toast).show();
+                        new bootstrap.Toast(toast, { delay: 1000 }).show();
                     }
                 })
                 .catch((err) => {
