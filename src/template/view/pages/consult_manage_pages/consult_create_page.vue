@@ -26,11 +26,7 @@
                 <!-- end page title -->
 
                 <div class="row">
-                    <div class="col-md-12 mb-2">
-                        <select class="patient-select2">
-                            <option></option>
-                        </select>
-                    </div>
+
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
@@ -69,88 +65,70 @@
                                         <div class="tab-content text-muted mt-3 mt-lg-0">
                                             <div class="tab-pane fade active show" id="custom-v-pills-home" role="tabpanel"
                                                 aria-labelledby="custom-v-pills-home-tab">
+                                                <select class="patient-select2">
+                                                    <option></option>
+                                                </select>
                                                 <form action="#">
-                                                    <div class="row g-3">
-                                                        <div class="col-lg-6">
-                                                            <div class="form-floating">
-                                                                <input type="text" class="form-control"
-                                                                    id="firstnamefloatingInput" value="KUBI KAYEMBE"
-                                                                    readonly>
-                                                                <label for="firstnamefloatingInput" class="text-primary">Nom
-                                                                    & postnom</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="form-floating">
-                                                                <input type="text" class="form-control"
-                                                                    id="lastnamefloatingInput" value="FLORY" readonly>
-                                                                <label for="lastnamefloatingInput"
-                                                                    class="text-primary">Prénom</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <div class="form-floating">
-                                                                <input type="text" class="form-control"
-                                                                    id="sexefloatingInput" value="M" readonly>
-                                                                <label for="sexefloatingInput"
-                                                                    class="text-primary">Sexe</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-floating">
-                                                                <input type="text" class="form-control"
-                                                                    id="phonefloatingInput" value="+(243) 813718833"
-                                                                    readonly>
-                                                                <label for="phonefloatingInput"
-                                                                    class="text-primary">Téléphone</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="form-floating">
-                                                                <input type="text" class="form-control"
-                                                                    id="adressefloatingInput1"
-                                                                    value="20, Bateke, Kingabwa, Limete Kinshasa" readonly>
-                                                                <label for="adressefloatingInput1"
-                                                                    class="text-primary">Adresse</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-floating">
-                                                                <input type="text" class="form-control"
-                                                                    id="agefloatingInput" value="25" readonly>
-                                                                <label for="agefloatingInput"
-                                                                    class="text-primary">Age</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-lg-3">
-                                                            <div class="form-floating">
-                                                                <input type="text" class="form-control"
-                                                                    id="taillefloatingInput" value="1,70" readonly>
-                                                                <label for="taillefloatingInput"
-                                                                    class="text-primary">Taille</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-lg-3">
-                                                            <div class="form-floating">
-                                                                <input type="text" class="form-control"
-                                                                    id="poidsfloatingInput" value="63,70" readonly>
-                                                                <label for="poidsfloatingInput"
-                                                                    class="text-primary">Poids</label>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="col-lg-3">
-                                                            <div class="form-floating">
-                                                                <input type="text" class="form-control"
-                                                                    id="tempfloatingInput" value="34°C" readonly>
-                                                                <label for="tempfloatingInput"
-                                                                    class="text-primary">Temperature</label>
-                                                            </div>
-                                                        </div>
+                                                    <div class="d-flex justify-content-between mb-2 mt-3 align-items-end"
+                                                        v-if="selectedPatient">
+                                                        <h6 class="fs-14 text-primary">Infos récentes du
+                                                            patient</h6>
+                                                        <button class="btn btn-info btn-border btn-sm"> <i
+                                                                class="ri-folder-5-line "></i> Voir le parcours du
+                                                            patient</button>
                                                     </div>
+                                                    <div class="border border-dashed border-primary mb-3"
+                                                        v-if="selectedPatient"></div>
+
+                                                    <div class="table-responsive" v-if="selectedPatient">
+                                                        <table class="table mb-0">
+                                                            <tbody class="text-black">
+                                                                <tr>
+                                                                    <th scope="row" style="width: 200px;">Nom complet</th>
+                                                                    <td>Gaston delimond</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Sexe</th>
+                                                                    <td>M</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Téléphone</th>
+                                                                    <td>+243 813648833</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Adresse</th>
+                                                                    <td>01, Bateke, Q. Kingabwa Mandradele, Limete kinshasa
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Age</th>
+                                                                    <td>19 ans</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Taille</th>
+                                                                    <td>1.70 mètre</td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <th scope="row">Poids</th>
+                                                                    <td>72 kg</td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <th scope="row">Temperature</th>
+                                                                    <td>32 °C</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Tension arterielle</th>
+                                                                    <td>140 mmHg</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <state-empty v-else title="Sélection patient !"
+                                                        description="Veuillez sélectionner un patient dans la liste pour commencer la consultation !"></state-empty>
+
                                                 </form>
                                             </div>
                                             <!--end tab-pane-->
@@ -200,8 +178,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Consultation
-                                                            détails</h6>
+                                                        <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Diagnostic</h6>
                                                         <div class="border border-dashed border-primary mb-3"></div>
                                                         <!-- <div class="row d-flex mt-2"
                                                             v-for="(detail, index) in consultDetails" :key="index">
@@ -280,8 +257,8 @@
                                                     v-for="(detail, index) in prescriptionDetails" :key="index">
                                                     <div class="col-md-5">
                                                         <div>
-                                                            <label for="iconrightInput"
-                                                                class="form-label">Traitement</label>
+                                                            <label for="iconrightInput" class="form-label">Traitement
+                                                            </label>
                                                             <div class="form-icon right">
                                                                 <input type="text" class="form-control form-control-icon"
                                                                     id="iconrightInput"
@@ -293,8 +270,7 @@
                                                     </div>
                                                     <div class="col-md-5">
                                                         <div>
-                                                            <label for="iconrightInput" class="form-label">Mode
-                                                                d'emploi</label>
+                                                            <label for="iconrightInput" class="form-label">Posologie</label>
                                                             <div class="form-icon right">
                                                                 <input type="text" class="form-control form-control-icon"
                                                                     id="iconrightInput" placeholder="Entrer la valeur..."
@@ -376,7 +352,7 @@ export default {
     name: "PatientAssign",
     data() {
         return {
-            selectPatient: null,
+            patientSelect2: null,
             editor: '',
             consultDetails: [
                 {
@@ -389,11 +365,12 @@ export default {
                     title: '',
                     value: ''
                 }
-            ]
+            ],
+            selectedPatient: null
         }
     },
     unmounted() {
-        this.selectPatient.select2('destroy');
+        this.patientSelect2.select2('destroy');
     },
     mounted() {
         this.init();
@@ -403,7 +380,7 @@ export default {
 
         init() {
             let self = this;
-            this.selectPatient = $(".patient-select2").select2({
+            this.patientSelect2 = $(".patient-select2").select2({
                 placeholder: 'Veuillez sélectionner un patient...',
                 searchInputPlaceholder: 'Recherche patient...',
                 data: [
@@ -414,8 +391,7 @@ export default {
                 ]
             });
             ClassicEditor.create(document.querySelector(".editor"), {
-                placeholder: 'Veuillez saisir votre consultation pour le patient en cours...',
-
+                placeholder: 'Veuillez saisir diagnostic pour la consultation en cours...',
             })
                 .then(function (e) {
                     e.ui.view.editable.element.style.height = "200px";

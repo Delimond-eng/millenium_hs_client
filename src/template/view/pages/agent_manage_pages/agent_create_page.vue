@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-12 col-md-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0">Création agent <sup class="text-info text-lowercase fw-normal">(médecin,
+                            <h4 class="mb-sm-0">Création agent <sup class="text-danger text-lowercase fw-normal">(médecin,
                                     infirmier,laborantin...)</sup></h4>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <form @submit.prevent="submitForm" class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <!-- agent personals infos -->
                                     <div class="col-md-8">
@@ -40,7 +40,8 @@
                                                     <label class="form-label">Matricule</label>
                                                     <div class="form-icon">
                                                         <input type="text" class="form-control form-control-icon"
-                                                            placeholder="n° matricule ..." v-model="form.matricule">
+                                                            placeholder="n° matricule ..." v-model="form.matricule"
+                                                            required>
                                                         <i class="bx bx-hash"></i>
                                                     </div>
                                                 </div>
@@ -52,7 +53,7 @@
                                                     <div class="form-icon">
                                                         <input type="text" class="form-control form-control-icon"
                                                             id="iconInputNom" placeholder="Saisir le nom...ex:Gaston"
-                                                            v-model="form.nom">
+                                                            v-model="form.nom" required>
                                                         <i class="ri-user-3-line"></i>
                                                     </div>
                                                 </div>
@@ -76,7 +77,7 @@
                                                             class="text-danger">*</sup></label>
                                                     <div class="form-icon">
                                                         <select class="form-select" id="inputGroupSelect01"
-                                                            v-model="form.sexe">
+                                                            v-model="form.sexe" required>
                                                             <option selected label="Sélectionner un sexe"></option>
                                                             <option value="M">Masculin</option>
                                                             <option value="F">Féminin</option>
@@ -93,24 +94,27 @@
                                                         <input type="text" class="form-control form-control-icon"
                                                             id="iconInputNom"
                                                             placeholder="Saisir le tél... ex: +(243) 810000000"
-                                                            v-model="form.telephone">
+                                                            v-model="form.telephone" required>
                                                         <i class="ri-phone-line"></i>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- spécialité -->
+
+                                            <!-- date naissance input -->
                                             <div class="col-md-6">
                                                 <div class="mt-3">
-                                                    <label for="iconInputPoids" class="form-label">Spécialité <sub
-                                                            class="text-danger">(optionnelle)</sub></label>
+                                                    <label for="iconInputNom" class="form-label">Date de naissance<sup
+                                                            class="text-danger">*</sup></label>
                                                     <div class="form-icon">
-                                                        <select class="specSelect" id="inputGroupSelect01">
-                                                            <option></option>
-
-                                                        </select>
+                                                        <input type="date" class="form-control form-control-icon"
+                                                            id="iconInputNom"
+                                                            placeholder="Saisir le tél... ex: +(243) 810000000"
+                                                            v-model="form.datenais" required>
+                                                        <i class="ri-calendar-2-line"></i>
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <!-- adresse input -->
                                             <div class="col-md-12">
                                                 <div class="mt-3">
@@ -119,8 +123,22 @@
                                                     <div class="form-icon">
                                                         <input type="text" class="form-control form-control-icon"
                                                             id="iconInputNom" v-model="form.adresse"
-                                                            placeholder="Saisir l'adresse ...... ex: N°/ av. / Q. /C">
+                                                            placeholder="Saisir l'adresse ...... ex: N°/ av. / Q. /C"
+                                                            required>
                                                         <i class="ri-map-pin-5-line"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- spécialité -->
+                                            <div class="col-md-6">
+                                                <div class="mt-3">
+                                                    <label for="iconInputPoids" class="form-label">Spécialité <sup
+                                                            class="text-danger">(optionnelle)</sup></label>
+                                                    <div class="form-icon">
+                                                        <select class="specSelect" id="inputGroupSelect01">
+                                                            <option></option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,7 +152,7 @@
                                                             class="text-danger">*</sup></label>
                                                     <div class="form-icon">
                                                         <select class="form-select" id="inputGroupSelect01"
-                                                            v-model="form.grade_id">
+                                                            v-model="form.grade_id" required>
                                                             <option selected label="Sélectionner un grade"></option>
                                                             <option v-for="(item, index) in configs.grades" :key="index"
                                                                 :value="item.id">{{ item.grade_libelle }}</option>
@@ -150,7 +168,7 @@
                                                             class="text-danger">*</sup></label>
                                                     <div class="form-icon">
                                                         <select class="form-select" id="inputGroupSelect01"
-                                                            v-model="form.service_id">
+                                                            v-model="form.service_id" required>
                                                             <option selected label="Sélectionner une grade"></option>
                                                             <option v-for="(item, index) in configs.services" :key="index"
                                                                 :value="item.id">{{ item.service_libelle }}</option>
@@ -167,7 +185,7 @@
                                                             class="text-danger">*</sup></label>
                                                     <div class="form-icon">
                                                         <select class="form-select" id="inputGroupSelect01"
-                                                            v-model="form.fonction_id">
+                                                            v-model="form.fonction_id" required>
                                                             <option selected label="Sélectionner une grade"></option>
                                                             <option v-for="(item, index) in configs.fonctions" :key="index"
                                                                 :value="item.id">{{ item.fonction_libelle }}</option>
@@ -190,7 +208,7 @@
                                                     <label class="form-label">Rôle utilisateur<sup
                                                             class="text-danger">*</sup></label>
                                                     <select class="form-select" v-model="form_user.role_id"
-                                                        :disabled="!user_account_allowed">
+                                                        :disabled="!user_account_allowed" :required="user_account_allowed">
                                                         <option selected label="Sélectionnez un rôle..."></option>
                                                         <option v-for="(item, index) in configs.roles" :key="index"
                                                             :value="item.id">{{ item.role }}</option>
@@ -202,8 +220,9 @@
                                                     <label class="form-label">Email</label>
                                                     <div class="form-icon">
                                                         <input type="email" class="form-control form-control-icon"
-                                                            placeholder="Saisir l'email de l'agent..." v-model="form.email"
-                                                            :disabled="!user_account_allowed">
+                                                            placeholder="Saisir l'email de l'agent..."
+                                                            v-model="form_user.email" :disabled="!user_account_allowed"
+                                                            :required="user_account_allowed">
                                                         <i class="ri-mail-settings-line"></i>
                                                     </div>
                                                 </div>
@@ -213,9 +232,10 @@
                                                 <div class="mt-3">
                                                     <label class="form-label">Mot de passe </label>
                                                     <div class="form-icon">
-                                                        <input type="email" class="form-control form-control-icon"
-                                                            placeholder="Saisir le mot de passe" v-model="form.password"
-                                                            :disabled="!user_account_allowed">
+                                                        <input type="password" class="form-control form-control-icon"
+                                                            placeholder="Saisir le mot de passe"
+                                                            v-model="form_user.password" :disabled="!user_account_allowed"
+                                                            :required="user_account_allowed">
                                                         <i class="ri-lock-password-line"></i>
                                                     </div>
                                                 </div>
@@ -225,10 +245,10 @@
                                                 <div class="mt-3">
                                                     <label class="form-label">Confirmation </label>
                                                     <div class="form-icon">
-                                                        <input type="email" class="form-control form-control-icon"
+                                                        <input type="password" class="form-control form-control-icon"
                                                             placeholder="Confirmer le mot de passe "
                                                             v-model="form_user.confirm"
-                                                            :required="form_user.confirm === '' && form_user.confirm !== form_user.password"
+                                                            :required="user_account_allowed && form_user.password !== form_user.confirm"
                                                             :disabled="!user_account_allowed">
                                                         <i class="ri-lock-password-line"></i>
                                                     </div>
@@ -237,15 +257,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <bs-toast id="errorsToast2" :msg="errors_msg" />
                                 <div class="d-flex align-items-end justify-content-end mt-4">
-                                    <button type="button" @click.prevent="testPermission"
-                                        class="btn btn-success btn-border btn-label right nexttab nexttab me-2"><i
-                                            class="ri-check-double-fill label-icon align-middle fs-16 ms-2"></i>Enregistrer</button>
-                                    <button type="button" class="btn btn-light btn-border btn-label right"><i
+                                    <load-button btn-type="submit" :loading="formLoading"
+                                        class-name="btn-success btn-border btn-label right nexttab nexttab me-2">
+                                        <span><i
+                                                class="ri-check-double-fill label-icon align-middle fs-16 ms-2"></i>Enregistrer</span>
+                                    </load-button>
+                                    <button type="button" @click.prevent="cleanField"
+                                        class="btn btn-light btn-border btn-label right"><i
                                             class="ri-restart-line label-icon align-middle fs-16 ms-2"></i>
                                         Annuler</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
                     </div> <!-- end col -->
@@ -289,6 +313,8 @@ export default {
     data() {
         return {
             specSelect: null,
+            errors_msg: '',
+            formLoading: false,
             form: {
                 matricule: '',
                 nom: '',
@@ -310,7 +336,8 @@ export default {
                 password: '',
                 email: '',
                 confirm: ''
-            }
+            },
+
         }
     },
     mounted() {
@@ -321,6 +348,7 @@ export default {
     },
     methods: {
         init() {
+            let self = this;
             /* specialites init select2 */
             this.specSelect = $('.specSelect').select2({
                 placeholder: 'Sélectionnez une spécialité...',
@@ -390,7 +418,64 @@ export default {
                     'Orthoptie',
                     'Périnatalogie',
                 ]
+            }).on('change', function () {
+                let specialite = $(this).val();
+                self.form.specialite = specialite;
             });
+        },
+
+
+        /**
+         * SUBMIT FORM DATA
+        */
+        submitForm(e) {
+            this.formLoading = true;
+            if (this.user_account_allowed) this.form.user_data = this.form_user;
+            this.form.created_by = this.$user().agent_id;
+            this.$store.dispatch('services/createAgent', this.form).then((res) => {
+                console.log(JSON.stringify(res));
+                this.formLoading = false;
+                if (res.status !== undefined) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Agent créé avec succès !",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        showCloseButton: false,
+                    });
+                    this.cleanField();
+                }
+                if (res.errors !== undefined) {
+                    console.log(JSON.stringify(res));
+                    this.errors_msg = res.errors.toString();
+                    let toast = document.getElementById("errorsToast2")
+                    new bootstrap.Toast(toast, { delay: 1500 }).show();
+                }
+            }).catch((err) => {
+                this.formLoading = false
+                console.log(JSON.stringify(err));
+            });
+        },
+
+        cleanField() {
+            this.form.matricule = '';
+            this.form.nom = '';
+            this.form.prenom = '';
+            this.form.sexe = '';
+            this.form.telephone = '';
+            this.form.adresse = '';
+            this.form.specialite = '';
+            this.form.datenais = ''
+            this.form.fonction_id = '';
+            this.form.grade_id = '';
+            this.form.service_id = '';
+            this.form.created_by = '';
+            this.form_user.role_id = '';
+            this.form_user.password = '';
+            this.form_user.email = '';
+            this.form_user.confirm = '';
+            $(".specSelect").val('').trigger('change');
         },
 
         testPermission() {

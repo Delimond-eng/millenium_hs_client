@@ -56,7 +56,8 @@
                                                     <td>{{ item.patient_sexe }}</td>
                                                     <td>{{ item.patient_datenais }}</td>
                                                     <td>{{ item.patient_telephone }}</td>
-                                                    <td class="text-ellipsis">{{ item.patient_telephone }}</td>
+                                                    <td>{{ item.patient_adresse
+                                                    }}</td>
                                                     <td>
                                                         <span v-if="item.details">
                                                             {{ item.details[item.details.length - 1].patient_detail_poids }}

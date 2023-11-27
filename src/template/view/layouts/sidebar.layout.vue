@@ -59,7 +59,7 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#med" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="med">
-                            <i class="ri-nurse-line"></i> <span data-key="t-apps">Agents(médecins...)</span>
+                            <i class=" ri-user-settings-line"></i> <span data-key="t-apps">Agents</span>
                         </a>
                         <div class="collapse menu-dropdown" id="med">
                             <ul class="nav nav-sm flex-column">

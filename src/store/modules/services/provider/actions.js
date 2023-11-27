@@ -43,12 +43,31 @@ export default {
   },
 
   /**
+   * CREATE NEW AGENT
+   * @param {*} context
+   * @param {*} form
+   * @returns
+   */
+  async createAgent(context, form) {
+    try {
+      let { data, status } = await post("/agents.create", form);
+      if (status === 200) {
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  /**
    * CREATE NEW OR OLD PATIENT
    */
   async createPatient(context, form) {
     try {
       let { data, status } = await post("/patients.create", form);
-      console.log(data);
+      console.log("new", data);
       if (status === 200) {
         return data;
       } else {

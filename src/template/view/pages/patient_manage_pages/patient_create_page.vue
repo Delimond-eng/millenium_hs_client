@@ -62,7 +62,7 @@
                                             <div class="form-icon">
                                                 <input type="text" v-model="form.nom" class="form-control form-control-icon"
                                                     id="iconInputNom" placeholder="Saisir le nom du patient...ex:Gaston"
-                                                    required>
+                                                    required :readonly="form.patient_id !== ''">
                                                 <i class="ri-user-2-line"></i>
                                             </div>
                                         </div>
@@ -76,7 +76,8 @@
                                             <div class="form-icon">
                                                 <input type="text" v-model="form.prenom"
                                                     class="form-control form-control-icon" id="iconInputNom"
-                                                    placeholder="Saisir le prénom du patient...ex:Lionnel" required>
+                                                    placeholder="Saisir le prénom du patient...ex:Lionnel" required
+                                                    :readonly="form.patient_id !== ''">
                                                 <i class="ri-user-2-line"></i>
                                             </div>
                                         </div>
@@ -88,7 +89,8 @@
                                             <label for="iconInputPoids" class="form-label">Sexe <sup
                                                     class="text-danger">*</sup></label>
                                             <div class="form-icon">
-                                                <select class="form-select" id="inputGroupSelect01" v-model="form.sexe">
+                                                <select class="form-select" id="inputGroupSelect01" v-model="form.sexe"
+                                                    :readonly="form.patient_id !== ''">
                                                     <option selected label="Sélectionner un sexe"></option>
                                                     <option value="M">Masculin</option>
                                                     <option value="F">Féminin</option>
@@ -105,7 +107,8 @@
                                             <div class="form-icon">
                                                 <input type="text" v-model="form.telephone"
                                                     class="form-control form-control-icon" id="iconInputNom"
-                                                    placeholder="Saisir le tél... ex: +(243) 810000000">
+                                                    placeholder="Saisir le tél... ex: +(243) 810000000"
+                                                    :readonly="form.patient_id !== ''">
                                                 <i class="ri-phone-line"></i>
                                             </div>
                                         </div>
@@ -118,7 +121,8 @@
                                                     class="text-danger">*</sup></label>
                                             <div class="form-icon">
                                                 <input type="date" v-model="form.datenais"
-                                                    class="form-control form-control-icon" id="iconInputNom" required>
+                                                    class="form-control form-control-icon" id="iconInputNom" required
+                                                    :readonly="form.patient_id !== ''">
                                                 <i class="ri-phone-line"></i>
                                             </div>
                                         </div>
@@ -133,7 +137,7 @@
                                                 <input type="text" v-model="form.adresse"
                                                     class="form-control form-control-icon" id="iconInputNom"
                                                     placeholder="Saisir l'adresse du patient... ex: N°/ av. / Q. /C"
-                                                    required>
+                                                    required :readonly="form.patient_id !== ''">
                                                 <i class="ri-map-pin-5-line"></i>
                                             </div>
                                         </div>
@@ -288,10 +292,12 @@ export default {
         submitForm(e) {
             let age = calculateAge(this.form.datenais);
             this.form_details.age = age;
+            this.form.code = this.pcode;
             this.form.patient_details = this.form_details;
             this.form.created_by = this.$user().agent_id;
             this.formLoading = true;
             this.$store.dispatch('services/createPatient', this.form).then((res) => {
+                console.log(JSON.stringify(res));
                 this.formLoading = false;
                 if (res.status !== undefined) {
                     Swal.fire({
@@ -304,13 +310,18 @@ export default {
                     });
                     this.$store.dispatch('services/viewAllPatients');
                     this.cleanField();
+                    this.loadPatientsList();
                 }
                 if (res.errors !== undefined) {
+                    console.log(JSON.stringify(res));
                     this.errors_msg = res.errors.toString();
                     let toast = document.getElementById("errorsToast")
                     new bootstrap.Toast(toast, { delay: 1500 }).show();
                 }
-            }).catch((err) => this.formLoading = false);
+            }).catch((err) => {
+                this.formLoading = false
+                console.log(JSON.stringify(err));
+            });
         },
 
         async loadPatientsList() {
