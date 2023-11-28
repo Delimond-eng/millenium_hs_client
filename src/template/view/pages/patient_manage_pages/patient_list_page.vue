@@ -8,28 +8,43 @@
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Liste des patients</h4>
 
-                            <div class="page-title-right">
-                                <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="#/home/patient/create"
-                                            class="btn btn-success btn-border btn-sm text-white"><i class="ri-add-line"></i>
-                                            Création nouveau agent</a></li>
-                                </ol>
-                            </div>
-
                         </div>
                     </div>
                 </div>
                 <!-- end page title -->
                 <div class="row">
                     <div class="col-md-12">
-
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-end">
-                                <div class="search-box ms-2">
-                                    <input type="text" class="form-control search" placeholder="Recherche patient...">
-                                    <i class="ri-search-line search-icon"></i>
-                                </div>
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="row g-2">
+                            <div class="col-sm-6">
+                              <div class="search-box">
+                                <input type="text" class="form-control" id="searchMemberList" placeholder="Recherche patient, par nom ou par code...">
+                                <i class="ri-search-line search-icon"></i>
+                              </div>
                             </div>
+                            <!--end col-->
+                            <div class="col-sm-auto ms-auto">
+                              <div class="list-grid-nav hstack gap-1">
+
+                                <!--
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1" style="">
+                                  <li><a class="dropdown-item" href="#">All</a></li>
+                                  <li><a class="dropdown-item" href="#">Last Week</a></li>
+                                  <li><a class="dropdown-item" href="#">Last Month</a></li>
+                                  <li><a class="dropdown-item" href="#">Last Year</a></li>
+                                </ul>
+                                -->
+                                <button class="btn btn-success btn-border addMembers-modal" @click="$router.push('/home/patient/create')"><i class="ri-add-fill me-1 align-bottom"></i> Nouveau patient</button>
+                              </div>
+                            </div>
+                            <!--end col-->
+                          </div>
+                          <!--end row-->
+                        </div>
+                      </div>
+                        <div class="card">
+
                             <div class="card-body">
                                 <div class="live-preview">
                                     <div class="table-responsive table-card">
@@ -41,7 +56,6 @@
                                                     <th scope="col">Sexe</th>
                                                     <th scope="col">Date naissance</th>
                                                     <th scope="col">Téléphone</th>
-                                                    <th scope="col">Adresse</th>
                                                     <th scope="col">Poids</th>
                                                     <th scope="col">Taille</th>
                                                     <th scope="col">Temperature</th>
@@ -56,8 +70,7 @@
                                                     <td>{{ item.patient_sexe }}</td>
                                                     <td>{{ item.patient_datenais }}</td>
                                                     <td>{{ item.patient_telephone }}</td>
-                                                    <td>{{ item.patient_adresse
-                                                    }}</td>
+
                                                     <td>
                                                         <span v-if="item.details">
                                                             {{ item.details[item.details.length - 1].patient_detail_poids }}
@@ -129,7 +142,11 @@
 <script>
 export default {
     name: "PatientListPage",
-    computed: {
+
+  mounted() {
+      this.$store.dispatch('services/viewAllPatients');
+  },
+  computed: {
         patients() {
             return this.$store.getters['services/GET_PATIENTS'];
         }

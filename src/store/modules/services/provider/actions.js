@@ -83,9 +83,39 @@ export default {
    */
   async viewAllPatients({ commit }) {
     try {
-      let { data, status } = await get("/patients.all");
+      let { data, status } = await get("/patients.all/desc");
       if (status === 200) {
         commit("SET_PATIENTS", data.patients);
+        return data.patients;
+      } else return [];
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  },
+  /**
+   * Voir les patients assignés à un médecins
+   * */
+  async viewMedecinsAssignments(context, agentId) {
+    try {
+      let { data, status } = await get(`/agents.showassigns/${agentId}`);
+      if (status === 200) {
+        return data.patients;
+      } else return [];
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  },
+
+  /**
+   * GET RECENT PATIENTS LIST
+   * */
+  async viewRecentPatients({ commit }) {
+    try {
+      let { data, status } = await get("/patients.all/desc");
+      if (status === 200) {
+        commit("SET_RECENT_PATIENTS", data.patients);
         return data.patients;
       } else return [];
     } catch (error) {
@@ -105,4 +135,18 @@ export default {
       return null;
     }
   },
+
+  async assignPatient(context, form){
+    try {
+      let { data, status } = await post("/patients.assign", form);
+      console.log("new", data);
+      if (status === 200) {
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  }
 };

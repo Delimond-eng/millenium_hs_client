@@ -6,4 +6,5 @@ export default {
   SET_AGENTS: (state, data) => (state.agents = data),
   SET_CODE: (state, data) => (state.rcode = data),
   SET_PATIENTS: (state, data) => (state.patients = data),
+  SET_RECENT_PATIENTS: (state, data) => (state.recentpatients = data),
 };

@@ -40,9 +40,10 @@ const actions = {
       let { data, status } = await post("/login", form);
       if (status === 200) {
         if (!data.errors) {
+          localStorage.removeItem('user-token');
+          localStorage.removeItem('user-data');
           localStorage.setItem("user-token", data.token);
           localStorage.setItem("user-data", JSON.stringify(data.user));
-          console.log(JSON.stringify(data));
           return data;
         } else {
           return data.errors;

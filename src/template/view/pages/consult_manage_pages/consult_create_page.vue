@@ -9,9 +9,15 @@
                             <h4 class="mb-sm-0">Consultation</h4>
 
                             <div class="page-title-right">
+
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);"
-                                            class="btn btn-success btn-sm text-white btn-border"> <i
+                                    <li class="me-2">
+                                        <select class="patient-select2">
+                                            <option></option>
+                                        </select>
+                                    </li>
+                                    <li v-if="selectedPatient" class="breadcrumb-item"><a href="javascript: void(0);"
+                                            @click.prevent="readCommand" class="btn btn-success text-white btn-border"> <i
                                                 class="ri-phone-line"></i> Appeler
                                             le patient</a></li>
 
@@ -26,7 +32,6 @@
                 <!-- end page title -->
 
                 <div class="row">
-
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
@@ -45,7 +50,8 @@
                                             <a class="nav-link d-flex flex-column justify-content-center align-items-center"
                                                 id="custom-v-pills-profile-tab" data-bs-toggle="pill"
                                                 href="#custom-v-pills-profile" role="tab"
-                                                aria-controls="custom-v-pills-profile" aria-selected="false">
+                                                aria-controls="custom-v-pills-profile" aria-selected="false"
+                                                :disabled="selectedPatient === null">
                                                 <img src="assets/images/companies/consult.png"
                                                     class="d-block fs-20 mb-1 text-center" style="height: 40px;">
                                                 Consultations
@@ -53,7 +59,8 @@
                                             <a class="nav-link d-flex flex-column justify-content-center align-items-center"
                                                 id="custom-v-pills-messages-tab" data-bs-toggle="pill"
                                                 href="#custom-v-pills-messages" role="tab"
-                                                aria-controls="custom-v-pills-messages" aria-selected="false">
+                                                :disabled="selectedPatient === null" aria-controls="custom-v-pills-messages"
+                                                aria-selected="false">
                                                 <!-- <i class="las la-file-alt  d-block fs-20 mb-1"></i> --> <img
                                                     src="assets/images/companies/prescription2.png"
                                                     class="d-block fs-20 mb-1 text-center" style="height: 40px;">
@@ -65,11 +72,8 @@
                                         <div class="tab-content text-muted mt-3 mt-lg-0">
                                             <div class="tab-pane fade active show" id="custom-v-pills-home" role="tabpanel"
                                                 aria-labelledby="custom-v-pills-home-tab">
-                                                <select class="patient-select2">
-                                                    <option></option>
-                                                </select>
-                                                <form action="#">
-                                                    <div class="d-flex justify-content-between mb-2 mt-3 align-items-end"
+                                                <div>
+                                                    <div class="d-flex justify-content-between mb-2 mt-3 align-items-end align-content-end"
                                                         v-if="selectedPatient">
                                                         <h6 class="fs-14 text-primary">Infos récentes du
                                                             patient</h6>
@@ -85,28 +89,33 @@
                                                             <tbody class="text-black">
                                                                 <tr>
                                                                     <th scope="row" style="width: 200px;">Nom complet</th>
-                                                                    <td>Gaston delimond</td>
+                                                                    <td>{{ selectedPatient.patient_nom }} {{
+                                                                        selectedPatient.patient_prenom }}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">Sexe</th>
-                                                                    <td>M</td>
+                                                                    <td>{{ selectedPatient.patient_sexe }}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">Téléphone</th>
-                                                                    <td>+243 813648833</td>
+                                                                    <td>{{ selectedPatient.patient_telephone }}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">Adresse</th>
-                                                                    <td>01, Bateke, Q. Kingabwa Mandradele, Limete kinshasa
+                                                                    <td>{{ selectedPatient.patient_adresse }}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">Age</th>
-                                                                    <td>19 ans</td>
+                                                                    <td>{{
+                                                                        selectedPatient.details[selectedPatient.details.length
+                                                                            - 1].patient_detail_age }} ans</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">Taille</th>
-                                                                    <td>1.70 mètre</td>
+                                                                    <td>{{
+                                                                        selectedPatient.details[selectedPatient.details.length
+                                                                            - 1].patient_detail_taille }} mètre</td>
                                                                 </tr>
 
                                                                 <tr>
@@ -116,11 +125,15 @@
 
                                                                 <tr>
                                                                     <th scope="row">Temperature</th>
-                                                                    <td>32 °C</td>
+                                                                    <td>{{
+                                                                        selectedPatient.details[selectedPatient.details.length
+                                                                            - 1].patient_detail_temperature }} °C</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">Tension arterielle</th>
-                                                                    <td>140 mmHg</td>
+                                                                    <td>{{
+                                                                        selectedPatient.details[selectedPatient.details.length
+                                                                            - 1].patient_tension_art }} mmHg</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -128,8 +141,7 @@
 
                                                     <state-empty v-else title="Sélection patient !"
                                                         description="Veuillez sélectionner un patient dans la liste pour commencer la consultation !"></state-empty>
-
-                                                </form>
+                                                </div>
                                             </div>
                                             <!--end tab-pane-->
                                             <div class="tab-pane fade" id="custom-v-pills-profile" role="tabpanel"
@@ -138,98 +150,57 @@
                                                     <div class="col-md-12">
                                                         <div class="row ">
                                                             <div class="col-md-12 mt-2">
-                                                                <label for="consultMotif" class="form-label">Motif
+                                                                <label class="form-label">Motif
                                                                     de la consultation
                                                                     <sup class="text-danger">*</sup></label>
                                                                 <div class="form-icon right">
                                                                     <input type="text"
                                                                         class="form-control form-control-icon"
-                                                                        id="iconrightInput"
                                                                         placeholder="Entrer le motif de la consultation...">
                                                                     <i class="ri-edit-box-fill"></i>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Les antécedents
-                                                        </h6>
-                                                        <div class="border border-dashed border-primary"></div>
-                                                        <div class="row mt-2">
-                                                            <div class="col-md-4">
-                                                                <label for="consultMotif" class="form-label">Familiaux
-                                                                </label>
-                                                                <textarea class="form-control"
-                                                                    placeholder="antécedents familiaux..."></textarea>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="consultMotif" class="form-label">Médicaux
-                                                                </label>
-                                                                <textarea class="form-control"
-                                                                    placeholder="antécedents médicaux..."></textarea>
-                                                            </div>
 
-                                                            <div class="col-md-4">
-                                                                <label for="consultMotif" class="form-label">Chirurgicaux
-                                                                </label>
-                                                                <textarea class="form-control"
-                                                                    placeholder="antécedents chirurgicaux..."></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="col-md-12">
                                                         <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Diagnostic</h6>
                                                         <div class="border border-dashed border-primary mb-3"></div>
-                                                        <!-- <div class="row d-flex mt-2"
-                                                            v-for="(detail, index) in consultDetails" :key="index">
-                                                            <div class="col-md-5">
-                                                                <div>
-                                                                    <label for="iconrightInput"
-                                                                        class="form-label">Désignation</label>
-                                                                    <div class="form-icon right">
-                                                                        <input type="text"
-                                                                            class="form-control form-control-icon"
-                                                                            id="iconrightInput"
-                                                                            placeholder="Entrer la designation..."
-                                                                            v-model="detail.title">
-                                                                        <i class="bx bx-body"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div>
-                                                                    <label for="iconrightInput"
-                                                                        class="form-label">Valeur</label>
-                                                                    <div class="form-icon right">
-                                                                        <input type="text"
-                                                                            class="form-control form-control-icon"
-                                                                            id="iconrightInput"
-                                                                            placeholder="Entrer la valeur..."
-                                                                            v-model="detail.value">
-                                                                        <i class="bx bx-body"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2 align-items-end">
-                                                                <div>
-                                                                    <label for="iconrightInput" class="form-label "
-                                                                        style="visibility: hidden;">Actions</label>
-                                                                    <div class="d-flex">
-                                                                        <button class="btn btn-info btn-border me-1"
-                                                                            @click.prevent="consultDetails.push({ title: '', value: '' })"><i
-                                                                                class="ri-add-line"></i></button>
-                                                                        <button class="btn btn-light btn-border me-1"
-                                                                            @click.prevent="consultDetails.splice(index, 1)"><i
-                                                                                class="ri-close-line"></i></button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-
-
                                                         <!-- wizard editor -->
-
                                                         <textarea class="editor"></textarea>
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Les
+                                                                    antécedents
+                                                                </h6>
+                                                                <div class="border border-dashed border-primary"></div>
+                                                                <div class="row mt-2">
+                                                                    <div class="col-md-12 mb-1">
+                                                                        <label class="form-label">Antécedents familiaux <sup
+                                                                                class="text-danger">(optionnel)</sup>
+                                                                        </label>
+                                                                        <textarea class="form-control"
+                                                                            placeholder="antécedents familiaux..."></textarea>
+                                                                    </div>
+                                                                    <div class="col-md-12 mb-1">
+                                                                        <label class="form-label">Antécedents médicaux <sup
+                                                                                class="text-danger">(optionnel)</sup>
+                                                                        </label>
+                                                                        <textarea class="form-control"
+                                                                            placeholder="antécedents médicaux..."></textarea>
+                                                                    </div>
+
+                                                                    <div class="col-md-12">
+                                                                        <label class="form-label">Antécedents chirurgicaux
+                                                                            <sup class="text-danger">(optionnel)</sup>
+                                                                        </label>
+                                                                        <textarea class="form-control"
+                                                                            placeholder="antécedents chirurgicaux..."></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="d-flex align-items-end justify-content-end w-100 mt-4">
                                                             <button type="button"
                                                                 class="btn btn-light btn-border btn-label right me-2"><i
@@ -257,11 +228,10 @@
                                                     v-for="(detail, index) in prescriptionDetails" :key="index">
                                                     <div class="col-md-5">
                                                         <div>
-                                                            <label for="iconrightInput" class="form-label">Traitement
+                                                            <label class="form-label">Traitement
                                                             </label>
                                                             <div class="form-icon right">
                                                                 <input type="text" class="form-control form-control-icon"
-                                                                    id="iconrightInput"
                                                                     placeholder="Entrer la designation..."
                                                                     v-model="detail.title">
                                                                 <i class="ri-health-book-line"></i>
@@ -270,10 +240,10 @@
                                                     </div>
                                                     <div class="col-md-5">
                                                         <div>
-                                                            <label for="iconrightInput" class="form-label">Posologie</label>
+                                                            <label class="form-label">Posologie</label>
                                                             <div class="form-icon right">
                                                                 <input type="text" class="form-control form-control-icon"
-                                                                    id="iconrightInput" placeholder="Entrer la valeur..."
+                                                                    placeholder="Entrer la valeur..."
                                                                     v-model="detail.value">
                                                                 <i class="ri-health-book-line"></i>
                                                             </div>
@@ -281,7 +251,7 @@
                                                     </div>
                                                     <div class="col-md-2 align-items-end">
                                                         <div>
-                                                            <label for="iconrightInput" class="form-label "
+                                                            <label class="form-label "
                                                                 style="visibility: hidden;">Actions</label>
                                                             <div class="d-flex">
                                                                 <button class="btn btn-outline-primary btn-icon me-1"
@@ -373,28 +343,42 @@ export default {
         this.patientSelect2.select2('destroy');
     },
     mounted() {
+        this.patientSelect2 = $(".patient-select2").select2({
+            placeholder: 'Chargement des patients assignés ...'
+        });
         this.init();
     },
 
     methods: {
 
-        init() {
+        async init() {
             let self = this;
+            let agentId = this.$user().agent_id;
+            console.log("agent id", agentId);
+            let patients = await this.$store.dispatch('services/viewMedecinsAssignments', agentId);
+            if (this.patientSelect2 !== null) this.patientSelect2.select2('destroy');
             this.patientSelect2 = $(".patient-select2").select2({
                 placeholder: 'Veuillez sélectionner un patient...',
                 searchInputPlaceholder: 'Recherche patient...',
-                data: [
-                    "Gaston delimond",
-                    "Lionnel Nawej",
-                    "Isaac Mabuki",
-                    "Daniel Engo"
-                ]
+                data: $.map(patients, function (item) {
+                    return {
+                        text: `${item.patient_code} : ${item.patient_nom} ${item.patient_prenom}`,
+                        id: item.id,
+                        info: item,
+                    }
+                })
+            }).on('change', function () {
+                //$(this).select2('data')[0].info
+                let id = $(this).val();
+                self.$store.dispatch('services/showPatient', id).then((result) => {
+                    self.selectedPatient = result;
+                });
             });
             ClassicEditor.create(document.querySelector(".editor"), {
                 placeholder: 'Veuillez saisir diagnostic pour la consultation en cours...',
             })
                 .then(function (e) {
-                    e.ui.view.editable.element.style.height = "200px";
+                    e.ui.view.editable.element.style.height = "150px";
                     e.ui.view.editable.element.style.fontColor = "#000000";
                     e.model.document.on('change', () => {
                         self.editor = jQuery(e.getData()).text().replaceAll("\n\n", "\n");
@@ -407,6 +391,31 @@ export default {
 
         getConsultValues() {
             console.log(this.editor);
+        },
+
+        readCommand() {
+            if ('speechSynthesis' in window) {
+                let medecin = this.$user().name;
+                let patientCode = `${this.selectedPatient.patient_nom} ${this.selectedPatient.patient_prenom}`;
+                let texteAvecVoix = `Le patient ${patientCode} est prié d'aller voir le médecin ${medecin}`;
+                const utterance = new SpeechSynthesisUtterance(texteAvecVoix);
+                utterance.lang = 'fr-FR';
+                let voixFeminineFrancaise = speechSynthesis.getVoices().find(voice => {
+                    return voice.lang === 'fr-FR' && voice.gender === 'female';
+                });
+
+                if (!voixFeminineFrancaise) {
+                    voixFeminineFrancaise = speechSynthesis.getVoices().find(voice => {
+                        return voice.lang === 'fr-FR';
+                    });
+                }
+
+                utterance.voice = voixFeminineFrancaise;
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
+            } else {
+                alert("Désolé, l'API Web Speech n'est pas prise en charge dans votre navigateur.");
+            }
         }
     },
 }

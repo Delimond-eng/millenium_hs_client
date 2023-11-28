@@ -23,11 +23,9 @@
                 <!-- end page title -->
                 <div class="row">
                     <div class="col-md-12">
-
                         <div class="card">
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Est-il nouveau ou ancien patient ??</h4>
-
                                 <div class="mx-4 flex-grow-1">
                                     <load-state :processing="searchLoading" :size="30">
                                         <select class="patient-select2" name="state">
@@ -57,12 +55,11 @@
                                     <!-- nom input -->
                                     <div class="col-md-5">
                                         <div>
-                                            <label for="iconInputNom" class="form-label">Nom <sup
-                                                    class="text-danger">*</sup></label>
+                                            <label class="form-label">Nom <sup class="text-danger">*</sup></label>
                                             <div class="form-icon">
                                                 <input type="text" v-model="form.nom" class="form-control form-control-icon"
-                                                    id="iconInputNom" placeholder="Saisir le nom du patient...ex:Gaston"
-                                                    required :readonly="form.patient_id !== ''">
+                                                    placeholder="Saisir le nom du patient...ex:Gaston" required
+                                                    :readonly="form.patient_id !== ''">
                                                 <i class="ri-user-2-line"></i>
                                             </div>
                                         </div>
@@ -71,11 +68,10 @@
                                     <!-- prenom input -->
                                     <div class="col-md-5">
                                         <div>
-                                            <label for="iconInputNom" class="form-label">Prénom <sup
-                                                    class="text-danger">*</sup></label>
+                                            <label class="form-label">Prénom <sup class="text-danger">*</sup></label>
                                             <div class="form-icon">
                                                 <input type="text" v-model="form.prenom"
-                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    class="form-control form-control-icon"
                                                     placeholder="Saisir le prénom du patient...ex:Lionnel" required
                                                     :readonly="form.patient_id !== ''">
                                                 <i class="ri-user-2-line"></i>
@@ -86,8 +82,7 @@
                                     <!-- patient sexe select -->
                                     <div class="col-md-4">
                                         <div class="mt-3">
-                                            <label for="iconInputPoids" class="form-label">Sexe <sup
-                                                    class="text-danger">*</sup></label>
+                                            <label class="form-label">Sexe <sup class="text-danger">*</sup></label>
                                             <div class="form-icon">
                                                 <select class="form-select" id="inputGroupSelect01" v-model="form.sexe"
                                                     :readonly="form.patient_id !== ''">
@@ -102,11 +97,10 @@
                                     <!-- telephone input -->
                                     <div class="col-md-4">
                                         <div class="mt-3">
-                                            <label for="iconInputNom" class="form-label">Téléphone<sup
-                                                    class="text-danger">*</sup></label>
+                                            <label class="form-label">Téléphone<sup class="text-danger">*</sup></label>
                                             <div class="form-icon">
                                                 <input type="text" v-model="form.telephone"
-                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    class="form-control form-control-icon"
                                                     placeholder="Saisir le tél... ex: +(243) 810000000"
                                                     :readonly="form.patient_id !== ''">
                                                 <i class="ri-phone-line"></i>
@@ -117,11 +111,11 @@
                                     <!-- sate naissance input -->
                                     <div class="col-md-4">
                                         <div class="mt-3">
-                                            <label for="iconInputNom" class="form-label">Date de naissance<sup
+                                            <label class="form-label">Date de naissance<sup
                                                     class="text-danger">*</sup></label>
                                             <div class="form-icon">
                                                 <input type="date" v-model="form.datenais"
-                                                    class="form-control form-control-icon" id="iconInputNom" required
+                                                    class="form-control form-control-icon" required
                                                     :readonly="form.patient_id !== ''">
                                                 <i class="ri-phone-line"></i>
                                             </div>
@@ -131,11 +125,10 @@
                                     <!-- adresse input -->
                                     <div class="col-md-12">
                                         <div class="mt-3">
-                                            <label for="iconInputNom" class="form-label">Adresse<sup
-                                                    class="text-danger">*</sup></label>
+                                            <label class="form-label">Adresse<sup class="text-danger">*</sup></label>
                                             <div class="form-icon">
                                                 <input type="text" v-model="form.adresse"
-                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    class="form-control form-control-icon"
                                                     placeholder="Saisir l'adresse du patient... ex: N°/ av. / Q. /C"
                                                     required :readonly="form.patient_id !== ''">
                                                 <i class="ri-map-pin-5-line"></i>
@@ -151,11 +144,10 @@
                                     <!-- patient poids input -->
                                     <div class="col-md-3">
                                         <div class="mt-3">
-                                            <label for="iconInputNom" class="form-label">Poids<sup
-                                                    class="text-danger">*</sup></label>
+                                            <label class="form-label">Poids<sup class="text-danger">*</sup></label>
                                             <div class="form-icon">
                                                 <input type="number" v-model="form_details.poids"
-                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    class="form-control form-control-icon"
                                                     placeholder="Saisir le poids... ex: 63.3" required>
                                                 <i class="ri-scales-line"></i>
                                             </div>
@@ -165,11 +157,10 @@
                                     <!-- Temperature input -->
                                     <div class="col-md-3">
                                         <div class="mt-3">
-                                            <label for="iconInputNom" class="form-label">Temperature<sup
-                                                    class="text-danger">*</sup></label>
+                                            <label class="form-label">Temperature<sup class="text-danger">*</sup></label>
                                             <div class="form-icon">
                                                 <input type="number" v-model="form_details.temperature"
-                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    class="form-control form-control-icon rounded-end-0"
                                                     placeholder="Saisir le T°... ex: 34.5" required>
                                                 <i class="ri-contrast-drop-2-line "></i>
                                             </div>
@@ -179,11 +170,10 @@
                                     <!-- taille input -->
                                     <div class="col-md-3">
                                         <div class="mt-3">
-                                            <label for="iconInputNom" class="form-label">Taille<sup
-                                                    class="text-danger">*</sup></label>
+                                            <label class="form-label">Taille<sup class="text-danger">*</sup></label>
                                             <div class="form-icon">
                                                 <input type="text" v-model="form_details.taille"
-                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    class="form-control form-control-icon"
                                                     placeholder="Saisir la taille... ex: 1.70" required>
                                                 <i class=" ri-ruler-line"></i>
                                             </div>
@@ -193,11 +183,11 @@
                                     <!-- tension arterielle input -->
                                     <div class="col-md-3">
                                         <div class="mt-3">
-                                            <label for="iconInputNom" class="form-label">Tension arterielle<sup
+                                            <label class="form-label">Tension arterielle<sup
                                                     class="text-danger">*</sup></label>
                                             <div class="form-icon">
                                                 <input type="text" v-model="form_details.tension_art"
-                                                    class="form-control form-control-icon" id="iconInputNom"
+                                                    class="form-control form-control-icon"
                                                     placeholder="Saisir la tension arterielle du patient..." required>
                                                 <i class="bx bx-pulse"></i>
                                             </div>
