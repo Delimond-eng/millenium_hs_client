@@ -226,19 +226,40 @@
 
                                                 <div class="row d-flex mt-2 p-2"
                                                     v-for="(detail, index) in prescriptionDetails" :key="index">
-                                                    <div class="col-md-5">
-                                                        <div>
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control form-control-icon"
+                                                                placeholder="Traitement..." style="width: 33%;"
+                                                                v-model="detail.title">
+                                                            <input type="text" class="form-control form-control-icon"
+                                                                placeholder="Posologie..." style="width: 33%;"
+                                                                v-model="detail.value">
+                                                            <select class="form-control" style="width: 14%;">
+                                                                <option selected label="Type..."></option>
+                                                                <option value="">Comprimé</option>
+                                                                <option value="">Injectable</option>
+                                                                <option value="">Cirop</option>
+                                                                <option value="">Rectale</option>
+                                                                <option value="">Dermique</option>
+                                                            </select>
+                                                            <button class="btn btn-secondary btn-border btn-icon"
+                                                                @click.prevent="prescriptionDetails.push({ title: '', value: '' })"><i
+                                                                    class="ri-add-line"></i></button>
+                                                            <button class="btn btn-light btn-border btn-icon"
+                                                                @click.prevent="prescriptionDetails.splice(index, 1)"><i
+                                                                    class="ri-close-line"></i></button>
+                                                        </div>
+                                                        <!-- <div>
                                                             <label class="form-label">Traitement
                                                             </label>
                                                             <div class="form-icon right">
                                                                 <input type="text" class="form-control form-control-icon"
-                                                                    placeholder="Entrer la designation..."
-                                                                    v-model="detail.title">
+                                                                    placeholder="Traitement..." v-model="detail.title">
                                                                 <i class="ri-health-book-line"></i>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
-                                                    <div class="col-md-5">
+                                                    <!-- <div class="col-md-5">
                                                         <div>
                                                             <label class="form-label">Posologie</label>
                                                             <div class="form-icon right">
@@ -262,7 +283,7 @@
                                                                         class="ri-close-line"></i></button>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
 
                                                 <div class="d-flex align-items-end justify-content-end w-100 mt-4">
