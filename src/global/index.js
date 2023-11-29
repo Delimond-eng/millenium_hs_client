@@ -28,5 +28,12 @@ export default {
       let formattedDate = ` ${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
       return formattedDate;
     };
+
+    app.config.globalProperties.$closeBsModal = (modalId) => {
+      $(`#${modalId}`).modal("hide");
+    };
+    app.config.globalProperties.$showBsModal = (modalId) => {
+      $(`#${modalId}`).modal("show");
+    };
   },
 };

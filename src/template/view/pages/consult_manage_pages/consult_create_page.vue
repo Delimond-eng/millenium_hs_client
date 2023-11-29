@@ -34,43 +34,58 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card ribbon-box right">
+                            <div class="card-header">
+                                <div class="nav nav-pills nav-pills-tab custom-verti-nav-pills text-center" role="tablist"
+                                    aria-orientation="vertical">
+                                    <a class="nav-link d-flex flex-fill me-2 flex-column justify-content-center align-items-center active show "
+                                        id="custom-v-pills-home-tab" data-bs-toggle="pill" href="#custom-v-pills-home"
+                                        role="tab" aria-controls="custom-v-pills-home" aria-selected="true">
+                                        <img src="assets/images/companies/patient_3.png"
+                                            class="d-block fs-20 mb-1 text-center" style="height: 40px;"> Patient
+                                        infos
+                                    </a>
+                                    <a class="nav-link d-flex flex-fill me-2 flex-column justify-content-center align-items-center"
+                                        id="custom-v-pills-profile-tab" data-bs-toggle="pill" href="#custom-v-pills-profile"
+                                        role="tab" aria-controls="custom-v-pills-profile" aria-selected="false"
+                                        :disabled="selectedPatient === null">
+                                        <img src="assets/images/companies/consult.png"
+                                            class="d-block fs-20 mb-1 text-center" style="height: 40px;">
+                                        Consultations
+                                    </a>
+                                    <a class="nav-link flex-fill d-flex me-2 flex-column justify-content-center align-items-center"
+                                        id="custom-v-pills-messages-tab" data-bs-toggle="pill"
+                                        href="#custom-v-pills-messages" role="tab" :disabled="selectedPatient === null"
+                                        aria-controls="custom-v-pills-messages" aria-selected="false">
+                                        <!-- <i class="las la-file-alt  d-block fs-20 mb-1"></i> --> <img
+                                            src="assets/images/companies/prescription2.png"
+                                            class="d-block fs-20 mb-1 text-center" style="height: 40px;">
+                                        Prescriptions
+                                    </a>
+                                    <a class="nav-link flex-fill d-flex me-2 flex-column justify-content-center align-items-center"
+                                        id="custom-v-pills-messages-tab" data-bs-toggle="pill" role="tab" disabled
+                                        aria-controls="custom-v-pills-messages" aria-selected="false">
+                                        <!-- <i class="las la-file-alt  d-block fs-20 mb-1"></i> --> <img
+                                            src="assets/images/companies/test-analysis.png"
+                                            class="d-block fs-20 mb-1 text-center" style="height: 40px;">
+                                        Examens médicaux
+                                    </a>
+
+                                    <a class="nav-link d-flex flex-column justify-content-center align-items-center"
+                                        id="custom-v-pills-messages-tab" data-bs-toggle="pill" role="tab" disabled
+                                        aria-controls="custom-v-pills-messages" aria-selected="false">
+                                        <!-- <i class="las la-file-alt  d-block fs-20 mb-1"></i> --> <img
+                                            src="assets/images/companies/clipboard.png"
+                                            class="d-block fs-20 mb-1 text-center" style="height: 40px;">
+                                        Anciens dossiers
+                                    </a>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <div class="ribbon ribbon-success round-shape" v-if="currentConsult"> <i
                                         class="ri-stethoscope-line"></i> </div>
                                 <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="nav nav-pills flex-column nav-pills-tab custom-verti-nav-pills text-center"
-                                            role="tablist" aria-orientation="vertical">
-                                            <a class="nav-link d-flex flex-column justify-content-center align-items-center active show "
-                                                id="custom-v-pills-home-tab" data-bs-toggle="pill"
-                                                href="#custom-v-pills-home" role="tab" aria-controls="custom-v-pills-home"
-                                                aria-selected="true">
-                                                <img src="assets/images/companies/patient_3.png"
-                                                    class="d-block fs-20 mb-1 text-center" style="height: 40px;"> Patient
-                                                infos
-                                            </a>
-                                            <a class="nav-link d-flex flex-column justify-content-center align-items-center"
-                                                id="custom-v-pills-profile-tab" data-bs-toggle="pill"
-                                                href="#custom-v-pills-profile" role="tab"
-                                                aria-controls="custom-v-pills-profile" aria-selected="false"
-                                                :disabled="selectedPatient === null">
-                                                <img src="assets/images/companies/consult.png"
-                                                    class="d-block fs-20 mb-1 text-center" style="height: 40px;">
-                                                Consultations
-                                            </a>
-                                            <a class="nav-link d-flex flex-column justify-content-center align-items-center"
-                                                id="custom-v-pills-messages-tab" data-bs-toggle="pill"
-                                                href="#custom-v-pills-messages" role="tab"
-                                                :disabled="selectedPatient === null" aria-controls="custom-v-pills-messages"
-                                                aria-selected="false">
-                                                <!-- <i class="las la-file-alt  d-block fs-20 mb-1"></i> --> <img
-                                                    src="assets/images/companies/prescription2.png"
-                                                    class="d-block fs-20 mb-1 text-center" style="height: 40px;">
-                                                Prescriptions
-                                            </a>
-                                        </div>
-                                    </div> <!-- end col-->
-                                    <div class="col-lg-9">
+                                    <!-- end col-->
+                                    <div class="col-lg-12">
                                         <div class="tab-content text-muted mt-3 mt-lg-0">
                                             <div class="tab-pane fade active show" id="custom-v-pills-home" role="tabpanel"
                                                 aria-labelledby="custom-v-pills-home-tab">

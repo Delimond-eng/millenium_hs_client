@@ -15,19 +15,20 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                          <div class="card-body">
-                            <div class="row g-2">
-                              <div class="col-sm-6">
-                                <div class="search-box">
-                                  <input type="text" class="form-control" id="searchMemberList" placeholder="Recherche médecin, par nom ou par matricule...">
-                                  <i class="ri-search-line search-icon"></i>
-                                </div>
-                              </div>
-                              <!--end col-->
-                              <div class="col-sm-auto ms-auto">
-                                <div class="list-grid-nav hstack gap-1">
+                            <div class="card-body">
+                                <div class="row g-2">
+                                    <div class="col-sm-6">
+                                        <div class="search-box">
+                                            <input type="text" class="form-control" id="searchMemberList"
+                                                placeholder="Recherche médecin, par nom ou par matricule...">
+                                            <i class="ri-search-line search-icon"></i>
+                                        </div>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col-sm-auto ms-auto">
+                                        <div class="list-grid-nav hstack gap-1">
 
-                                  <!--
+                                            <!--
                                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1" style="">
                                     <li><a class="dropdown-item" href="#">All</a></li>
                                     <li><a class="dropdown-item" href="#">Last Week</a></li>
@@ -35,13 +36,15 @@
                                     <li><a class="dropdown-item" href="#">Last Year</a></li>
                                   </ul>
                                   -->
-                                  <button class="btn btn-success btn-border addMembers-modal" @click="$router.push('/home/med/create')"><i class="ri-add-fill me-1 align-bottom"></i> Nouveau agent</button>
+                                            <button class="btn btn-success btn-border addMembers-modal"
+                                                @click="$router.push('/home/med/create')"><i
+                                                    class="ri-add-fill me-1 align-bottom"></i> Nouveau agent</button>
+                                        </div>
+                                    </div>
+                                    <!--end col-->
                                 </div>
-                              </div>
-                              <!--end col-->
+                                <!--end row-->
                             </div>
-                            <!--end row-->
-                          </div>
                         </div>
                         <div class="card">
                             <div class="card-body">
