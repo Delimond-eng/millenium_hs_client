@@ -136,7 +136,7 @@ export default {
     }
   },
 
-  async assignPatient(context, form){
+  async assignPatient(context, form) {
     try {
       let { data, status } = await post("/patients.assign", form);
       console.log("new", data);
@@ -148,5 +148,44 @@ export default {
     } catch (error) {
       return null;
     }
-  }
+  },
+
+  async saveConsult(context, form) {
+    try {
+      let { data, status } = await post("/consultations.create", form);
+      if (status === 200) {
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  async addPrescriptions(context, form) {
+    try {
+      let { data, status } = await post("/prescriptions.add", form);
+      if (status === 200) {
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  async viewAllConsults({ commit }) {
+    try {
+      let { data, status } = await get("/consultations.all");
+      if (status === 200) {
+        commit("SET_CONSULTATIONS", data.consultations);
+        return data.consultations;
+      } else return [];
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  },
 };

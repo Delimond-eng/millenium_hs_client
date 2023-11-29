@@ -3,5 +3,6 @@ export default {
   agents: [],
   patients: [],
   recentpatients: [],
+  consultations: [],
   rcode: "",
 };

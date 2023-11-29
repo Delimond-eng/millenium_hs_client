@@ -33,8 +33,10 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
+                        <div class="card ribbon-box right">
                             <div class="card-body">
+                                <div class="ribbon ribbon-success round-shape" v-if="currentConsult"> <i
+                                        class="ri-stethoscope-line"></i> </div>
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="nav nav-pills flex-column nav-pills-tab custom-verti-nav-pills text-center"
@@ -146,20 +148,16 @@
                                             <!--end tab-pane-->
                                             <div class="tab-pane fade" id="custom-v-pills-profile" role="tabpanel"
                                                 aria-labelledby="custom-v-pills-profile-tab">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="row ">
-                                                            <div class="col-md-12 mt-2">
-                                                                <label class="form-label">Motif
-                                                                    de la consultation
-                                                                    <sup class="text-danger">*</sup></label>
-                                                                <div class="form-icon right">
-                                                                    <input type="text"
-                                                                        class="form-control form-control-icon"
-                                                                        placeholder="Entrer le motif de la consultation...">
-                                                                    <i class="ri-edit-box-fill"></i>
-                                                                </div>
-                                                            </div>
+                                                <form class="row" @submit.prevent="submitFormConsult">
+                                                    <div class="col-md-12 mt-2">
+                                                        <label class="form-label">Motif
+                                                            de la consultation
+                                                            <sup class="text-danger">*</sup></label>
+                                                        <div class="form-icon right">
+                                                            <input type="text" class="form-control form-control-icon"
+                                                                placeholder="Entrer le motif de la consultation..."
+                                                                v-model="form_consult.libelle" required>
+                                                            <i class="ri-edit-box-fill"></i>
                                                         </div>
                                                     </div>
 
@@ -176,46 +174,36 @@
                                                                 </h6>
                                                                 <div class="border border-dashed border-primary"></div>
                                                                 <div class="row mt-2">
-                                                                    <div class="col-md-12 mb-1">
-                                                                        <label class="form-label">Antécedents familiaux <sup
-                                                                                class="text-danger">(optionnel)</sup>
-                                                                        </label>
-                                                                        <textarea class="form-control"
-                                                                            placeholder="antécedents familiaux..."></textarea>
-                                                                    </div>
-                                                                    <div class="col-md-12 mb-1">
-                                                                        <label class="form-label">Antécedents médicaux <sup
-                                                                                class="text-danger">(optionnel)</sup>
-                                                                        </label>
-                                                                        <textarea class="form-control"
-                                                                            placeholder="antécedents médicaux..."></textarea>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <label class="form-label">Antécedents chirurgicaux
+                                                                    <div class="col-md-12 mb-1"
+                                                                        v-for="(detail, index) in consult_details"
+                                                                        :key="index">
+                                                                        <label class="form-label">{{ detail.detail_libelle
+                                                                        }}
                                                                             <sup class="text-danger">(optionnel)</sup>
                                                                         </label>
                                                                         <textarea class="form-control"
-                                                                            placeholder="antécedents chirurgicaux..."></textarea>
+                                                                            v-model="detail.detail_valeur"
+                                                                            placeholder="antécedents familiaux..."></textarea>
                                                                     </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <bs-toast id="errorsToast4" :msg="errors_msg" />
                                                         <div class="d-flex align-items-end justify-content-end w-100 mt-4">
                                                             <button type="button"
                                                                 class="btn btn-light btn-border btn-label right me-2"><i
                                                                     class="ri-restart-line label-icon align-middle fs-16 ms-2"></i>
                                                                 Annuler</button>
-
-                                                            <button type="button" @click.prevent="getConsultValues"
-                                                                class="btn btn-success btn-border btn-label right nexttab nexttab "><i
+                                                            <load-button btn-type="submit" :loading="formLoading"
+                                                                class-name="btn-success btn-border btn-label right nexttab nexttab "><i
                                                                     class="ri-check-double-line label-icon align-middle fs-16 ms-2 "></i>Soumettre
                                                                 la
-                                                                consultation</button>
+                                                                consultation</load-button>
                                                         </div>
                                                     </div>
 
-                                                </div>
+                                                </form>
                                             </div>
                                             <!--end tab-pane-->
                                             <div class="tab-pane fade" id="custom-v-pills-messages" role="tabpanel"
@@ -224,32 +212,34 @@
                                                     patient !</h6>
                                                 <div class="border border-dashed border-primary"></div>
 
-                                                <div class="row d-flex mt-2 p-2"
-                                                    v-for="(detail, index) in prescriptionDetails" :key="index">
-                                                    <div class="col-md-12">
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control form-control-icon"
-                                                                placeholder="Traitement..." style="width: 33%;"
-                                                                v-model="detail.title">
-                                                            <input type="text" class="form-control form-control-icon"
-                                                                placeholder="Posologie..." style="width: 33%;"
-                                                                v-model="detail.value">
-                                                            <select class="form-control" style="width: 14%;">
-                                                                <option selected label="Type..."></option>
-                                                                <option value="">Comprimé</option>
-                                                                <option value="">Injectable</option>
-                                                                <option value="">Cirop</option>
-                                                                <option value="">Rectale</option>
-                                                                <option value="">Dermique</option>
-                                                            </select>
-                                                            <button class="btn btn-secondary btn-border btn-icon"
-                                                                @click.prevent="prescriptionDetails.push({ title: '', value: '' })"><i
-                                                                    class="ri-add-line"></i></button>
-                                                            <button class="btn btn-light btn-border btn-icon"
-                                                                @click.prevent="prescriptionDetails.splice(index, 1)"><i
-                                                                    class="ri-close-line"></i></button>
-                                                        </div>
-                                                        <!-- <div>
+                                                <form @submit.prevent="submitFormPrescriptions">
+                                                    <div class="row d-flex mt-2 p-2" v-for="(p, index) in prescriptions"
+                                                        :key="index">
+                                                        <div class="col-md-12">
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control form-control-icon"
+                                                                    placeholder="Traitement..." style="width: 33%;"
+                                                                    v-model="p.traitement" required>
+                                                                <input type="text" class="form-control form-control-icon"
+                                                                    placeholder="Posologie..." style="width: 33%;"
+                                                                    v-model="p.posologie" required>
+                                                                <select class="form-control" style="width: 14%;"
+                                                                    v-model="p.traitement_type" required>
+                                                                    <option selected label="Type..."></option>
+                                                                    <option value="Comprimé">Comprimé</option>
+                                                                    <option value="Injéctable">Injéctable</option>
+                                                                    <option value="Cirop">Cirop</option>
+                                                                    <option value="Rectale">Rectale</option>
+                                                                    <option value="Dermique">Dermique</option>
+                                                                </select>
+                                                                <button class="btn btn-secondary btn-border btn-icon"
+                                                                    @click.prevent="prescriptions.push({ traitement: '', traitement_type: '', posologie: '', consult_id: '' })"><i
+                                                                        class="ri-add-line"></i></button>
+                                                                <button class="btn btn-light btn-border btn-icon"
+                                                                    @click.prevent="prescriptions.splice(index, 1)"><i
+                                                                        class="ri-close-line"></i></button>
+                                                            </div>
+                                                            <!-- <div>
                                                             <label class="form-label">Traitement
                                                             </label>
                                                             <div class="form-icon right">
@@ -258,8 +248,8 @@
                                                                 <i class="ri-health-book-line"></i>
                                                             </div>
                                                         </div> -->
-                                                    </div>
-                                                    <!-- <div class="col-md-5">
+                                                        </div>
+                                                        <!-- <div class="col-md-5">
                                                         <div>
                                                             <label class="form-label">Posologie</label>
                                                             <div class="form-icon right">
@@ -284,20 +274,21 @@
                                                             </div>
                                                         </div>
                                                     </div> -->
-                                                </div>
+                                                    </div>
+                                                    <bs-toast id="errorsToast5" :msg="errors_msg" />
+                                                    <div class="d-flex align-items-end justify-content-end w-100 mt-4">
+                                                        <button type="button"
+                                                            class="btn btn-light btn-border btn-label right me-2"><i
+                                                                class="ri-restart-line label-icon align-middle fs-16 ms-2"></i>
+                                                            Annuler</button>
 
-                                                <div class="d-flex align-items-end justify-content-end w-100 mt-4">
-                                                    <button type="button"
-                                                        class="btn btn-light btn-border btn-label right me-2"><i
-                                                            class="ri-restart-line label-icon align-middle fs-16 ms-2"></i>
-                                                        Annuler</button>
-
-                                                    <button type="button"
-                                                        class="btn btn-success btn-border btn-label right nexttab nexttab "><i
-                                                            class="ri-check-double-line label-icon align-middle fs-16 ms-2 "></i>Valider
-                                                        & imprimer
-                                                        la prescription</button>
-                                                </div>
+                                                        <load-button btn-type="submit" :loading="formLoadingPrescriptions"
+                                                            class-name="btn-success btn-border btn-label right nexttab nexttab "><i
+                                                                class="ri-check-double-line label-icon align-middle fs-16 ms-2 "></i>Valider
+                                                            & imprimer
+                                                            la prescription</load-button>
+                                                    </div>
+                                                </form>
                                             </div>
                                             <!--end tab-pane-->
                                         </div>
@@ -330,114 +321,17 @@
         </footer>
 
         <div class="customizer-setting d-block">
-            <div class="btn-info text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2"
-                @click.prevent="$router.push('/home/consults/list')">
-                <i class="ri-list-check-2 fs-22"></i>
+            <div class="btn-info text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2" @click.prevent="refreshAll">
+                <i class="ri-refresh-line fs-22"></i>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import ConsultMixins from '../../mixins/consult.mixins'
 export default {
     name: "PatientAssign",
-    data() {
-        return {
-            patientSelect2: null,
-            editor: '',
-            consultDetails: [
-                {
-                    title: '',
-                    value: ''
-                }
-            ],
-            prescriptionDetails: [
-                {
-                    title: '',
-                    value: ''
-                }
-            ],
-            selectedPatient: null
-        }
-    },
-    unmounted() {
-        this.patientSelect2.select2('destroy');
-    },
-    mounted() {
-        this.patientSelect2 = $(".patient-select2").select2({
-            placeholder: 'Chargement des patients assignés ...'
-        });
-        this.init();
-    },
-
-    methods: {
-
-        async init() {
-            let self = this;
-            let agentId = this.$user().agent_id;
-            console.log("agent id", agentId);
-            let patients = await this.$store.dispatch('services/viewMedecinsAssignments', agentId);
-            if (this.patientSelect2 !== null) this.patientSelect2.select2('destroy');
-            this.patientSelect2 = $(".patient-select2").select2({
-                placeholder: 'Veuillez sélectionner un patient...',
-                searchInputPlaceholder: 'Recherche patient...',
-                data: $.map(patients, function (item) {
-                    return {
-                        text: `${item.patient_code} : ${item.patient_nom} ${item.patient_prenom}`,
-                        id: item.id,
-                        info: item,
-                    }
-                })
-            }).on('change', function () {
-                //$(this).select2('data')[0].info
-                let id = $(this).val();
-                self.$store.dispatch('services/showPatient', id).then((result) => {
-                    self.selectedPatient = result;
-                });
-            });
-            ClassicEditor.create(document.querySelector(".editor"), {
-                placeholder: 'Veuillez saisir diagnostic pour la consultation en cours...',
-            })
-                .then(function (e) {
-                    e.ui.view.editable.element.style.height = "150px";
-                    e.ui.view.editable.element.style.fontColor = "#000000";
-                    e.model.document.on('change', () => {
-                        self.editor = jQuery(e.getData()).text().replaceAll("\n\n", "\n");
-                    });
-                })
-                .catch(function (e) {
-                    console.error("Error from editor => ", e);
-                });
-        },
-
-        getConsultValues() {
-            console.log(this.editor);
-        },
-
-        readCommand() {
-            if ('speechSynthesis' in window) {
-                let medecin = this.$user().name;
-                let patientCode = `${this.selectedPatient.patient_nom} ${this.selectedPatient.patient_prenom}`;
-                let texteAvecVoix = `Le patient ${patientCode} est prié d'aller voir le médecin ${medecin}`;
-                const utterance = new SpeechSynthesisUtterance(texteAvecVoix);
-                utterance.lang = 'fr-FR';
-                let voixFeminineFrancaise = speechSynthesis.getVoices().find(voice => {
-                    return voice.lang === 'fr-FR' && voice.gender === 'female';
-                });
-
-                if (!voixFeminineFrancaise) {
-                    voixFeminineFrancaise = speechSynthesis.getVoices().find(voice => {
-                        return voice.lang === 'fr-FR';
-                    });
-                }
-
-                utterance.voice = voixFeminineFrancaise;
-                utterance.rate = 0.8;
-                speechSynthesis.speak(utterance);
-            } else {
-                alert("Désolé, l'API Web Speech n'est pas prise en charge dans votre navigateur.");
-            }
-        }
-    },
+    mixins: [ConsultMixins],
 }
 </script>

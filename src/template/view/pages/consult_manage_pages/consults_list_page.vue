@@ -11,17 +11,43 @@
                     </div>
                 </div>
                 <!-- end page title -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-2">
+                            <div class="col-sm-6">
+                                <div class="search-box">
+                                    <input type="text" class="form-control" id="searchMemberList"
+                                        placeholder="Recherche médecin ou patient ...">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                            </div>
+                            <!--end col-->
+                            <div class="col-sm-auto ms-auto">
+                                <div class="list-grid-nav hstack gap-1">
+
+                                    <!--
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1" style="">
+                                    <li><a class="dropdown-item" href="#">All</a></li>
+                                    <li><a class="dropdown-item" href="#">Last Week</a></li>
+                                    <li><a class="dropdown-item" href="#">Last Month</a></li>
+                                    <li><a class="dropdown-item" href="#">Last Year</a></li>
+                                  </ul>
+                                  -->
+                                    <button class="btn btn-success btn-border addMembers-modal"
+                                        @click="$router.push('/home/consult/create')"><i
+                                            class="ri-add-fill me-1 align-bottom"></i> Consultez les patients</button>
+                                </div>
+                            </div>
+                            <!--end col-->
+                        </div>
+                        <!--end row-->
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
 
                         <div class="card">
-                            <div class="card-header d-flex justify-content-end">
-                                <div class="search-box ms-2">
-                                    <input type="text" class="form-control search"
-                                        placeholder="Recherche consultation (par nom ou code patient)...">
-                                    <i class="ri-search-line search-icon"></i>
-                                </div>
-                            </div>
+
                             <div class="card-body">
                                 <div class="live-preview">
                                     <div class="table-responsive table-card">
@@ -37,35 +63,21 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>12/11/2023</td>
-                                                    <td>Gaston Delimond</td>
-                                                    <td>A002</td>
-                                                    <td style="text-overflow: ellipsis;">Lorem ipsum, dolor sit amet
-                                                        consectetur
-                                                        adipisicing
-                                                        elit.</td>
-                                                    <td><i class="ri-user-2-line me-1"></i>Dr. Lionnel</td>
-                                                    <td>
-                                                        <button type="button"
-                                                            class="btn btn-sm btn-info me-2">Editer</button>
-                                                        <button type="button" class="btn btn-sm btn-light"><i
-                                                                class="ri-delete-bin-3-line"></i></button>
+                                                <tr v-for="(consult, index) in consultations" :key="index">
+                                                    <td>{{ formatDate(consult.consult_create_At) }}
                                                     </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>12/11/2023</td>
-                                                    <td>Kubi kayembe flory</td>
-                                                    <td>A003</td>
-                                                    <td style="text-overflow: ellipsis;">Lorem ipsum, dolor sit amet
-                                                        consectetur
-                                                        adipisicing
-                                                        elit.</td>
-                                                    <td><i class="ri-user-2-line me-1"></i>Dr. Lionnel</td>
+                                                    <td><span v-if="consult.patient">{{ consult.patient.patient_nom }} {{
+                                                        consult.patient.patient_prenom }}</span></td>
+                                                    <td> <span v-if="consult.patient">{{ consult.patient.patient_code
+                                                    }}</span> </td>
+                                                    <td style="text-overflow: ellipsis;">{{ consult.consult_libelle }}</td>
+                                                    <td><span v-if="consult.agent"><i class="ri-user-2-line me-1"></i>{{
+                                                        consult.agent.agent_nom }} {{
+        consult.agent.agent_prenom }}</span></td>
                                                     <td>
                                                         <button type="button"
-                                                            class="btn btn-sm btn-info me-2">Editer</button>
-                                                        <button type="button" class="btn btn-sm btn-light"><i
+                                                            class="btn btn-sm btn-info btn-border me-2">Voir</button>
+                                                        <button type="button" class="btn btn-sm btn-border btn-light"><i
                                                                 class="ri-delete-bin-3-line"></i></button>
                                                     </td>
                                                 </tr>
@@ -110,3 +122,35 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    name: "ConsulstList",
+
+    computed: {
+        consultations() {
+            return this.$store.getters['services/GET_CONSULTATIONS']
+        }
+    },
+
+    mounted() {
+        this.$store.dispatch('services/viewAllConsults');
+    },
+
+    methods: {
+        formatDate(timestamp) {
+            // Créer un nouvel objet Date avec le timestamp (en millisecondes)
+            let date = new Date(timestamp * 1000);
+            let year = date.getFullYear();
+            let month = ("0" + (date.getMonth() + 1)).slice(-2);
+            let day = ("0" + date.getDate()).slice(-2);
+            let hours = ("0" + date.getHours()).slice(-2);
+            let minutes = ("0" + date.getMinutes()).slice(-2);
+            let seconds = ("0" + date.getSeconds()).slice(-2);
+            let formattedDate = ` ${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+            return formattedDate;
+
+        }
+    },
+}
+</script>
