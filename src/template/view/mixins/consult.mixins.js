@@ -116,6 +116,7 @@ export default {
       this.$store
         .dispatch("services/saveConsult", this.form_consult)
         .then((res) => {
+          console.log(res);
           console.log(JSON.stringify(res));
           this.formLoading = false;
           if (res.status !== undefined) {
@@ -155,12 +156,14 @@ export default {
         return;
       }
       for (let p of this.prescriptions) {
+        let user = JSON.parse(localStorage.getItem("user-data"));
         p.consult_id = this.currentConsult.id;
+        p.hopital_id = user.hopital.id;
+        p.emplacement_id = user.hopital.emplacement.id;
       }
       let form = {
         prescriptions: this.prescriptions,
       };
-      console.log(JSON.stringify(form));
 
       this.formLoadingPrescriptions = true;
       this.$store
@@ -226,6 +229,7 @@ export default {
       ];
       this.selectedPatient = null;
       $(".patient-select2").val("").trigger("change");
+      this.$showBsModal("filterModal");
     },
 
     readCommand() {

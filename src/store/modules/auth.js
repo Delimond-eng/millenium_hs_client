@@ -40,8 +40,8 @@ const actions = {
       let { data, status } = await post("/login", form);
       if (status === 200) {
         if (!data.errors) {
-          localStorage.removeItem('user-token');
-          localStorage.removeItem('user-data');
+          localStorage.removeItem("user-token");
+          localStorage.removeItem("user-data");
           localStorage.setItem("user-token", data.token);
           localStorage.setItem("user-data", JSON.stringify(data.user));
           return data;
@@ -55,12 +55,34 @@ const actions = {
   },
 
   /**
+   * CREATE NEW HOSPITAL, DEFAULT USER ADMIN, AND DEFAULT LOCATION
+   * @param {Vuex} context
+   * @param {Object} form
+   */
+  async createHospital(context, form) {
+    try {
+      let { data, status } = await post("/hospitals.create", form);
+      if (status === 200) {
+        if (data.status === undefined) {
+          localStorage.removeItem("user-data");
+          return data;
+        } else {
+          return data;
+        }
+      } else return data;
+    } catch (error) {
+      return null;
+    }
+  },
+
+  /**
    * Refresh logged User
    * @param commit mutator
    * @returns void
    * */
   async refreshUser({ commit }) {
-    let localUserData = JSON.parse(localStorage.getItem("user-data"));
+    let user = localStorage.getItem("user-data");
+    let localUserData = JSON.parse(user);
     commit("SET_USER", localUserData);
   },
 
@@ -69,7 +91,11 @@ const actions = {
    * @param commit mutator
    * @returns void
    * */
-  async loggedOut({ commit }) {},
+  async loggedOut({ commit }) {
+    localStorage.removeItem("user-data");
+    console.log(localStorage.getItem("user-data"));
+    commit("SET_USER", {});
+  },
 };
 
 const auth = {

@@ -169,7 +169,7 @@
                                                     <div class="form-icon">
                                                         <select class="form-select" id="inputGroupSelect01"
                                                             v-model="form.service_id" required>
-                                                            <option selected label="Sélectionner une grade"></option>
+                                                            <option selected label="Sélectionner un service"></option>
                                                             <option v-for="(item, index) in configs.services" :key="index"
                                                                 :value="item.id">{{ item.service_libelle }}</option>
 
@@ -186,9 +186,26 @@
                                                     <div class="form-icon">
                                                         <select class="form-select" id="inputGroupSelect01"
                                                             v-model="form.fonction_id" required>
-                                                            <option selected label="Sélectionner une grade"></option>
+                                                            <option selected label="Sélectionner une fonction"></option>
                                                             <option v-for="(item, index) in configs.fonctions" :key="index"
                                                                 :value="item.id">{{ item.fonction_libelle }}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mt-3">
+                                                    <label for="iconInputLocation" class="form-label">Emplacement <sup
+                                                            class="text-danger">*</sup></label>
+                                                    <div class="form-icon">
+                                                        <select class="form-select" id="iconInputLocation"
+                                                            v-model="form.emplacement_id" required>
+                                                            <option selected label="Sélectionner un emplacement...">
+                                                            </option>
+                                                            <option v-for="(item, index) in configs.emplacements"
+                                                                :key="index" :value="item.id">{{
+                                                                    item.hopital_emplacement_libelle }}
+                                                            </option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -328,6 +345,7 @@ export default {
                 grade_id: '',
                 service_id: '',
                 created_by: '',
+                emplacement_id: '',
                 user_data: {}
             },
             user_account_allowed: false,
@@ -341,11 +359,14 @@ export default {
         }
     },
     mounted() {
+        this.$store.dispatch('services/showConfigs');
         this.init();
     },
+
     unmounted() {
         this.specSelect.select2('destroy');
     },
+
     methods: {
         init() {
             let self = this;
@@ -423,7 +444,6 @@ export default {
                 self.form.specialite = specialite;
             });
         },
-
 
         /**
          * SUBMIT FORM DATA

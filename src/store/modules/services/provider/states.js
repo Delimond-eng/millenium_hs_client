@@ -4,5 +4,7 @@ export default {
   patients: [],
   recentpatients: [],
   consultations: [],
+  emplacements: [],
+  patients_pending: [],
   rcode: "",
 };

@@ -275,7 +275,6 @@ export default {
 
     methods: {
 
-
         /**
          * SUBMIT FORM DATA TO SERVER
         */
@@ -284,6 +283,10 @@ export default {
             this.form_details.age = age;
             this.form.code = this.pcode;
             this.form.patient_details = this.form_details;
+
+            /**
+             * @var $user Global fonction retourne l'utilisateur courant
+            */
             this.form.created_by = this.$user().agent_id;
             this.formLoading = true;
             this.$store.dispatch('services/createPatient', this.form).then((res) => {

@@ -35,12 +35,14 @@
 
                     <!-- App Search-->
                     <form class="app-search d-none d-md-block">
-                        <div class="position-relative">
-                            <input type="text" class="form-control" placeholder="Recherche..." autocomplete="off"
+                        <div class="position-relative d-flex justify-content-center align-items-center">
+                            <!-- <input type="text" class="form-control" placeholder="Recherche..." autocomplete="off"
                                 id="search-options" value="">
                             <span class="mdi mdi-magnify search-widget-icon"></span>
                             <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none"
-                                id="search-close-options"></span>
+                                id="search-close-options"></span> -->
+                            <img v-if="user.hopital" :src="user.hopital.hopital_logo" class="img-fluid" alt="logo"
+                                style="height: 50px;">
                         </div>
                         <div class="dropdown-menu dropdown-menu-lg" id="search-dropdown">
                             <div data-simplebar style="max-height: 320px;">
@@ -183,7 +185,8 @@
                             <a class="dropdown-item" href="auth-lockscreen-basic.html"><i
                                     class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Verrouillage session</span></a>
-                            <a class="dropdown-item" href="#/"><i
+                            <a class="dropdown-item" href="javascript:void(0)"
+                                @click.prevent="$store.dispatch('auth/loggedOut'); $router.push({ name: 'login' })"><i
                                     class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle" data-key="t-logout">Déconnexion</span></a>
                         </div>

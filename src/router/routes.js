@@ -4,6 +4,11 @@ import HomeMain from "@/template/view/main";
 /* Home children/pages */
 import Dashboard from "@/template/view/screens/public/home_screen";
 
+/**
+ * Config routes pages
+ */
+import ConfigLocationsPage from "@/template/view/pages/config_manage_pages/location_config_page";
+
 /* patient manage pages */
 import PatientCreatePage from "@/template/view/pages/patient_manage_pages/patient_create_page";
 import PatientListPage from "@/template/view/pages/patient_manage_pages/patient_list_page";
@@ -24,6 +29,7 @@ const routes = [
   {
     path: "/",
     component: LoginScreen,
+    name: "login",
   },
   {
     path: "/home",
@@ -35,6 +41,15 @@ const routes = [
         path: "/home/dash",
         component: Dashboard,
         name: "dash",
+      },
+
+      /**
+       * COnfig routes
+       */
+      {
+        path: "/admin/config/locations",
+        component: ConfigLocationsPage,
+        name: "config-locations",
       },
 
       /* patient routes */

@@ -91,6 +91,9 @@
 
                                             </tbody>
                                         </table>
+
+                                        <state-empty v-if="agents.length === 0" title="Aucune information répertoriée !"
+                                            description="Veuillez créer des agents dans le système !"></state-empty>
                                     </div>
                                 </div>
                             </div>

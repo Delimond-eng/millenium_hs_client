@@ -12,9 +12,9 @@
 
                                 <ol class="breadcrumb m-0">
                                     <li class="me-2">
-                                        <select class="patient-select2">
-                                            <option></option>
-                                        </select>
+                                        <a href="javascript:void(0)" class="btn btn-soft-primary"
+                                            @click="$showBsModal('filterModal')">Voir patients en
+                                            attente</a>
                                     </li>
                                     <li v-if="selectedPatient" class="breadcrumb-item"><a href="javascript: void(0);"
                                             @click.prevent="readCommand" class="btn btn-success text-white btn-border"> <i
@@ -90,13 +90,13 @@
                                             <div class="tab-pane fade active show" id="custom-v-pills-home" role="tabpanel"
                                                 aria-labelledby="custom-v-pills-home-tab">
                                                 <div>
-                                                    <div class="d-flex justify-content-between mb-2 mt-3 align-items-end align-content-end"
+                                                    <div class="d-flex justify-content-between mt-3 align-items-end align-content-end"
                                                         v-if="selectedPatient">
                                                         <h6 class="fs-14 text-primary">Infos récentes du
                                                             patient</h6>
-                                                        <button class="btn btn-info btn-border btn-sm"> <i
+                                                        <!-- <button class="btn btn-info btn-border btn-sm"> <i
                                                                 class="ri-folder-5-line "></i> Voir le parcours du
-                                                            patient</button>
+                                                            patient</button> -->
                                                     </div>
                                                     <div class="border border-dashed border-primary mb-3"
                                                         v-if="selectedPatient"></div>
@@ -198,7 +198,7 @@
                                                                         </label>
                                                                         <textarea class="form-control"
                                                                             v-model="detail.detail_valeur"
-                                                                            placeholder="antécedents familiaux..."></textarea>
+                                                                            :placeholder="detail.detail_libelle.toLowerCase() + '...'"></textarea>
                                                                     </div>
 
                                                                 </div>
@@ -341,12 +341,23 @@
             </div>
         </div>
     </div>
+    <filter-modal @on-select="selectedPatient = $event" />
 </template>
 
 <script>
 import ConsultMixins from '../../mixins/consult.mixins'
+import filterModal from '../../modals/modal_patient_filter'
 export default {
     name: "PatientAssign",
+    components: {
+        filterModal
+    },
     mixins: [ConsultMixins],
+
+    mounted() {
+        this.$nextTick(() => {
+            this.$showBsModal('filterModal');
+        });
+    }
 }
 </script>

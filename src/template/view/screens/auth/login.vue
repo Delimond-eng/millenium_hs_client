@@ -77,6 +77,10 @@
                                             <load-button btn-type="submit" class-name="btn-success w-100"
                                                 :loading="formLoading">
                                                 <span class="text-uppercase fw-semibold">Connecter</span></load-button>
+                                            <button type="button"
+                                                class="btn btn-primary btn-border w-100 mt-2 text-uppercase"
+                                                @click.prevent="$showBsModal('hostoCreateModal')">Nouveau
+                                                hôpital</button>
                                         </div>
                                         <div id="borderedToast4"
                                             class="toast toast-border-danger overflow-hidden w-100 mt-2" role="alert"
@@ -110,7 +114,7 @@
         <!-- end auth page content -->
 
         <!-- footer -->
-        <footer class="footer">
+        <!--  <footer class="footer">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -122,14 +126,19 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer> -->
         <!-- end Footer -->
     </div>
+    <hosto-create-modal />
 </template>
 
 <script>
+import HostoCreateModal from './modals/create-hospital-modal'
 export default {
     name: 'Login',
+    components: {
+        HostoCreateModal
+    },
     data() {
         return {
             form: {

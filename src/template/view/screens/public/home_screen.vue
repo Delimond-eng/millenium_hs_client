@@ -15,10 +15,8 @@
                                                 travailler.
                                             </p>
                                         </div>
-
-                                    </div><!-- end card header -->
+                                    </div>
                                 </div>
-                                <!--end col-->
                             </div>
 
                             <div class="row">
@@ -42,7 +40,7 @@
                                             <div class="mb-2 pb-2">
                                                 <img src="assets/images/companies/patient_1.png" alt="" class="avatar-sm">
                                             </div>
-                                            <h6 class="fs-15 fw-semibold">201 </h6>
+                                            <h6 class="fs-15 fw-semibold">0 </h6>
                                             <p class="text-muted mb-0"><i class="ri-wheelchair-line align-bottom"></i>
                                                 Nombre des patients</p>
 
@@ -71,7 +69,7 @@
                                             <div class="mb-2 pb-2">
                                                 <img src="assets/images/companies/doctor.png" alt="" class="avatar-sm">
                                             </div>
-                                            <h6 class="fs-15 fw-semibold">201 </h6>
+                                            <h6 class="fs-15 fw-semibold">0</h6>
                                             <p class="text-muted mb-0"><i class=" ri-user-2-line align-bottom"></i>
                                                 Nombre des médecins</p>
 
@@ -100,7 +98,7 @@
                                                 <img src="assets/images/companies/prescription.png" alt=""
                                                     class="avatar-sm">
                                             </div>
-                                            <h6 class="fs-15 fw-semibold">201 </h6>
+                                            <h6 class="fs-15 fw-semibold">0</h6>
                                             <p class="text-muted mb-0"><i class="bx bxs-first-aid align-bottom"></i>
                                                 Préscriptions en cours</p>
 
@@ -128,7 +126,7 @@
                                             <div class="mb-2 pb-2">
                                                 <img src="assets/images/companies/consult.png" alt="" class="avatar-sm">
                                             </div>
-                                            <h6 class="fs-15 fw-semibold">201 </h6>
+                                            <h6 class="fs-15 fw-semibold">0 </h6>
                                             <p class="text-muted mb-0"><i class="ri-stethoscope-line align-bottom"></i>
                                                 Consultations journalières</p>
 
@@ -137,7 +135,7 @@
                                 </div>
                             </div>
 
-                            <div class="card checkout-tab">
+                            <!-- <div class="card checkout-tab">
 
                                 <div class="card-body">
                                     <div class="step-arrow-nav mt-n3 mx-n3 mb-3">
@@ -340,17 +338,10 @@
                                                         </tr>
                                                     </tfoot>
                                                 </table>
-                                                <!-- end table -->
                                             </div>
-                                            <!-- end table responsive -->
-                                            <!--end row-->
                                         </div>
-                                        <!-- end tab pane -->
-
                                         <div class="tab-pane fade" id="pills-bill-address" role="tabpanel"
                                             aria-labelledby="pills-bill-address-tab">
-
-
                                             <div class="table-responsive">
                                                 <table class="table align-middle mb-0">
                                                     <thead class="table-light">
@@ -520,20 +511,12 @@
                                                         </tr>
                                                     </tfoot>
                                                 </table>
-                                                <!-- end table -->
                                             </div>
-                                            <!-- end table responsive -->
-
 
                                         </div>
-                                        <!-- end tab pane -->
-
                                         <div class="tab-pane fade" id="pills-payment" role="tabpanel"
                                             aria-labelledby="pills-payment-tab">
                                             <h5 class="mb-3">Choose Document Type</h5>
-
-
-
                                             <div class="table-responsive">
                                                 <table class="table align-middle mb-0">
                                                     <thead class="table-light">
@@ -703,13 +686,8 @@
                                                         </tr>
                                                     </tfoot>
                                                 </table>
-                                                <!-- end table -->
                                             </div>
-                                            <!-- end table responsive -->
-
-
                                         </div>
-                                        <!-- end tab pane -->
 
                                         <div class="tab-pane fade" id="pills-finish" role="tabpanel"
                                             aria-labelledby="pills-finish-tab">
@@ -737,19 +715,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- end tab pane -->
                                     </div>
                                 </div>
-                            </div>
-                            <!--end row-->
-                        </div> <!-- end .h-100-->
+                            </div> -->
+                        </div>
 
-                    </div> <!-- end col -->
+                    </div>
                 </div>
             </div>
-            <!-- container-fluid -->
         </div>
-        <!-- End Page-content -->
 
         <footer class="footer">
             <div class="container-fluid">

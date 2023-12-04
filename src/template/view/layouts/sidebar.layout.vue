@@ -14,6 +14,7 @@
                     </svg>
                     <h3 class="text-white mx-1 text-uppercase fw-bold">Millenium HS</h3>
                 </span>
+
             </a>
 
             <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -111,6 +112,41 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#pharmaLanding" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="sidebarLanding">
+                            <i class="ri-medicine-bottle-line"></i> <span data-key="t-landing">Pharmacie</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="pharmaLanding">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" data-key="t-one-page"> Catégories médicament </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" data-key="t-one-page"> Création médicament </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#laboLanding" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="sidebarLanding">
+                            <i class="ri-microscope-line"></i> <span data-key="t-landing">Laboratoire</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="laboLanding">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" data-key="t-one-page">Tableau de bord</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" data-key="t-one-page"> Création examens </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" data-key="t-one-page"> Liste examens</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
 
 
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Administrations</span></li>
@@ -123,17 +159,43 @@
                         <div class="collapse menu-dropdown" id="adminLanding">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-one-page"> Configuration fonctions </a>
+                                    <a href="javascript:void(0)" class="nav-link"
+                                        @click="actionKey = 'fonctions'; $showBsModal('serviceConfigModal')"> Configuration
+                                        fonctions </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-nft-landing"> Configuration grades
+                                    <a href="javascript:void(0)" class="nav-link"
+                                        @click="actionKey = 'grades'; $showBsModal('serviceConfigModal')"> Configuration
+                                        grades
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="javascript:void(0)" class="nav-link" data-bs-toggle="offcanvas"
-                                        data-bs-target="#theme-settings-offcanvas" aria-controls="theme-settings-offcanvas">
+                                    <a href="javascript:void(0)" class="nav-link"
+                                        @click="actionKey = 'services'; $showBsModal('serviceConfigModal')">
                                         Configuration services
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#/admin/config/locations" class="nav-link">
+                                        Configuration emplacements
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item" id="config-menu">
+                        <a class="nav-link menu-link" href="#accountLanding" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="accountLanding">
+                            <i class="ri-user-settings-line "></i> <span data-key="t-landing">Comptes utilisateurs</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="adminLanding">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" data-key="t-one-page">Création accès </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" data-key="t-nft-landing"> Attribution accès
                                     </a>
                                 </li>
                             </ul>
@@ -146,11 +208,20 @@
 
         <div class="sidebar-background"></div>
     </div>
+    <service-config-modal :action-key="actionKey" />
 </template>
 
 <script>
-
+import serviceConfigModal from '../pages/config_manage_pages/modals/services_config_modal'
 export default {
-    name: "SidebarLayout"
+    name: "SidebarLayout",
+    data() {
+        return {
+            actionKey: ''
+        }
+    },
+    components: {
+        serviceConfigModal
+    },
 }
 </script>
