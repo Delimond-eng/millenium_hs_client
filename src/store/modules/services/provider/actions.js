@@ -145,15 +145,13 @@ export default {
   /**
    * Voir les patients assignés à un médecins
    * */
-  async viewMedecinsAssignments({ commit }) {
+  async viewPatientsPending({ commit }) {
     let user = JSON.parse(localStorage.getItem("user-data"));
     let agentId = user.agent_id;
     /* let hostoId = user.hopital.id; */
     let locationId = user.hopital.emplacement.id;
     try {
-      let { data, status } = await get(
-        `/agents.showassigns/${locationId}/${agentId}`
-      );
+      let { data, status } = await get(`/patients.pending/${locationId}`);
       if (status === 200) {
         commit("SET_PATIENTS_PENDING", data.patients);
         return data.patients;
@@ -254,8 +252,10 @@ export default {
         break;
       case "fonctions":
         url = "/configs.fonctions";
+        break;
       case "grades":
         url = "/configs.grades";
+        break;
     }
     try {
       let { data, status } = await post(url, form);

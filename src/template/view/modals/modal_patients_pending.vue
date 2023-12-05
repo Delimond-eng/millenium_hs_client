@@ -1,6 +1,6 @@
 <template>
     <teleport to="body">
-        <div id="filterModal" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
+        <div id="patientsPendingModal" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content border-0 overflow-hidden">
                     <div class="modal-body login-modal p-4 ">
@@ -16,18 +16,18 @@
                                 <i class="ri-search-line search-icon"></i>
                             </div>
                             <button class="btn btn-soft-success btn-icon"
-                                @click="$closeBsModal('filterModal'); $router.push({ name: 'patient-create' })">
+                                @click="$closeBsModal('patientsPendingModal'); $router.push({ name: 'patient-create' })">
                                 <i class="ri-add-line"></i>
                             </button>
                         </div>
                         <div class="table-responsive">
                             <table class="table align-middle table-nowrap mb-0" v-if="patients.length > 0">
-                                <thead class="table-light">
+                                <thead class="table-info">
                                     <tr>
                                         <th scope="col" style="width: 50px;">
                                         </th>
-                                        <th class="sort" scope="col">CODE</th>
-                                        <th class="sort" scope="col">NOM COMPLET</th>
+                                        <th class="sort fw-bold" scope="col">Code</th>
+                                        <th class="sort fw-bold" scope="col">Nom complet</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list form-check-all">
@@ -84,12 +84,16 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch('services/viewMedecinsAssignments');
-        $('#filterModal').on("hidden.bs.modal", function (e) {
+        let self = this;
+        $('#patientsPendingModal').on("hidden.bs.modal", function (e) {
             const radios = document.querySelectorAll('input[type="radio"]');
             radios.forEach(radio => {
                 radio.checked = false;
             });
+        });
+
+        $('#patientsPendingModal').on("show.bs.modal", function (e) {
+            self.$store.dispatch('services/viewPatientsPending');
         });
     },
 

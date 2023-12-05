@@ -59,6 +59,7 @@
                                                     <th scope="col">Sexe</th>
                                                     <th scope="col">Date naissance</th>
                                                     <th scope="col">Téléphone</th>
+                                                    <th scope="col">Status</th>
                                                     <th scope="col">Poids</th>
                                                     <th scope="col">Taille</th>
                                                     <th scope="col">Temperature</th>
@@ -73,6 +74,12 @@
                                                     <td>{{ item.patient_sexe }}</td>
                                                     <td>{{ item.patient_datenais }}</td>
                                                     <td>{{ item.patient_telephone }}</td>
+                                                    <td class="status">
+                                                        <span class="badge text-uppercase"
+                                                            :class="item.patients.toLowerCase().includes('en attente') ? 'bg-warning-subtle text-warning' : 'bg-success-subtle text-success'">{{
+                                                                item.patient_status }}
+                                                        </span>
+                                                    </td>
 
                                                     <td>
                                                         <span v-if="item.details">
@@ -101,6 +108,9 @@
                                                     <td>
                                                         <button type="button"
                                                             class="btn btn-sm btn-info me-2">Editer</button>
+                                                        <button type="button" class="btn btn-sm btn-secondary me-2"
+                                                            @click.prevent="setPatient(item)">Nouvelle
+                                                            fiche</button>
                                                         <button type="button" class="btn btn-sm btn-light"><i
                                                                 class="ri-delete-bin-3-line"></i></button>
                                                     </td>
@@ -149,6 +159,16 @@
 <script>
 export default {
     name: "PatientListPage",
+
+    methods: {
+        /**
+         * Set patient in caches
+        */
+        setPatient(data) {
+            localStorage.setItem('current-patient', JSON.stringify(data));
+            this.$router.push({ name: 'patient-create' });
+        }
+    },
 
     mounted() {
         this.$store.dispatch('services/viewAllPatients');

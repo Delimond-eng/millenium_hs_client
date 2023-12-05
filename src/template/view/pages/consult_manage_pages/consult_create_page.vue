@@ -7,9 +7,7 @@
                     <div class="col-12 col-md-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Consultation</h4>
-
                             <div class="page-title-right">
-
                                 <ol class="breadcrumb m-0">
                                     <li class="me-2">
                                         <a href="javascript:void(0)" class="btn btn-soft-primary"
@@ -20,17 +18,12 @@
                                             @click.prevent="readCommand" class="btn btn-success text-white btn-border"> <i
                                                 class="ri-phone-line"></i> Appeler
                                             le patient</a></li>
-
                                 </ol>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
-
                 <!-- end page title -->
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card ribbon-box right">
@@ -314,12 +307,10 @@
                         <!--end card-->
                     </div>
                 </div>
-
             </div>
             <!-- container-fluid -->
         </div>
         <!-- End Page-content -->
-
         <footer class="footer">
             <div class="container-fluid">
                 <div class="row">
@@ -341,23 +332,21 @@
             </div>
         </div>
     </div>
-    <filter-modal @on-select="selectedPatient = $event" />
+    <patients-pending-modal @on-select="selectedPatient = $event" />
 </template>
 
 <script>
 import ConsultMixins from '../../mixins/consult.mixins'
-import filterModal from '../../modals/modal_patient_filter'
+import patientsPendingModal from '../../modals/modal_patients_pending'
 export default {
     name: "PatientAssign",
     components: {
-        filterModal
+        patientsPendingModal
     },
     mixins: [ConsultMixins],
 
     mounted() {
-        this.$nextTick(() => {
-            this.$showBsModal('filterModal');
-        });
+        this.$showBsModal('patientsPendingModal');
     }
 }
 </script>

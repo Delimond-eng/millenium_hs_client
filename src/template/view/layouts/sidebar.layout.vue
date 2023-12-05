@@ -159,22 +159,21 @@
                         <div class="collapse menu-dropdown" id="adminLanding">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="javascript:void(0)" class="nav-link"
-                                        @click="actionKey = 'fonctions'; $showBsModal('serviceConfigModal')"> Configuration
-                                        fonctions </a>
+                                    <button class="nav-link" @click.stop="showConfigModal('fonctions')">
+                                        Configuration
+                                        fonctions </button>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="javascript:void(0)" class="nav-link"
-                                        @click="actionKey = 'grades'; $showBsModal('serviceConfigModal')"> Configuration
+                                    <button class="nav-link" @click="showConfigModal('grades')">
+                                        Configuration
                                         grades
-                                    </a>
+                                    </button>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="javascript:void(0)" class="nav-link"
-                                        @click="actionKey = 'services'; $showBsModal('serviceConfigModal')">
+                                    <button class="nav-link" @click.stop="showConfigModal('services')">
                                         Configuration services
-                                    </a>
+                                    </button>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#/admin/config/locations" class="nav-link">
@@ -218,6 +217,12 @@ export default {
     data() {
         return {
             actionKey: ''
+        }
+    },
+    methods: {
+        showConfigModal(tag) {
+            this.actionKey = tag;
+            this.$showBsModal('serviceConfigModal');
         }
     },
     components: {

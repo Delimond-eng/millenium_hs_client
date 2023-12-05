@@ -79,7 +79,7 @@
                                                 <span class="text-uppercase fw-semibold">Connecter</span></load-button>
                                             <button type="button"
                                                 class="btn btn-primary btn-border w-100 mt-2 text-uppercase"
-                                                @click.prevent="$showBsModal('hostoCreateModal')">Nouveau
+                                                @click.prevent="$showBsModal('hostoCreateModal')">Création
                                                 hôpital</button>
                                         </div>
                                         <div id="borderedToast4"

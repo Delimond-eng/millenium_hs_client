@@ -165,7 +165,6 @@ export default {
             let seconds = ("0" + date.getSeconds()).slice(-2);
             let formattedDate = ` ${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
             return formattedDate;
-
         }
     },
 }

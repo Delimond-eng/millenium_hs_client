@@ -25,17 +25,16 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Est-il nouveau ou ancien patient ??</h4>
-                                <div class="mx-4 flex-grow-1">
+                                <h4 class="card-title mb-0 flex-grow-1">Veuillez remplir tous les champs requis !</h4>
+                                <!-- <div class="mx-4 flex-grow-1">
                                     <load-state :processing="searchLoading" :size="30">
                                         <select class="patient-select2" name="state">
                                             <option></option>
                                         </select>
                                     </load-state>
-                                </div>
+                                </div> -->
                             </div>
                             <form class="card-body" @submit.prevent="submitForm">
-
                                 <h6 class="fs-14 text-start mb-2 text-primary">Infos personnelles</h6>
                                 <div class="border border-dashed border-primary mb-3"></div>
                                 <div class="row">
@@ -317,6 +316,29 @@ export default {
             });
         },
 
+
+        /**
+         * SHOW SELECTED PATIENTS
+        */
+        loadCachedPatient() {
+            this.$nextTick(() => {
+                let patient = JSON.parse(localStorage.getItem('current-patient'));
+                if (patient !== null && patient !== undefined) {
+                    this.$store.commit('services/SET_CODE', patient.patient_code);
+                    this.form.code = patient.patient_code;
+                    this.form.nom = patient.patient_nom;
+                    this.form.prenom = patient.patient_prenom;
+                    this.form.sexe = patient.patient_sexe;
+                    this.form.adresse = patient.patient_adresse;
+                    this.form.datenais = patient.patient_datenais;
+                    this.form.patient_id = patient.id;
+                    this.form.telephone = patient.patient_telephone;
+                } else {
+                    this.$store.dispatch('services/showCode');
+                }
+            });
+        },
+
         async loadPatientsList() {
             let self = this;
             let patients = await this.$store.dispatch('services/viewAllPatients');
@@ -363,7 +385,6 @@ export default {
 
 
         cleanField() {
-
             this.form.patient_id = "";
             this.form.code = "";
             this.form.nom = "";
@@ -386,12 +407,17 @@ export default {
 
     unmounted() {
         if (this.selectPatient !== null) this.selectPatient.select2('destroy');
+        /**
+         * renitialise les données dans le cache !
+        */
+        localStorage.removeItem('current-patient');
     },
 
     async mounted() {
-        this.$store.dispatch('services/showCode');
-        $(".patient-select2").select2({ placeholder: 'chargement des patients...' });
-        await this.loadPatientsList();
+
+        /* $(".patient-select2").select2({ placeholder: 'chargement des patients...' }); */
+        this.loadCachedPatient();
+        //await this.loadPatientsList();
     },
 
     computed: {
