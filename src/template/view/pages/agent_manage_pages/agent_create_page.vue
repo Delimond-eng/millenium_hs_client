@@ -490,6 +490,7 @@ export default {
             this.form.fonction_id = '';
             this.form.grade_id = '';
             this.form.service_id = '';
+            this.form.emplacement_id = '';
             this.form.created_by = '';
             this.form_user.role_id = '';
             this.form_user.password = '';

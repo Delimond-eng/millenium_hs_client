@@ -26,7 +26,7 @@
                                     <tr>
                                         <th scope="col" style="width: 50px;">
                                         </th>
-                                        <th class="sort fw-bold" scope="col">Code</th>
+                                        <th class="sort fw-bold" scope="col">N° Jeton</th>
                                         <th class="sort fw-bold" scope="col">Nom complet</th>
                                     </tr>
                                 </thead>
@@ -41,12 +41,12 @@
                                             </div>
                                         </th>
                                         <td class="id"><a href="javascript:void(0);" class="fw-medium link-primary">{{
-                                            patient.patient_code }}</a></td>
+                                            patient.patient_code_appel }}</a></td>
                                         <td class="name">{{ patient.patient_nom }} {{ patient.patient_prenom }} </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <state-empty v-else title="Aucun informations répertorié !"
+                            <state-empty v-else title="Aucun informations répertorié !" :expanded="false"
                                 description="Vs n'avez pas des consultations en attente pour l'instant !"></state-empty>
                         </div>
                     </div>
@@ -75,7 +75,7 @@ export default {
                 this.$store.dispatch("services/showPatient", data.id).then((result) => {
                     this.id = "";
                     this.$emit('onSelect', result);
-                    this.$closeBsModal('filterModal');
+                    this.$closeBsModal('patientsPendingModal');
                 }).catch((e) => {
                     this.id = "";
                 });

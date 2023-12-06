@@ -7,4 +7,6 @@ export default {
   GET_CONSULTATIONS: (state) => state.consultations,
   GET_EMPLACEMENTS: (state) => state.emplacements,
   GET_PATIENTS_PENDING: (state) => state.patients_pending,
+  GET_EMPLACEMENT_PHARMAS: (state) => state.emplacement_pharmacies,
+  GET_PHARMAS: (state) => state.pharmacies,
 };

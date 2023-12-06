@@ -59,7 +59,7 @@
                                                     <th scope="col">Sexe</th>
                                                     <th scope="col">Date naissance</th>
                                                     <th scope="col">Téléphone</th>
-                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Fiche status</th>
                                                     <th scope="col">Poids</th>
                                                     <th scope="col">Taille</th>
                                                     <th scope="col">Temperature</th>
@@ -75,9 +75,9 @@
                                                     <td>{{ item.patient_datenais }}</td>
                                                     <td>{{ item.patient_telephone }}</td>
                                                     <td class="status">
-                                                        <span class="badge text-uppercase"
-                                                            :class="item.patients.toLowerCase().includes('en attente') ? 'bg-warning-subtle text-warning' : 'bg-success-subtle text-success'">{{
-                                                                item.patient_status }}
+                                                        <span class="badge text-uppercase" v-if="item.details"
+                                                            :class="item.details[item.details.length - 1].patient_fiche_status.toLowerCase().includes('en attente') ? 'bg-warning-subtle text-warning' : 'bg-success-subtle text-success'">
+                                                            {{ item.details[item.details.length - 1].patient_fiche_status }}
                                                         </span>
                                                     </td>
 

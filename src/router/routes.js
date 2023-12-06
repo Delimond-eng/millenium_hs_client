@@ -9,10 +9,15 @@ import Dashboard from "@/template/view/screens/public/home_screen";
  */
 import ConfigLocationsPage from "@/template/view/pages/config_manage_pages/location_config_page";
 
+/**
+ * SERVICES
+ */
+import ServiceManagerPage from "@/template/view/pages/service_manage_pages/service_create_page";
+import PharmacieManagerPage from "@/template/view/pages/service_manage_pages/pharmacie_pages/pharmacie_landing_page";
+
 /* patient manage pages */
 import PatientCreatePage from "@/template/view/pages/patient_manage_pages/patient_create_page";
 import PatientListPage from "@/template/view/pages/patient_manage_pages/patient_list_page";
-import PatientAssignPage from "@/template/view/pages/patient_manage_pages/patient_assign_page";
 
 /* medecin manage pages */
 import AgentCreatePage from "@/template/view/pages/agent_manage_pages/agent_create_page";
@@ -51,6 +56,16 @@ const routes = [
         component: ConfigLocationsPage,
         name: "config-locations",
       },
+      {
+        path: "/admin/config/services",
+        component: ServiceManagerPage,
+        name: "config-services",
+      },
+      {
+        path: "/admin/manage/pharmacies",
+        component: PharmacieManagerPage,
+        name: "manage-pharmacies",
+      },
 
       /* patient routes */
       {
@@ -62,11 +77,6 @@ const routes = [
         path: "/home/patients/list",
         component: PatientListPage,
         name: "patient-list",
-      },
-      {
-        path: "/home/patients/assign",
-        component: PatientAssignPage,
-        name: "patient-assign",
       },
 
       /* medecins routes */

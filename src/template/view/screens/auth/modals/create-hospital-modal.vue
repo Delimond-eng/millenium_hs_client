@@ -10,7 +10,7 @@
                     <div class="modal-body p-4">
                         <form class="row" enctype="multipart/form-data" @submit.prevent="submitForm">
                             <div class="mb-2 col-md-6">
-                                <label for="hsnom">Désignation Hôpitale <sup class="text-danger">*</sup> </label>
+                                <label for="hsnom">Désignation Hôpital <sup class="text-danger">*</sup> </label>
                                 <input type="text" v-model="form.nom" class="form-control" id="exampleInputEmail1"
                                     placeholder="Entrer le nom de l'hôpital..." required>
                             </div>

@@ -9,4 +9,7 @@ export default {
   SET_CONSULTATIONS: (state, data) => (state.consultations = data),
   SET_EMPLACEMENTS: (state, data) => (state.emplacements = data),
   SET_PATIENTS_PENDING: (state, data) => (state.patients_pending = data),
+  SET_EMPLACEMENT_PHARMAS: (state, data) =>
+    (state.emplacement_pharmacies = data),
+  SET_PHARMAS: (state, data) => (state.pharmacies = data),
 };

@@ -11,8 +11,10 @@ export default {
         libelle: "",
         diagnostic: "",
         patient_id: "",
+        patient_fiche_id: "",
         agent_id: "",
         consult_details: [],
+        consult_symptomes: [],
       },
       consult_details: [
         {
@@ -36,16 +38,22 @@ export default {
           consult_id: "",
         },
       ],
+      symptomes: [
+        {
+          libelle: "",
+        },
+      ],
       selectedPatient: null,
     };
   },
-  unmounted() {
-    this.patientSelect2.select2("destroy");
-  },
-  mounted() {
-    this.patientSelect2 = $(".patient-select2").select2({
-      placeholder: "Chargement des patients assignés ...",
+
+  async mounted() {
+    this.$nextTick(() => {
+      this.$showBsModal("patientsPendingModal");
     });
+    /*     this.patientSelect2 = $(".patient-select2").select2({
+                                                                  placeholder: "Chargement des patients assignés ...",
+                                                                }); */
     this.init();
   },
 
@@ -54,46 +62,46 @@ export default {
       let self = this;
       let agentId = this.$user().agent_id;
       console.log("agent id", agentId);
-      let patients = await this.$store.dispatch(
-        "services/viewMedecinsAssignments",
-        agentId
-      );
-      if (this.patientSelect2 !== null) this.patientSelect2.select2("destroy");
-      this.patientSelect2 = $(".patient-select2")
-        .select2({
-          placeholder: "Veuillez sélectionner un patient...",
-          searchInputPlaceholder: "Recherche patient...",
-          data: $.map(patients, function (item) {
-            return {
-              text: `${item.patient_code} : ${item.patient_nom} ${item.patient_prenom}`,
-              id: item.id,
-              info: item,
-            };
-          }),
-        })
-        .on("change", function () {
-          //$(this).select2('data')[0].info
-          let id = $(this).val();
-          if (id !== "") {
-            self.$store.dispatch("services/showPatient", id).then((result) => {
-              self.selectedPatient = result;
-            });
-          }
-        });
-      ClassicEditor.create(document.querySelector(".editor"), {
-        placeholder:
-          "Veuillez saisir diagnostic pour la consultation en cours...",
-      })
-        .then(function (e) {
-          e.ui.view.editable.element.style.height = "150px";
-          e.ui.view.editable.element.style.fontColor = "#000000";
-          e.model.document.on("change", () => {
-            self.editor = jQuery(e.getData()).text().replaceAll("\n\n", "\n");
-          });
-        })
-        .catch(function (e) {
-          console.error("Error from editor => ", e);
-        });
+      /* let patients = await this.$store.dispatch(
+                                                                                            "services/viewMedecinsAssignments",
+                                                                                            agentId
+                                                                                          );
+                                                                                          if (this.patientSelect2 !== null) this.patientSelect2.select2("destroy");
+                                                                                          this.patientSelect2 = $(".patient-select2")
+                                                                                            .select2({
+                                                                                              placeholder: "Veuillez sélectionner un patient...",
+                                                                                              searchInputPlaceholder: "Recherche patient...",
+                                                                                              data: $.map(patients, function (item) {
+                                                                                                return {
+                                                                                                  text: `${item.patient_code} : ${item.patient_nom} ${item.patient_prenom}`,
+                                                                                                  id: item.id,
+                                                                                                  info: item,
+                                                                                                };
+                                                                                              }),
+                                                                                            })
+                                                                                            .on("change", function () {
+                                                                                              //$(this).select2('data')[0].info
+                                                                                              let id = $(this).val();
+                                                                                              if (id !== "") {
+                                                                                                self.$store.dispatch("services/showPatient", id).then((result) => {
+                                                                                                  self.selectedPatient = result;
+                                                                                                });
+                                                                                              }
+                                                                                            }); */
+      /* ClassicEditor.create(document.querySelector(".editor"), {
+                                                                                placeholder:
+                                                                                  "Veuillez saisir diagnostic pour la consultation en cours...",
+                                                                              })
+                                                                                .then(function (e) {
+                                                                                  e.ui.view.editable.element.style.height = "150px";
+                                                                                  e.ui.view.editable.element.style.fontColor = "#000000";
+                                                                                  e.model.document.on("change", () => {
+                                                                                    self.editor = jQuery(e.getData()).text().replaceAll("\n\n", "\n");
+                                                                                  });
+                                                                                })
+                                                                                .catch(function (e) {
+                                                                                  console.error("Error from editor => ", e);
+                                                                                }); */
     },
 
     /**
@@ -102,15 +110,25 @@ export default {
     submitFormConsult(e) {
       this.form_consult.agent_id = this.$user().agent_id;
       this.form_consult.patient_id = this.selectedPatient.id;
-      this.form_consult.diagnostic = this.editor;
 
       let details = [];
+      let symptomes = [];
       for (let detail of this.consult_details) {
         if (detail.detail_valeur !== "") {
           details.push(detail);
         }
       }
+      for (let s of this.symptomes) {
+        if (s.libelle !== "") {
+          symptomes.push(s);
+        }
+      }
+      this.form_consult.consult_symptomes = symptomes;
       this.form_consult.consult_details = details;
+      this.form_consult.patient_fiche_id =
+        this.selectedPatient.details[
+          this.selectedPatient.details.length - 1
+        ].id;
 
       this.formLoading = true;
       this.$store
@@ -229,7 +247,7 @@ export default {
       ];
       this.selectedPatient = null;
       $(".patient-select2").val("").trigger("change");
-      this.$showBsModal("filterModal");
+      this.$showBsModal("patientsPendingModal");
     },
 
     readCommand() {

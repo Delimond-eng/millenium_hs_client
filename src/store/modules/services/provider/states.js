@@ -6,5 +6,7 @@ export default {
   consultations: [],
   emplacements: [],
   patients_pending: [],
+  emplacement_pharmacies: [],
+  pharmacies: [],
   rcode: "",
 };

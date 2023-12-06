@@ -35,12 +35,12 @@
                                 </div> -->
                             </div>
                             <form class="card-body" @submit.prevent="submitForm">
-                                <h6 class="fs-14 text-start mb-2 text-primary">Infos personnelles</h6>
+
                                 <div class="border border-dashed border-primary mb-3"></div>
                                 <div class="row">
 
                                     <!-- patient code input -->
-                                    <div class="col-xxl-3 col-md-2">
+                                    <div class="col-xxl-2 col-md-2">
                                         <div>
                                             <label for="patientCode" class="form-label">Patient code</label>
                                             <div class="form-icon">
@@ -51,13 +51,25 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-xxl-2 col-md-2">
+                                        <div>
+                                            <label for="appelCode" class="form-label">Code appel <sup
+                                                    class="text-danger">*</sup></label>
+                                            <div class="form-icon">
+                                                <input type="text" class="form-control form-control-icon" id="appelCode"
+                                                    v-model="form.code_appel" required>
+                                                <i class="bx bx-hash"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <!-- nom input -->
-                                    <div class="col-md-5">
+                                    <div class="col-md-4">
                                         <div>
                                             <label class="form-label">Nom <sup class="text-danger">*</sup></label>
                                             <div class="form-icon">
                                                 <input type="text" v-model="form.nom" class="form-control form-control-icon"
-                                                    placeholder="Saisir le nom du patient...ex:Gaston" required
+                                                    placeholder="Saisir le nom du patient...ex:KAYEMBE" required
                                                     :readonly="form.patient_id !== ''">
                                                 <i class="ri-user-2-line"></i>
                                             </div>
@@ -65,7 +77,7 @@
                                     </div>
 
                                     <!-- prenom input -->
-                                    <div class="col-md-5">
+                                    <div class="col-md-4">
                                         <div>
                                             <label class="form-label">Prénom <sup class="text-danger">*</sup></label>
                                             <div class="form-icon">
@@ -128,7 +140,7 @@
                                             <div class="form-icon">
                                                 <input type="text" v-model="form.adresse"
                                                     class="form-control form-control-icon"
-                                                    placeholder="Saisir l'adresse du patient... ex: N°/ av. / Q. /C"
+                                                    placeholder="Saisir l'adresse du patient... ex: n°..... av..... Q..... C....."
                                                     required :readonly="form.patient_id !== ''">
                                                 <i class="ri-map-pin-5-line"></i>
                                             </div>
@@ -173,7 +185,7 @@
                                             <div class="form-icon">
                                                 <input type="text" v-model="form_details.taille"
                                                     class="form-control form-control-icon"
-                                                    placeholder="Saisir la taille... ex: 1.70" required>
+                                                    placeholder="Saisir la taille... ex: 170" required>
                                                 <i class=" ri-ruler-line"></i>
                                             </div>
                                         </div>
@@ -187,14 +199,30 @@
                                             <div class="form-icon">
                                                 <input type="text" v-model="form_details.tension_art"
                                                     class="form-control form-control-icon"
-                                                    placeholder="Saisir la tension arterielle du patient..." required>
+                                                    placeholder="tension arterielle..." required>
+                                                <i class="bx bx-pulse"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- frequence cardio input -->
+                                    <div class="col-md-3">
+                                        <div class="mt-3">
+                                            <label class="form-label">Fréquence cardiaque<sup
+                                                    class="text-danger">*</sup></label>
+                                            <div class="form-icon">
+                                                <input type="text" v-model="form_details.freq_cardio"
+                                                    class="form-control form-control-icon"
+                                                    placeholder="Fréquence cardiaque..." required>
                                                 <i class="bx bx-pulse"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <bs-toast id="errorsToast" :msg="errors_msg" />
-                                <div div class=" d-flex align-items-end justify-content-end mt-4">
+
+                                <div div class=" d-flex align-items-end justify-content-end mt-4"
+                                    v-if="$user().agent_id !== 0">
                                     <load-button btn-type="submit" :loading="formLoading"
                                         class-name="btn-success btn-border btn-label right nexttab nexttab me-2">
                                         <span><i
@@ -247,6 +275,7 @@ export default {
         return {
             form: {
                 code: "",
+                code_appel: "",
                 nom: "",
                 prenom: "",
                 sexe: "",
@@ -262,6 +291,7 @@ export default {
                 taille: "",
                 temperature: "",
                 tension_art: "",
+                freq_cardio: "",
                 age: ""
             },
             formLoading: false,
@@ -288,6 +318,10 @@ export default {
             */
             this.form.created_by = this.$user().agent_id;
             this.formLoading = true;
+
+            if (this.form.created_by === 0) {
+                return;
+            }
             this.$store.dispatch('services/createPatient', this.form).then((res) => {
                 console.log(JSON.stringify(res));
                 this.formLoading = false;
@@ -387,6 +421,7 @@ export default {
         cleanField() {
             this.form.patient_id = "";
             this.form.code = "";
+            this.form.code_appel = "";
             this.form.nom = "";
             this.form.prenom = "";
             this.form.sexe = "";
@@ -398,6 +433,7 @@ export default {
             this.form_details.taille = "";
             this.form_details.temperature = "";
             this.form_details.tension_art = "";
+            this.form_details.freq_cardio = "";
 
             this.$store.dispatch('services/showCode');
             $(".patient-select2").val('').trigger('change');

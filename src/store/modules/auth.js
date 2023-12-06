@@ -30,9 +30,10 @@ const getters = {
  * */
 const actions = {
   /**
-   * Login to application
-   * @param context vuex context,
-   * @param form request formData,
+   * Utilisateur Login
+   * @author Dev.GastonDelimond
+   * @param {context vuex} context,
+   * @param {*} form,
    * @returns HttpResponse
    * */
   async login(context, form) {
@@ -56,6 +57,7 @@ const actions = {
 
   /**
    * CREATE NEW HOSPITAL, DEFAULT USER ADMIN, AND DEFAULT LOCATION
+   * @author Dev.GastonDelimond
    * @param {Vuex} context
    * @param {Object} form
    */
@@ -76,8 +78,9 @@ const actions = {
   },
 
   /**
-   * Refresh logged User
-   * @param commit mutator
+   * Refresh logged In User
+   * @author Dev.GastonDelimond
+   * @param {Vuex} commit
    * @returns void
    * */
   async refreshUser({ commit }) {
@@ -88,7 +91,8 @@ const actions = {
 
   /**
    * Log Out
-   * @param commit mutator
+   * @author Dev.GastonDelimond
+   * @param {Vuex} commit
    * @returns void
    * */
   async loggedOut({ commit }) {

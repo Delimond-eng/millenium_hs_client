@@ -1,5 +1,5 @@
 <template>
-    <div class="noresult d-flex justify-content-center align-items-center" style="height:300px">
+    <div class="noresult d-flex justify-content-center align-items-center" :style="expanded ? 'height:300px' : ''">
         <div class="text-center">
             <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
                 colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
@@ -14,9 +14,17 @@
 export default {
     name: "StateEmpty",
 
-    props: [
-        "title",
-        "description"
-    ]
+    props: {
+        title: {
+            type: String
+        },
+        description: {
+            type: String
+        },
+        expanded: {
+            type: Boolean,
+            default: true,
+        }
+    }
 }
 </script>

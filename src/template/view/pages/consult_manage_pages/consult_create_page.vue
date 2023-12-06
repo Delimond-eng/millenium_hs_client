@@ -9,9 +9,9 @@
                             <h4 class="mb-sm-0">Consultation</h4>
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="me-2">
+                                    <li class="me-2" v-if="!selectedPatient">
                                         <a href="javascript:void(0)" class="btn btn-soft-primary"
-                                            @click="$showBsModal('filterModal')">Voir patients en
+                                            @click="$showBsModal('patientsPendingModal')">Voir patients en
                                             attente</a>
                                     </li>
                                     <li v-if="selectedPatient" class="breadcrumb-item"><a href="javascript: void(0);"
@@ -83,72 +83,106 @@
                                             <div class="tab-pane fade active show" id="custom-v-pills-home" role="tabpanel"
                                                 aria-labelledby="custom-v-pills-home-tab">
                                                 <div>
-                                                    <div class="d-flex justify-content-between mt-3 align-items-end align-content-end"
+                                                    <div class="d-flex justify-content-between bg-primary-subtle p-2 mt-3 align-items-center align-content-center"
                                                         v-if="selectedPatient">
-                                                        <h6 class="fs-14 text-primary">Infos récentes du
+                                                        <h6 class="fs-14 text-primary fw-bold">Infos récentes
+                                                            du
                                                             patient</h6>
                                                         <!-- <button class="btn btn-info btn-border btn-sm"> <i
                                                                 class="ri-folder-5-line "></i> Voir le parcours du
                                                             patient</button> -->
+                                                        <div class="d-flex align-content-end align-items-center"
+                                                            v-if="selectedPatient">
+                                                            <span class="me-1">N° Jeton :</span>
+                                                            <span class="fw-bold text-primary fs-17">{{
+                                                                selectedPatient.patient_code_appel }}</span>
+                                                        </div>
                                                     </div>
-                                                    <div class="border border-dashed border-primary mb-3"
-                                                        v-if="selectedPatient"></div>
-
-                                                    <div class="table-responsive" v-if="selectedPatient">
-                                                        <table class="table mb-0">
-                                                            <tbody class="text-black">
-                                                                <tr>
-                                                                    <th scope="row" style="width: 200px;">Nom complet</th>
-                                                                    <td>{{ selectedPatient.patient_nom }} {{
-                                                                        selectedPatient.patient_prenom }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Sexe</th>
-                                                                    <td>{{ selectedPatient.patient_sexe }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Téléphone</th>
-                                                                    <td>{{ selectedPatient.patient_telephone }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Adresse</th>
-                                                                    <td>{{ selectedPatient.patient_adresse }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Age</th>
-                                                                    <td>{{
-                                                                        selectedPatient.details[selectedPatient.details.length
-                                                                            - 1].patient_detail_age }} ans</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Taille</th>
-                                                                    <td>{{
-                                                                        selectedPatient.details[selectedPatient.details.length
-                                                                            - 1].patient_detail_taille }} mètre</td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <th scope="row">Poids</th>
-                                                                    <td>72 kg</td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <th scope="row">Temperature</th>
-                                                                    <td>{{
-                                                                        selectedPatient.details[selectedPatient.details.length
-                                                                            - 1].patient_detail_temperature }} °C</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Tension arterielle</th>
-                                                                    <td>{{
-                                                                        selectedPatient.details[selectedPatient.details.length
-                                                                            - 1].patient_tension_art }} mmHg</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                    <div class="border border-primary-subtle mb-3" v-if="selectedPatient">
                                                     </div>
+                                                    <div class="row" v-if="selectedPatient">
+                                                        <div class="col-md-6">
+                                                            <div class="table-responsive">
+                                                                <table class="table mb-0">
+                                                                    <tbody class="text-black">
+                                                                        <tr>
+                                                                            <th scope="row" style="width: 200px;">Nom
+                                                                                complet</th>
+                                                                            <td>{{ selectedPatient.patient_nom }} {{
+                                                                                selectedPatient.patient_prenom }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">Sexe</th>
+                                                                            <td>{{ selectedPatient.patient_sexe }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">Téléphone</th>
+                                                                            <td>{{ selectedPatient.patient_telephone }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">Adresse</th>
+                                                                            <td>{{ selectedPatient.patient_adresse }}
+                                                                            </td>
+                                                                        </tr>
 
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="table-responsive">
+                                                                <table class="table mb-0">
+                                                                    <tbody class="text-black">
+                                                                        <tr>
+                                                                            <th scope="row">Age</th>
+                                                                            <td>{{
+                                                                                selectedPatient.details[selectedPatient.details.length
+                                                                                    - 1].patient_fiche_age }} ans</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">Taille</th>
+                                                                            <td>{{
+                                                                                selectedPatient.details[selectedPatient.details.length
+                                                                                    - 1].patient_fiche_taille }} mètre</td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <th scope="row">Poids</th>
+                                                                            <td>{{
+                                                                                selectedPatient.details[selectedPatient.details.length
+                                                                                    - 1].patient_fiche_poids }}</td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <th scope="row">Temperature</th>
+                                                                            <td>{{
+                                                                                selectedPatient.details[selectedPatient.details.length
+                                                                                    - 1].patient_fiche_temperature }} {{
+            selectedPatient.details[selectedPatient.details.length
+                - 1].patient_fiche_temperature_unite }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">Tension arterielle</th>
+                                                                            <td>{{
+                                                                                selectedPatient.details[selectedPatient.details.length
+                                                                                    - 1].patient_fiche_tension_art }} {{
+            selectedPatient.details[selectedPatient.details.length
+                - 1].patient_fiche_tension_art_unite }}</td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <th scope="row">Fréquence cardiaque</th>
+                                                                            <td>{{
+                                                                                selectedPatient.details[selectedPatient.details.length
+                                                                                    - 1].patient_fiche_freq_cardio }} {{
+            selectedPatient.details[selectedPatient.details.length
+                - 1].patient_fiche_freq_cardio_unite }}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <state-empty v-else title="Sélection patient !"
                                                         description="Veuillez sélectionner un patient dans la liste pour commencer la consultation !"></state-empty>
                                                 </div>
@@ -158,7 +192,7 @@
                                                 aria-labelledby="custom-v-pills-profile-tab">
                                                 <form class="row" @submit.prevent="submitFormConsult">
                                                     <div class="col-md-12 mt-2">
-                                                        <label class="form-label">Motif
+                                                        <label class="form-label text-dark">Motif
                                                             de la consultation
                                                             <sup class="text-danger">*</sup></label>
                                                         <div class="form-icon right">
@@ -168,13 +202,27 @@
                                                             <i class="ri-edit-box-fill"></i>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-5">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Les
+                                                                    symptômes
+                                                                </h6>
+                                                                <div class="border border-dashed border-primary mb-2"></div>
+                                                                <div class="input-group mb-2"
+                                                                    v-for="(s, index) in symptomes" :key="index">
+                                                                    <input type="text" class="form-control"
+                                                                        v-model="s.libelle"
+                                                                        placeholder="entrer symptôme...">
+                                                                    <button class="btn btn-outline-secondary"
+                                                                        @click.prevent="symptomes.push({ libelle: '' })"
+                                                                        type="button"><i class="ri-add-line"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                                    <div class="col-md-12">
-                                                        <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Diagnostic</h6>
-                                                        <div class="border border-dashed border-primary mb-3"></div>
-                                                        <!-- wizard editor -->
-                                                        <textarea class="editor"></textarea>
-
+                                                    <div class="col-md-7">
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Les
@@ -197,6 +245,17 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 mt-2">
+                                                        <label class="form-label text-dark">Diagnostic
+                                                            <sup class="text-danger">*</sup></label>
+                                                        <!-- wizard editor -->
+                                                        <textarea class="form-control"
+                                                            placeholder="Saisir votre diagnostic..."
+                                                            v-model="form_consult.diagnostic" required></textarea>
+                                                    </div>
+                                                    <div class="col-md-12 mt-2">
                                                         <bs-toast id="errorsToast4" :msg="errors_msg" />
                                                         <div class="d-flex align-items-end justify-content-end w-100 mt-4">
                                                             <button type="button"
@@ -344,9 +403,5 @@ export default {
         patientsPendingModal
     },
     mixins: [ConsultMixins],
-
-    mounted() {
-        this.$showBsModal('patientsPendingModal');
-    }
 }
 </script>

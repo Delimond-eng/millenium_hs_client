@@ -49,10 +49,6 @@
                                     <a href="#/home/patient/create" class="nav-link" data-key="t-chat"> Création patient
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#/home/patients/assign" class="nav-link" data-key="t-chat"> Assignation patient
-                                    </a>
-                                </li>
 
                             </ul>
                         </div>
@@ -112,44 +108,41 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="#pharmaLanding" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarLanding">
-                            <i class="ri-medicine-bottle-line"></i> <span data-key="t-landing">Pharmacie</span>
-                        </a>
-                        <div class="collapse menu-dropdown" id="pharmaLanding">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-one-page"> Catégories médicament </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-one-page"> Création médicament </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="#laboLanding" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarLanding">
-                            <i class="ri-microscope-line"></i> <span data-key="t-landing">Laboratoire</span>
-                        </a>
-                        <div class="collapse menu-dropdown" id="laboLanding">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-one-page">Tableau de bord</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-one-page"> Création examens </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-one-page"> Liste examens</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
 
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Administrations</span></li>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#serviceLanding" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="serviceLanding">
+                            <i class="bx bx-plus-medical"></i> <span data-key="t-landing">Services</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="serviceLanding">
+                            <ul class="nav nav-sm flex-column">
+
+                                <li class="nav-item">
+                                    <a href="#/admin/config/services" class="nav-link" data-key="t-one-page"> Gestion
+                                        services</a>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a href="#sidebarPharmacie" class="nav-link" data-bs-toggle="collapse" role="button"
+                                        aria-expanded="true" aria-controls="sidebarPharmacie" data-key="t-profile">
+                                        Pharmacies
+                                    </a>
+                                    <div class="menu-dropdown collapse" id="sidebarPharmacie" style="">
+                                        <ul class="nav nav-sm flex-column">
+                                            <li class="nav-item">
+                                                <a href="#/admin/manage/pharmacies" class="nav-link"
+                                                    data-key="t-simple-page">
+                                                    Gestion pharmacies </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
 
                     <li class="nav-item" id="config-menu">
                         <a class="nav-link menu-link" href="#adminLanding" data-bs-toggle="collapse" role="button"
@@ -160,41 +153,35 @@
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
                                     <button class="nav-link" @click.stop="showConfigModal('fonctions')">
-                                        Configuration
-                                        fonctions </button>
+                                        Création fonctions </button>
                                 </li>
                                 <li class="nav-item">
                                     <button class="nav-link" @click="showConfigModal('grades')">
-                                        Configuration
-                                        grades
-                                    </button>
-                                </li>
-
-                                <li class="nav-item">
-                                    <button class="nav-link" @click.stop="showConfigModal('services')">
-                                        Configuration services
+                                        Création grades
                                     </button>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#/admin/config/locations" class="nav-link">
-                                        Configuration emplacements
+                                        Création emplacements
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item" id="config-menu">
-                        <a class="nav-link menu-link" href="#accountLanding" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="accountLanding">
+                    <li class="nav-item" id="users-menu">
+                        <a class="nav-link menu-link" href="#usersLanding" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="usersLanding">
                             <i class="ri-user-settings-line "></i> <span data-key="t-landing">Comptes utilisateurs</span>
                         </a>
-                        <div class="collapse menu-dropdown" id="adminLanding">
+                        <div class="collapse menu-dropdown" id="usersLanding">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-one-page">Création accès </a>
+                                    <button class="nav-link" @click.stop="showConfigModal('roles')">
+                                        Création roles
+                                    </button>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-nft-landing"> Attribution accès
+                                    <a href="#" class="nav-link" data-key="t-nft-landing"> Assigner comptes
                                     </a>
                                 </li>
                             </ul>
