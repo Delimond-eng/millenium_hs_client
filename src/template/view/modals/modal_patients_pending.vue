@@ -100,15 +100,13 @@ export default {
     computed: {
         patients() {
             if (this.search) {
-                /*Filter les données en fonction de sujets sélectionnés par l'utilisateur*/
                 let arr = this.$store.getters['services/GET_PATIENTS_PENDING'];
-                let filtered = arr.filter((el) => el.patient_nom.toLowerCase().includes(this.search))
+                let filtered = arr.filter((el) => el.patient_nom.toLowerCase().includes(this.search.toLocaleLowerCase()))
                 return filtered;
             }
             else {
                 return this.$store.getters['services/GET_PATIENTS_PENDING'];
             }
-
         }
     },
 }

@@ -208,7 +208,7 @@
                                                                 <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Les
                                                                     symptômes
                                                                 </h6>
-                                                                <div class="border border-dashed border-primary mb-2"></div>
+                                                                <div class="border border-dashed mb-2"></div>
                                                                 <div class="input-group mb-2"
                                                                     v-for="(s, index) in symptomes" :key="index">
                                                                     <input type="text" class="form-control"
@@ -228,7 +228,7 @@
                                                                 <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Les
                                                                     antécedents
                                                                 </h6>
-                                                                <div class="border border-dashed border-primary"></div>
+                                                                <div class="border border-dashed"></div>
                                                                 <div class="row mt-2">
                                                                     <div class="col-md-12 mb-1"
                                                                         v-for="(detail, index) in consult_details"
@@ -277,20 +277,20 @@
                                                 aria-labelledby="custom-v-pills-messages-tab">
                                                 <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Veuillez prescrire le
                                                     patient !</h6>
-                                                <div class="border border-dashed border-primary"></div>
+                                                <div class="border border-dashed"></div>
 
                                                 <form @submit.prevent="submitFormPrescriptions">
-                                                    <div class="row d-flex mt-2 p-2" v-for="(p, index) in prescriptions"
-                                                        :key="index">
+                                                    <div class="row d-flex mt-2 p-2">
                                                         <div class="col-md-12">
-                                                            <div class="input-group">
+                                                            <div class="input-group mb-1"
+                                                                v-for="(p, index) in prescriptions" :key="index">
                                                                 <input type="text" class="form-control form-control-icon"
                                                                     placeholder="Traitement..." style="width: 33%;"
                                                                     v-model="p.traitement" required>
                                                                 <input type="text" class="form-control form-control-icon"
                                                                     placeholder="Posologie..." style="width: 33%;"
                                                                     v-model="p.posologie" required>
-                                                                <select class="form-control" style="width: 14%;"
+                                                                <select class="form-control" style="width: 120px;"
                                                                     v-model="p.traitement_type" required>
                                                                     <option selected label="Type..."></option>
                                                                     <option value="Comprimé">Comprimé</option>
@@ -299,12 +299,12 @@
                                                                     <option value="Rectale">Rectale</option>
                                                                     <option value="Dermique">Dermique</option>
                                                                 </select>
-                                                                <button class="btn btn-secondary btn-border btn-icon"
+                                                                <button class="btn btn-soft-secondary btn-icon"
                                                                     @click.prevent="prescriptions.push({ traitement: '', traitement_type: '', posologie: '', consult_id: '' })"><i
                                                                         class="ri-add-line"></i></button>
-                                                                <button class="btn btn-light btn-border btn-icon"
+                                                                <!-- <button class="btn btn-soft-danger btn-icon"
                                                                     @click.prevent="prescriptions.splice(index, 1)"><i
-                                                                        class="ri-close-line"></i></button>
+                                                                        class="ri-close-line"></i></button> -->
                                                             </div>
                                                             <!-- <div>
                                                             <label class="form-label">Traitement

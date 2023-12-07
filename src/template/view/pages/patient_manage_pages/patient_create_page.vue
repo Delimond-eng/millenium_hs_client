@@ -26,13 +26,6 @@
                         <div class="card">
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Veuillez remplir tous les champs requis !</h4>
-                                <!-- <div class="mx-4 flex-grow-1">
-                                    <load-state :processing="searchLoading" :size="30">
-                                        <select class="patient-select2" name="state">
-                                            <option></option>
-                                        </select>
-                                    </load-state>
-                                </div> -->
                             </div>
                             <form class="card-body" @submit.prevent="submitForm">
 
@@ -416,8 +409,6 @@ export default {
             });
         },
 
-
-
         cleanField() {
             this.form.patient_id = "";
             this.form.code = "";
@@ -442,7 +433,7 @@ export default {
     },
 
     unmounted() {
-        if (this.selectPatient !== null) this.selectPatient.select2('destroy');
+        /*  if (this.selectPatient !== null) this.selectPatient.select2('destroy'); */
         /**
          * renitialise les données dans le cache !
         */
@@ -450,10 +441,10 @@ export default {
     },
 
     async mounted() {
-
-        /* $(".patient-select2").select2({ placeholder: 'chargement des patients...' }); */
+        /**
+         * Charge les données du patient qui se trouve dans le cache !
+        */
         this.loadCachedPatient();
-        //await this.loadPatientsList();
     },
 
     computed: {

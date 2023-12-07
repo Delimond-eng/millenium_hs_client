@@ -301,6 +301,8 @@ export default {
       case "roles":
         url = "/configs.roles";
         break;
+      case "examens":
+        url = "/configs.examens";
     }
     try {
       let { data, status } = await post(url, form);

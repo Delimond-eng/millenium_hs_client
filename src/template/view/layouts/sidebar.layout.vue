@@ -153,16 +153,21 @@
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
                                     <button class="nav-link" @click.stop="showConfigModal('fonctions')">
-                                        Création fonctions </button>
+                                        Configuration fonctions </button>
                                 </li>
                                 <li class="nav-item">
                                     <button class="nav-link" @click="showConfigModal('grades')">
-                                        Création grades
+                                        Configuration grades
                                     </button>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#/admin/config/locations" class="nav-link">
-                                        Création emplacements
+                                        Configuration emplacements
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#/admin/config/examens" class="nav-link">
+                                        Configuration examens
                                     </a>
                                 </li>
                             </ul>

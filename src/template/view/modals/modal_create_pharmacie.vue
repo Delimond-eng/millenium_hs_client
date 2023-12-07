@@ -5,7 +5,7 @@
                 <div class="modal-content border-0 overflow-hidden">
                     <div class="modal-body login-modal p-4">
                         <h5 class="text-white fs-20">Création pharmacie</h5>
-                        <p class="text-white-50 mb-4">Veuillez créer des pharmacies pour votre établissement hospitalier !
+                        <p class="text-white-50 mb-2">Veuillez créer des pharmacies pour votre établissement hospitalier !
                         </p>
                     </div>
                     <div class="modal-body p-4">
@@ -40,10 +40,11 @@
                                 <div class="d-flex justify-content-end align-items-end">
                                     <button type="button" @click.prevent="abort"
                                         class="btn btn-light btn-border btn-lg mt-2 text-uppercase me-2">Fermer</button>
-                                    <load-button btn-type="submit" :loading="formLoading" v-if="!pharmacie_id"
+                                    <load-button btn-type="submit" :loading="formLoading" v-if="!form.pharmacie_id"
                                         class-name="btn btn-success btn-border btn-lg mt-2 text-uppercase">Créer</load-button>
-                                    <button v-else class="btn btn-info btn-border btn-lg mt-2 text-uppercase">Mettre à
-                                        jour</button>
+                                    <load-button :loading="formLoading" btn-type="submit" v-else
+                                        class-name="btn btn-info btn-border btn-lg mt-2 text-uppercase">Mettre à
+                                        jour</load-button>
                                 </div>
                             </div>
                         </form>
@@ -63,9 +64,9 @@ export default {
                 nom: '',
                 adresse: '',
                 emplacement_id: '',
-                telephone: ''
+                telephone: '',
+                pharmacie_id: ''
             },
-            pharmacie_id: '',
             formLoading: false,
             errors_msg: ''
         }
@@ -82,7 +83,7 @@ export default {
             self.form.adresse = "";
             self.form.emplacement_id = "";
             self.form.telephone = "";
-            self.pharmacie_id = "";
+            self.form.pharmacie_id = "";
         });
     },
     methods: {
@@ -147,7 +148,7 @@ export default {
             this.form.adresse = val.pharmacie_adresse ?? old.pharmacie_adresse;
             this.form.telephone = val.pharmacie_telephone ?? old.pharmacie_telephone;
             this.form.emplacement_id = val.hopital_emplacement_id ?? old.hopital_emplacement_id;
-            this.pharmacie_id = val.id ?? old.id;
+            this.form.pharmacie_id = val.id ?? old.id;
         }
     }
 }
