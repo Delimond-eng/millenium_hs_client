@@ -55,8 +55,9 @@
                                         Prescriptions
                                     </a>
                                     <a class="nav-link flex-fill d-flex me-2 flex-column justify-content-center align-items-center"
-                                        id="custom-v-pills-messages-tab" data-bs-toggle="pill" role="tab" disabled
-                                        aria-controls="custom-v-pills-messages" aria-selected="false">
+                                        id="examens-tab" data-bs-toggle="pill" role="tab"
+                                        :disabled="selectedPatient === null" aria-controls="examens-tab"
+                                        aria-selected="false" href="#examens">
                                         <!-- <i class="las la-file-alt  d-block fs-20 mb-1"></i> --> <img
                                             src="assets/images/companies/test-analysis.png"
                                             class="d-block fs-20 mb-1 text-center" style="height: 40px;">
@@ -354,6 +355,46 @@
                                                                 class="ri-check-double-line label-icon align-middle fs-16 ms-2 "></i>Valider
                                                             & imprimer
                                                             la prescription</load-button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!--end tab-pane-->
+
+                                            <!--end tab-pane-->
+                                            <div class="tab-pane fade" id="examens" role="tabpanel"
+                                                aria-labelledby="examens-tab">
+                                                <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Veuillez sélectionner
+                                                    les examens à prescrire au patient !</h6>
+                                                <div class="border border-dashed"></div>
+
+                                                <form @submit.prevent="submitFormExamens">
+                                                    <div class="row mt-3 p-2">
+                                                        <div class="form-check form-check-success col-md-3 mb-3"
+                                                            v-for="(exam, index) in examens" :key="index">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                @change="triggerSelectExamen($event, exam)"
+                                                                :id="'checkList_' + index">
+                                                            <label class="form-check-label text-dark fw-medium"
+                                                                :for="'checkList_' + index">
+                                                                {{ exam.examen_labo_libelle }}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <state-empty v-if="examens.length === 0"
+                                                        title="Aucun informations répertorié !" :expanded="false"
+                                                        description="Il y a aucun examen pour cet emplacement !"></state-empty>
+                                                    <bs-toast id="errorsToastExamen" :msg="errors_msg" />
+                                                    <div class="d-flex align-items-end justify-content-end w-100 mt-4">
+                                                        <button type="button"
+                                                            class="btn btn-light btn-border btn-label right me-2"><i
+                                                                class="ri-restart-line label-icon align-middle fs-16 ms-2"></i>
+                                                            Annuler</button>
+
+                                                        <load-button btn-type="submit" :loading="formLoadingExamens"
+                                                            class-name="btn-success btn-border btn-label right nexttab nexttab "><i
+                                                                class="ri-check-double-line label-icon align-middle fs-16 ms-2 "></i>Valider
+                                                            & imprimer
+                                                        </load-button>
                                                     </div>
                                                 </form>
                                             </div>

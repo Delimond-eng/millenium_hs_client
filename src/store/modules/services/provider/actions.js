@@ -276,6 +276,30 @@ export default {
   },
 
   /**
+   * Ajouter les examens
+   * @author Dev.GastonDelimond
+   * @param {*} context
+   * @param {*} form
+   * @returns HttpResponse
+   */
+  async addExamens(context, form) {
+    let formData = {
+      examens: form,
+    };
+
+    try {
+      let { data, status } = await post(`/examens.add`, formData);
+      if (status === 200) {
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  /**
    * AJOUTE UNE CONFIGURATION SUR PLUSIEURS NIVEAUX
    * @author Dev.GastonDelimond
    * @param {*} context
@@ -334,6 +358,21 @@ export default {
       if (status === 200) {
         commit("SET_CONSULTATIONS", data.consultations);
         return data.consultations;
+      } else return [];
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  },
+
+  async viewAllConsultsExamens({ commit }) {
+    let user = JSON.parse(localStorage.getItem("user-data"));
+    let emplacement_id = user.hopital.emplacement.id;
+    try {
+      let { data, status } = await get(`/consult.examens/${emplacement_id}`);
+      if (status === 200) {
+        commit("SET_ALL_EXAMENS", data.examens);
+        return data.examens;
       } else return [];
     } catch (error) {
       console.log(error);
@@ -407,6 +446,59 @@ export default {
     } catch (error) {
       console.log(error);
       return [];
+    }
+  },
+
+  /**
+   * Afficher la liste des examens pour un emplacements
+   * @author Dev.GastonDelimond
+   * @param {*} commit
+   * @returns HttpResponse
+   */
+  async viewAllExamens({ commit }) {
+    let user = JSON.parse(localStorage.getItem("user-data"));
+    let emplacement_id = user.hopital.emplacement.id;
+    try {
+      let { data, status } = await get(`/examens.all/${emplacement_id}`);
+      if (status === 200) {
+        commit("SET_EXAMENS", data.examens);
+        return data.examens;
+      } else return [];
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  },
+
+  /**
+   * Valider une demande des examens en cours
+   * @author Dev.GastonDelimond
+   * @param {*} commit
+   * @returns HttpResponse
+   */
+
+  async validateDemandeExam({ dispatch }, consult_id) {
+    try {
+      let { data, status } = await post(`/examen.validate/${consult_id}`);
+      if (status === 200) {
+        dispatch("viewAllConsultsExamens");
+        return data;
+      } else null;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  },
+
+  async showExamDetails(context, consult_id) {
+    try {
+      let { data, status } = await get(`/examen.detail/${consult_id}`);
+      if (status === 200) {
+        return data;
+      } else null;
+    } catch (error) {
+      console.log(error);
+      return null;
     }
   },
 };

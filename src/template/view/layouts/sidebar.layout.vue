@@ -118,7 +118,10 @@
                         </a>
                         <div class="collapse menu-dropdown" id="serviceLanding">
                             <ul class="nav nav-sm flex-column">
-
+                                <li class="nav-item">
+                                    <a href="#/admin/config/services" class="nav-link" data-key="t-one-page">Services
+                                        tableau</a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="#/admin/config/services" class="nav-link" data-key="t-one-page"> Gestion
                                         services</a>

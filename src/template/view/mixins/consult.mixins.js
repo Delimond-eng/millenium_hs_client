@@ -4,6 +4,7 @@ export default {
       patientSelect2: null,
       editor: "",
       formLoading: false,
+      formLoadingExamens: false,
       formLoadingPrescriptions: false,
       currentConsult: null,
       errors_msg: "",
@@ -43,6 +44,7 @@ export default {
           libelle: "",
         },
       ],
+      form_examens: [],
       selectedPatient: null,
     };
   },
@@ -51,9 +53,7 @@ export default {
     this.$nextTick(() => {
       this.$showBsModal("patientsPendingModal");
     });
-    /*     this.patientSelect2 = $(".patient-select2").select2({
-                                                                  placeholder: "Chargement des patients assignés ...",
-                                                                }); */
+    this.$store.dispatch("services/viewAllExamens");
     this.init();
   },
 
@@ -63,45 +63,45 @@ export default {
       let agentId = this.$user().agent_id;
       console.log("agent id", agentId);
       /* let patients = await this.$store.dispatch(
-                                                                                            "services/viewMedecinsAssignments",
-                                                                                            agentId
-                                                                                          );
-                                                                                          if (this.patientSelect2 !== null) this.patientSelect2.select2("destroy");
-                                                                                          this.patientSelect2 = $(".patient-select2")
-                                                                                            .select2({
-                                                                                              placeholder: "Veuillez sélectionner un patient...",
-                                                                                              searchInputPlaceholder: "Recherche patient...",
-                                                                                              data: $.map(patients, function (item) {
-                                                                                                return {
-                                                                                                  text: `${item.patient_code} : ${item.patient_nom} ${item.patient_prenom}`,
-                                                                                                  id: item.id,
-                                                                                                  info: item,
-                                                                                                };
-                                                                                              }),
-                                                                                            })
-                                                                                            .on("change", function () {
-                                                                                              //$(this).select2('data')[0].info
-                                                                                              let id = $(this).val();
-                                                                                              if (id !== "") {
-                                                                                                self.$store.dispatch("services/showPatient", id).then((result) => {
-                                                                                                  self.selectedPatient = result;
-                                                                                                });
-                                                                                              }
-                                                                                            }); */
+                                                                                                                                                                                                                                                                                                                    "services/viewMedecinsAssignments",
+                                                                                                                                                                                                                                                                                                                    agentId
+                                                                                                                                                                                                                                                                                                                  );
+                                                                                                                                                                                                                                                                                                                  if (this.patientSelect2 !== null) this.patientSelect2.select2("destroy");
+                                                                                                                                                                                                                                                                                                                  this.patientSelect2 = $(".patient-select2")
+                                                                                                                                                                                                                                                                                                                    .select2({
+                                                                                                                                                                                                                                                                                                                      placeholder: "Veuillez sélectionner un patient...",
+                                                                                                                                                                                                                                                                                                                      searchInputPlaceholder: "Recherche patient...",
+                                                                                                                                                                                                                                                                                                                      data: $.map(patients, function (item) {
+                                                                                                                                                                                                                                                                                                                        return {
+                                                                                                                                                                                                                                                                                                                          text: `${item.patient_code} : ${item.patient_nom} ${item.patient_prenom}`,
+                                                                                                                                                                                                                                                                                                                          id: item.id,
+                                                                                                                                                                                                                                                                                                                          info: item,
+                                                                                                                                                                                                                                                                                                                        };
+                                                                                                                                                                                                                                                                                                                      }),
+                                                                                                                                                                                                                                                                                                                    })
+                                                                                                                                                                                                                                                                                                                    .on("change", function () {
+                                                                                                                                                                                                                                                                                                                      //$(this).select2('data')[0].info
+                                                                                                                                                                                                                                                                                                                      let id = $(this).val();
+                                                                                                                                                                                                                                                                                                                      if (id !== "") {
+                                                                                                                                                                                                                                                                                                                        self.$store.dispatch("services/showPatient", id).then((result) => {
+                                                                                                                                                                                                                                                                                                                          self.selectedPatient = result;
+                                                                                                                                                                                                                                                                                                                        });
+                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                    }); */
       /* ClassicEditor.create(document.querySelector(".editor"), {
-                                                                                placeholder:
-                                                                                  "Veuillez saisir diagnostic pour la consultation en cours...",
-                                                                              })
-                                                                                .then(function (e) {
-                                                                                  e.ui.view.editable.element.style.height = "150px";
-                                                                                  e.ui.view.editable.element.style.fontColor = "#000000";
-                                                                                  e.model.document.on("change", () => {
-                                                                                    self.editor = jQuery(e.getData()).text().replaceAll("\n\n", "\n");
-                                                                                  });
-                                                                                })
-                                                                                .catch(function (e) {
-                                                                                  console.error("Error from editor => ", e);
-                                                                                }); */
+                                                                                                                                                                                                                                                                                                        placeholder:
+                                                                                                                                                                                                                                                                                                          "Veuillez saisir diagnostic pour la consultation en cours...",
+                                                                                                                                                                                                                                                                                                      })
+                                                                                                                                                                                                                                                                                                        .then(function (e) {
+                                                                                                                                                                                                                                                                                                          e.ui.view.editable.element.style.height = "150px";
+                                                                                                                                                                                                                                                                                                          e.ui.view.editable.element.style.fontColor = "#000000";
+                                                                                                                                                                                                                                                                                                          e.model.document.on("change", () => {
+                                                                                                                                                                                                                                                                                                            self.editor = jQuery(e.getData()).text().replaceAll("\n\n", "\n");
+                                                                                                                                                                                                                                                                                                          });
+                                                                                                                                                                                                                                                                                                        })
+                                                                                                                                                                                                                                                                                                        .catch(function (e) {
+                                                                                                                                                                                                                                                                                                          console.error("Error from editor => ", e);
+                                                                                                                                                                                                                                                                                                        }); */
     },
 
     /**
@@ -250,6 +250,50 @@ export default {
       this.$showBsModal("patientsPendingModal");
     },
 
+    /**
+     * Crée la prescription des examens pour un patient
+     */
+    submitFormExamens(e) {
+      if (this.currentConsult === null) {
+        this.errors_msg =
+          "Veuillez consulter le patient avant de le prescrire !";
+        let toast = document.getElementById("errorsToastExamen");
+        new bootstrap.Toast(toast, { delay: 2000 }).show();
+        return;
+      }
+      this.formLoadingExamens = true;
+      for (let exam of this.form_examens) {
+        exam.consult_id = this.currentConsult.id;
+        exam.patient_id = this.selectedPatient.id;
+      }
+      this.$store
+        .dispatch("services/addExamens", this.form_examens)
+        .then((res) => {
+          console.log(JSON.stringify(res));
+          this.formLoadingExamens = false;
+          if (res.status !== undefined) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Demandes d'examens effectuées avec succès !",
+              showConfirmButton: false,
+              timer: 3000,
+              showCloseButton: false,
+            });
+            this.$store.dispatch("services/viewAllConsultsExamens");
+          }
+          if (res.errors !== undefined) {
+            this.errors_msg = res.errors.toString();
+            let toast = document.getElementById("errorsToastExamen");
+            new bootstrap.Toast(toast, { delay: 2000 }).show();
+          }
+        })
+        .catch((err) => {
+          this.formLoadingExamens = false;
+          console.log(JSON.stringify(err));
+        });
+    },
+
     readCommand() {
       if ("speechSynthesis" in window) {
         let medecin = this.$user().name;
@@ -277,6 +321,35 @@ export default {
           "Désolé, l'API Web Speech n'est pas prise en charge dans votre navigateur."
         );
       }
+    },
+
+    triggerSelectExamen(e, data) {
+      let checked = e.target.checked;
+      if (checked) {
+        this.form_examens.push({
+          examen_id: data.id,
+          consult_id: 0,
+          agent_id: this.user.agent_id,
+          emplacement_id: this.user.hopital.emplacement.id,
+          hopital_id: this.user.hopital.id,
+        });
+      } else {
+        for (let i = 0; i < this.form_examens.length; i++) {
+          if (this.form_examens[i].examen_id === data.id) {
+            this.form_examens.splice(i, 1);
+            break;
+          }
+        }
+      }
+      console.log(JSON.stringify(this.form_examens));
+    },
+  },
+  computed: {
+    examens() {
+      return this.$store.getters["services/GET_EXAMENS"];
+    },
+    user() {
+      return this.$store.getters["auth/GET_USER"];
     },
   },
 };

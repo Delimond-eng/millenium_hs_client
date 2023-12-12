@@ -12,4 +12,6 @@ export default {
   SET_EMPLACEMENT_PHARMAS: (state, data) =>
     (state.emplacement_pharmacies = data),
   SET_PHARMAS: (state, data) => (state.pharmacies = data),
+  SET_EXAMENS: (state, data) => (state.examens = data),
+  SET_ALL_EXAMENS: (state, data) => (state.all_examens = data),
 };
