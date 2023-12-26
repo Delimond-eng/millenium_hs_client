@@ -86,8 +86,7 @@
                                             </div>
                                             <h6 class="fs-15 fw-semibold">0</h6>
                                             <p class="text-muted mb-0"><i class=" ri-user-2-line align-bottom"></i>
-                                                Nombre des médecins</p>
-
+                                                Médecins connectés</p>
                                         </div>
                                     </div>
                                 </div>
@@ -144,14 +143,12 @@
                                             <h6 class="fs-15 fw-semibold">0 </h6>
                                             <p class="text-muted mb-0"><i class="ri-stethoscope-line align-bottom"></i>
                                                 Consultations journalières</p>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="card checkout-tab">
-
                                 <div class="card-body">
                                     <div class="step-arrow-nav mt-n3 mx-n3 mb-3">
                                         <ul class="nav nav-pills nav-justified custom-nav" role="tablist">
@@ -159,20 +156,30 @@
                                                 <button class="nav-link p-3 active" id="pills-bill-info-tab"
                                                     data-bs-toggle="pill" data-bs-target="#pills-bill-info" type="button"
                                                     role="tab" aria-controls="pills-bill-info" aria-selected="true">Demandes
-                                                    des examens <span class="badge badge-gradient-danger">{{ examens.length
-                                                    }}</span> </button>
+                                                    des examens <span class="badge bg-danger align-middle ms-1">{{
+                                                        examens.length }}</span> </button>
                                             </li>
                                             <li class="nav-item" role="presentation">
-                                                <button class="nav-link p-3" id="pills-bill-address-tab"
-                                                    data-bs-toggle="pill" data-bs-target="#pills-bill-address" type="button"
-                                                    role="tab" aria-controls="pills-bill-address"
-                                                    aria-selected="false">Patients en attente</button>
+                                                <button class="nav-link p-3" id="patient-pending-tab" data-bs-toggle="pill"
+                                                    data-bs-target="#patient-pending" type="button" role="tab"
+                                                    aria-controls="patient-pending-tab" aria-selected="false">Patients en
+                                                    attente <span class="badge bg-danger align-middle ms-1">{{
+                                                        pendings.length }}</span></button>
                                             </li>
+
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link p-3" id="pills-bill-address-tab"
                                                     data-bs-toggle="pill" data-bs-target="#pills-bill-address" type="button"
                                                     role="tab" aria-controls="pills-bill-address"
                                                     aria-selected="false">Rendez-vous journaliers</button>
+                                            </li>
+
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link p-3" id="labo-examen-tab" data-bs-toggle="pill"
+                                                    data-bs-target="#labo-examen" type="button" role="tab"
+                                                    aria-controls="pills-bill-address" aria-selected="false">Prescriptions
+                                                    en attente<span
+                                                        class="badge bg-danger align-middle ms-1">0</span></button>
                                             </li>
                                         </ul>
                                     </div>
@@ -180,8 +187,8 @@
                                         <div class="tab-pane fade show active" id="pills-bill-info" role="tabpanel"
                                             aria-labelledby="pills-bill-info-tab">
 
-                                            <div class="table-responsive">
-                                                <table class="table align-middle mb-0">
+                                            <div class="table-responsive table-card">
+                                                <table class="table align-middle table-nowrap table-striped-columns mb-0">
                                                     <thead class="table-light">
                                                         <tr>
                                                             <th scope="col">Date</th>
@@ -192,26 +199,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <!-- <tr>
-                                                            <td><a href="#" class="fw-semibold">#VZ2110</a></td>
-                                                            <td>10 Oct, 14:47</td>
-                                                            <td>Mastering the grid</td>
-                                                            <td>Gaston delimond</td>
-                                                            <td class="text-success"><i
-                                                                    class="ri-checkbox-circle-line fs-17 align-middle"></i>
-                                                                Paid
-                                                            </td>
-                                                            <td>
-
-                                                                <button class="btn btn-soft-warning btn-sm me-1"> <i
-                                                                        class="ri-refresh-line"></i>Invalider</button>
-                                                                <button class="btn btn-soft-info btn-sm"> <i
-                                                                        class="ri-eye-line"></i> Voir
-                                                                    examens</button>
-                                                            </td>
-                                                        </tr> -->
                                                         <tr v-for="(data, index) in examens" :key="index">
-
                                                             <td>{{ data.consult_examen_create_At }}</td>
                                                             <td>{{ data.patient_nom }}</td>
                                                             <td>{{ data.agent_nom }}</td>
@@ -235,7 +223,7 @@
                                                     </tbody>
                                                 </table>
                                                 <state-empty v-if="examens.length === 0"
-                                                    title="Aucun informations répertorié !" :expanded="false"
+                                                    title="Aucun informations répertorié !"
                                                     description="Il y a aucun examen en attente !"></state-empty>
                                             </div>
                                             <!--  <div class="table-responsive">
@@ -389,19 +377,125 @@
                                                 </table>
                                             </div> -->
                                         </div>
-                                        <div class="tab-pane fade" id="pills-bill-address" role="tabpanel"
+                                        <div class="tab-pane fade" id="patient-pending" role="tabpanel"
                                             aria-labelledby="pills-bill-address-tab">
 
+                                            <div class="table-responsive table-card">
+                                                <table class="table align-middle table-nowrap table-striped-columns mb-0">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th scope="col">CODE</th>
+                                                            <th scope="col">Nom complet</th>
+                                                            <th scope="col">Sexe</th>
+                                                            <th scope="col">Date naissance</th>
+                                                            <th scope="col">Téléphone</th>
+                                                            <th scope="col">Fiche status</th>
+                                                            <th scope="col">Poids</th>
+                                                            <th scope="col">Taille</th>
+                                                            <th scope="col">Temperature</th>
+                                                            <th scope="col">Tension arterielle</th>
+                                                            <th scope="col" style="width: 150px;"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="(item, index) in pendings" :key="index">
+                                                            <td>{{ item.patient_code }}</td>
+                                                            <td>{{ item.patient_nom }} {{ item.patient_prenom }}</td>
+                                                            <td>{{ item.patient_sexe }}</td>
+                                                            <td>{{ item.patient_datenais }}</td>
+                                                            <td>{{ item.patient_telephone }}</td>
+                                                            <td class="status">
+                                                                <span class="badge text-uppercase" v-if="item.details"
+                                                                    :class="item.details[item.details.length - 1].patient_fiche_status.toLowerCase().includes('en attente') ? 'bg-warning-subtle text-warning' : 'bg-success-subtle text-success'">
+                                                                    {{ item.details[item.details.length -
+                                                                        1].patient_fiche_status }}
+                                                                </span>
+                                                            </td>
 
+                                                            <td>
+                                                                <span v-if="item.details">
+                                                                    {{ item.details[item.details.length -
+                                                                        1].patient_fiche_poids }}
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <span v-if="item.details">
+                                                                    {{ item.details[item.details.length -
+                                                                        1].patient_fiche_taille
+                                                                    }}
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <span v-if="item.details">
+                                                                    {{ item.details[item.details.length -
+                                                                        1].patient_fiche_temperature }}
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <span v-if="item.details">
+                                                                    {{ item.details[item.details.length -
+                                                                        1].patient_fiche_tension_art }}
+                                                                </span>
+                                                            </td>
+                                                            <!-- <td><i class="ri-user-2-line me-1"></i>Lionnel</td> -->
+                                                            <td>
+                                                                <button type="button" class="btn btn-sm btn-secondary me-2"
+                                                                    @click.prevent="setPatient(item)">Nouvelle
+                                                                    fiche</button>
+                                                                <button type="button" class="btn btn-sm btn-success"
+                                                                    @click="$router.push({ name: 'fiche-invoice' })"><i
+                                                                        class="ri-printer-line"></i></button>
+                                                                <button type="button" class="btn btn-sm btn-ghost-danger"><i
+                                                                        class="ri-delete-bin-3-line"></i></button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <state-empty v-if="pendings.length === 0"
+                                                    title="Aucune information répertoriée !"
+                                                    description="Il n'y a aucune fiche de patient en attente pour l'instant !"></state-empty>
+                                            </div>
                                         </div>
                                         <div class="tab-pane fade" id="pills-payment" role="tabpanel"
                                             aria-labelledby="pills-payment-tab">
 
                                         </div>
 
-                                        <div class="tab-pane fade" id="pills-finish" role="tabpanel"
-                                            aria-labelledby="pills-finish-tab">
-
+                                        <div class="tab-pane fade" id="labo-examen" role="tabpanel"
+                                            aria-labelledby="labo-examen-tab">
+                                            <div class="table-responsive table-card">
+                                                <table class="table align-middle table-nowrap table-striped-columns mb-0">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Patient</th>
+                                                            <th scope="col">Médecin</th>
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="(data, index) in laboexamens" :key="index">
+                                                            <td>{{ data.consult_examen_create_At }}</td>
+                                                            <td>{{ data.patient_nom }}</td>
+                                                            <td>{{ data.agent_nom }}</td>
+                                                            <td class="text-success"><i
+                                                                    class="ri-check-double-line fs-17 align-middle"></i> {{
+                                                                        data.consult_examen_status }}
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-soft-info btn-sm"
+                                                                    @click.prevent="showDetail(data)"> <i
+                                                                        class="ri-eye-line"></i>
+                                                                    Voir détails</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <state-empty v-if="laboexamens.length === 0"
+                                                    title="Aucun informations répertorié !"
+                                                    description="Il y a aucun examen en attente !"></state-empty>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -446,6 +540,8 @@ export default {
     },
     mounted() {
         this.$store.dispatch('services/viewAllConsultsExamens');
+        this.$store.dispatch('services/viewPatientsPending');
+        this.$store.dispatch('services/viewAllLaboExamensPendings');
     },
 
     methods: {
@@ -474,6 +570,11 @@ export default {
                 this.loadedDetail = "";
                 console.log(e);
             })
+        },
+
+        setPatient(data) {
+            localStorage.setItem('current-patient', JSON.stringify(data));
+            this.$router.push({ name: 'patient-create' });
         }
     },
 
@@ -483,6 +584,12 @@ export default {
         },
         examens() {
             return this.$store.getters['services/GET_ALL_EXAMENS']
+        },
+        pendings() {
+            return this.$store.getters['services/GET_PATIENTS_PENDING'];
+        },
+        laboexamens() {
+            return this.$store.getters['services/GET_LABO_EXAMENS'];
         }
     },
 }

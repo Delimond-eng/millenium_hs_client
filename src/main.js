@@ -13,4 +13,5 @@ app.use(Store);
 app.use(VueSweetalert2);
 app.use(Components);
 app.use(Globals);
+window.Swal = app.config.globalProperties.$swal;
 app.mount("#app");

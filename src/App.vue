@@ -1,6 +1,7 @@
 <template>
 	<!-- main router view content -->
 	<router-view />
+	<!-- End main -->
 </template>
 
 <script>

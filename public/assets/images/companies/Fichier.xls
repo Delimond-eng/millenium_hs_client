@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>MILLENIUM PAYROLL</title>
+    <style type="text/css">
+        <!--
+        .style7 {font-size: x-small}
+        .Style8 {
+            font-size: large;
+            font-weight: bold;
+        }
+        .style17 {
+            font-size: 18px;
+            color: #000000;
+            font-weight: bold;
+        }
+        .style18 {font-size: x-small; font-weight: bold; }
+        -->
+    </style>
+</head>
+
+<body><fieldset><legend></legend>
+    <p>&nbsp;</p>
+    <table width="1261" border="1" cellspacing="0">
+        <tr bgcolor="#FFFFAA">
+            <td colspan="10"><span class="Style8">
+            </span></td>
+        </tr>
+
+        <tr bgcolor="#FFFFAA">
+            <td width="157">PERIODE</td>
+            <td width="157"><div align="center">Matricule</div></td>
+            <td width="200"><div align="center">Noms</div></td>
+            <td width="160"><div align="center">Nationalit&eacute;</div></td>
+            <td width="106" align="center">Brut imposable</td>
+            <td width="106" align="center">INSS</td>
+            <td width="106"><div align="center">Net  imposable </div></td>
+            <td width="67"><div align="center">IPR</div></td>
+            <td width="80"><div align="center">IER</div></td>
+            <td width="80"><div align="center">Total</div></td>
+        </tr>
+                    <tr bgcolor="#FFFFFF">
+                <td>Decembre 2023</td>
+                <td>PALUKU/10312</td>
+                <td>Paluku Amisi Illain</td>
+                <td><span class="style7"> </span>Congolaise</td>
+                <td align="right">40 000</td>
+                <td align="right">1 400</td>
+                <td><div align="right">
+                        38 600                    </div></td>
+                <td><div align="right" class="style7">
+                        0                    </div></td>
+                <td><div align="right">
+                        0                    </div></td>
+                <td><div align="right"><strong>
+                            0                        </strong></div></td>
+            </tr>
+            </table>
+    <p align="center">
+</fieldset>
+</body>
+</html>

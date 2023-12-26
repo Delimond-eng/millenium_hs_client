@@ -6,7 +6,10 @@
                 <div class="row">
                     <div class="col-12 col-md-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0">Impression fiche patient</h4>
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-info btn-sm btn-border me-2" @click="$router.go(-1)">Retour</button>
+                                <h4 class="mb-sm-0">Impression fiche patient</h4>
+                            </div>
                         </div>
                     </div>
                 </div>

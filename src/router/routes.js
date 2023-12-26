@@ -3,6 +3,7 @@ import HomeMain from "@/template/view/main";
 
 /* Home children/pages */
 import Dashboard from "@/template/view/screens/public/home_screen";
+import HomeModule from "@/template/view/screens/public/home_modules";
 
 /**
  * Config routes pages
@@ -39,6 +40,11 @@ const routes = [
     path: "/",
     component: LoginScreen,
     name: "login",
+  },
+  {
+    path: "/home/modules",
+    component: HomeModule,
+    name: "modules",
   },
   {
     path: "/home",
