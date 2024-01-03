@@ -35,7 +35,7 @@
                         </a>
                     </li>
                     <!-- end Dashboard Menu -->
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="$isAccessMenu('modules')">
                         <a class="nav-link menu-link" href="#/home/modules">
                             <i class="ri-apps-fill"></i> <span data-key="t-dashboards">Modules</span>
                         </a>

@@ -14,6 +14,22 @@ export default {
         return false;
       }
     };
+
+    app.config.globalProperties.$isAccessMenu = (menuName) => {
+      let myList = [
+        "patients",
+        "consultations",
+        "agents",
+        "laboratoires",
+        "modules",
+      ];
+      let searchString = menuName;
+      if (myList.find((item) => item === searchString)) {
+        return true;
+      } else {
+        return false;
+      }
+    };
     app.config.globalProperties.$user = () => store.getters["auth/GET_USER"];
 
     app.config.globalProperties.formatDate = (timestamp) => {

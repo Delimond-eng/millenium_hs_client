@@ -94,7 +94,8 @@
                                                             <button type="button" class="btn btn-sm btn-info me-2">Voir
                                                                 toutes les
                                                                 fiches</button>
-                                                            <button type="button" class="btn btn-sm btn-ghost-danger"><i
+                                                            <button type="button" @click="checkInList"
+                                                                class="btn btn-sm btn-ghost-danger"><i
                                                                     class="ri-delete-bin-3-line"></i></button>
                                                         </td>
                                                     </tr>
@@ -237,6 +238,17 @@ export default {
         setPatient(data) {
             localStorage.setItem('current-patient', JSON.stringify(data));
             this.$router.push({ name: 'patient-create' });
+        },
+
+        checkInList() {
+            let myList = ['apple', 'banana', 'orange', 'grape'];
+            let searchString = 'banane';
+
+            if (myList.find(item => item === searchString)) {
+                console.log(`${searchString} is in the list.`);
+            } else {
+                console.log(`${searchString} is not in the list.`);
+            }
         }
     },
 

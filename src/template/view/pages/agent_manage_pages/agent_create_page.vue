@@ -272,6 +272,30 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="row mt-2" v-show="user_account_allowed">
+                                            <div class="col-lg-12">
+                                                <div>
+                                                    <label class="fs-14 mb-2 text-dark">Menus accessibles <sup
+                                                            class="text-danger">*</sup></label>
+                                                    <select :required="user_account_allowed" multiple="multiple"
+                                                        style="width:100%" name="menus-select" id="multiselect-basic">
+                                                        <option selected>Tableau de bord</option>
+                                                        <option>Patients</option>
+                                                        <option>Agents</option>
+                                                        <option>Consultations</option>
+                                                        <option>Configurations</option>
+                                                        <option>Comptes utilisateurs</option>
+                                                        <option>Services</option>
+                                                        <option>Pharmacies</option>
+                                                        <option>Laboratoires</option>
+                                                        <option>Maternités</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- end col -->
+
+                                        </div>
                                     </div>
                                 </div>
                                 <bs-toast id="errorsToast2" :msg="errors_msg" />
@@ -353,7 +377,8 @@ export default {
                 role_id: '',
                 password: '',
                 email: '',
-                confirm: ''
+                confirm: '',
+                menus: ''
             },
 
         }
@@ -443,6 +468,26 @@ export default {
                 let specialite = $(this).val();
                 self.form.specialite = specialite;
             });
+
+
+            let multiSelectBasic = document.getElementById("multiselect-basic");
+            if (multiSelectBasic) {
+                multi(multiSelectBasic, {
+                    enable_search: false,
+                });
+            } else {
+                console.error("L'élément avec l'ID multiselect-basic n'a pas été trouvé.");
+            }
+        },
+
+
+        getSelectedMenus() {
+            let multiSelectElement = document.getElementById("multiselect-basic");
+
+            // Obtenez tous les éléments sélectionnés
+            let selectedOptions = Array.from(multiSelectElement.selectedOptions).map(option => option.value);
+            // Affiche les éléments sélectionnés
+            console.log(selectedOptions);
         },
 
         /**
@@ -450,7 +495,12 @@ export default {
         */
         submitForm(e) {
             this.formLoading = true;
-            if (this.user_account_allowed) this.form.user_data = this.form_user;
+            if (this.user_account_allowed) {
+                let multiSelectElement = document.getElementById("multiselect-basic");
+                let selectedOptions = Array.from(multiSelectElement.selectedOptions).map(option => option.value);
+                this.form_user.menus = selectedOptions.toString();
+                this.form.user_data = this.form_user
+            };
             this.form.created_by = this.$user().agent_id;
             this.$store.dispatch('services/createAgent', this.form).then((res) => {
                 console.log(JSON.stringify(res));
@@ -515,8 +565,6 @@ export default {
         user() {
             return this.$store.getters['auth/GET_USER']
         },
-
-
     },
 }
 </script>
