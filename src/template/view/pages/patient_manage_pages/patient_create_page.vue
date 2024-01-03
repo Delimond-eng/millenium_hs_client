@@ -28,8 +28,6 @@
                                 <h4 class="card-title mb-0 flex-grow-1">Veuillez remplir tous les champs requis !</h4>
                             </div>
                             <form class="card-body" @submit.prevent="submitForm">
-
-                                <div class="border border-dashed border-primary mb-3"></div>
                                 <div class="row">
 
                                     <!-- patient code input -->
@@ -323,6 +321,7 @@ export default {
                         position: "top-end",
                         icon: "success",
                         title: "Patient créé avec succès !",
+                        toast: true,
                         showConfirmButton: false,
                         timer: 3000,
                         showCloseButton: false,

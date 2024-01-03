@@ -5,7 +5,7 @@
         <div class="navbar-brand-box">
 
             <!-- Light Logo-->
-            <a href="#" class="logo logo-light" id="app-logo">
+            <a href="#/home" class="logo logo-light" id="app-logo">
                 <!-- <span class="logo-lg d-flex align-items-center " style="height:80px;">
                     <svg width="28px" height="30px" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -72,6 +72,9 @@
                                 <li class="nav-item">
                                     <a href="#/home/med/create" class="nav-link" data-key="t-create"> Création agents </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="#/home/med/create" class="nav-link" data-key="t-create"> Rendez-vous </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -100,7 +103,7 @@
                         </div>
                     </li>
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link menu-link" href="#consultLanding" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="sidebarLanding">
                             <i class="ri-health-book-line"></i> <span data-key="t-landing">Prescriptions</span>
@@ -113,7 +116,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#lab" data-bs-toggle="collapse" role="button"
@@ -122,6 +125,11 @@
                         </a>
                         <div class="collapse menu-dropdown" id="lab">
                             <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="#/admin/config/examens" class="nav-link">
+                                        Configuration examens
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="javascript:void(0)" class="nav-link" data-key="t-list"> Examens en attente </a>
                                 </li>
@@ -164,12 +172,15 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#pharmacie" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="pharmacie">
-                            <i class=" ri-parent-line"></i> <span data-key="t-apps">Pharmacies</span>
+                            <i class="bx bx-first-aid"></i> <span data-key="t-apps">Pharmacies</span>
                         </a>
                         <div class="collapse menu-dropdown" id="pharmacie">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="javascript:void(0)" class="nav-link" data-key="t-list"> Création pharmacie </a>
+                                    <a href="javascript:void(0)" class="nav-link" data-key="t-list">Tableau de bord</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="nav-link" data-key="t-list">Création pharmacie</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#sidebarPharmacie" class="nav-link" data-bs-toggle="collapse" role="button"
@@ -180,11 +191,19 @@
                                         <ul class="nav nav-sm flex-column">
                                             <li class="nav-item">
                                                 <a href="javascript:void(0)" class="nav-link" data-key="t-simple-page">
+                                                    Création catégories</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0)" class="nav-link" data-key="t-simple-page">
+                                                    Création produits</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0)" class="nav-link" data-key="t-simple-page">
                                                     Création stock</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="javascript:void(0)" class="nav-link" data-key="t-simple-page">
-                                                    Création catégories</a>
+                                                    Mouvements stock</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -198,7 +217,7 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#serviceLanding" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="serviceLanding">
-                            <i class="bx bx-plus-medical"></i> <span data-key="t-landing">Services</span>
+                            <i class="bx bx-sitemap"></i> <span data-key="t-landing">Services</span>
                         </a>
                         <div class="collapse menu-dropdown" id="serviceLanding">
                             <ul class="nav nav-sm flex-column">
@@ -229,7 +248,7 @@
                                         Configuration fonctions </button>
                                 </li>
                                 <li class="nav-item">
-                                    <button class="nav-link" @click="showConfigModal('grades')">
+                                    <button class="nav-link" @click.stop="showConfigModal('grades')">
                                         Configuration grades
                                     </button>
                                 </li>
@@ -238,11 +257,7 @@
                                         Configuration emplacements
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#/admin/config/examens" class="nav-link">
-                                        Configuration examens
-                                    </a>
-                                </li>
+
                             </ul>
                         </div>
                     </li>

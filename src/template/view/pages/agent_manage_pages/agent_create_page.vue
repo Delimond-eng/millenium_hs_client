@@ -459,6 +459,7 @@ export default {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
+                        toast: true,
                         title: "Agent créé avec succès !",
                         showConfirmButton: false,
                         timer: 3000,

@@ -84,7 +84,7 @@
                                             <div class="tab-pane fade active show" id="custom-v-pills-home" role="tabpanel"
                                                 aria-labelledby="custom-v-pills-home-tab">
                                                 <div>
-                                                    <div class="d-flex justify-content-between bg-primary-subtle p-2 mt-3 align-items-center align-content-center"
+                                                    <div class="d-flex justify-content-between mt-3 align-items-center align-content-center"
                                                         v-if="selectedPatient">
                                                         <h6 class="fs-14 text-primary fw-bold">Infos récentes
                                                             du
@@ -99,7 +99,8 @@
                                                                 selectedPatient.patient_code_appel }}</span>
                                                         </div>
                                                     </div>
-                                                    <div class="border border-primary-subtle mb-3" v-if="selectedPatient">
+                                                    <div class="border-primary border-bottom-dashed mb-3"
+                                                        v-if="selectedPatient">
                                                     </div>
                                                     <div class="row" v-if="selectedPatient">
                                                         <div class="col-md-6">
@@ -144,14 +145,18 @@
                                                                             <th scope="row">Taille</th>
                                                                             <td>{{
                                                                                 selectedPatient.details[selectedPatient.details.length
-                                                                                    - 1].patient_fiche_taille }} mètre</td>
+                                                                                    - 1].patient_fiche_taille }} {{
+            selectedPatient.details[selectedPatient.details.length
+                - 1].patient_fiche_taille_unite }}</td>
                                                                         </tr>
 
                                                                         <tr>
                                                                             <th scope="row">Poids</th>
                                                                             <td>{{
                                                                                 selectedPatient.details[selectedPatient.details.length
-                                                                                    - 1].patient_fiche_poids }}</td>
+                                                                                    - 1].patient_fiche_poids }} {{
+            selectedPatient.details[selectedPatient.details.length
+                - 1].patient_fiche_poids_unite }}</td>
                                                                         </tr>
 
                                                                         <tr>
