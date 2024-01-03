@@ -3,7 +3,6 @@ import store from "@/store";
 export default {
   install: (app, opt) => {
     window.Swal = app.config.globalProperties.$swal;
-
     app.config.globalProperties.$hasPermission = (key) => {
       let user = store.getters["auth/GET_USER"];
       if (
@@ -16,13 +15,12 @@ export default {
     };
 
     app.config.globalProperties.$isAccessMenu = (menuName) => {
-      let myList = [
-        "patients",
-        "consultations",
-        "agents",
-        "laboratoires",
-        "modules",
-      ];
+      let user = store.getters["auth/GET_USER"];
+      let myList = [];
+      console.log("user menus", user.menus);
+      if (user.menus !== undefined) {
+        myList = user.menus.split(",");
+      }
       let searchString = menuName;
       if (myList.find((item) => item === searchString)) {
         return true;
