@@ -34,7 +34,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row" v-if="$user().agent_id === 0">
                                 <div class="col-xl-3 col-md-6">
                                     <div class="card">
                                         <div class="card-body">
@@ -168,18 +168,17 @@
                                             </li>
 
                                             <li class="nav-item" role="presentation">
-                                                <button class="nav-link p-3" id="pills-bill-address-tab"
-                                                    data-bs-toggle="pill" data-bs-target="#pills-bill-address" type="button"
-                                                    role="tab" aria-controls="pills-bill-address"
+                                                <button class="nav-link p-3" id="rdv-tab" data-bs-toggle="pill"
+                                                    data-bs-target="#rdv" type="button" role="tab" aria-controls="rdv"
                                                     aria-selected="false">Rendez-vous journaliers</button>
                                             </li>
 
                                             <li class="nav-item" role="presentation">
-                                                <button class="nav-link p-3" id="labo-examen-tab" data-bs-toggle="pill"
-                                                    data-bs-target="#labo-examen" type="button" role="tab"
+                                                <button class="nav-link p-3" id="prescription_tab-btn" data-bs-toggle="pill"
+                                                    data-bs-target="#prescription-tab" type="button" role="tab"
                                                     aria-controls="pills-bill-address" aria-selected="false">Prescriptions
-                                                    en attente<span
-                                                        class="badge bg-danger align-middle ms-1">0</span></button>
+                                                    en attente<span class="badge bg-danger align-middle ms-1">{{
+                                                        prescriptions.length }}</span></button>
                                             </li>
                                         </ul>
                                     </div>
@@ -188,7 +187,8 @@
                                             aria-labelledby="pills-bill-info-tab">
 
                                             <div class="table-responsive table-card">
-                                                <table class="table align-middle table-nowrap table-striped-columns mb-0">
+                                                <table
+                                                    class="table align-middle table-nowrap table-striped-columns mb-0 mt-2">
                                                     <thead class="table-light">
                                                         <tr>
                                                             <th scope="col">Date</th>
@@ -211,13 +211,17 @@
                                                                 <button :disabled="loaded === data.consult_id"
                                                                     class="btn btn-soft-success btn-load btn-sm me-1"
                                                                     @click.prevent="validDemand(data.consult_id)">
-                                                                    <span>Valider</span>
+                                                                    <svg-loading v-if="loaded === data.consult_id"
+                                                                        color="#13b69f" size="18"></svg-loading>
+                                                                    <span v-else>Valider</span>
                                                                 </button>
-                                                                <button class="btn btn-soft-info btn-sm"
-                                                                    @click.prevent="showDetail(data)"> <i
-                                                                        class="ri-eye-line"></i>
-                                                                    Voir
-                                                                    examens</button>
+                                                                <button :disabled="loadedDetail === data.consult_id"
+                                                                    class="btn btn-soft-info btn-sm"
+                                                                    @click.prevent="showDetail(data)">
+                                                                    <svg-loading v-if="loadedDetail === data.consult_id"
+                                                                        color="#0C8BCF" size="18"></svg-loading>
+                                                                    <span v-else> <i class="ri-eye-line"></i>Voir
+                                                                        examens</span></button>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -456,43 +460,54 @@
                                                     description="Il n'y a aucune fiche de patient en attente pour l'instant !"></state-empty>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="pills-payment" role="tabpanel"
-                                            aria-labelledby="pills-payment-tab">
-
+                                        <div class="tab-pane fade" id="rdv-tab" role="tabpanel" aria-labelledby="rdv-tab">
                                         </div>
 
-                                        <div class="tab-pane fade" id="labo-examen" role="tabpanel"
-                                            aria-labelledby="labo-examen-tab">
+                                        <div class="tab-pane fade" id="prescription-tab" role="tabpanel"
+                                            aria-labelledby="prescription-tab">
                                             <div class="table-responsive table-card">
-                                                <table class="table align-middle table-nowrap table-striped-columns mb-0">
+                                                <table
+                                                    class="table align-middle table-nowrap table-striped-columns mb-0 mt-2">
                                                     <thead class="table-light">
                                                         <tr>
                                                             <th scope="col">Date</th>
                                                             <th scope="col">Patient</th>
                                                             <th scope="col">Médecin</th>
                                                             <th scope="col">Status</th>
+                                                            <th scope="col">Emplacement</th>
                                                             <th scope="col"></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr v-for="(data, index) in laboexamens" :key="index">
-                                                            <td>{{ data.consult_examen_create_At }}</td>
+                                                        <tr v-for="(data, index) in prescriptions" :key="index">
+                                                            <td>{{ data.prescription_create_At }}</td>
                                                             <td>{{ data.patient_nom }}</td>
                                                             <td>{{ data.agent_nom }}</td>
-                                                            <td class="text-success"><i
-                                                                    class="ri-check-double-line fs-17 align-middle"></i> {{
-                                                                        data.consult_examen_status }}
+                                                            <td class="text-warning"><i
+                                                                    class="ri-time-line fs-17 align-middle"></i> en
+                                                                attente
                                                             </td>
+                                                            <td>{{ data.hopital_emplacement_libelle }}</td>
                                                             <td>
-                                                                <button class="btn btn-soft-info btn-sm"
-                                                                    @click.prevent="showDetail(data)"> <i
-                                                                        class="ri-eye-line"></i>
-                                                                    Voir détails</button>
+                                                                <button :disabled="loaded === data.consult_id"
+                                                                    @click="validatePrescription(data.consult_id)"
+                                                                    class="btn btn-soft-success btn-load btn-sm me-1">
+                                                                    <svg-loading v-if="loaded === data.consult_id"
+                                                                        color="#13b69f" size="18"></svg-loading>
+                                                                    <span v-els>Valider</span>
+                                                                </button>
+                                                                <button :disabled="loadedDetail === data.consult_id"
+                                                                    class="btn btn-soft-info btn-sm"
+                                                                    @click="showPrescriptionDetails(data)">
+                                                                    <svg-loading v-if="loadedDetail === data.consult_id"
+                                                                        color="#0C8BCF" size="18"></svg-loading>
+                                                                    <span v-else><i class="ri-eye-line"></i>Voir
+                                                                        examens</span></button>
                                                             </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                <state-empty v-if="laboexamens.length === 0"
+                                                <state-empty v-if="prescriptions.length === 0"
                                                     title="Aucun informations répertorié !"
                                                     description="Il y a aucun examen en attente !"></state-empty>
                                             </div>
@@ -523,31 +538,46 @@
         </footer>
     </div>
     <examen-details-modal :detail="selectedExamConsult" />
+    <prescription-details-modal :detail="selectedPrescription" />
 </template>
 
 <script>
 import examenDetailsModal from "../../modals/modal_examen_details"
+import prescriptionDetailsModal from "../../modals/modal_prescription_details"
 export default {
     components: {
-        examenDetailsModal
+        examenDetailsModal,
+        prescriptionDetailsModal,
     },
     data() {
         return {
             loaded: '',
             loadedDetail: '',
             selectedExamConsult: null,
+            selectedPrescription: null,
         }
     },
     mounted() {
         this.$store.dispatch('services/viewAllConsultsExamens');
         this.$store.dispatch('services/viewPatientsPending');
         this.$store.dispatch('services/viewAllLaboExamensPendings');
+        this.$store.dispatch('services/viewAllPrescriptionsPendings');
     },
 
     methods: {
         validDemand(id) {
             this.loaded = id;
             this.$store.dispatch('services/validateDemandeExam', id).then((res) => {
+                this.loaded = "";
+            }).catch((e) => {
+                this.loaded = "";
+                console.log(e);
+            })
+        },
+
+        validatePrescription(id) {
+            this.loaded = id;
+            this.$store.dispatch('services/validatePrescription', id).then((res) => {
                 this.loaded = "";
             }).catch((e) => {
                 this.loaded = "";
@@ -571,6 +601,22 @@ export default {
                 console.log(e);
             })
         },
+        showPrescriptionDetails(data) {
+            this.loadedDetail = data.consult_id;
+            this.$store.dispatch('services/showPrescriptionDetails', data.consult_id).then((res) => {
+                this.loadedDetail = "";
+                console.log(res);
+                let detail = {
+                    heading: data,
+                    detail: res.detail
+                };
+                this.selectedPrescription = detail;
+                this.$showBsModal('prescriptionDetailsModal');
+            }).catch((e) => {
+                this.loadedDetail = "";
+                console.log(e);
+            })
+        },
 
         setPatient(data) {
             localStorage.setItem('current-patient', JSON.stringify(data));
@@ -588,8 +634,8 @@ export default {
         pendings() {
             return this.$store.getters['services/GET_PATIENTS_PENDING'];
         },
-        laboexamens() {
-            return this.$store.getters['services/GET_LABO_EXAMENS'];
+        prescriptions() {
+            return this.$store.getters['services/GET_PENDING_PRESCRIPTIONS']
         }
     },
 }

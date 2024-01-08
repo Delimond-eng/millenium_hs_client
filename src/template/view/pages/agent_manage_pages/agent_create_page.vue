@@ -284,12 +284,14 @@
                                                         <option>Patients</option>
                                                         <option>Agents</option>
                                                         <option>Consultations</option>
+                                                        <option>Hospitalisations</option>
                                                         <option>Configurations</option>
                                                         <option>Comptes utilisateurs</option>
                                                         <option>Services</option>
                                                         <option>Pharmacies</option>
                                                         <option>Laboratoires</option>
                                                         <option>Maternités</option>
+                                                        <option>Utilisateurs</option>
                                                     </select>
                                                 </div>
                                             </div>

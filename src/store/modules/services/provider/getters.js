@@ -12,4 +12,5 @@ export default {
     GET_EXAMENS: (state) => state.examens,
     GET_ALL_EXAMENS: (state) => state.all_examens,
     GET_LABO_EXAMENS: (state) => state.labo_examens,
+    GET_PENDING_PRESCRIPTIONS: (state) => state.pending_prescriptions,
 };

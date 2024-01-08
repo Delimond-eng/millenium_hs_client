@@ -16,6 +16,7 @@
         <router-view />
         <!-- end main content-->
 
+
     </div>
 
     <!-- END layout-wrapper -->
@@ -24,6 +25,7 @@
 <script>
 
 import HeaderLayout from "@/template/view/layouts/header.layout";
+
 import sidebarLayout from "@/template/view/layouts/sidebar.layout";
 import ServiceSettingsCanvas from "../modals/modal_setting_service"
 
@@ -33,6 +35,7 @@ export default {
         HeaderLayout,
         sidebarLayout,
         ServiceSettingsCanvas,
+        
     },
     mounted() {
         this.$store.dispatch('services/showConfigs');

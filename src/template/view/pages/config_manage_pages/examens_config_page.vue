@@ -112,11 +112,13 @@ export default {
     },
     mounted() {
         this.$store.dispatch('services/showConfigs')
+        this.$store.dispatch('labo/viewLabos')
     },
     computed: {
         configs() {
             return this.$store.getters['services/GET_CONFIGS']
-        },
+        }
+
     },
 }
 </script>

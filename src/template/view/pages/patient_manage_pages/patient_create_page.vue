@@ -172,11 +172,12 @@
                                     <!-- taille input -->
                                     <div class="col-md-3">
                                         <div class="mt-3">
-                                            <label class="form-label">Taille<sup class="text-danger">*</sup></label>
+                                            <label class="form-label">Taille<sup class="text-danger">
+                                                    (optionnelle)</sup></label>
                                             <div class="form-icon">
                                                 <input type="text" v-model="form_details.taille"
                                                     class="form-control form-control-icon"
-                                                    placeholder="Saisir la taille... ex: 170" required>
+                                                    placeholder="Saisir la taille... ex: 170">
                                                 <i class=" ri-ruler-line"></i>
                                             </div>
                                         </div>

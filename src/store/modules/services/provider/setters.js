@@ -15,4 +15,5 @@ export default {
     SET_EXAMENS: (state, data) => (state.examens = data),
     SET_ALL_EXAMENS: (state, data) => (state.all_examens = data),
     SET_LABO_EXAMENS: (state, data) => (state.labo_examens = data),
+    SET_PENDING_PRESCRIPTIONS: (state, data) => (state.pending_prescriptions = data),
 };

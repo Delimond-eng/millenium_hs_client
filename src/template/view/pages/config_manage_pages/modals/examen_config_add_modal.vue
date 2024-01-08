@@ -15,9 +15,7 @@
                                 <input type="text" v-model="form.libelle" class="form-control" id="exampleInputEmail1"
                                     placeholder="Entrer le libellé..." required>
                             </div>
-
-
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <div>
                                     <label for="iconInputNom" class="form-label">Emplacement <sup
                                             class="text-danger">*</sup></label>
@@ -30,7 +28,19 @@
                                     </select>
                                 </div>
                             </div>
-
+                            <div class="col-md-6 mb-2">
+                                <div>
+                                    <label for="iconInputNom" class="form-label">Laboratoire <sup
+                                            class="text-danger">*</sup></label>
+                                    <select class="form-select" v-model="form.labo_id">
+                                        <option label="Sélectionner un laboratoire..."></option>
+                                        <option v-for="(item, index) in labos" :key="index" :value="item.id">
+                                            {{
+                                                item.labo_nom }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="mb-2 col-md-12">
                                 <label for="hsnom">Prix <sup class="text-danger">*</sup> </label>
                                 <div class="d-flex">
@@ -81,6 +91,7 @@ export default {
                 prix: '',
                 devise: 'CDF',
                 emplacement_id: '',
+                labo_id: '',
                 description: '',
                 key: 'examens'
             },
@@ -120,6 +131,7 @@ export default {
                     this.form.description = "";
                     this.form.emplacement_id = "";
                     this.form.prix = "";
+                    this.form.labo_id = "";
                 }
                 if (res.errors !== undefined) {
                     this.errors_msg = res.errors.toString();
@@ -144,6 +156,9 @@ export default {
         configs() {
             return this.$store.getters['services/GET_CONFIGS']
         },
+        labos() {
+            return this.$store.getters['labo/GET_LABOS']
+        }
     },
 }
 </script>

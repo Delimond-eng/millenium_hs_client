@@ -11,5 +11,6 @@ export default {
     examens: [],
     all_examens: [],
     labo_examens: [],
+    pending_prescriptions: [],
     rcode: "",
 };

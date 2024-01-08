@@ -27,7 +27,7 @@
             <div class="container-fluid">
                 <div id="two-column-menu">
                 </div>
-                <ul class="navbar-nav" id="navbar-nav">
+                <ul class="navbar-nav" id="navbar-nav" v-if="$isAccessMenu('Tableau de bord')">
                     <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#/home/dash">
@@ -40,7 +40,7 @@
                             <i class="ri-apps-fill"></i> <span data-key="t-dashboards">Modules</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="$isAccessMenu('Patients')">
                         <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="sidebarApps">
                             <i class="ri-wheelchair-line"></i> <span data-key="t-apps">Patients</span>
@@ -59,7 +59,9 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
+
+
+                    <li class="nav-item" v-if="$isAccessMenu('Agents')">
                         <a class="nav-link menu-link" href="#med" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="med">
                             <i class=" ri-user-settings-line"></i> <span data-key="t-apps">Agents</span>
@@ -72,7 +74,7 @@
                                 <li class="nav-item">
                                     <a href="#/home/med/create" class="nav-link" data-key="t-create"> Création agents </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" v-if="$user().agent_id !== 0">
                                     <a href="#/home/med/create" class="nav-link" data-key="t-create"> Rendez-vous </a>
                                 </li>
                             </ul>
@@ -82,7 +84,7 @@
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Opérations
                             Médicales</span></li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="$isAccessMenu('Consultations')">
                         <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="sidebarLanding">
                             <i class="ri-stethoscope-line"></i> <span data-key="t-landing">Consultations</span>
@@ -103,6 +105,25 @@
                         </div>
                     </li>
 
+                    <li class="nav-item" v-if="$isAccessMenu('Hospitalisations')">
+                        <a class="nav-link menu-link" href="#hospitalApps" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="hospitalApps">
+                            <i class="ri-hotel-bed-line"></i> <span data-key="t-apps">Hospitalisations</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="hospitalApps">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="nav-link" data-key="t-chat"> Gestion des lits
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="nav-link" data-key="t-chat"> Situation globale
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
                     <!-- <li class="nav-item">
                         <a class="nav-link menu-link" href="#consultLanding" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="sidebarLanding">
@@ -118,32 +139,42 @@
                         </div>
                     </li> -->
 
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="$isAccessMenu('Laboratoires')">
                         <a class="nav-link menu-link" href="#lab" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="med">
-                            <i class=" ri-microscope-line"></i> <span data-key="t-apps">Laboratoire</span>
+                            <i class=" ri-microscope-line"></i> <span data-key="t-apps">Laboratoires</span>
                         </a>
                         <div class="collapse menu-dropdown" id="lab">
                             <ul class="nav nav-sm flex-column">
+                                <li class="nav-item" v-if="$user().agent_id === 0">
+                                    <button class="nav-link" @click.stop="$showBsModal('laboCreateModal')">
+                                        Création laboratoire
+                                    </button>
+                                </li>
+                                <li class="nav-item" v-if="$user().agent_id === 0">
+                                    <button class="nav-link" @click.stop="$showBsModal('laboViewModal')">
+                                        Liste des laboratoires
+                                    </button>
+                                </li>
                                 <li class="nav-item">
                                     <a href="#/admin/config/examens" class="nav-link">
                                         Configuration examens
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" v-if="$user().agent_id !== 0">
                                     <a href="javascript:void(0)" class="nav-link" data-key="t-list"> Examens en attente </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" v-if="$user().agent_id !== 0">
                                     <a href="javascript:void(0)" class="nav-link" data-key="t-list"> Resultats </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" v-if="$user().agent_id !== 0">
                                     <a href="javascript:void(0)" class="nav-link" data-key="t-create"> Equipements </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="$isAccessMenu('Maternites')">
                         <a class="nav-link menu-link" href="#maternite" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="maternite">
                             <i class=" ri-parent-line"></i> <span data-key="t-apps">Maternité</span>
@@ -169,7 +200,7 @@
                         </div>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="$isAccessMenu('Pharmacies')">
                         <a class="nav-link menu-link" href="#pharmacie" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="pharmacie">
                             <i class="bx bx-first-aid"></i> <span data-key="t-apps">Pharmacies</span>
@@ -212,9 +243,10 @@
                         </div>
                     </li>
 
-                    <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Administrations</span></li>
+                    <li class="menu-title" v-if="$user().agent_id === 0"><i class="ri-more-fill"></i> <span
+                            data-key="t-pages">Administrations</span></li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="$isAccessMenu('Services')">
                         <a class="nav-link menu-link" href="#serviceLanding" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="serviceLanding">
                             <i class="bx bx-sitemap"></i> <span data-key="t-landing">Services</span>
@@ -229,14 +261,11 @@
                                     <a href="#/admin/config/services" class="nav-link" data-key="t-one-page"> Gestion
                                         services</a>
                                 </li>
-
-
-
                             </ul>
                         </div>
                     </li>
 
-                    <li class="nav-item" id="config-menu">
+                    <li class="nav-item" id="config-menu" v-if="$isAccessMenu('Configurations')">
                         <a class="nav-link menu-link" href="#adminLanding" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="adminLanding">
                             <i class="ri-settings-2-line"></i> <span data-key="t-landing">Configurations</span>
@@ -262,7 +291,7 @@
                         </div>
                     </li>
 
-                    <li class="nav-item" id="users-menu">
+                    <li class="nav-item" id="users-menu" v-if="$isAccessMenu('Utilisateurs')">
                         <a class="nav-link menu-link" href="#usersLanding" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="usersLanding">
                             <i class="ri-user-settings-line "></i> <span data-key="t-landing">Comptes utilisateurs</span>
@@ -289,10 +318,14 @@
         <div class="sidebar-background"></div>
     </div>
     <service-config-modal :action-key="actionKey" />
+    <labo-list-modal />
+    <labo-create-modal />
 </template>
 
 <script>
 import serviceConfigModal from '../pages/config_manage_pages/modals/services_config_modal'
+import laboCreateModal from '../pages/config_manage_pages/modals/labos_create_modal'
+import laboListModal from '../pages/config_manage_pages/modals/labos_list_modal'
 export default {
     name: "SidebarLayout",
     data() {
@@ -307,7 +340,9 @@ export default {
         }
     },
     components: {
-        serviceConfigModal
+        serviceConfigModal,
+        laboCreateModal,
+        laboListModal
     },
 }
 </script>
