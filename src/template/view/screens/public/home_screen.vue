@@ -148,7 +148,7 @@
                                 </div>
                             </div>
 
-                            <div class="card checkout-tab">
+                            <div class="card checkout-tab" v-if="$user().agent_id !== 0">
                                 <div class="card-body">
                                     <div class="step-arrow-nav mt-n3 mx-n3 mb-3">
                                         <ul class="nav nav-pills nav-justified custom-nav" role="tablist">

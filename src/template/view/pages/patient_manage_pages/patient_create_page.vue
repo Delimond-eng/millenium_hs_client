@@ -27,192 +27,272 @@
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Veuillez remplir tous les champs requis !</h4>
                             </div>
+                            <ul class="nav nav-tabs m-3" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#basic-infos" role="tab"
+                                        aria-selected="true">
+                                        Informations personnelles
+                                    </a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#medic-infos" role="tab"
+                                        aria-selected="false" tabindex="-1">
+                                        Signes vitaux
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- Tab panes -->
                             <form class="card-body" @submit.prevent="submitForm">
-                                <div class="row">
+                                <div class="tab-content">
+                                    <div class="tab-pane active show" id="basic-infos" role="tabpanel">
+                                        <div class="row">
+                                            <!-- patient code input -->
+                                            <div class="col-xxl-2 col-md-2">
+                                                <div>
+                                                    <label for="patientCode" class="form-label">Patient code</label>
+                                                    <div class="form-icon">
+                                                        <input type="text" class="form-control form-control-icon"
+                                                            id="patientCode" v-model="pcode" disabled>
+                                                        <i class="bx bx-hash"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                    <!-- patient code input -->
-                                    <div class="col-xxl-2 col-md-2">
-                                        <div>
-                                            <label for="patientCode" class="form-label">Patient code</label>
-                                            <div class="form-icon">
-                                                <input type="text" class="form-control form-control-icon" id="patientCode"
-                                                    v-model="pcode" disabled>
-                                                <i class="bx bx-hash"></i>
+                                            <div class="col-xxl-2 col-md-2">
+                                                <div>
+                                                    <label for="appelCode" class="form-label">Code appel <sup
+                                                            class="text-danger">*</sup></label>
+                                                    <div class="form-icon">
+                                                        <input type="text" class="form-control form-control-icon"
+                                                            id="appelCode" v-model="form.code_appel" required>
+                                                        <i class="bx bx-hash"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- nom input -->
+                                            <div class="col-md-4">
+                                                <div>
+                                                    <label class="form-label">Nom <sup class="text-danger">*</sup></label>
+                                                    <div class="form-icon">
+                                                        <input type="text" v-model="form.nom"
+                                                            class="form-control form-control-icon"
+                                                            placeholder="Saisir le nom du patient...ex:KAYEMBE" required
+                                                            :readonly="form.patient_id !== ''">
+                                                        <i class="ri-user-2-line"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- prenom input -->
+                                            <div class="col-md-4">
+                                                <div>
+                                                    <label class="form-label">Prénom <sup
+                                                            class="text-danger">*</sup></label>
+                                                    <div class="form-icon">
+                                                        <input type="text" v-model="form.prenom"
+                                                            class="form-control form-control-icon"
+                                                            placeholder="Saisir le prénom du patient...ex:Lionnel" required
+                                                            :readonly="form.patient_id !== ''">
+                                                        <i class="ri-user-2-line"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- patient sexe select -->
+                                            <div class="col-md-4">
+                                                <div class="mt-2">
+                                                    <label class="form-label">Sexe <sup class="text-danger">*</sup></label>
+                                                    <div class="form-icon">
+                                                        <select class="form-select" id="inputGroupSelect01"
+                                                            v-model="form.sexe" :readonly="form.patient_id !== ''">
+                                                            <option selected label="Sélectionner un sexe" hidden></option>
+                                                            <option value="M">Masculin</option>
+                                                            <option value="F">Féminin</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- telephone input -->
+                                            <div class="col-md-4">
+                                                <div class="mt-2">
+                                                    <label class="form-label">Téléphone<sup
+                                                            class="text-danger">*</sup></label>
+                                                    <div class="form-icon">
+                                                        <input type="text" v-model="form.telephone"
+                                                            class="form-control form-control-icon"
+                                                            placeholder="Saisir le tél... ex: +(243) 810000000"
+                                                            :readonly="form.patient_id !== ''">
+                                                        <i class="ri-phone-line"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- sate naissance input -->
+                                            <div class="col-md-4">
+                                                <div class="mt-2">
+                                                    <label class="form-label">Date de naissance<sup
+                                                            class="text-danger">*</sup></label>
+                                                    <div class="form-icon">
+                                                        <input type="date" v-model="form.datenais"
+                                                            class="form-control form-control-icon" required
+                                                            :readonly="form.patient_id !== ''">
+                                                        <i class="ri-phone-line"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-3">
+                                                <div class="mt-2">
+                                                    <label class="form-label">Etat civil<sup
+                                                            class="text-danger">*</sup></label>
+                                                    <select class="form-select" v-model='form.etat_civil' required>
+                                                        <option selected hidden label="Sélectionner Etat civil"></option>
+                                                        <option value="Célibataire">Célibataire</option>
+                                                        <option value="Marié">Marié(e)</option>
+                                                        <option value="Divorcé">Divorcé(e)</option>
+                                                        <option value="Veuf">Veuf(ve)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mt-2">
+                                                    <label class="form-label">Groupe sanguin<sup
+                                                            class="text-danger">(Optionnel)</sup></label>
+                                                    <select class="form-select" v-model="form.groupe_sang">
+                                                        <option selected hidden label="Sélectionner le groupe sanguin">
+                                                        </option>
+                                                        <option value="A">A</option>
+                                                        <option value="B">B</option>
+                                                        <option value="AB">AB</option>
+                                                        <option value="O">O</option>
+                                                        <option value="Rh positif (+)">Rh positif (+)</option>
+                                                        <option value="Rh négatif (-)">Rh négatif (-)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div :class="isAssured ? 'col-md-2' : 'col-md-5'">
+                                                <div class="mt-2">
+                                                    <label class="form-label">Assurance <sup
+                                                            class="text-danger">(Optionnel)</sup></label>
+                                                    <select class="form-select"
+                                                        @change="$event.target.value === 'Oui' ? isAssured = true : isAssured = false">
+                                                        <option value="Non" selected>Non</option>
+                                                        <option value="Oui">Oui</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3" v-if="isAssured">
+                                                <div class="mt-2">
+                                                    <label class="form-label">Numéro assurance<sup
+                                                            class="text-danger">*</sup></label>
+                                                    <input type="text" v-model="form.num_assurance"
+                                                        class="form-control form-control-icon" required
+                                                        :readonly="form.patient_id !== ''" placeholder="n° assurance...">
+                                                </div>
+                                            </div>
+                                            <!-- adresse input -->
+                                            <div class="col-md-12">
+                                                <div class="mt-2">
+                                                    <label class="form-label">Adresse<sup
+                                                            class="text-danger">*</sup></label>
+                                                    <textarea class="form-control" v-model="form.adresse"
+                                                        placeholder="Saisir l'adresse du patient... ex: n°.. av.. Q.. C.."></textarea>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-xxl-2 col-md-2">
-                                        <div>
-                                            <label for="appelCode" class="form-label">Code appel <sup
-                                                    class="text-danger">*</sup></label>
-                                            <div class="form-icon">
-                                                <input type="text" class="form-control form-control-icon" id="appelCode"
-                                                    v-model="form.code_appel" required>
-                                                <i class="bx bx-hash"></i>
+                                    <div class="tab-pane" id="medic-infos" role="tabpanel">
+                                        <div class="row">
+                                            <!-- patient poids input -->
+                                            <div class="col-md-3">
+                                                <div>
+                                                    <label class="form-label">Poids<sup class="text-danger">*</sup></label>
+                                                    <div class="form-icon">
+                                                        <input type="number" v-model="form_details.poids"
+                                                            class="form-control form-control-icon"
+                                                            placeholder="Saisir le poids... ex: 63.3" required>
+                                                        <i class="ri-scales-line"></i>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
 
-                                    <!-- nom input -->
-                                    <div class="col-md-4">
-                                        <div>
-                                            <label class="form-label">Nom <sup class="text-danger">*</sup></label>
-                                            <div class="form-icon">
-                                                <input type="text" v-model="form.nom" class="form-control form-control-icon"
-                                                    placeholder="Saisir le nom du patient...ex:KAYEMBE" required
-                                                    :readonly="form.patient_id !== ''">
-                                                <i class="ri-user-2-line"></i>
+                                            <!-- Temperature input -->
+                                            <div class="col-md-3">
+                                                <div>
+                                                    <label class="form-label">Temperature<sup
+                                                            class="text-danger">*</sup></label>
+                                                    <div class="form-icon">
+                                                        <input type="number" v-model="form_details.temperature"
+                                                            class="form-control form-control-icon rounded-end-0"
+                                                            placeholder="Saisir le T°... ex: 34.5" required>
+                                                        <i class="ri-contrast-drop-2-line "></i>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
 
-                                    <!-- prenom input -->
-                                    <div class="col-md-4">
-                                        <div>
-                                            <label class="form-label">Prénom <sup class="text-danger">*</sup></label>
-                                            <div class="form-icon">
-                                                <input type="text" v-model="form.prenom"
-                                                    class="form-control form-control-icon"
-                                                    placeholder="Saisir le prénom du patient...ex:Lionnel" required
-                                                    :readonly="form.patient_id !== ''">
-                                                <i class="ri-user-2-line"></i>
+                                            <!-- taille input -->
+                                            <div class="col-md-3">
+                                                <div>
+                                                    <label class="form-label">Taille<sup class="text-danger">
+                                                            (optionnelle)</sup></label>
+                                                    <div class="form-icon">
+                                                        <input type="text" v-model="form_details.taille"
+                                                            class="form-control form-control-icon"
+                                                            placeholder="Saisir la taille... ex: 170">
+                                                        <i class=" ri-ruler-line"></i>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
 
-                                    <!-- patient sexe select -->
-                                    <div class="col-md-4">
-                                        <div class="mt-3">
-                                            <label class="form-label">Sexe <sup class="text-danger">*</sup></label>
-                                            <div class="form-icon">
-                                                <select class="form-select" id="inputGroupSelect01" v-model="form.sexe"
-                                                    :readonly="form.patient_id !== ''">
-                                                    <option selected label="Sélectionner un sexe"></option>
-                                                    <option value="M">Masculin</option>
-                                                    <option value="F">Féminin</option>
-                                                </select>
+                                            <!-- tension arterielle input -->
+                                            <div class="col-md-3">
+                                                <div>
+                                                    <label class="form-label">Tension arterielle<sup
+                                                            class="text-danger">*</sup></label>
+                                                    <div class="form-icon">
+                                                        <input type="text" v-model="form_details.tension_art"
+                                                            class="form-control form-control-icon"
+                                                            placeholder="tension arterielle..." required>
+                                                        <i class="bx bx-pulse"></i>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
 
-                                    <!-- telephone input -->
-                                    <div class="col-md-4">
-                                        <div class="mt-3">
-                                            <label class="form-label">Téléphone<sup class="text-danger">*</sup></label>
-                                            <div class="form-icon">
-                                                <input type="text" v-model="form.telephone"
-                                                    class="form-control form-control-icon"
-                                                    placeholder="Saisir le tél... ex: +(243) 810000000"
-                                                    :readonly="form.patient_id !== ''">
-                                                <i class="ri-phone-line"></i>
+                                            <!-- frequence cardio input -->
+                                            <div class="col-md-3">
+                                                <div>
+                                                    <label class="form-label">Pulsation<sup
+                                                            class="text-danger">*</sup></label>
+                                                    <div class="form-icon">
+                                                        <input type="text" v-model="form_details.freq_cardio"
+                                                            class="form-control form-control-icon"
+                                                            placeholder="Entrer le pouls du patient..." required>
+                                                        <i class="bx bx-pulse"></i>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- sate naissance input -->
-                                    <div class="col-md-4">
-                                        <div class="mt-3">
-                                            <label class="form-label">Date de naissance<sup
-                                                    class="text-danger">*</sup></label>
-                                            <div class="form-icon">
-                                                <input type="date" v-model="form.datenais"
-                                                    class="form-control form-control-icon" required
-                                                    :readonly="form.patient_id !== ''">
-                                                <i class="ri-phone-line"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- adresse input -->
-                                    <div class="col-md-12">
-                                        <div class="mt-3">
-                                            <label class="form-label">Adresse<sup class="text-danger">*</sup></label>
-                                            <div class="form-icon">
-                                                <input type="text" v-model="form.adresse"
-                                                    class="form-control form-control-icon"
-                                                    placeholder="Saisir l'adresse du patient... ex: n°..... av..... Q..... C....."
-                                                    required :readonly="form.patient_id !== ''">
-                                                <i class="ri-map-pin-5-line"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <h6 class="fs-14 text-start mb-2 mt-4 text-primary">Infos médicales
-                                </h6>
-                                <div class="border border-dashed border-primary"></div>
-                                <div class="row">
-                                    <!-- patient poids input -->
-                                    <div class="col-md-3">
-                                        <div class="mt-3">
-                                            <label class="form-label">Poids<sup class="text-danger">*</sup></label>
-                                            <div class="form-icon">
-                                                <input type="number" v-model="form_details.poids"
-                                                    class="form-control form-control-icon"
-                                                    placeholder="Saisir le poids... ex: 63.3" required>
-                                                <i class="ri-scales-line"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Temperature input -->
-                                    <div class="col-md-3">
-                                        <div class="mt-3">
-                                            <label class="form-label">Temperature<sup class="text-danger">*</sup></label>
-                                            <div class="form-icon">
-                                                <input type="number" v-model="form_details.temperature"
-                                                    class="form-control form-control-icon rounded-end-0"
-                                                    placeholder="Saisir le T°... ex: 34.5" required>
-                                                <i class="ri-contrast-drop-2-line "></i>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- taille input -->
-                                    <div class="col-md-3">
-                                        <div class="mt-3">
-                                            <label class="form-label">Taille<sup class="text-danger">
-                                                    (optionnelle)</sup></label>
-                                            <div class="form-icon">
-                                                <input type="text" v-model="form_details.taille"
-                                                    class="form-control form-control-icon"
-                                                    placeholder="Saisir la taille... ex: 170">
-                                                <i class=" ri-ruler-line"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- tension arterielle input -->
-                                    <div class="col-md-3">
-                                        <div class="mt-3">
-                                            <label class="form-label">Tension arterielle<sup
-                                                    class="text-danger">*</sup></label>
-                                            <div class="form-icon">
-                                                <input type="text" v-model="form_details.tension_art"
-                                                    class="form-control form-control-icon"
-                                                    placeholder="tension arterielle..." required>
-                                                <i class="bx bx-pulse"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- frequence cardio input -->
-                                    <div class="col-md-3">
-                                        <div class="mt-3">
-                                            <label class="form-label">Fréquence cardiaque<sup
-                                                    class="text-danger">*</sup></label>
-                                            <div class="form-icon">
-                                                <input type="text" v-model="form_details.freq_cardio"
-                                                    class="form-control form-control-icon"
-                                                    placeholder="Fréquence cardiaque..." required>
-                                                <i class="bx bx-pulse"></i>
+                                            <div class="col-md-3">
+                                                <div>
+                                                    <label class="form-label">Saturation<sup
+                                                            class="text-danger">*</sup></label>
+                                                    <div class="form-icon">
+                                                        <input type="text" v-model="form_details.saturation"
+                                                            class="form-control form-control-icon"
+                                                            placeholder="Entrer la saturation du patient..." required>
+                                                        <i class="bx bx-pulse"></i>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <bs-toast id="errorsToast" :msg="errors_msg" />
-
                                 <div div class=" d-flex align-items-end justify-content-end mt-4"
                                     v-if="$user().agent_id !== 0">
                                     <load-button btn-type="submit" :loading="formLoading"
@@ -275,6 +355,9 @@ export default {
                 adresse: "",
                 datenais: "",
                 patient_id: "",
+                groupe_sang: "",
+                etat_civil: "",
+                num_assurance: "",
                 created_by: "",
                 patient_details: {},
             },
@@ -284,12 +367,14 @@ export default {
                 temperature: "",
                 tension_art: "",
                 freq_cardio: "",
+                saturation: "",
                 age: ""
             },
             formLoading: false,
             isOld: false,
             selectPatient: null,
             searchLoading: false,
+            isAssured: false,
             errors_msg: '',
         }
     },
@@ -420,11 +505,16 @@ export default {
             this.form.datenais = "";
             this.form.patient_id = "";
             this.form.telephone = "";
+            this.form.groupe_sang = "";
+            this.form.etat_civil = "";
+            this.form.num_assurance = "";
             this.form_details.poids = "";
             this.form_details.taille = "";
             this.form_details.temperature = "";
             this.form_details.tension_art = "";
             this.form_details.freq_cardio = "";
+            this.form_details.saturation = "";
+            this.isAssured = false;
 
             this.$store.dispatch('services/showCode');
             $(".patient-select2").val('').trigger('change');
