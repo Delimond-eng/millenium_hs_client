@@ -35,6 +35,9 @@ import PrescriptionListPage from "@/template/view/pages/prescription_manage_page
 
 /* invoices */
 import FicheInvoice from "@/template/view/pages/invoices/fiche_medical_invoice";
+
+/*Hospitalisation manage*/
+import HospitalisationHome from "@/template/view/pages/hospitalisation_manage_pages/home_view";
 const routes = [
   {
     path: "/",
@@ -133,6 +136,11 @@ const routes = [
         path: "/home/invoice/fiche",
         component: FicheInvoice,
         name: "fiche-invoice",
+      },
+      {
+        path: "/home/hospitalisations.manage",
+        component: HospitalisationHome,
+        name: "hospitalisation-home",
       },
     ],
   },

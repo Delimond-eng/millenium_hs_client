@@ -105,23 +105,10 @@
                         </div>
                     </li>
 
-                    <li class="nav-item" v-if="$isAccessMenu('Hospitalisations')">
-                        <a class="nav-link menu-link" href="#hospitalApps" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="hospitalApps">
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#/home/hospitalisations.manage" role="button">
                             <i class="ri-hotel-bed-line"></i> <span data-key="t-apps">Hospitalisations</span>
                         </a>
-                        <div class="collapse menu-dropdown" id="hospitalApps">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="javascript:void(0)" class="nav-link" data-key="t-chat"> Gestion des lits
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="javascript:void(0)" class="nav-link" data-key="t-chat"> Situation globale
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
 
                     <!-- <li class="nav-item">
