@@ -1,3 +1,3 @@
 export default {
-    SET_LABOS: (state, data) => (state.labos = data),
+  SET_ALL_DATAS: (state, data) => (state.datas = data),
 };

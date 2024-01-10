@@ -1,3 +1,3 @@
 export default {
-    GET_LABOS: (state) => state.labos
+  GET_ALL_DATAS: (state) => state.datas,
 };
