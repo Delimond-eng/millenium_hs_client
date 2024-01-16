@@ -38,6 +38,11 @@ import FicheInvoice from "@/template/view/pages/invoices/fiche_medical_invoice";
 
 /*Hospitalisation manage*/
 import HospitalisationHome from "@/template/view/pages/hospitalisation_manage_pages/home_view";
+import BedTab from "@/template/view/pages/hospitalisation_manage_pages/tabs/beds_tab";
+import FacturationTab from "@/template/view/pages/hospitalisation_manage_pages/tabs/facturation_tab";
+import HospitalisationTab from "@/template/view/pages/hospitalisation_manage_pages/tabs/hospitalisations_tab";
+import TransfertTab from "@/template/view/pages/hospitalisation_manage_pages/tabs/transferts_tab";
+import SettingTab from "@/template/view/pages/hospitalisation_manage_pages/tabs/config_tab";
 const routes = [
   {
     path: "/",
@@ -141,6 +146,34 @@ const routes = [
         path: "/home/hospitalisations.manage",
         component: HospitalisationHome,
         name: "hospitalisation-home",
+        redirect: { name: "bed-tab" },
+        children: [
+          {
+            path: "",
+            component: BedTab,
+            name: "bed-tab",
+          },
+          {
+            path: "/home/hospitalisations.manage/hospitalisations",
+            component: HospitalisationTab,
+            name: "hospitalisation-tab",
+          },
+          {
+            path: "/home/hospitalisations.manage/hospitalisations",
+            component: TransfertTab,
+            name: "transfert-tab",
+          },
+          {
+            path: "/home/hospitalisations.manage/facturations",
+            component: FacturationTab,
+            name: "facturation-tab",
+          },
+          {
+            path: "/home/hospitalisations.manage/settings",
+            component: SettingTab,
+            name: "setting-tab",
+          },
+        ],
       },
     ],
   },

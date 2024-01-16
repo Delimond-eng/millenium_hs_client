@@ -14,4 +14,10 @@ app.use(VueSweetalert2);
 app.use(Components);
 app.use(Globals);
 window.Swal = app.config.globalProperties.$swal;
+window.addEventListener("error", function (event) {
+  console.error("Uncaught Error:", event.error);
+  if (!app.config.silent) {
+    event.preventDefault();
+  }
+});
 app.mount("#app");

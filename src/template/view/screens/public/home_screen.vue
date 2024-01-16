@@ -169,8 +169,10 @@
 
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link p-3" id="rdv-tab" data-bs-toggle="pill"
-                                                    data-bs-target="#rdv" type="button" role="tab" aria-controls="rdv"
-                                                    aria-selected="false">Rendez-vous journaliers</button>
+                                                    data-bs-target="#schedules" type="button" role="tab" aria-controls="rdv"
+                                                    aria-selected="false">Rendez-vous journaliers <span
+                                                        class="badge bg-danger align-middle ms-1">{{
+                                                            schedules.length }}</span></button>
                                             </li>
 
                                             <li class="nav-item" role="presentation">
@@ -460,7 +462,62 @@
                                                     description="Il n'y a aucune fiche de patient en attente pour l'instant !"></state-empty>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="rdv-tab" role="tabpanel" aria-labelledby="rdv-tab">
+                                        <div class="tab-pane fade" id="schedules" role="tabpanel" aria-labelledby="rdv-tab">
+                                            <div class="row mb-4">
+                                                <div class="col-sm order-3 order-sm-2 mt-sm-0">
+                                                    <h5 class="fw-semibold mb-0">Les rendez-vous en attente</h5>
+                                                </div>
+                                                <div class="col-auto order-2 order-sm-3 ms-auto">
+                                                    <div class="hstack gap-2">
+                                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                                            <button class="btn btn-icon fw-semibold btn-primary"><i
+                                                                    class="ri-list-check"></i></button>
+                                                            <button class="btn btn-icon fw-semibold btn-soft-primary"><i
+                                                                    class="ri-calendar-event-line"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive table-card">
+                                                <table
+                                                    class="table align-middle table-nowrap table-striped-columns mb-0 mt-2">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th scope="col">Date & heure</th>
+                                                            <th scope="col">Patient</th>
+                                                            <th scope="col">Médecin</th>
+                                                            <th scope="col">Durée</th>
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="(data, index) in schedules" :key="index">
+                                                            <td>{{ data.schedule_date_heure }}</td>
+                                                            <td><span v-if="data.patient">{{ data.patient.patient_code
+                                                            }} {{
+    data.patient.patient_nom
+}} {{ data.patient.patient_nom }}</span></td>
+                                                            <td><span v-if="data.agent">{{ data.agent.agent_matricule }} {{
+                                                                data.agent.agent_nom }} {{
+        data.agent.agent_prenom }}</span></td>
+                                                            <td class="text-warning"><i
+                                                                    class="ri-time-line fs-17 align-middle"></i> {{
+                                                                        data.schedule_duree }}
+                                                            </td>
+                                                            <td>{{ data.schedule_status }}</td>
+                                                            <td>
+                                                                <button class="btn btn-soft-danger btn-sm">
+                                                                    <i class="ri-delete-bin-2-line"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <state-empty v-if="schedules.length === 0"
+                                                    title="Aucun informations répertorié !"
+                                                    description="Il y a aucun rendez-vous en attente pour l'instant !"></state-empty>
+                                            </div>
                                         </div>
 
                                         <div class="tab-pane fade" id="prescription-tab" role="tabpanel"
@@ -562,6 +619,7 @@ export default {
         this.$store.dispatch('services/viewPatientsPending');
         this.$store.dispatch('services/viewAllLaboExamensPendings');
         this.$store.dispatch('services/viewAllPrescriptionsPendings');
+        this.$store.dispatch('services/viewSchedules');
     },
 
     methods: {
@@ -636,6 +694,9 @@ export default {
         },
         prescriptions() {
             return this.$store.getters['services/GET_PENDING_PRESCRIPTIONS']
+        },
+        schedules() {
+            return this.$store.getters['services/GET_SCHEDULES'];
         }
     },
 }

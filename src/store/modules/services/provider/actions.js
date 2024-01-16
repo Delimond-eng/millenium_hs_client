@@ -1,6 +1,10 @@
 import {get, post } from "@/http";
 
 export default {
+    triggerLoading({ commit }, val) {
+        commit("SET_LOADING", val);
+    },
+
     /**
      * Envoie un code unique pour le patient
      * @author Dev.GastonDelimond
@@ -22,15 +26,18 @@ export default {
      * @param {*} commit
      * @returns HttpResponse
      */
-    async showConfigs({ commit }) {
+    async showConfigs({ commit, dispatch }) {
         let user = JSON.parse(localStorage.getItem("user-data"));
         let hostoId = user.hopital.id;
         try {
+            dispatch("triggerLoading", true);
             let { data, status } = await get(`/configs.all/${hostoId}`);
+            dispatch("triggerLoading", false);
             if (status === 200) {
                 commit("SET_CONFIGS", data.configs);
             } else return {};
         } catch (error) {
+            dispatch("triggerLoading", false);
             return {};
         }
     },
@@ -41,17 +48,20 @@ export default {
      * @param {*} commit
      * @returns HttpResponse
      */
-    async viewAllEmplacements({ commit }) {
+    async viewAllEmplacements({ commit, dispatch }) {
         try {
             let user = JSON.parse(localStorage.getItem("user-data"));
             let hopitalId = user.hopital.id;
+            dispatch("triggerLoading", true);
             let { data, status } = await get(`/emplacements.all/${hopitalId}`);
+            dispatch("triggerLoading", false);
             if (status === 200) {
                 commit("SET_EMPLACEMENTS", data.emplacements);
                 return data.emplacements;
             } else return [];
         } catch (error) {
             console.log(error);
+            dispatch("triggerLoading", false);
             return [];
         }
     },
@@ -84,17 +94,20 @@ export default {
      * @param {*} commit
      * @returns HttpResponse
      */
-    async viewAllAgents({ commit }) {
+    async viewAllAgents({ commit, dispatch }) {
         let user = JSON.parse(localStorage.getItem("user-data"));
         let hostoId = user.hopital.id;
         try {
+            dispatch("triggerLoading", true);
             let { data, status } = await get(`/agents.all/${hostoId}`);
+            dispatch("triggerLoading", true);
             if (status === 200) {
                 commit("SET_AGENTS", data.agents);
                 return data.agents;
             } else return [];
         } catch (error) {
             console.log(error);
+            dispatch("triggerLoading", false);
             return [];
         }
     },
@@ -157,18 +170,21 @@ export default {
      * @param {*} commit
      * @returns HttpResponse
      */
-    async viewAllPatients({ commit }) {
+    async viewAllPatients({ commit, dispatch }) {
         let user = JSON.parse(localStorage.getItem("user-data"));
         //let hostoId = user.hopital.id;
         let locationId = user.hopital.emplacement.id;
         try {
+            dispatch("triggerLoading", true);
             let { data, status } = await get(`/patients.all/${locationId}`);
+            dispatch("triggerLoading", false);
             if (status === 200) {
                 commit("SET_PATIENTS", data.patients);
                 return data.patients;
             } else return [];
         } catch (error) {
             console.log(error);
+            dispatch("triggerLoading", false);
             return [];
         }
     },
@@ -179,13 +195,15 @@ export default {
      * @param {Vuex} commit
      * @returns HttpResponse
      * */
-    async viewPatientsPending({ commit }) {
+    async viewPatientsPending({ commit, dispatch }) {
         let user = JSON.parse(localStorage.getItem("user-data"));
         let agentId = user.agent_id;
         /* let hostoId = user.hopital.id; */
         let locationId = user.hopital.emplacement.id;
         try {
+            dispatch("triggerLoading", true);
             let { data, status } = await get(`/patients.pending/${locationId}`);
+            dispatch("triggerLoading", false);
             if (status === 200) {
                 commit("SET_PATIENTS_PENDING", data.patients);
                 return data.patients;
@@ -202,16 +220,19 @@ export default {
      * @param {Vuex} commit
      * @returns HttpResponse
      * */
-    async viewRecentPatients({ commit }) {
+    async viewRecentPatients({ commit, dispatch }) {
         let user = JSON.parse(localStorage.getItem("user-data"));
         let locationId = user.hopital.emplacement.id;
         try {
+            dispatch("triggerLoading", true);
             let { data, status } = await get(`/patients.all/${locationId}`);
+            dispatch("triggerLoading", false);
             if (status === 200) {
                 commit("SET_RECENT_PATIENTS", data.patients);
                 return data.patients;
             } else return [];
         } catch (error) {
+            dispatch("triggerLoading", false);
             console.log(error);
             return [];
         }
@@ -351,67 +372,79 @@ export default {
      * @param {*} form
      * @returns HttpResponse
      */
-    async viewAllConsults({ commit }) {
+    async viewAllConsults({ commit, dispatch }) {
         let user = JSON.parse(localStorage.getItem("user-data"));
         let hopital_id = user.hopital.id;
         let emplacement_id = user.hopital.emplacement.id;
         try {
+            dispatch("triggerLoading", true);
             let { data, status } = await get(
                 `/consultations.all/${hopital_id}/${emplacement_id}`
             );
+            dispatch("triggerLoading", false);
             if (status === 200) {
                 commit("SET_CONSULTATIONS", data.consultations);
                 return data.consultations;
             } else return [];
         } catch (error) {
             console.log(error);
+            dispatch("triggerLoading", false);
             return [];
         }
     },
 
-    async viewAllConsultsExamens({ commit }) {
+    async viewAllConsultsExamens({ commit, dispatch }) {
         let user = JSON.parse(localStorage.getItem("user-data"));
         let emplacement_id = user.hopital.emplacement.id;
         try {
+            dispatch("triggerLoading", true);
             let { data, status } = await get(`/consult.examens/${emplacement_id}`);
+            dispatch("triggerLoading", false);
             if (status === 200) {
                 commit("SET_ALL_EXAMENS", data.examens);
                 return data.examens;
             } else return [];
         } catch (error) {
             console.log(error);
+            dispatch("triggerLoading", false);
             return [];
         }
     },
 
-    async viewAllLaboExamensPendings({ commit }) {
+    async viewAllLaboExamensPendings({ commit, dispatch }) {
         let user = JSON.parse(localStorage.getItem("user-data"));
         let emplacement_id = user.hopital.emplacement.id;
         try {
+            dispatch("triggerLoading", true);
             let { data, status } = await get(`/labo.examens/${emplacement_id}`);
+            dispatch("triggerLoading", false);
             if (status === 200) {
                 commit("SET_LABO_EXAMENS", data.examens);
                 return data.examens;
             } else return [];
         } catch (error) {
+            dispatch("triggerLoading", false);
             console.log(error);
             return [];
         }
     },
 
-    async viewAllPrescriptionsPendings({ commit }) {
+    async viewAllPrescriptionsPendings({ commit, dispatch }) {
         let user = JSON.parse(localStorage.getItem("user-data"));
         let emplacement_id = user.hopital.emplacement.id;
         try {
+            dispatch("triggerLoading", true);
             let { data, status } = await get(
                 `/prescriptions.pending/${emplacement_id}`
             );
+            dispatch("triggerLoading", false);
             if (status === 200) {
                 commit("SET_PENDING_PRESCRIPTIONS", data.prescriptions);
                 return data.prescriptions;
             } else return [];
         } catch (error) {
             console.log(error);
+            dispatch("triggerLoading", false);
             return [];
         }
     },
@@ -447,17 +480,20 @@ export default {
      * @returns HttpResponse
      */
 
-    async viewAllPharmacies({ commit }) {
+    async viewAllPharmacies({ commit, dispatch }) {
         let user = JSON.parse(localStorage.getItem("user-data"));
         let hopital_id = user.hopital.id;
         try {
+            dispatch("triggerLoading", true);
             let { data, status } = await get(`/pharmacies.all/${hopital_id}`);
+            dispatch("triggerLoading", false);
             if (status === 200) {
                 commit("SET_PHARMAS", data.pharmacies);
                 return data.pharmacies;
             } else return [];
         } catch (error) {
             console.log(error);
+            dispatch("triggerLoading", false);
             return [];
         }
     },
@@ -472,15 +508,18 @@ export default {
         let user = JSON.parse(localStorage.getItem("user-data"));
         let emplacement_id = user.hopital.emplacement.id;
         try {
+            dispatch("triggerLoading", true);
             let { data, status } = await get(
                 `/pharmacies.emplacement/${emplacement_id}`
             );
+            dispatch("triggerLoading", false);
             if (status === 200) {
                 commit("SET_EMPLACEMENT_PHARMAS", data.pharmacies);
                 return data.pharmacies;
             } else return [];
         } catch (error) {
             console.log(error);
+            dispatch("triggerLoading", false);
             return [];
         }
     },
@@ -491,17 +530,20 @@ export default {
      * @param {*} commit
      * @returns HttpResponse
      */
-    async viewAllExamens({ commit }) {
+    async viewAllExamens({ commit, dispatch }) {
         let user = JSON.parse(localStorage.getItem("user-data"));
         let emplacement_id = user.hopital.emplacement.id;
         try {
+            dispatch("triggerLoading", true);
             let { data, status } = await get(`/examens.all/${emplacement_id}`);
+            dispatch("triggerLoading", false);
             if (status === 200) {
                 commit("SET_EXAMENS", data.examens);
                 return data.examens;
             } else return [];
         } catch (error) {
             console.log(error);
+            dispatch("triggerLoading", false);
             return [];
         }
     },
@@ -559,6 +601,52 @@ export default {
             } else null;
         } catch (error) {
             console.log(error);
+            return null;
+        }
+    },
+
+    /**
+     * Créer un rendez-vous medical
+     * @author Dev.GastonDelimond
+     * @param {Vuex} context
+     * @param {*} form
+     * @returns HttpResponse
+     */
+    async createSchedule(context, form) {
+        let user = JSON.parse(localStorage.getItem("user-data"));
+        form.hopital_emplacement_id = user.hopital.emplacement.id;
+        form.created_by = user.id;
+        try {
+            let { data, status } = await post("/schedule.create", form);
+            if (status === 200) {
+                return data;
+            } else {
+                return null;
+            }
+        } catch (error) {
+            return null;
+        }
+    },
+
+    /**
+     * Voir les rendez-vous medicaux
+     * @author Dev.GastonDelimond
+     * @param {Vuex} context
+     * @param {*} form
+     * @returns HttpResponse
+     */
+    async viewSchedules({ commit }) {
+        let user = JSON.parse(localStorage.getItem("user-data"));
+        let emplacement_id = user.hopital.emplacement.id;
+        try {
+            let { data, status } = await get(`/schedules.all/${emplacement_id}`);
+            if (status === 200) {
+                commit("SET_SCHEDULES", data.schedules);
+                return data.schedules;
+            } else {
+                return null;
+            }
+        } catch (error) {
             return null;
         }
     },

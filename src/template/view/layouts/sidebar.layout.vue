@@ -105,7 +105,7 @@
                         </div>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="$isAccessMenu('Hospitalisations')">
                         <a class="nav-link menu-link" href="#/home/hospitalisations.manage" role="button">
                             <i class="ri-hotel-bed-line"></i> <span data-key="t-apps">Hospitalisations</span>
                         </a>

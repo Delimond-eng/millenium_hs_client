@@ -1,5 +1,5 @@
 <template>
-    <div class="tab-pane" id="facturations" role="tabpanel">
+    <div id="facturations" role="tabpanel">
 
     </div>
 </template>
