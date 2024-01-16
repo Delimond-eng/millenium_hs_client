@@ -30,14 +30,6 @@ export default {
           detail_valeur: "",
         },
       ],
-      prescriptions: [
-        {
-          traitement: "",
-          traitement_type: "",
-          posologie: "",
-          consult_id: "",
-        },
-      ],
       symptomes: [
         {
           libelle: "",

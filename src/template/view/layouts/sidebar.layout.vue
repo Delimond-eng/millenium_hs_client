@@ -59,8 +59,6 @@
                             </ul>
                         </div>
                     </li>
-
-
                     <li class="nav-item" v-if="$isAccessMenu('Agents')">
                         <a class="nav-link menu-link" href="#med" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="med">
@@ -80,8 +78,6 @@
                             </ul>
                         </div>
                     </li>
-
-
                     <li class="nav-item" v-if="$isAccessMenu('Consultations')">
                         <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="sidebarLanding">
@@ -244,7 +240,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item" v-if="$isAccessMenu('Services')">
+                    <!--  <li class="nav-item" v-if="$isAccessMenu('Services')">
                         <a class="nav-link menu-link" href="#serviceLanding" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="serviceLanding">
                             <i class="bx bx-sitemap"></i> <span data-key="t-landing">Services</span>
@@ -261,14 +257,13 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item" id="config-menu" v-if="$isAccessMenu('Configurations')">
-                        <a class="nav-link menu-link" href="#adminLanding" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="adminLanding">
+                        <a class="nav-link menu-link" href="#/admin/config/all" role="button">
                             <i class="ri-settings-2-line"></i> <span data-key="t-landing">Configurations</span>
                         </a>
-                        <div class="collapse menu-dropdown" id="adminLanding">
+                        <!-- <div class="collapse menu-dropdown" id="adminLanding">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
                                     <button class="nav-link" @click.stop="showConfigModal('fonctions')">
@@ -286,7 +281,7 @@
                                 </li>
 
                             </ul>
-                        </div>
+                        </div> -->
                     </li>
 
                     <li class="nav-item" id="users-menu" v-if="$isAccessMenu('Utilisateurs')">
@@ -321,7 +316,6 @@
 </template>
 
 <script>
-import serviceConfigModal from '../pages/config_manage_pages/modals/services_config_modal'
 import laboCreateModal from '../pages/config_manage_pages/modals/labos_create_modal'
 import laboListModal from '../pages/config_manage_pages/modals/labos_list_modal'
 export default {
@@ -338,7 +332,6 @@ export default {
         }
     },
     components: {
-        serviceConfigModal,
         laboCreateModal,
         laboListModal
     },

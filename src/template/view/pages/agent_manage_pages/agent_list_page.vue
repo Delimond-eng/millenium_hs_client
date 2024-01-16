@@ -51,7 +51,7 @@
                                 <div class="live-preview">
                                     <div class="table-responsive table-card">
                                         <table class="table align-middle table-nowrap table-striped-columns mb-0">
-                                            <thead class="table-light">
+                                            <thead class="table-secondary text-uppercase">
                                                 <tr>
                                                     <th scope="col">MATRICULE</th>
                                                     <th scope="col">Nom complet</th>

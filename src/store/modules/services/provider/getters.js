@@ -15,4 +15,6 @@ export default {
   GET_LABO_EXAMENS: (state) => state.labo_examens,
   GET_PENDING_PRESCRIPTIONS: (state) => state.pending_prescriptions,
   GET_SCHEDULES: (state) => state.schedules,
+  GET_ALL_FACTURATIONS: (state) => state.all_facturations,
+  GET_SITE_FACTURATIONS: (state) => state.site_facturations,
 };

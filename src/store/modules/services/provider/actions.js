@@ -366,6 +366,76 @@ export default {
     },
 
     /**
+     * Config fonction
+     * @param form
+     * @returns HttpResponse
+     */
+    async addFonctions(context, form) {
+        try {
+            let { data, status } = await post("/configs.fonctions", form);
+            if (status === 200) {
+                return data;
+            } else {
+                return null;
+            }
+        } catch (error) {
+            return null;
+        }
+    },
+
+    /**
+     * Config facturations
+     * @param form
+     * @return HttpResponse
+     */
+    async configFacturation(context, form) {
+        let user = JSON.parse(localStorage.getItem("user-data"));
+        form.hopital_id = user.hopital.id;
+        form.created_by = user.id;
+        try {
+            let { data, status } = await post("/configs.facturations", form);
+            if (status === 200) {
+                return data;
+            } else {
+                return null;
+            }
+        } catch (error) {
+            return null;
+        }
+    },
+
+    async viewFacturations({ commit, dispatch }, key) {
+        let user = JSON.parse(localStorage.getItem("user-data"));
+        let emplacement_id = user.hopital.emplacement.id;
+        try {
+            if (key === "all") {
+                dispatch("triggerLoading", true);
+                let { data, status } = await get(
+                    `/configs.facturations/all/${user.hopital.id}`
+                );
+                dispatch("triggerLoading", false);
+                if (status === 200) {
+                    commit("SET_ALL_FACTURATIONS", data.results);
+                    return data.results;
+                } else return [];
+            } else {
+                dispatch("triggerLoading", true);
+                let { data, status } = await get(
+                    `/configs.facturations/emplacement/${emplacement_id}`
+                );
+                dispatch("triggerLoading", false);
+                if (status === 200) {
+                    commit("SET_SITE_FACTURATIONS", data.results);
+                    return data.results;
+                } else return [];
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch("triggerLoading", false);
+            return [];
+        }
+    },
+    /**
      * Afficher la liste des consultations pour un emplacements
      * @author Dev.GastonDelimond
      * @param {*} commit

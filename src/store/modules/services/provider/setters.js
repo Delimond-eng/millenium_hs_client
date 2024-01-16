@@ -19,4 +19,6 @@ export default {
   SET_PENDING_PRESCRIPTIONS: (state, data) =>
     (state.pending_prescriptions = data),
   SET_SCHEDULES: (state, data) => (state.schedules = data),
+  SET_ALL_FACTURATIONS: (state, data) => (state.all_facturations = data),
+  SET_SITE_FACTURATIONS: (state, data) => (state.site_facturations = data),
 };

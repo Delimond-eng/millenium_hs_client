@@ -8,7 +8,6 @@ import HomeModule from "@/template/view/screens/public/home_modules";
 /**
  * Config routes pages
  */
-import ConfigLocationsPage from "@/template/view/pages/config_manage_pages/location_config_page";
 import ConfigExamensPage from "@/template/view/pages/config_manage_pages/examens_config_page";
 
 /**
@@ -43,6 +42,14 @@ import FacturationTab from "@/template/view/pages/hospitalisation_manage_pages/t
 import HospitalisationTab from "@/template/view/pages/hospitalisation_manage_pages/tabs/hospitalisations_tab";
 import TransfertTab from "@/template/view/pages/hospitalisation_manage_pages/tabs/transferts_tab";
 import SettingTab from "@/template/view/pages/hospitalisation_manage_pages/tabs/config_tab";
+
+//Config or Setting App Routes
+import ConfigHome from "@/template/view/pages/config_manage_pages/home_view";
+import EmplacementsTab from "@/template/view/pages/config_manage_pages/tabs/emplacements_tab";
+import ServicesTab from "@/template/view/pages/config_manage_pages/tabs/services_tab";
+import FonctionsTab from "@/template/view/pages/config_manage_pages/tabs/fonctions_tab";
+import FacturationsTab from "@/template/view/pages/config_manage_pages/tabs/facturations_tab";
+
 const routes = [
   {
     path: "/",
@@ -69,16 +76,6 @@ const routes = [
       /**
        * COnfig routes
        */
-      {
-        path: "/admin/config/locations",
-        component: ConfigLocationsPage,
-        name: "config-locations",
-      },
-      {
-        path: "/admin/config/services",
-        component: ServiceManagerPage,
-        name: "config-services",
-      },
       {
         path: "/admin/config/examens",
         component: ConfigExamensPage,
@@ -172,6 +169,34 @@ const routes = [
             path: "/home/hospitalisations.manage/settings",
             component: SettingTab,
             name: "setting-tab",
+          },
+        ],
+      },
+      {
+        path: "/admin/config/all",
+        component: ConfigHome,
+        name: "settings-app",
+        redirect: { name: "emplacements-config-tab" },
+        children: [
+          {
+            path: "",
+            component: EmplacementsTab,
+            name: "emplacements-config-tab",
+          },
+          {
+            path: "/admin/config/services",
+            component: ServicesTab,
+            name: "services-config-tab",
+          },
+          {
+            path: "/admin/config/fonctions",
+            component: FonctionsTab,
+            name: "fonctions-config-tab",
+          },
+          {
+            path: "/admin/config/facturations",
+            component: FacturationsTab,
+            name: "facturations-config-tab",
           },
         ],
       },

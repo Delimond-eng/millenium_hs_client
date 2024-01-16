@@ -151,7 +151,7 @@
                             <div class="card checkout-tab" v-if="$user().agent_id !== 0">
                                 <div class="card-body">
                                     <div class="step-arrow-nav mt-n3 mx-n3 mb-3">
-                                        <ul class="nav nav-pills nav-justified custom-nav" role="tablist">
+                                        <ul class="nav nav-pills nav-justified bg-white custom-nav" role="tablist">
                                             <li class="nav-item active" role="presentation">
                                                 <button class="nav-link p-3 active" id="pills-bill-info-tab"
                                                     data-bs-toggle="pill" data-bs-target="#pills-bill-info" type="button"
@@ -189,9 +189,8 @@
                                             aria-labelledby="pills-bill-info-tab">
 
                                             <div class="table-responsive table-card">
-                                                <table
-                                                    class="table align-middle table-nowrap table-striped-columns mb-0 mt-2">
-                                                    <thead class="table-light">
+                                                <table class="table align-middle table-nowrap table-striped-columns mb-0">
+                                                    <thead class="table-secondary text-uppercase">
                                                         <tr>
                                                             <th scope="col">Date</th>
                                                             <th scope="col">Patient</th>
@@ -388,14 +387,14 @@
 
                                             <div class="table-responsive table-card">
                                                 <table class="table align-middle table-nowrap table-striped-columns mb-0">
-                                                    <thead class="table-light">
+                                                    <thead class="table-secondary text-uppercase">
                                                         <tr>
                                                             <th scope="col">CODE</th>
                                                             <th scope="col">Nom complet</th>
                                                             <th scope="col">Sexe</th>
                                                             <th scope="col">Date naissance</th>
                                                             <th scope="col">Téléphone</th>
-                                                            <th scope="col">Fiche status</th>
+                                                            <th scope="col">status</th>
                                                             <th scope="col">Poids</th>
                                                             <th scope="col">Taille</th>
                                                             <th scope="col">Temperature</th>
@@ -479,9 +478,8 @@
                                                 </div>
                                             </div>
                                             <div class="table-responsive table-card">
-                                                <table
-                                                    class="table align-middle table-nowrap table-striped-columns mb-0 mt-2">
-                                                    <thead class="table-light">
+                                                <table class="table align-middle table-nowrap table-striped-columns mb-0">
+                                                    <thead class="table-secondary text-uppercase">
                                                         <tr>
                                                             <th scope="col">Date & heure</th>
                                                             <th scope="col">Patient</th>
@@ -523,9 +521,8 @@
                                         <div class="tab-pane fade" id="prescription-tab" role="tabpanel"
                                             aria-labelledby="prescription-tab">
                                             <div class="table-responsive table-card">
-                                                <table
-                                                    class="table align-middle table-nowrap table-striped-columns mb-0 mt-2">
-                                                    <thead class="table-light">
+                                                <table class="table align-middle table-nowrap table-striped-columns mb-0 ">
+                                                    <thead class="table-secondary text-uppercase">
                                                         <tr>
                                                             <th scope="col">Date</th>
                                                             <th scope="col">Patient</th>
@@ -701,3 +698,9 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+li:active {
+    background-color: #d7e4fc !important;
+}
+</style>

@@ -14,5 +14,7 @@ export default {
   labo_examens: [],
   pending_prescriptions: [],
   schedules: [],
+  all_facturations: [],
+  site_facturations: [],
   rcode: "",
 };

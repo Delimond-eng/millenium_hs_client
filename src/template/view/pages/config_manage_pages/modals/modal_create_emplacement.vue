@@ -1,7 +1,7 @@
 <template>
     <teleport to="body">
         <div id="emplacementCreateModal" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content border-0 overflow-hidden">
                     <div class="modal-body login-modal p-4">
                         <h5 class="text-white fs-20">Création emplacement hôpital</h5>
@@ -25,7 +25,7 @@
                                 <bs-toast id="borderedToastError2" :msg="errors_msg" />
                                 <!-- buttons -->
                                 <div class="d-flex justify-content-end align-items-end">
-                                    <button type="button" @click.prevent="abort"
+                                    <button type="button" @click.prevent="$closeBsModal('emplacementCreateModal')"
                                         class="btn btn-light btn-border btn-lg mt-2 text-uppercase me-2">Fermer</button>
                                     <load-button btn-type="submit" :loading="formLoading"
                                         class-name="btn btn-info btn-border btn-lg mt-2 text-uppercase">Créer</load-button>
@@ -69,6 +69,7 @@ export default {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
+                        toast: true,
                         title: "L'Emplacement ajouté avec succès !",
                         showConfirmButton: false,
                         timer: 3000,
@@ -91,7 +92,7 @@ export default {
         abort() {
             this.form.emplacement_libelle = "";
             this.form.emplacement_adresse = "";
-            this.$closeBsModal('emplacementCreateModal');
+            /*  this.$closeBsModal('emplacementCreateModal'); */
         },
     },
 }

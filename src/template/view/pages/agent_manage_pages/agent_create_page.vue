@@ -201,7 +201,7 @@
                                                     <div class="form-icon">
                                                         <select class="form-select" id="iconInputLocation"
                                                             v-model="form.emplacement_id" required>
-                                                            <option selected label="Sélectionner un emplacement...">
+                                                            <option selected label="Sélectionner un emplacement..." hidden>
                                                             </option>
                                                             <option v-for="(item, index) in configs.emplacements"
                                                                 :key="index" :value="item.id">{{
