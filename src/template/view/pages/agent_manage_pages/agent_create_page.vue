@@ -19,14 +19,14 @@
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Création agent</h4>
 
-                                <div class="flex-shrink-0">
+                                <!--  <div class="flex-shrink-0">
                                     <div class="form-check form-switch form-switch-right form-switch-md">
                                         <label for="allow_account" class="form-label text-muted">Créer agent avec un compte
                                             utilisateur ?</label>
                                         <input class="form-check-input code-switcher" type="checkbox" id="allow_account"
                                             @change="user_account_allowed = $event.target.checked">
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <form @submit.prevent="submitForm" class="card-body">
                                 <div class="row d-flex justify-content-center">
@@ -71,7 +71,7 @@
                                                 </div>
                                             </div>
                                             <!-- patient sexe select -->
-                                            <div class="col-md-2">
+                                            <div class="col-md-6">
                                                 <div class="mt-3">
                                                     <label for="iconInputPoids" class="form-label">Sexe <sup
                                                             class="text-danger">*</sup></label>
@@ -225,8 +225,7 @@
                                                 <div>
                                                     <label class="form-label">Rôle utilisateur<sup
                                                             class="text-danger">*</sup></label>
-                                                    <select class="form-select" v-model="form_user.role_id"
-                                                        :disabled="!user_account_allowed" :required="user_account_allowed">
+                                                    <select class="form-select" v-model="form_user.role_id" required>
                                                         <option selected label="Sélectionnez un rôle..."></option>
                                                         <option v-for="(item, index) in configs.roles" :key="index"
                                                             :value="item.id">{{ item.role }}</option>
@@ -239,8 +238,7 @@
                                                     <div class="form-icon">
                                                         <input type="email" class="form-control form-control-icon"
                                                             placeholder="Saisir l'email de l'agent..."
-                                                            v-model="form_user.email" :disabled="!user_account_allowed"
-                                                            :required="user_account_allowed">
+                                                            v-model="form_user.email" required>
                                                         <i class="ri-mail-settings-line"></i>
                                                     </div>
                                                 </div>
@@ -252,8 +250,7 @@
                                                     <div class="form-icon">
                                                         <input type="password" class="form-control form-control-icon"
                                                             placeholder="Saisir le mot de passe"
-                                                            v-model="form_user.password" :disabled="!user_account_allowed"
-                                                            :required="user_account_allowed">
+                                                            v-model="form_user.password" required>
                                                         <i class="ri-lock-password-line"></i>
                                                     </div>
                                                 </div>
@@ -265,9 +262,7 @@
                                                     <div class="form-icon">
                                                         <input type="password" class="form-control form-control-icon"
                                                             placeholder="Confirmer le mot de passe "
-                                                            v-model="form_user.confirm"
-                                                            :required="user_account_allowed && form_user.password !== form_user.confirm"
-                                                            :disabled="!user_account_allowed">
+                                                            v-model="form_user.confirm" required>
                                                         <i class="ri-lock-password-line"></i>
                                                     </div>
                                                 </div>
@@ -285,6 +280,8 @@
                                                         <option>Patients</option>
                                                         <option>Agents</option>
                                                         <option>Consultations</option>
+                                                        <option>Suivis</option>
+                                                        <option>Premiers soins</option>
                                                         <option>Hospitalisations</option>
                                                         <option>Configurations</option>
                                                         <option>Comptes utilisateurs</option>
@@ -498,12 +495,10 @@ export default {
         */
         submitForm(e) {
             this.formLoading = true;
-            if (this.user_account_allowed) {
-                let multiSelectElement = document.getElementById("multiselect-basic");
-                let selectedOptions = Array.from(multiSelectElement.selectedOptions).map(option => option.value);
-                this.form_user.menus = selectedOptions.toString();
-                this.form.user_data = this.form_user
-            };
+            let multiSelectElement = document.getElementById("multiselect-basic");
+            let selectedOptions = Array.from(multiSelectElement.selectedOptions).map(option => option.value);
+            this.form_user.menus = selectedOptions.toString();
+            this.form.user_data = this.form_user
             this.form.created_by = this.$user().agent_id;
             this.$store.dispatch('services/createAgent', this.form).then((res) => {
                 console.log(JSON.stringify(res));

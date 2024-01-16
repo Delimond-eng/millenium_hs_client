@@ -57,10 +57,10 @@
                                                     <th scope="col">Nom complet</th>
                                                     <th scope="col">Sexe</th>
                                                     <th scope="col">Téléphone</th>
-                                                    <th scope="col">Date naissance</th>
+                                                    <!--  <th scope="col">Date naissance</th> -->
                                                     <!--<th scope="col">Adresse</th>-->
                                                     <th scope="col">Spécialité</th>
-                                                    <th scope="col">Grade</th>
+                                                    <!-- <th scope="col">Grade</th> -->
                                                     <th scope="col">Service</th>
                                                     <th scope="col">Fonction</th>
                                                     <th scope="col" style="width: 150px;"></th>
@@ -73,10 +73,10 @@
 
                                                     <td>{{ item.agent_sexe }}</td>
                                                     <td>{{ item.agent_telephone }}</td>
-                                                    <td>{{ item.agent_datenais }}</td>
+                                                    <!-- <td>{{ item.agent_datenais }}</td> -->
                                                     <!-- <td style="text-overflow: ellipsis;">{{ item.agent_adresse }}</td>-->
                                                     <td>{{ item.agent_specialite }}</td>
-                                                    <td><span v-if="item.grade">{{ item.grade.grade_libelle }}</span></td>
+                                                    <!-- <td><span v-if="item.grade">{{ item.grade.grade_libelle }}</span></td> -->
                                                     <td><span v-if="item.service">{{ item.service.service_libelle }}</span>
                                                     </td>
                                                     <td><span v-if="item.fonction">{{ item.fonction.fonction_libelle

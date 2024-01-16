@@ -81,8 +81,6 @@
                         </div>
                     </li>
 
-                    <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Opérations
-                            Médicales</span></li>
 
                     <li class="nav-item" v-if="$isAccessMenu('Consultations')">
                         <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
@@ -246,10 +244,6 @@
                             </ul>
                         </div>
                     </li>
-
-                    <li class="menu-title" v-if="$user().agent_id === 0"><i class="ri-more-fill"></i> <span
-                            data-key="t-pages">Administrations</span></li>
-
                     <li class="nav-item" v-if="$isAccessMenu('Services')">
                         <a class="nav-link menu-link" href="#serviceLanding" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="serviceLanding">
