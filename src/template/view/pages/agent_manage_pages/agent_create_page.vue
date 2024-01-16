@@ -71,7 +71,7 @@
                                                 </div>
                                             </div>
                                             <!-- patient sexe select -->
-                                            <div class="col-md-6">
+                                            <div class="col-md-2">
                                                 <div class="mt-3">
                                                     <label for="iconInputPoids" class="form-label">Sexe <sup
                                                             class="text-danger">*</sup></label>
@@ -101,7 +101,7 @@
                                             </div>
 
                                             <!-- date naissance input -->
-                                            <div class="col-md-6">
+                                            <!-- <div class="col-md-6">
                                                 <div class="mt-3">
                                                     <label for="iconInputNom" class="form-label">Date de naissance<sup
                                                             class="text-danger">*</sup></label>
@@ -113,10 +113,10 @@
                                                         <i class="ri-calendar-2-line"></i>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <!-- adresse input -->
-                                            <div class="col-md-12">
+                                            <!--  <div class="col-md-12">
                                                 <div class="mt-3">
                                                     <label for="iconInputNom" class="form-label">Adresse<sup
                                                             class="text-danger">*</sup></label>
@@ -128,7 +128,7 @@
                                                         <i class="ri-map-pin-5-line"></i>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <!-- spécialité -->
                                             <div class="col-md-6">
@@ -146,7 +146,7 @@
 
 
                                             <!-- grade -->
-                                            <div class="col-md-6">
+                                            <!-- <div class="col-md-6">
                                                 <div class="mt-3">
                                                     <label for="iconInputPoids" class="form-label">Grade <sup
                                                             class="text-danger">*</sup></label>
@@ -159,7 +159,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <!-- service -->
                                             <div class="col-md-6">
@@ -193,6 +193,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="col-md-12">
                                                 <div class="mt-3">
                                                     <label for="iconInputLocation" class="form-label">Emplacement <sup
@@ -273,13 +274,13 @@
                                             </div>
                                         </div>
 
-                                        <div class="row mt-2" v-show="user_account_allowed">
+                                        <div class="row mt-2">
                                             <div class="col-lg-12">
                                                 <div>
                                                     <label class="fs-14 mb-2 text-dark">Menus accessibles <sup
                                                             class="text-danger">*</sup></label>
-                                                    <select :required="user_account_allowed" multiple="multiple"
-                                                        style="width:100%" name="menus-select" id="multiselect-basic">
+                                                    <select required multiple="multiple" style="width:100%"
+                                                        name="menus-select" id="multiselect-basic">
                                                         <option selected>Tableau de bord</option>
                                                         <option>Patients</option>
                                                         <option>Agents</option>
