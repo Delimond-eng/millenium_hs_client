@@ -83,11 +83,12 @@
 
                                     <button
                                         class="nav-link flex-fill d-flex me-2 flex-column justify-content-center align-items-center"
-                                        id="docs-btn">
+                                        id="docs-btn" @click="loadDoc" :disabled="docLoading">
                                         <!-- <i class="las la-file-alt  d-block fs-20 mb-1"></i> --> <img
                                             src="assets/images/companies/doc3.png" class="d-block fs-20 mb-1 text-center"
                                             style="height: 40px;">
-                                        Dossier médical
+                                        <span v-if="!docLoading">Dossier médical</span>
+                                        <svg-loading v-else color="#000000"></svg-loading>
                                     </button>
                                 </div>
                             </div>
@@ -255,5 +256,32 @@ export default {
         SchedulesTab
     },
     mixins: [ConsultMixins],
+    data() {
+        return {
+            docLoading: false,
+        }
+    },
+
+    methods: {
+        loadDoc() {
+            if (this.selectedPatient === null) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "warning",
+                    text: 'Veuillez sélectionnez un patient pour afficher son dossier médical !',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    toast: true,
+                    showCloseButton: false,
+                });
+                return;
+            }
+            this.docLoading = true;
+            this.$store.dispatch('services/viewPatientDoc', this.selectedPatient.id).then((res) => {
+                this.docLoading = false
+                this.$router.push({ name: 'patient-docs' });
+            });
+        }
+    },
 }
 </script>

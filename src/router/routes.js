@@ -19,6 +19,7 @@ import PharmacieManagerPage from "@/template/view/pages/service_manage_pages/pha
 /* patient manage pages */
 import PatientCreatePage from "@/template/view/pages/patient_manage_pages/patient_create_page";
 import PatientListPage from "@/template/view/pages/patient_manage_pages/patient_list_page";
+import PatientDocMedPage from "@/template/view/pages/consult_manage_pages/patient_doc_med_page";
 
 /* medecin manage pages */
 import AgentCreatePage from "@/template/view/pages/agent_manage_pages/agent_create_page";
@@ -50,6 +51,10 @@ import ServicesTab from "@/template/view/pages/config_manage_pages/tabs/services
 import FonctionsTab from "@/template/view/pages/config_manage_pages/tabs/fonctions_tab";
 import FacturationsTab from "@/template/view/pages/config_manage_pages/tabs/facturations_tab";
 
+/**
+ * Pages qui gerent le cas d'urgence
+ */
+import PremierSoinsPage from "@/template/view/pages/urgence_manage_pages/premier_soins_page";
 const routes = [
   {
     path: "/",
@@ -97,6 +102,12 @@ const routes = [
         path: "/home/patients/list",
         component: PatientListPage,
         name: "patient-list",
+      },
+
+      {
+        path: "/home/patients/docs",
+        component: PatientDocMedPage,
+        name: "patient-docs",
       },
 
       /* medecins routes */
@@ -199,6 +210,11 @@ const routes = [
             name: "facturations-config-tab",
           },
         ],
+      },
+      {
+        path: "/home/premiers_soins",
+        component: PremierSoinsPage,
+        name: "premiers-soins",
       },
     ],
   },

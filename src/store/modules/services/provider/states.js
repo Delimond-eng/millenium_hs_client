@@ -16,5 +16,6 @@ export default {
   schedules: [],
   all_facturations: [],
   site_facturations: [],
+  patient_doc: {},
   rcode: "",
 };

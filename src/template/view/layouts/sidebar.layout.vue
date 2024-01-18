@@ -112,7 +112,7 @@
                         </div>
                     </li>
                     <li class="nav-item" v-if="$isAccessMenu('Premiers soins')">
-                        <a class="nav-link menu-link" href="#/home/hospitalisations.manage" role="button">
+                        <a class="nav-link menu-link" href="#/home/premiers_soins" role="button">
                             <i class="bx bx-capsule"></i> <span data-key="t-apps">Premiers soins</span>
                         </a>
                     </li>

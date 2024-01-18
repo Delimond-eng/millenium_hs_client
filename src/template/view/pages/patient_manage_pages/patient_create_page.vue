@@ -210,7 +210,7 @@
                                     <div class="tab-pane" id="medic-infos" role="tabpanel">
                                         <div class="row">
                                             <!-- patient poids input -->
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div>
                                                     <label class="form-label">Poids<sup class="text-danger">*</sup></label>
                                                     <div class="form-icon">
@@ -223,7 +223,7 @@
                                             </div>
 
                                             <!-- Temperature input -->
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div>
                                                     <label class="form-label">Temperature<sup
                                                             class="text-danger">*</sup></label>
@@ -237,7 +237,7 @@
                                             </div>
 
                                             <!-- taille input -->
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div>
                                                     <label class="form-label">Taille<sup class="text-danger">
                                                             (optionnelle)</sup></label>
@@ -251,7 +251,7 @@
                                             </div>
 
                                             <!-- tension arterielle input -->
-                                            <div class="col-md-3">
+                                            <div class="col-md-4 mt-3">
                                                 <div>
                                                     <label class="form-label">Tension arterielle<sup
                                                             class="text-danger">*</sup></label>
@@ -265,7 +265,7 @@
                                             </div>
 
                                             <!-- frequence cardio input -->
-                                            <div class="col-md-3">
+                                            <div class="col-md-4 mt-3">
                                                 <div>
                                                     <label class="form-label">Pulsation<sup
                                                             class="text-danger">*</sup></label>
@@ -277,7 +277,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4 mt-3">
                                                 <div>
                                                     <label class="form-label">Saturation<sup
                                                             class="text-danger">*</sup></label>
