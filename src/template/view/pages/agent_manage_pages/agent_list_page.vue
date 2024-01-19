@@ -63,6 +63,7 @@
                                                     <!-- <th scope="col">Grade</th> -->
                                                     <th scope="col">Service</th>
                                                     <th scope="col">Fonction</th>
+                                                    <th scope="col">Emplacement/site</th>
                                                     <th scope="col" style="width: 150px;"></th>
                                                 </tr>
                                             </thead>
@@ -80,6 +81,9 @@
                                                     <td><span v-if="item.service">{{ item.service.service_libelle }}</span>
                                                     </td>
                                                     <td><span v-if="item.fonction">{{ item.fonction.fonction_libelle
+                                                    }}</span></td>
+                                                    <td><span v-if="item.emplacement">{{
+                                                        item.emplacement.hopital_emplacement_libelle
                                                     }}</span></td>
                                                     <td>
                                                         <button type="button"

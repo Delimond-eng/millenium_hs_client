@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-12 col-md-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0">Configuration examens médicaux</h4>
+                            <h4 class="mb-sm-0">Examens en attente des résultats</h4>
                             <div class="page-title-right">
 
                             </div>

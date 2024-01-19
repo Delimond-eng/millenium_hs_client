@@ -1,7 +1,7 @@
 <template>
     <teleport to="body">
         <div id="examensCreateModal" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content border-0 overflow-hidden">
                     <div class="modal-body login-modal p-4">
                         <h5 class="text-white fs-20">Configuration examens médicaux </h5>
@@ -19,29 +19,33 @@
                                 <div>
                                     <label for="iconInputNom" class="form-label">Emplacement <sup
                                             class="text-danger">*</sup></label>
-                                    <select class="form-select" v-model="form.emplacement_id">
-                                        <option label="Sélectionner un emplacement..."></option>
-                                        <option v-for="(item, index) in configs.emplacements" :key="index" :value="item.id">
+                                    <select class="form-select" v-model="emplacement">
+                                        <option selected label="Sélectionner un emplacement..." hidden></option>
+                                        <option v-for="(item, index) in configs.emplacements" :key="index" :value="item">
                                             {{
                                                 item.hopital_emplacement_libelle }}
                                         </option>
                                     </select>
                                 </div>
+
                             </div>
                             <div class="col-md-6 mb-2">
                                 <div>
                                     <label for="iconInputNom" class="form-label">Laboratoire <sup
                                             class="text-danger">*</sup></label>
-                                    <select class="form-select" v-model="form.labo_id">
-                                        <option label="Sélectionner un laboratoire..."></option>
-                                        <option v-for="(item, index) in labos" :key="index" :value="item.id">
+                                    <select class="form-select" v-model="form.labo_id"
+                                        :disabled="emplacement.labos === undefined || emplacement.labos.length === 0">
+                                        <option
+                                            :label="emplacement.labos === undefined || emplacement.labos.length === 0 ? 'Aucun labo disponible !' : 'Sélectionner un laboratoire...'"
+                                            selected hidden></option>
+                                        <option v-for="(item, index) in emplacement.labos" :key="index" :value="item.id">
                                             {{
                                                 item.labo_nom }}
                                         </option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="mb-2 col-md-12">
+                            <div class="mb-2 col-md-8">
                                 <label for="hsnom">Prix <sup class="text-danger">*</sup> </label>
                                 <div class="d-flex">
                                     <input type="text" v-model="form.prix" class="form-control me-1 flex-fill"
@@ -51,6 +55,15 @@
                                         <option value="CDF" selected>USD</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="mb-2 col-md-4">
+                                <label for="hsnom">Resultat type <sup class="text-danger">*</sup> </label>
+                                <select class="form-control" v-model="form.resultat_type">
+                                    <option label="type de resultat..." selected hidden></option>
+                                    <option value="text">Text</option>
+                                    <option value="image">Image</option>
+                                    <option value="numeric">Numerique</option>
+                                </select>
                             </div>
 
                             <div class="col-md-12 mb-2">
@@ -91,19 +104,18 @@ export default {
                 prix: '',
                 devise: 'CDF',
                 emplacement_id: '',
+                resultat_type: '',
                 labo_id: '',
                 description: '',
-                key: 'examens'
             },
             formLoading: false,
-            errors_msg: ''
+            errors_msg: '',
+            labos: [],
+            emplacement: ''
         }
     },
     mounted() {
-        let self = this;
-        $('#examensCreateModal').on("show.bs.modal", function (e) {
-            self.$store.dispatch('services/showConfigs');
-        });
+        this.$store.dispatch('services/showConfigs');
     },
 
     methods: {
@@ -113,7 +125,8 @@ export default {
              * Dispatch vuex action createHospital
              * @argument form this.form
             */
-            this.$store.dispatch('services/addConfig', this.form).then((res) => {
+            this.form.emplacement_id = this.emplacement.id;
+            this.$store.dispatch('labo/configExamens', this.form).then((res) => {
                 console.log(res);
                 this.formLoading = false;
                 if (res.status !== undefined) {
@@ -131,7 +144,9 @@ export default {
                     this.form.description = "";
                     this.form.emplacement_id = "";
                     this.form.prix = "";
+                    this.form.resultat_type = "";
                     this.form.labo_id = "";
+                    this.emplacement = "";
                 }
                 if (res.errors !== undefined) {
                     this.errors_msg = res.errors.toString();
@@ -156,9 +171,6 @@ export default {
         configs() {
             return this.$store.getters['services/GET_CONFIGS']
         },
-        labos() {
-            return this.$store.getters['labo/GET_LABOS']
-        }
     },
 }
 </script>

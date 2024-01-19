@@ -110,12 +110,9 @@
                                                         <label class="form-label text-dark">Motif
                                                             de la consultation
                                                             <sup class="text-danger">*</sup></label>
-                                                        <div class="form-icon right">
-                                                            <input type="text" class="form-control form-control-icon"
-                                                                placeholder="Entrer le motif de la consultation..."
-                                                                v-model="form_consult.libelle" required>
-                                                            <i class="ri-edit-box-fill"></i>
-                                                        </div>
+                                                        <textarea class="form-control form-control-icon"
+                                                            placeholder="Entrer le motif de la consultation..."
+                                                            v-model="form_consult.libelle" required></textarea>
                                                     </div>
                                                     <div class="col-md-5">
                                                         <div class="row">
@@ -138,7 +135,7 @@
                                                     </div>
 
                                                     <div class="col-md-7">
-                                                        <div class="row">
+                                                        <div class="row text-dark">
                                                             <div class="col-md-12">
                                                                 <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Les
                                                                     antécedents

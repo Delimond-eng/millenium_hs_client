@@ -63,7 +63,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr v-for="(consult, index) in consultations" :key="index">
-                                                    <td>{{ formatDate(consult.consult_create_At) }}
+                                                    <td>{{ consult.consult_create_At }}
                                                     </td>
                                                     <td><span v-if="consult.patient">{{ consult.patient.patient_nom }} {{
                                                         consult.patient.patient_prenom }}</span></td>
@@ -74,7 +74,10 @@
                                                         consult.agent.agent_nom }} {{
         consult.agent.agent_prenom }}</span></td>
                                                     <td>
-                                                        <button type="button" class="btn btn-sm btn-info btn-border me-2"
+                                                        <button type="button"
+                                                            class="btn btn-sm btn-border me-1 btn-secondary"><i
+                                                                class="ri-edit-line"></i>Editer</button>
+                                                        <button type="button" class="btn btn-sm btn-info btn-border me-1"
                                                             @click="selectedConsult = consult; $showBsModal('detailsModal')">Voir
                                                             détails</button>
                                                         <button type="button" class="btn btn-sm btn-border btn-light"><i

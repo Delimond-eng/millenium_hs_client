@@ -43,7 +43,7 @@
                     <div class="d-flex">
                         <input type="number" v-model="inputs.dosage" class="form-control flex-fill me-2"
                             placeholder="Dosage">
-                        <select class="form-select" style="width:120px" v-model="inputs.dosage_unite" required>
+                        <select class="form-select" style="width:120px" v-model="inputs.dosage_unite">
                             <option label="unité" selected hidden></option>
                             <option value="mg">mg</option>
                             <option value="µg">µg</option>

@@ -7,15 +7,25 @@
                     <div class="col-12 col-md-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Dossier médical</h4>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+
+                                    <li v-if="doc" class="breadcrumb-item"><a href="javascript: void(0);"
+                                            class="btn btn-secondary btn-sm text-white btn-border"> <i
+                                                class="ri-printer-fill"></i>
+                                            Imprimer</a></li>
+                                </ol>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="pt-2 mb-lg-3 pb-lg-2 profile-wrapper">
-                    <div class="row g-4">
+                <div class="pt-2 mb-lg-3 pb-lg-2 profile-wrapper card">
+                    <div class="row g-4 p-3">
                         <div class="col-auto">
                             <div class="avatar-lg">
-                                <img src="assets/images/users/avatar-1.jpg" alt="user-img" class="img-thumbnail rounded-4">
+                                <img src="assets/images/companies/doc2.png" alt="user-img"
+                                    class="img-thumbnail img-fluid rounded-2">
                             </div>
                         </div>
                         <!--end col-->
@@ -33,9 +43,44 @@
                                         <i class="ri-building-line me-1 text-opacity-75 fs-16 align-middle"></i>Themesbrand
                                     </div>
                                 </div>
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <tbody class="text-black">
+                                            <tr>
+                                                <th scope="row">Sexe</th>
+                                                <td>{{ doc.patient_sexe }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
+                        <div class="col">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <tbody class="text-black">
+                                        <tr>
+                                            <th scope="row">Date de naissance</th>
+                                            <td>{{ doc.patient_datenais }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Etat civil</th>
+                                            <td>{{ doc.patient_etat_civil }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Groupe </th>
+                                            <td>{{ doc.patient_gs }}
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                     <!--end row-->
                 </div>
@@ -50,7 +95,7 @@
                                         <a class="nav-link fs-14 active" data-bs-toggle="tab" href="#overview-tab"
                                             role="tab" aria-selected="true">
                                             <i class="ri-airplay-fill d-inline-block d-md-none"></i> <span
-                                                class="d-none d-md-inline-block">Signes vitaux</span>
+                                                class="d-none d-md-inline-block">Symptômes & signes vitaux</span>
                                         </a>
                                     </li>
                                     <li class="nav-item" role="presentation">
@@ -93,12 +138,13 @@
                                                 <div class="col-lg-12">
                                                     <div class="card">
                                                         <div class="card-header align-items-center d-flex">
-                                                            <h4 class="card-title mb-0  me-2">Les signes vitaux</h4>
+                                                            <h4 class="card-title mb-0  me-2">Symptômes & signes vitaux</h4>
 
                                                         </div>
                                                         <div class="card-body">
                                                             <div class="profile-timeline">
                                                                 <div class="accordion accordion-flush" id="todayExample">
+                                                                    <h6>Signes vitaux</h6>
                                                                     <div class="accordion-item border-0">
                                                                         <div class="accordion-header" id="headingFour">
                                                                             <a class="accordion-button p-2 shadow-none"
@@ -302,7 +348,6 @@
                                                     <div class="card">
                                                         <div class="card-header align-items-center d-flex">
                                                             <h4 class="card-title mb-0  me-2">Les signes vitaux</h4>
-
                                                         </div>
                                                         <div class="card-body">
                                                             <div class="profile-timeline">

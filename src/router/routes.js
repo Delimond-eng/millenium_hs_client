@@ -8,7 +8,8 @@ import HomeModule from "@/template/view/screens/public/home_modules";
 /**
  * Config routes pages
  */
-import ConfigExamensPage from "@/template/view/pages/config_manage_pages/examens_config_page";
+import ConfigExamensPage from "@/template/view/pages/labo_manage_pages/examens_config_page.vue";
+import ConfigLabosPage from "@/template/view/pages/labo_manage_pages/labo_config_page.vue";
 
 /**
  * SERVICES
@@ -82,9 +83,14 @@ const routes = [
        * COnfig routes
        */
       {
-        path: "/admin/config/examens",
+        path: "/admin/labo/config/examens",
         component: ConfigExamensPage,
-        name: "config-examens",
+        name: "admin-config-examens",
+      },
+      {
+        path: "/admin/labo/config",
+        component: ConfigLabosPage,
+        name: "admin-config-labos",
       },
       {
         path: "/admin/manage/pharmacies",

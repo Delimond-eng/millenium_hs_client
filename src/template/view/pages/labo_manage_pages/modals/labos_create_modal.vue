@@ -91,6 +91,7 @@ export default {
                         timer: 3000,
                         showCloseButton: false,
                     });
+                    this.$store.dispatch('labo/viewLabos');
 
                     this.form.labo_nom = "";
                     this.form.labo_adresse = "";

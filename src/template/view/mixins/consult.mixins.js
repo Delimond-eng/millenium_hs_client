@@ -45,15 +45,9 @@ export default {
       this.$showBsModal("patientsPendingModal");
     });
     this.$store.dispatch("services/viewAllExamens");
-    this.init();
   },
 
   methods: {
-    async init() {
-      let self = this;
-      let agentId = this.$user().agent_id;
-    },
-
     /**
      * SOUMET UNE CONSULTATION AU SERVEUR
      */
@@ -95,6 +89,7 @@ export default {
               icon: "success",
               title: "Consultation créée avec succès !",
               showConfirmButton: false,
+              toast: true,
               timer: 3000,
               showCloseButton: false,
             });

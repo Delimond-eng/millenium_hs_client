@@ -145,19 +145,14 @@
                         <div class="collapse menu-dropdown" id="lab">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item" v-if="$user().agent_id === 0">
-                                    <button class="nav-link" @click.stop="$showBsModal('laboCreateModal')">
+                                    <button class="nav-link" @click.stop="$router.push({ name: 'admin-config-labos' })">
                                         Création laboratoire
                                     </button>
                                 </li>
                                 <li class="nav-item" v-if="$user().agent_id === 0">
-                                    <button class="nav-link" @click.stop="$showBsModal('laboViewModal')">
-                                        Liste des laboratoires
+                                    <button class="nav-link" @click.stop="$router.push({ name: 'admin-config-examens' })">
+                                        Congiguration examens
                                     </button>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#/admin/config/examens" class="nav-link">
-                                        Configuration examens
-                                    </a>
                                 </li>
                                 <li class="nav-item" v-if="$user().agent_id !== 0">
                                     <a href="javascript:void(0)" class="nav-link" data-key="t-list"> Examens en attente </a>
@@ -311,13 +306,9 @@
         <div class="sidebar-background"></div>
     </div>
     <service-config-modal :action-key="actionKey" />
-    <labo-list-modal />
-    <labo-create-modal />
 </template>
 
 <script>
-import laboCreateModal from '../pages/config_manage_pages/modals/labos_create_modal'
-import laboListModal from '../pages/config_manage_pages/modals/labos_list_modal'
 export default {
     name: "SidebarLayout",
     data() {
@@ -330,10 +321,6 @@ export default {
             this.actionKey = tag;
             this.$showBsModal('serviceConfigModal');
         }
-    },
-    components: {
-        laboCreateModal,
-        laboListModal
-    },
+    }
 }
 </script>

@@ -56,7 +56,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="fw-medium">Date et heure</td>
-                                                <td v-if="selectedConsult">{{ formatDate(selectedConsult.consult_create_At)
+                                                <td v-if="selectedConsult">{{ selectedConsult.consult_create_At
                                                 }}</td>
                                             </tr>
                                         </tbody>
