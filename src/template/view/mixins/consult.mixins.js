@@ -47,7 +47,21 @@ export default {
     this.$store.dispatch("services/viewAllExamens");
   },
 
+  unmounted() {
+    localStorage.removeItem("cached-consult");
+  },
+
   methods: {
+    /**
+     * Recuperer les données d'une consultation en cache
+     */
+    init() {
+      let cachedData = localStorage.getItem("cached-consult");
+      console.log(cachedData);
+      if (cachedData !== null) {
+        let localConsult = JSON.parse(cachedData);
+      }
+    },
     /**
      * SOUMET UNE CONSULTATION AU SERVEUR
      */
