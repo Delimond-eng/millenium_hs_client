@@ -56,6 +56,9 @@ import FacturationsTab from "@/template/view/pages/config_manage_pages/tabs/fact
  * Pages qui gerent le cas d'urgence
  */
 import PremierSoinsPage from "@/template/view/pages/urgence_manage_pages/premier_soins_page";
+
+
+import DatatablesNet from "@/template/view/pages/datatables.net.vue";
 const routes = [
   {
     path: "/",
@@ -77,6 +80,11 @@ const routes = [
         path: "/home/dash",
         component: Dashboard,
         name: "dash",
+      },
+      {
+        path: '/home/datatables.net',
+        component: DatatablesNet,
+        name:'datatable-route'
       },
 
       /**

@@ -3,6 +3,7 @@ import LoadState from "./src/load_state";
 import BsToast from "./src/alert_message";
 import StateEmpty from "./src/state_empty";
 import SVGLoading from "./src/loading_svg";
+import CustomDatatable from "./src/custom_datatable.vue";
 export default {
     install: (app, opt) => {
         app.component("load-button", LoadButton);
@@ -10,5 +11,6 @@ export default {
         app.component("bs-toast", BsToast);
         app.component("svg-loading", SVGLoading);
         app.component("state-empty", StateEmpty);
+        app.component("custom-table", CustomDatatable);
     },
 };

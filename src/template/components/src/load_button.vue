@@ -1,6 +1,6 @@
 <template>
-    <button v-if="btnType == 'button'" @click.prevent="$emit('click', $event)" :type="btnType" :disabled="loading"
-        class="btn btn-border btn-load" :class="className">
+    <button v-if="btnType === 'button'" @click.prevent="$emit('click', $event)" :type="btnType" :disabled="loading"
+            class="btn btn-border btn-load" :class="className">
         <svg width="22" v-show="loading" fill="#FFFFFF" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <circle class="spinner_S1WN" cx="4" cy="12" r="3" />
             <circle class="spinner_S1WN spinner_Km9P" cx="12" cy="12" r="3" />

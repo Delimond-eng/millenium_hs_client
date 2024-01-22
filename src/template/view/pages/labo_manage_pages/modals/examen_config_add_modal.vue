@@ -140,6 +140,7 @@ export default {
                         showCloseButton: false,
                     });
                     this.$store.dispatch('services/showConfigs');
+                    this.$emit('reload');
                     this.form.libelle = "";
                     this.form.description = "";
                     this.form.emplacement_id = "";

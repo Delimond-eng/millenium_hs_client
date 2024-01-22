@@ -47,7 +47,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="card p-2 mt-0" v-if="facturations.length > 0">
+                <!-- <div class="card p-2 mt-0">
                     <table class="table table-sm table-nowrap text-dark mt-2">
                         <thead class="bg-primary text-white">
                             <tr>
@@ -72,7 +72,14 @@
                             </tr>
                         </tbody>
                     </table>
-
+                </div> -->
+                <div class="card">
+                    <div class="card-body">
+                        <custom-table v-if="isHopitalDefined"
+                            :api-url="`http://127.0.0.1:8000/api/configs.facturations/all/${$user().hopital.id}`"
+                            :columns="dataTableColumns" :data-src="'results'" ref="customTableFacturations"
+                            :action-buttons="actionButtons" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -92,7 +99,16 @@ export default {
                 montant: '',
                 montant_devise: 'CDF',
                 emplacement_id: '',
-            }
+            },
+            dataTableColumns: [
+                { data: 'facturation_config_libelle', title: "Libelle facture" },
+                { data: 'facturation_config_montant', title: 'Montant' },
+                { data: 'facturation_config_montant_devise', title: 'devise' },
+                { data: 'emplacement.hopital_emplacement_libelle', title: 'Emplacement' }
+            ],
+            actionButtons: [
+                { label: '<i class="ri-delete-bin-3-line"></i>', class: 'btn-soft-danger', key: 'delete' },
+            ],
         }
     },
     methods: {
@@ -110,7 +126,7 @@ export default {
                         timer: 3000,
                         showCloseButton: false,
                     });
-                    this.$store.dispatch('services/viewFacturations', 'all');
+                    this.$refs.customTableFacturations.reloadData();
                     this.cleanField();
                 }
                 if (res.errors !== undefined) {
@@ -121,8 +137,6 @@ export default {
                 }
             }).catch(err => this.formLoading = false);
         },
-
-
         cleanField() {
             this.form.libelle = '';
             this.form.emplacement_id = '';
@@ -134,8 +148,8 @@ export default {
         configs() {
             return this.$store.getters['services/GET_CONFIGS']
         },
-        facturations() {
-            return this.$store.getters['services/GET_ALL_FACTURATIONS']
+        isHopitalDefined() {
+            return this.$user().hopital !== undefined;
         },
     },
 }

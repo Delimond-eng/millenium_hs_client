@@ -13,53 +13,30 @@
                 <!-- end page title -->
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row g-2">
-                                    <div class="col-sm-6">
-                                        <div class="search-box">
-                                            <input type="text" class="form-control" v-model="search" id="searchMemberList"
-                                                placeholder="Recherche patient, par nom ou par code...">
-                                            <i class="ri-search-line search-icon"></i>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-sm-auto ms-auto">
-                                        <div class="list-grid-nav hstack gap-1">
-                                            <button class="btn btn-success btn-border addMembers-modal"
-                                                @click="$router.push('/home/patient/create')"><i
-                                                    class="ri-add-fill me-1 align-bottom"></i> Nouveau patient</button>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                </div>
-                                <!--end row-->
-                            </div>
+                        <div class="step-arrow-nav bg-white shadow-sm mb-2 p-2">
+                            <ul class="nav nav-pills custom-nav" role="tablist">
+                                <li class="nav-item active" role="presentation">
+                                    <button class="nav-link p-3 active" @click="tab = 'all'" id="all-tab"
+                                        data-bs-toggle="pill" data-bs-target="#tab-all" type="button" role="tab"
+                                        aria-controls="all" aria-selected="true">
+                                        Tous les patients
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link p-3" id="tab-pendings-tab" @click="tab = 'pending'"
+                                        data-bs-toggle="pill" data-bs-target="#tab-pendings" type="button" role="tab"
+                                        aria-controls="tab-pendings" aria-selected="false">Patients en
+                                        attente <span class="badge bg-danger align-middle ms-1">{{
+                                            pendings.length }}</span></button>
+                                </li>
+
+                            </ul>
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <div class="step-arrow-nav mt-n3 mx-n3 mb-3">
-                                    <ul class="nav nav-pills nav-justified custom-nav" role="tablist">
-                                        <li class="nav-item active" role="presentation">
-                                            <button class="nav-link p-3 active" @click="tab = 'all'" id="all-tab"
-                                                data-bs-toggle="pill" data-bs-target="#tab-all" type="button" role="tab"
-                                                aria-controls="all" aria-selected="true">
-                                                Tous les patients
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link p-3" id="tab-pendings-tab" @click="tab = 'pending'"
-                                                data-bs-toggle="pill" data-bs-target="#tab-pendings" type="button"
-                                                role="tab" aria-controls="tab-pendings" aria-selected="false">Patients en
-                                                attente <span class="badge bg-danger align-middle ms-1">{{
-                                                    pendings.length }}</span></button>
-                                        </li>
-
-                                    </ul>
-                                </div>
                                 <div class="tab-content">
-                                    <div class="tab-pane active show" role="tabpanel" id="tab-all">
-                                        <div class="table-responsive table-card">
+                                    <div class="tab-pane active show w-100" role="tabpanel" id="tab-all">
+                                        <!-- <div class="table-responsive table-card">
                                             <table class="table align-middle table-nowrap table-striped-columns mb-0">
                                                 <thead class="table-light">
                                                     <tr>
@@ -105,10 +82,14 @@
                                             <state-empty v-if="patients.length === 0"
                                                 title="Aucune information répertoriée !"
                                                 description="Il n'y a aucun patient dans la liste pour l'instant !"></state-empty>
-                                        </div>
+                                        </div> -->
+                                        <custom-table v-if="isEmplacementDefined"
+                                            :api-url="`http://127.0.0.1:8000/api/patients.all/${$user().hopital.emplacement.id}`"
+                                            :columns="dataTableColumns" :data-src="'patients'" ref="customTablePatients"
+                                            :action-buttons="actionButtons" />
                                     </div>
-                                    <div class="tab-pane" role="tabpanel" id="tab-pendings">
-                                        <div class="table-responsive table-card">
+                                    <div class="tab-pane w-100" role="tabpanel" id="tab-pendings">
+                                        <!-- <div class="table-responsive table-card">
                                             <table class="table align-middle table-nowrap table-striped-columns mb-0">
                                                 <thead class="table-light">
                                                     <tr>
@@ -165,7 +146,6 @@
                                                                     1].patient_fiche_tension_art }}
                                                             </span>
                                                         </td>
-                                                        <!-- <td><i class="ri-user-2-line me-1"></i>Lionnel</td> -->
                                                         <td>
                                                             <button type="button" class="btn btn-sm btn-secondary me-2"
                                                                 @click.prevent="setPatient(item)">Nouvelle
@@ -183,7 +163,11 @@
                                             <state-empty v-if="pendings.length === 0"
                                                 title="Aucune information répertoriée !"
                                                 description="Il n'y a aucune fiche de patient en attente pour l'instant !"></state-empty>
-                                        </div>
+                                        </div> -->
+                                        <custom-table v-if="isEmplacementDefined"
+                                            :api-url="`http://127.0.0.1:8000/api/patients.pending/${$user().hopital.emplacement.id}`"
+                                            :columns="dataTableColumns2" :data-src="'patients'" ref="customTablePatients2"
+                                            :action-buttons="actionButtons2" />
                                     </div>
                                 </div>
                             </div>
@@ -227,7 +211,45 @@ export default {
     data() {
         return {
             tab: 'all',
-            search: ''
+            search: '',
+            dataTableColumns: [
+                { data: 'patient_code', title: "Code" },
+                {
+                    data: null,
+                    title: 'Nom complet',
+                    render: function (data, type, row) {
+                        // Concaténer les valeurs de agent_nom et agent_prenom
+                        return row.patient_nom + ' ' + row.patient_prenom;
+                    },
+                },
+                { data: 'patient_sexe', title: 'Sexe' },
+                { data: 'patient_datenais', title: 'Date naissance' },
+                { data: 'patient_telephone', title: 'Téléphone' }
+            ],
+            actionButtons: [
+                { label: '<i class="ri-edit-2-line"></i>', class: 'btn-info me-1', key: 'edit' },
+                { label: 'Voir parcours', class: 'btn-soft-secondary me-1', key: 'edit' },
+                { label: '<i class="ri-delete-bin-3-line"></i>', class: 'btn-soft-danger me-1', key: 'delete' },
+            ],
+            dataTableColumns2: [
+                { data: 'patient_code', title: "Code" },
+                {
+                    data: null,
+                    title: 'Nom complet',
+                    render: function (data, type, row) {
+                        // Concaténer les valeurs de agent_nom et agent_prenom
+                        return row.patient_nom + ' ' + row.patient_prenom;
+                    },
+                },
+                { data: 'patient_sexe', title: 'Sexe' },
+                { data: 'patient_datenais', title: 'Date naissance' },
+                { data: 'patient_telephone', title: 'Téléphone' },
+
+            ],
+            actionButtons2: [
+                { label: 'Voir signes vitaux', class: 'btn-secondary me-1', key: 'view' },
+                { label: '<i class="ri-delete-bin-3-line"></i>', class: 'btn-soft-danger me-1', key: 'delete' },
+            ],
         }
     },
 
@@ -238,17 +260,6 @@ export default {
         setPatient(data) {
             localStorage.setItem('current-patient', JSON.stringify(data));
             this.$router.push({ name: 'patient-create' });
-        },
-
-        checkInList() {
-            let myList = ['apple', 'banana', 'orange', 'grape'];
-            let searchString = 'banane';
-
-            if (myList.find(item => item === searchString)) {
-                console.log(`${searchString} is in the list.`);
-            } else {
-                console.log(`${searchString} is not in the list.`);
-            }
         }
     },
 
@@ -268,14 +279,10 @@ export default {
             }
         },
         patients() {
-            if (this.search && this.tab === 'all') {
-                let arr = this.$store.getters['services/GET_PATIENTS'];
-                let filtered = arr.filter((el) => el.patient_nom.toLowerCase().includes(this.search.toLocaleLowerCase()))
-                return filtered;
-            }
-            else {
-                return this.$store.getters['services/GET_PATIENTS'];
-            }
+            return this.$store.getters['services/GET_PATIENTS'];
+        },
+        isEmplacementDefined() {
+            return this.$user().hopital !== undefined && this.$user().hopital.emplacement !== undefined;
         }
     },
 }

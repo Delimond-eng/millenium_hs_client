@@ -148,240 +148,46 @@
                                 </div>
                             </div>
 
+                            <div class="step-arrow-nav mt-n3 mb-2 bg-white shadow-sm">
+                                <ul class="nav nav-pills nav-justified bg-white custom-nav" role="tablist">
+                                    <li class="nav-item active" role="presentation">
+                                        <button class="nav-link p-3 active" id="pills-bill-info-tab" data-bs-toggle="pill"
+                                            data-bs-target="#pills-bill-info" type="button" role="tab"
+                                            aria-controls="pills-bill-info" aria-selected="true">Demandes
+                                            des examens <span class="badge bg-danger align-middle ms-1">{{
+                                                examens.length }}</span> </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link p-3" id="patient-pending-tab" data-bs-toggle="pill"
+                                            data-bs-target="#patient-pending" type="button" role="tab"
+                                            aria-controls="patient-pending-tab" aria-selected="false">Patients en
+                                            attente <span class="badge bg-danger align-middle ms-1">{{
+                                                pendings.length }}</span></button>
+                                    </li>
+
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link p-3" id="rdv-tab" data-bs-toggle="pill"
+                                            data-bs-target="#schedules" type="button" role="tab" aria-controls="rdv"
+                                            aria-selected="false">Rendez-vous journaliers <span
+                                                class="badge bg-danger align-middle ms-1">{{
+                                                    schedules.length }}</span></button>
+                                    </li>
+
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link p-3" id="prescription_tab-btn" data-bs-toggle="pill"
+                                            data-bs-target="#prescription-tab" type="button" role="tab"
+                                            aria-controls="pills-bill-address" aria-selected="false">Prescriptions
+                                            en attente<span class="badge bg-danger align-middle ms-1">{{
+                                                prescriptions.length }}</span></button>
+                                    </li>
+                                </ul>
+                            </div>
+
                             <div class="card checkout-tab" v-if="$user().agent_id !== 0">
                                 <div class="card-body">
-                                    <div class="step-arrow-nav mt-n3 mx-n3 mb-3">
-                                        <ul class="nav nav-pills nav-justified bg-white custom-nav" role="tablist">
-                                            <li class="nav-item active" role="presentation">
-                                                <button class="nav-link p-3 active" id="pills-bill-info-tab"
-                                                    data-bs-toggle="pill" data-bs-target="#pills-bill-info" type="button"
-                                                    role="tab" aria-controls="pills-bill-info" aria-selected="true">Demandes
-                                                    des examens <span class="badge bg-danger align-middle ms-1">{{
-                                                        examens.length }}</span> </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link p-3" id="patient-pending-tab" data-bs-toggle="pill"
-                                                    data-bs-target="#patient-pending" type="button" role="tab"
-                                                    aria-controls="patient-pending-tab" aria-selected="false">Patients en
-                                                    attente <span class="badge bg-danger align-middle ms-1">{{
-                                                        pendings.length }}</span></button>
-                                            </li>
 
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link p-3" id="rdv-tab" data-bs-toggle="pill"
-                                                    data-bs-target="#schedules" type="button" role="tab" aria-controls="rdv"
-                                                    aria-selected="false">Rendez-vous journaliers <span
-                                                        class="badge bg-danger align-middle ms-1">{{
-                                                            schedules.length }}</span></button>
-                                            </li>
-
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link p-3" id="prescription_tab-btn" data-bs-toggle="pill"
-                                                    data-bs-target="#prescription-tab" type="button" role="tab"
-                                                    aria-controls="pills-bill-address" aria-selected="false">Prescriptions
-                                                    en attente<span class="badge bg-danger align-middle ms-1">{{
-                                                        prescriptions.length }}</span></button>
-                                            </li>
-                                        </ul>
-                                    </div>
                                     <div class="tab-content">
-                                        <div class="tab-pane fade show active" id="pills-bill-info" role="tabpanel"
-                                            aria-labelledby="pills-bill-info-tab">
-
-                                            <div class="table-responsive table-card">
-                                                <table class="table align-middle table-nowrap table-striped-columns mb-0">
-                                                    <thead class="table-secondary text-uppercase">
-                                                        <tr>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Patient</th>
-                                                            <th scope="col">Médecin</th>
-                                                            <th scope="col">Status</th>
-                                                            <th scope="col"></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr v-for="(data, index) in examens" :key="index">
-                                                            <td>{{ data.consult_examen_create_At }}</td>
-                                                            <td>{{ data.patient_nom }}</td>
-                                                            <td>{{ data.agent_nom }}</td>
-                                                            <td class="text-warning"><i
-                                                                    class="ri-time-line fs-17 align-middle"></i> {{
-                                                                        data.consult_examen_status }}
-                                                            </td>
-                                                            <td>
-                                                                <button :disabled="loaded === data.consult_id"
-                                                                    class="btn btn-soft-success btn-load btn-sm me-1"
-                                                                    @click.prevent="validDemand(data.consult_id)">
-                                                                    <svg-loading v-if="loaded === data.consult_id"
-                                                                        color="#13b69f" size="18"></svg-loading>
-                                                                    <span v-else>Valider</span>
-                                                                </button>
-                                                                <button :disabled="loadedDetail === data.consult_id"
-                                                                    class="btn btn-soft-info btn-sm"
-                                                                    @click.prevent="showDetail(data)">
-                                                                    <svg-loading v-if="loadedDetail === data.consult_id"
-                                                                        color="#0C8BCF" size="18"></svg-loading>
-                                                                    <span v-else> <i class="ri-eye-line"></i>Voir
-                                                                        examens</span></button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <state-empty v-if="examens.length === 0"
-                                                    title="Aucun informations répertorié !"
-                                                    description="Il y a aucun examen en attente !"></state-empty>
-                                            </div>
-                                            <!--  <div class="table-responsive">
-                                                <table class="table align-middle mb-0">
-                                                    <thead class="table-light">
-                                                        <tr>
-                                                            <th scope="col">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" value=""
-                                                                        id="responsivetableCheck">
-                                                                    <label class="form-check-label"
-                                                                        for="responsivetableCheck"></label>
-                                                                </div>
-                                                            </th>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Patient</th>
-                                                            <th scope="col">Médecin</th>
-                                                            <th scope="col">Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><a href="#" class="fw-semibold">#VZ2110</a></td>
-                                                            <td>10 Oct, 14:47</td>
-                                                            <td>Mastering the grid</td>
-                                                            <td>$9.98</td>
-                                                            <td class="text-success"><i
-                                                                        class="ri-checkbox-circle-line fs-17 align-middle"></i>
-                                                                    Paid</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" value=""
-                                                                        id="responsivetableCheck02">
-                                                                    <label class="form-check-label"
-                                                                        for="responsivetableCheck02"></label>
-                                                                </div>
-                                                            </th>
-                                                            <td><a href="#" class="fw-semibold">#VZ2109</a></td>
-                                                            <td>17 Oct, 02:10</td>
-                                                            <td class="text-success"><i
-                                                                    class="ri-checkbox-circle-line fs-17 align-middle"></i>
-                                                                Paid</td>
-                                                            <td>
-                                                                <div class="d-flex gap-2 align-items-center">
-                                                                    <div class="flex-shrink-0">
-                                                                        <img src="assets/images/users/avatar-4.jpg" alt=""
-                                                                            class="avatar-xs rounded-circle" />
-                                                                    </div>
-                                                                    <div class="flex-grow-1">
-                                                                        Jackson Graham
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>Splashify</td>
-                                                            <td>$270.60</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" value=""
-                                                                        id="responsivetableCheck03">
-                                                                    <label class="form-check-label"
-                                                                        for="responsivetableCheck03"></label>
-                                                                </div>
-                                                            </th>
-                                                            <td><a href="#" class="fw-semibold">#VZ2108</a></td>
-                                                            <td>26 Oct, 08:20</td>
-                                                            <td class="text-primary"><i
-                                                                    class="ri-refresh-line fs-17 align-middle"></i> Refunded
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex gap-2 align-items-center">
-                                                                    <div class="flex-shrink-0">
-                                                                        <img src="assets/images/users/avatar-5.jpg" alt=""
-                                                                            class="avatar-xs rounded-circle" />
-                                                                    </div>
-                                                                    <div class="flex-grow-1">
-                                                                        Lauren Trujillo
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>Wireframing Kit for Figma</td>
-                                                            <td>$145.42</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" value=""
-                                                                        id="responsivetableCheck04">
-                                                                    <label class="form-check-label"
-                                                                        for="responsivetableCheck04"></label>
-                                                                </div>
-                                                            </th>
-                                                            <td><a href="#" class="fw-semibold">#VZ2107</a></td>
-                                                            <td>02 Nov, 04:52</td>
-                                                            <td class="text-danger"><i
-                                                                    class="ri-close-circle-line fs-17 align-middle"></i>
-                                                                Cancel</td>
-                                                            <td>
-                                                                <div class="d-flex gap-2 align-items-center">
-                                                                    <div class="flex-shrink-0">
-                                                                        <img src="assets/images/users/avatar-6.jpg" alt=""
-                                                                            class="avatar-xs rounded-circle" />
-                                                                    </div>
-                                                                    <div class="flex-grow-1">
-                                                                        Curtis Weaver
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>Wireframing Kit for Figma</td>
-                                                            <td>$170.68</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" value=""
-                                                                        id="responsivetableCheck05">
-                                                                    <label class="form-check-label"
-                                                                        for="responsivetableCheck05"></label>
-                                                                </div>
-                                                            </th>
-                                                            <td><a href="#" class="fw-semibold">#VZ2106</a></td>
-                                                            <td>10 Nov, 07:20</td>
-                                                            <td class="text-success"><i
-                                                                    class="ri-checkbox-circle-line fs-17 align-middle"></i>
-                                                                Paid</td>
-                                                            <td>
-                                                                <div class="d-flex gap-2 align-items-center">
-                                                                    <div class="flex-shrink-0">
-                                                                        <img src="assets/images/users/avatar-1.jpg" alt=""
-                                                                            class="avatar-xs rounded-circle" />
-                                                                    </div>
-                                                                    <div class="flex-grow-1">
-                                                                        Jason schuller
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>Splashify</td>
-                                                            <td>$350.87</td>
-                                                        </tr>
-                                                    </tbody>
-                                                    <tfoot class="table-light">
-                                                        <tr>
-                                                            <td colspan="6">Total</td>
-                                                            <td>$947.55</td>
-                                                        </tr>
-                                                    </tfoot>
-                                                </table>
-                                            </div> -->
-                                        </div>
+                                        <pending-examens-tab></pending-examens-tab>
                                         <div class="tab-pane fade" id="patient-pending" role="tabpanel"
                                             aria-labelledby="pills-bill-address-tab">
 
@@ -462,7 +268,7 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="schedules" role="tabpanel" aria-labelledby="rdv-tab">
-                                            <div class="row mb-4">
+                                            <div class="row mb-3">
                                                 <div class="col-sm order-3 order-sm-2 mt-sm-0">
                                                     <h5 class="fw-semibold mb-0">Les rendez-vous en attente</h5>
                                                 </div>
@@ -518,54 +324,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="tab-pane fade" id="prescription-tab" role="tabpanel"
-                                            aria-labelledby="prescription-tab">
-                                            <div class="table-responsive table-card">
-                                                <table class="table align-middle table-nowrap table-striped-columns mb-0 ">
-                                                    <thead class="table-secondary text-uppercase">
-                                                        <tr>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Patient</th>
-                                                            <th scope="col">Médecin</th>
-                                                            <th scope="col">Status</th>
-                                                            <th scope="col">Emplacement</th>
-                                                            <th scope="col"></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr v-for="(data, index) in prescriptions" :key="index">
-                                                            <td>{{ data.prescription_create_At }}</td>
-                                                            <td>{{ data.patient_nom }}</td>
-                                                            <td>{{ data.agent_nom }}</td>
-                                                            <td class="text-warning"><i
-                                                                    class="ri-time-line fs-17 align-middle"></i> en
-                                                                attente
-                                                            </td>
-                                                            <td>{{ data.hopital_emplacement_libelle }}</td>
-                                                            <td>
-                                                                <button :disabled="loaded === data.consult_id"
-                                                                    @click="validatePrescription(data.consult_id)"
-                                                                    class="btn btn-soft-success btn-load btn-sm me-1">
-                                                                    <svg-loading v-if="loaded === data.consult_id"
-                                                                        color="#13b69f" size="18"></svg-loading>
-                                                                    <span v-els>Valider</span>
-                                                                </button>
-                                                                <button :disabled="loadedDetail === data.consult_id"
-                                                                    class="btn btn-soft-info btn-sm"
-                                                                    @click="showPrescriptionDetails(data)">
-                                                                    <svg-loading v-if="loadedDetail === data.consult_id"
-                                                                        color="#0C8BCF" size="18"></svg-loading>
-                                                                    <span v-else><i class="ri-eye-line"></i>Voir
-                                                                        examens</span></button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <state-empty v-if="prescriptions.length === 0"
-                                                    title="Aucun informations répertorié !"
-                                                    description="Il y a aucun examen en attente !"></state-empty>
-                                            </div>
-                                        </div>
+                                        <pending-prescriptions-tab></pending-prescriptions-tab>
                                     </div>
                                 </div>
                             </div>
@@ -597,11 +356,15 @@
 
 <script>
 import examenDetailsModal from "../../modals/modal_examen_details"
-import prescriptionDetailsModal from "../../modals/modal_prescription_details"
+import prescriptionDetailsModal from "../../modals/modal_prescription_details";
+import PendingExamensTab from './tabs/examens_demande_view_tab'
+import PendingPrescriptionsTab from './tabs/prescriptions_demande_view_tab'
 export default {
     components: {
         examenDetailsModal,
         prescriptionDetailsModal,
+        PendingExamensTab,
+        PendingPrescriptionsTab
     },
     data() {
         return {

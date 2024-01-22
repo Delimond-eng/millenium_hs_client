@@ -94,7 +94,6 @@
                                         consultations
                                     </a>
                                 </li>
-
                             </ul>
                         </div>
                     </li>
@@ -116,6 +115,11 @@
                             <i class="bx bx-capsule"></i> <span data-key="t-apps">Premiers soins</span>
                         </a>
                     </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link menu-link" href="#/home/datatables.net" role="button">
+                            <i class="bx bx-capsule"></i> <span data-key="t-apps">Tables</span>
+                        </a>
+                    </li> -->
                     <li class="nav-item" v-if="$isAccessMenu('Hospitalisations')">
                         <a class="nav-link menu-link" href="#/home/hospitalisations.manage" role="button">
                             <i class="ri-hotel-bed-line"></i> <span data-key="t-apps">Hospitalisations</span>
@@ -145,14 +149,14 @@
                         <div class="collapse menu-dropdown" id="lab">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item" v-if="$user().agent_id === 0">
-                                    <button class="nav-link" @click.stop="$router.push({ name: 'admin-config-labos' })">
+                                    <a href="#/admin/labo/config" class="nav-link">
                                         Création laboratoire
-                                    </button>
+                                    </a>
                                 </li>
                                 <li class="nav-item" v-if="$user().agent_id === 0">
-                                    <button class="nav-link" @click.stop="$router.push({ name: 'admin-config-examens' })">
+                                    <a class="nav-link" href="#/admin/labo/config/examens">
                                         Congiguration examens
-                                    </button>
+                                    </a>
                                 </li>
                                 <li class="nav-item" v-if="$user().agent_id !== 0">
                                     <a href="javascript:void(0)" class="nav-link" data-key="t-list"> Examens en attente </a>
