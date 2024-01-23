@@ -48,6 +48,7 @@ export default {
         columnDefs.push(actionsColumn);
       }
       this.table = $(this.$refs.dataTable).DataTable({
+        autoWidth: true,
         ajax: {
           url: this.apiUrl,
           type: 'GET',
@@ -122,3 +123,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.table tbody th,
+.table tbody td {
+  width: 100% !important;
+}
+</style>

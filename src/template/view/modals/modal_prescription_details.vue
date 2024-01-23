@@ -7,9 +7,11 @@
                         <h5 class="text-white fs-20">Préscription des soins médicaux</h5>
                         <div class="d-flex mt-2">
                             <span class="text-white-50 me-2 flex-fill" v-if="detail">Préscrit par : <strong
-                                    class="text-white" v-if="detail.heading">{{ detail.heading.agent_nom }}</strong></span>
+                                    class="text-white" v-if="detail.heading">{{ detail.heading.agent_nom }} {{
+                                        detail.heading.agent_prenom }}</strong></span>
                             <span class="text-white-50 flex-fill" v-if="detail">Patient : <strong class="text-white"
-                                    v-if="detail.heading">{{ detail.heading.patient_nom }}</strong></span>
+                                    v-if="detail.heading">{{ detail.heading.patient_nom }} {{ detail.heading.patient_prenom
+                                    }}</strong></span>
                         </div>
                     </div>
                     <div class="modal-body p-4">

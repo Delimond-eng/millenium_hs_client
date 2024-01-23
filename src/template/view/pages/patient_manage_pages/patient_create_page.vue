@@ -27,17 +27,17 @@
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Veuillez remplir tous les champs requis !</h4>
                             </div>
-                            <ul class="nav nav-tabs m-3" role="tablist">
+                            <ul class="nav nav-tabs nav-tabs-custom nav-success m-3" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link active" data-bs-toggle="tab" href="#basic-infos" role="tab"
                                         aria-selected="true">
-                                        Informations personnelles
+                                        <i class="ri-user-3-line me-2"></i> Informations personnelles
                                     </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" data-bs-toggle="tab" href="#medic-infos" role="tab"
                                         aria-selected="false" tabindex="-1">
-                                        Signes vitaux
+                                        <i class="ri-stethoscope-line me-2"></i> Signes vitaux
                                     </a>
                                 </li>
                             </ul>
@@ -116,7 +116,7 @@
 
                                             <!-- telephone input -->
                                             <div class="col-md-4">
-                                                <div class="mt-2">
+                                                <div class="mt-3">
                                                     <label class="form-label">Téléphone<sup
                                                             class="text-danger">*</sup></label>
                                                     <div class="form-icon">
@@ -128,10 +128,23 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-4">
+                                                <div class="mt-3">
+                                                    <label class="form-label">Téléphone d'urgence<sup
+                                                            class="text-danger">(optionnel)</sup></label>
+                                                    <div class="form-icon">
+                                                        <input type="text" v-model="form.telephone_urgence"
+                                                            class="form-control form-control-icon"
+                                                            placeholder="Saisir le tél... ex: +(243) 810000000"
+                                                            :readonly="form.patient_id !== ''">
+                                                        <i class="ri-phone-line"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <!-- sate naissance input -->
-                                            <div class="col-md-4">
-                                                <div class="mt-2">
+                                            <div class="col-md-3">
+                                                <div class="mt-3">
                                                     <label class="form-label">Date de naissance<sup
                                                             class="text-danger">*</sup></label>
                                                     <div class="form-icon">
@@ -145,7 +158,7 @@
 
 
                                             <div class="col-md-3">
-                                                <div class="mt-2">
+                                                <div class="mt-3">
                                                     <label class="form-label">Etat civil<sup
                                                             class="text-danger">*</sup></label>
                                                     <select class="form-select" v-model='form.etat_civil' required>
@@ -157,8 +170,8 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="mt-2">
+                                            <div class="col-md-3">
+                                                <div class="mt-3">
                                                     <label class="form-label">Groupe sanguin<sup
                                                             class="text-danger">(Optionnel)</sup></label>
                                                     <select class="form-select" v-model="form.groupe_sang">
@@ -174,8 +187,8 @@
                                                 </div>
                                             </div>
 
-                                            <div :class="isAssured ? 'col-md-2' : 'col-md-5'">
-                                                <div class="mt-2">
+                                            <div class="col-md-3">
+                                                <div class="mt-3">
                                                     <label class="form-label">Assurance <sup
                                                             class="text-danger">(Optionnel)</sup></label>
                                                     <select class="form-select"
@@ -187,7 +200,7 @@
                                             </div>
 
                                             <div class="col-md-3" v-if="isAssured">
-                                                <div class="mt-2">
+                                                <div class="mt-3">
                                                     <label class="form-label">Numéro assurance<sup
                                                             class="text-danger">*</sup></label>
                                                     <input type="text" v-model="form.num_assurance"
@@ -197,7 +210,7 @@
                                             </div>
                                             <!-- adresse input -->
                                             <div class="col-md-12">
-                                                <div class="mt-2">
+                                                <div class="mt-3">
                                                     <label class="form-label">Adresse<sup
                                                             class="text-danger">*</sup></label>
                                                     <textarea class="form-control" v-model="form.adresse"
@@ -352,6 +365,7 @@ export default {
                 prenom: "",
                 sexe: "",
                 telephone: "",
+                telephone_urgence: "",
                 adresse: "",
                 datenais: "",
                 patient_id: "",

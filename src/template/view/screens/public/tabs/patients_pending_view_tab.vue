@@ -1,16 +1,15 @@
 <template>
-    <div class="tab-pane fade show active" id="pills-bill-info" role="tabpanel" aria-labelledby="pills-bill-info-tab">
-
+    <div class="tab-pane fade" id="patient-pending" role="tabpanel">
         <div class="row">
             <div class="col-md-12">
                 <custom-table v-if="isEmplacementDefined"
-                    :api-url="`http://127.0.0.1:8000/api/consult.examens/${$user().hopital.emplacement.id}`"
-                    :columns="dataTableColumns" :data-src="'examens'" ref="dataTableExamens" :action-buttons="actionButtons"
-                    @actionButtonClick="handleActionButtonClick" />
+                    :api-url="`http://127.0.0.1:8000/api/patients.pending/${$user().hopital.emplacement.id}`"
+                    :columns="dataTableColumns2" :data-src="'patients'" ref="customTablePatients2"
+                    :action-buttons="actionButtons2" />
             </div>
         </div>
     </div>
-    <examen-details-modal :detail="selectedExamConsult" />
+    <!--  <examen-details-modal :detail="selectedExamConsult" /> -->
 </template>
 <script>
 import examenDetailsModal from "../../../modals/modal_examen_details"
@@ -21,29 +20,26 @@ export default {
     },
     data() {
         return {
-            dataTableColumns: [
-                { data: 'consult_examen_create_At', title: "Date & heure" },
+            dataTableColumns2: [
+                { data: 'patient_code', title: "Code" },
                 {
                     data: null,
-                    title: 'Patient',
+                    title: 'Nom complet',
                     render: function (data, type, row) {
-                        return row.patient_code + ' ' + row.patient_nom + ' ' + row.patient_prenom;
-                    }
+                        // Concaténer les valeurs de agent_nom et agent_prenom
+                        return row.patient_nom + ' ' + row.patient_prenom;
+                    },
                 },
-                {
-                    data: null,
-                    title: 'Médecin',
-                    render: function (data, type, row) {
-                        return row.agent_matricule + ' ' + row.agent_nom + ' ' + row.agent_prenom;
-                    }
-                },
-                { data: 'consult_examen_status', title: 'Status' },
+                { data: 'patient_sexe', title: 'Sexe' },
+                { data: 'patient_datenais', title: 'Date naissance' },
+                { data: 'patient_telephone', title: 'Téléphone' },
+
             ],
-            actionButtons: [
-                { label: 'Valider', class: 'btn-soft-success btn-load btn-sm me-1', key: 'validate' },
-                { label: 'Voir détails', class: 'btn-soft-secondary', key: 'details' },
+            actionButtons2: [
+                { label: 'Voir signes vitaux', class: 'btn-secondary me-1', key: 'view' },
+                { label: '<i class="ri-delete-bin-3-line"></i>', class: 'btn-soft-danger me-1', key: 'delete' },
             ],
-            selectedExamConsult: null,
+            selectedPatient: null,
         }
     },
 

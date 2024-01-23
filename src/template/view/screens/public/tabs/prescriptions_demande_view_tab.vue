@@ -10,11 +10,16 @@
             </div>
         </div>
     </div>
+    <prescription-details-modal :detail="selectedPrescription" />
 </template>
 
 <script>
+import prescriptionDetailsModal from "../../../modals/modal_prescription_details";
 export default {
     name: 'PrescriptionsTab',
+    components: {
+        prescriptionDetailsModal
+    },
 
     data() {
         return {
@@ -38,23 +43,64 @@ export default {
             ],
             actionButtons: [
                 { label: 'Valider', class: 'btn-soft-success btn-load btn-sm me-1', key: 'validate' },
-                { label: 'Voir détails', class: 'btn-soft-secondary', key: 'edit' },
+                { label: 'Voir détails', class: 'btn-soft-secondary', key: 'details' },
             ],
+            selectedPrescription: null,
         }
     },
 
     methods: {
         handleActionButtonClick(payload) {
             switch (payload.key) {
-                case 'delete':
-                    console.log("delete", JSON.stringify(payload.data));
+                case 'validate':
+                    this.validatePrescription(payload.data);
                     break;
-                case 'edit':
-                    console.log("edit", JSON.stringify(payload.data));
+                case 'details':
+                    this.showPrescriptionDetails(payload.data);
                     break;
                 default:
                     break;
             }
+        },
+        validatePrescription(data) {
+
+            Swal.fire({
+                text: 'Chargement...',
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+            this.$store.dispatch('services/validatePrescription', data.consult_id).then((res) => {
+                Swal.close();
+                this.$refs.dataTablePrescriptions.reloadData();
+            }).catch((e) => {
+                Swal.close();
+            })
+        },
+
+        showPrescriptionDetails(data) {
+            console.log(data);
+            Swal.fire({
+                text: 'Chargement...',
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+            this.$store.dispatch('services/showPrescriptionDetails', data.consult_id).then((res) => {
+                Swal.close();
+                let detail = {
+                    heading: data,
+                    detail: res.detail
+                };
+                this.selectedPrescription = detail;
+                this.$showBsModal('prescriptionDetailsModal');
+            }).catch((e) => {
+                Swal.close();
+            })
         },
     },
 
