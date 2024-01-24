@@ -147,7 +147,7 @@
                                 </div>
                             </div>
 
-                            <div class="step-arrow-nav mt-n3 mb-2 bg-white shadow-sm">
+                            <div class="step-arrow-nav mt-n3 mb-2 bg-white shadow-sm" v-else>
                                 <ul class="nav nav-pills nav-justified bg-white custom-nav" role="tablist">
                                     <li class="nav-item active" role="presentation">
                                         <button class="nav-link p-3 active" id="pills-bill-info-tab" data-bs-toggle="pill"

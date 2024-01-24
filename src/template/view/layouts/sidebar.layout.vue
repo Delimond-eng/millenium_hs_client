@@ -111,35 +111,54 @@
                         </div>
                     </li>
                     <li class="nav-item" v-if="$isAccessMenu('Premiers soins')">
-                        <a class="nav-link menu-link" href="#/home/premiers_soins" role="button">
-                            <i class="bx bx-capsule"></i> <span data-key="t-apps">Premiers soins</span>
+                        <a class="nav-link menu-link" href="#premiersLanding" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="premiersLanding">
+                            <i class="bx bx-capsule"></i> <span data-key="t-landing">Premiers soins</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="premiersLanding">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="#/home/premiers_soins" class="nav-link" data-key="t-one-page"> Enregistrement
+                                        soins</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#/home/premiers_soins/list" class="nav-link" data-key="t-one-page"> Liste des
+                                        soins</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item" v-if="$isAccessMenu('Transferts patients')">
+                        <a class="nav-link menu-link" href="#/home/transferts" role="button">
+                            <i class="ri-arrow-left-right-fill"></i> <span data-key="t-apps">Transferts patients</span>
                         </a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link menu-link" href="#/home/datatables.net" role="button">
-                            <i class="bx bx-capsule"></i> <span data-key="t-apps">Tables</span>
+
+                    <li class="nav-item" v-if="$isAccessMenu('Facturations')">
+                        <a class="nav-link menu-link" href="#paiementsLanding" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="paiementsLanding">
+                            <i class="ri-money-dollar-box-line"></i> <span data-key="t-landing">Paiements & factures</span>
                         </a>
-                    </li> -->
+                        <div class="collapse menu-dropdown" id="paiementsLanding">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="#/home/facture/create" class="nav-link" data-key="t-one-page">Nouvelle facture
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#/home/factures/list" class="nav-link" data-key="t-one-page"> Historique
+                                        factures</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
                     <li class="nav-item" v-if="$isAccessMenu('Hospitalisations')">
                         <a class="nav-link menu-link" href="#/home/hospitalisations.manage" role="button">
                             <i class="ri-hotel-bed-line"></i> <span data-key="t-apps">Hospitalisations</span>
                         </a>
                     </li>
-
-                    <!-- <li class="nav-item">
-                        <a class="nav-link menu-link" href="#consultLanding" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarLanding">
-                            <i class="ri-health-book-line"></i> <span data-key="t-landing">Prescriptions</span>
-                        </a>
-                        <div class="collapse menu-dropdown" id="consultLanding">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="#/home/prescriptions/list" class="nav-link" data-key="t-one-page"> Liste des
-                                        prescriptions </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li> -->
 
                     <li class="nav-item" v-if="$isAccessMenu('Laboratoires')">
                         <a class="nav-link menu-link" href="#lab" data-bs-toggle="collapse" role="button"
@@ -283,10 +302,10 @@
                         </div> -->
                     </li>
 
-                    <li class="nav-item" id="users-menu" v-if="$isAccessMenu('Utilisateurs')">
+                    <li class="nav-item" id="users-menu" v-if="$isAccessMenu('Gestion utilisateurs')">
                         <a class="nav-link menu-link" href="#usersLanding" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="usersLanding">
-                            <i class="ri-user-settings-line "></i> <span data-key="t-landing">Comptes utilisateurs</span>
+                            <i class="ri-user-settings-line "></i> <span data-key="t-landing">Gestion utilisateurs</span>
                         </a>
                         <div class="collapse menu-dropdown" id="usersLanding">
                             <ul class="nav nav-sm flex-column">
@@ -296,7 +315,11 @@
                                     </button>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-nft-landing"> Assigner comptes
+                                    <a href="#" class="nav-link" data-key="t-nft-landing"> Gestionnaire des comptes
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link" data-key="t-nft-landing"> Historique de navigation
                                     </a>
                                 </li>
                             </ul>

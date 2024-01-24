@@ -139,7 +139,8 @@
         </footer>
 
         <div class="customizer-setting d-block">
-            <div class="btn-info text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2">
+            <div class="btn-info text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2"
+                @click="$router.push({ name: 'premiers-soins-list' })">
                 <i class="ri-list-check-2 fs-22"></i>
             </div>
         </div>

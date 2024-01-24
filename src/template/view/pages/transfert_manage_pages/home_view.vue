@@ -6,15 +6,15 @@
                 <div class="row">
                     <div class="col-12 col-md-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0">Liste des consultations</h4>
-
+                            <h4 class="mb-sm-0">Transferts des patients
+                            </h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="me-2"><button class="btn btn-secondary btn-border btn-sm addMembers-modal"
-                                            @click="$router.push('/home/consult/create')"><i
-                                                class="ri-add-fill me-1 align-bottom"></i>
-                                            Nouvelles consultations</button>
+                                    <li class="me-2"><a href="javascript:void(0)"
+                                            @click="$showBsModal('transfertsCreateModal')"
+                                            class="btn btn-secondary btn-sm"><i class="ri-add-line me-1"></i> Nouveau
+                                            tranfert</a>
                                     </li>
                                 </ol>
                             </div>
@@ -27,18 +27,17 @@
                         <div class="card">
                             <div class="card-body">
                                 <custom-table v-if="isEmplacementDefined"
-                                    :api-url="`http://127.0.0.1:8000/api/consultations.all/${this.$user().hopital.emplacement.id}`"
-                                    :columns="dataTableColumns" :data-src="'consultations'" ref="dataTableConsult"
+                                    :api-url="`http://127.0.0.1:8000/api/transferts.all/${this.$user().hopital.emplacement.id}`"
+                                    :columns="dataTableColumns" :data-src="'transferts'" ref="dataTableTransferts"
                                     :action-buttons="actionButtons" @actionButtonClick="handleActionButtonClick" />
                             </div>
                         </div>
-                    </div> <!-- end col -->
+                    </div>
                 </div>
             </div>
             <!-- container-fluid -->
         </div>
         <!-- End Page-content -->
-
         <footer class="footer">
             <div class="container-fluid">
                 <div class="row">
@@ -53,47 +52,37 @@
                 </div>
             </div>
         </footer>
-
-        <div class="customizer-setting d-block">
-            <div class="btn-secondary text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2"
-                @click.prevent="$router.push('/home/consult/create')">
-                <i class="ri-add-line fs-22"></i>
-            </div>
-        </div>
     </div>
-
-    <!-- modal consult details view -->
-    <consult-details-modal :selected-consult="selectedConsult" />
+    <transfert-create-modal @reload="$refs.dataTableTransferts.reloadData()"></transfert-create-modal>
 </template>
 
 <script>
-import consultDetailsModal from '../../modals/modal_consult_details'
+import TransfertCreateModal from './modals/create_transfert_modal'
 export default {
-    name: "ConsulstList",
-    components: {
-        consultDetailsModal,
-    },
+    name: 'HomeView',
     data() {
         return {
-            selectedConsult: null,
             dataTableColumns: [
-                { data: 'consult_create_At', title: "Date" },
+                { data: 'transfert_date', title: "Date & heure" },
+                { data: 'transfert_motif', title: "Motif" },
+                { data: 'transfert_hopital', title: "Hopital de destination" },
                 {
                     data: null,
-                    title: 'Nom complet',
+                    title: 'Patient',
                     render: function (data, type, row) {
                         return row.patient.patient_code + ' ' + row.patient.patient_nom + ' ' + row.patient.patient_prenom;
                     },
                 },
-                { data: 'consult_libelle', title: 'Motif' },
+
                 {
                     data: null,
-                    title: 'Consulté par',
+                    title: 'Effectué par',
                     render: function (data, type, row) {
                         // Concaténer les valeurs de agent_nom et agent_prenom
                         return row.agent.agent_matricule + ' ' + row.agent.agent_nom + ' ' + row.agent.agent_prenom;
                     },
                 },
+                { data: 'emplacement.hopital_emplacement_libelle', title: "Emplacement" },
 
             ],
             actionButtons: [
@@ -102,31 +91,24 @@ export default {
             ],
         }
     },
-    computed: {
-        consultations() {
-            return this.$store.getters['services/GET_CONSULTATIONS']
-        },
-        isEmplacementDefined() {
-            return this.$user().hopital !== undefined && this.$user().hopital.emplacement !== undefined;
-        }
-    },
-
-    mounted() {
-        this.$store.dispatch('services/viewAllConsults');
+    components: {
+        TransfertCreateModal
     },
     methods: {
         handleActionButtonClick(payload) {
             switch (payload.key) {
-                case 'details':
-                    this.selectedConsult = payload.data;
-                    $showBsModal('detailsModal')
-                    break;
+                case 'edit':
+                    console.log('');
                 case 'delete':
                     console.log("");
                     break;
             }
         },
     },
-
+    computed: {
+        isEmplacementDefined() {
+            return this.$user().hopital !== undefined && this.$user().hopital.emplacement !== undefined;
+        }
+    },
 }
 </script>

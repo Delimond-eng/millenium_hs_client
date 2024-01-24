@@ -56,8 +56,16 @@ import FacturationsTab from "@/template/view/pages/config_manage_pages/tabs/fact
  * Pages qui gerent le cas d'urgence
  */
 import PremierSoinsPage from "@/template/view/pages/urgence_manage_pages/premier_soins_page";
+import PremierSoinsListPage from "@/template/view/pages/urgence_manage_pages/premier_soins_list";
+import TransfertPatientPage from "@/template/view/pages/transfert_manage_pages/home_view";
 
+/**
+ * Facturations & paiements
+ */
+import FacturesListPage from "@/template/view/pages/facturations_manage_pages/factures_list_page";
+import FactureCreatePage from "@/template/view/pages/facturations_manage_pages/facture_create_page";
 
+//DataTable Test
 import DatatablesNet from "@/template/view/pages/datatables.net.vue";
 const routes = [
   {
@@ -82,9 +90,15 @@ const routes = [
         name: "dash",
       },
       {
-        path: '/home/datatables.net',
+        path: "/home/datatables.net",
         component: DatatablesNet,
-        name:'datatable-route'
+        name: "datatable-route",
+      },
+
+      {
+        path: "/home/transferts",
+        component: TransfertPatientPage,
+        name: "transferts-route",
       },
 
       /**
@@ -229,6 +243,21 @@ const routes = [
         path: "/home/premiers_soins",
         component: PremierSoinsPage,
         name: "premiers-soins",
+      },
+      {
+        path: "/home/premiers_soins/list",
+        component: PremierSoinsListPage,
+        name: "premiers-soins-list",
+      },
+      {
+        path: "/home/facture/create",
+        component: FactureCreatePage,
+        name: "facture-create-route",
+      },
+      {
+        path: "/home/factures/list",
+        component: FacturesListPage,
+        name: "factures-list-route",
       },
     ],
   },

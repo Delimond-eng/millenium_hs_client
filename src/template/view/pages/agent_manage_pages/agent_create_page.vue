@@ -31,11 +31,11 @@
                             <form @submit.prevent="submitForm" class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <!-- agent personals infos -->
-                                    <div class="col-md-8">
+                                    <div class="col-md-7">
                                         <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Infos personnelles</h6>
                                         <div class="border border-dashed border-primary mb-2"></div>
                                         <div class="row">
-                                            <div class=" col-md-6">
+                                            <div class=" col-md-3">
                                                 <div>
                                                     <label class="form-label">Matricule</label>
                                                     <div class="form-icon">
@@ -46,7 +46,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-9">
                                                 <div>
                                                     <label for="iconInputNom" class="form-label">Nom <sup
                                                             class="text-danger">*</sup></label>
@@ -58,7 +58,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-9">
                                                 <div class="mt-3">
                                                     <label for="iconInputNom" class="form-label">Prénom <sup
                                                             class="text-danger">*</sup></label>
@@ -71,14 +71,14 @@
                                                 </div>
                                             </div>
                                             <!-- patient sexe select -->
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
                                                 <div class="mt-3">
                                                     <label for="iconInputPoids" class="form-label">Sexe <sup
                                                             class="text-danger">*</sup></label>
                                                     <div class="form-icon">
                                                         <select class="form-select" id="inputGroupSelect01"
                                                             v-model="form.sexe" required>
-                                                            <option selected label="Sélectionner un sexe"></option>
+                                                            <option selected hidden label="--Genre ou Sexe--"></option>
                                                             <option value="M">Masculin</option>
                                                             <option value="F">Féminin</option>
                                                         </select>
@@ -169,7 +169,8 @@
                                                     <div class="form-icon">
                                                         <select class="form-select" id="inputGroupSelect01"
                                                             v-model="form.service_id" required>
-                                                            <option selected label="Sélectionner un service"></option>
+                                                            <option selected hidden label="Sélectionner un service">
+                                                            </option>
                                                             <option v-for="(item, index) in configs.services" :key="index"
                                                                 :value="item.id">{{ item.service_libelle }}</option>
 
@@ -186,7 +187,8 @@
                                                     <div class="form-icon">
                                                         <select class="form-select" id="inputGroupSelect01"
                                                             v-model="form.fonction_id" required>
-                                                            <option selected label="Sélectionner une fonction"></option>
+                                                            <option selected hidden label="Sélectionner une fonction">
+                                                            </option>
                                                             <option v-for="(item, index) in configs.fonctions" :key="index"
                                                                 :value="item.id">{{ item.fonction_libelle }}</option>
                                                         </select>
@@ -215,7 +217,7 @@
                                     </div>
 
                                     <!-- account infos -->
-                                    <div class="col-md-4">
+                                    <div class="col-md-5">
                                         <h6 class="fs-14 text-start mb-2 mt-3 text-primary">Infos compte utilisateur <sup
                                                 class="text-danger">(Optionnelle)</sup></h6>
                                         <div class="border border-dashed border-primary mb-2"></div>
@@ -226,7 +228,7 @@
                                                     <label class="form-label">Rôle utilisateur<sup
                                                             class="text-danger">*</sup></label>
                                                     <select class="form-select" v-model="form_user.role_id" required>
-                                                        <option selected label="Sélectionnez un rôle..."></option>
+                                                        <option selected hidden label="Sélectionnez un rôle..."></option>
                                                         <option v-for="(item, index) in configs.roles" :key="index"
                                                             :value="item.id">{{ item.role }}</option>
                                                     </select>
@@ -244,9 +246,10 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="mt-3">
-                                                    <label class="form-label">Mot de passe </label>
+                                                    <label class="form-label">Mot de passe <sup
+                                                            class="text-danger">*</sup></label>
                                                     <div class="form-icon">
                                                         <input type="password" class="form-control form-control-icon"
                                                             placeholder="Saisir le mot de passe"
@@ -256,9 +259,10 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="mt-3">
-                                                    <label class="form-label">Confirmation </label>
+                                                    <label class="form-label">Confirmation <sup
+                                                            class="text-danger">*</sup></label>
                                                     <div class="form-icon">
                                                         <input type="password" class="form-control form-control-icon"
                                                             placeholder="Confirmer le mot de passe "
@@ -274,8 +278,9 @@
                                                 <div>
                                                     <label class="fs-14 mb-2 text-dark">Menus accessibles <sup
                                                             class="text-danger">*</sup></label>
-                                                    <select required multiple="multiple" style="width:100%"
-                                                        name="menus-select" id="multiselect-basic">
+                                                    <select required multiple="multiple" ref="multiSelectBasic"
+                                                        class="fs-10" style="width:100%" name="menus-select"
+                                                        id="multiselect-basic">
                                                         <option selected>Tableau de bord</option>
                                                         <option>Patients</option>
                                                         <option>Agents</option>
@@ -283,13 +288,13 @@
                                                         <option>Suivis</option>
                                                         <option>Premiers soins</option>
                                                         <option>Hospitalisations</option>
+                                                        <option>Facturations</option>
+                                                        <option>Transferts patients</option>
                                                         <option>Configurations</option>
-                                                        <option>Comptes utilisateurs</option>
-                                                        <option>Services</option>
                                                         <option>Pharmacies</option>
                                                         <option>Laboratoires</option>
                                                         <option>Maternités</option>
-                                                        <option>Utilisateurs</option>
+                                                        <option>Gestion utilisateurs</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -303,7 +308,8 @@
                                     <load-button btn-type="submit" :loading="formLoading"
                                         class-name="btn-success btn-border btn-label right nexttab nexttab me-2">
                                         <span><i
-                                                class="ri-check-double-fill label-icon align-middle fs-16 ms-2"></i>Enregistrer</span>
+                                                class="ri-check-double-fill label-icon align-middle fs-16 ms-2"></i>Enregistrer
+                                            & imprimer carte</span>
                                     </load-button>
                                     <button type="button" @click.prevent="cleanField"
                                         class="btn btn-light btn-border btn-label right"><i
@@ -468,12 +474,10 @@ export default {
                 let specialite = $(this).val();
                 self.form.specialite = specialite;
             });
-
-
             let multiSelectBasic = document.getElementById("multiselect-basic");
             if (multiSelectBasic) {
-                multi(multiSelectBasic, {
-                    enable_search: false,
+                new multi(this.$refs.multiSelectBasic, {
+                    enable_search: true,
                 });
             } else {
                 console.error("L'élément avec l'ID multiselect-basic n'a pas été trouvé.");

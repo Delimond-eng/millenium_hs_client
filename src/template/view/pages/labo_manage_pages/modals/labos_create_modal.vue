@@ -28,7 +28,7 @@
                             <div class="mb-2 col-md-6">
                                 <label for="hsnom">Emplacement <sup class="text-danger">*</sup> </label>
                                 <select class="form-select" v-model="form.hopital_emplacement_id" required>
-                                    <option selected label="Sélectionner un emplacement...">
+                                    <option selected hidden label="Sélectionner un emplacement...">
                                     </option>
                                     <option v-for="(item, index) in configs.emplacements" :key="index" :value="item.id">{{
                                         item.hopital_emplacement_libelle }}

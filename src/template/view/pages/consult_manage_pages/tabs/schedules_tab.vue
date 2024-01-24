@@ -5,7 +5,7 @@
         <div class="border border-dashed mb-2"></div>
         <form @submit.prevent="submitFormSchedule" class="row text-dark">
             <div class="mb-2 col-md-6">
-                <label for="hsnom">Date & heure admission <sup class="text-danger">*</sup> </label>
+                <label for="hsnom">Date & heure du rendez-vous <sup class="text-danger">*</sup> </label>
                 <div class="d-flex">
                     <input type="date" v-model="schedule.date" class="form-control me-1 flex-fill" id="exampleInputEmail1"
                         required>
@@ -97,6 +97,10 @@ export default {
 
     props: {
         currentConsult: {
+            type: Object,
+            default: () => { }
+        },
+        selectedPatient: {
             type: Object,
             default: () => { }
         }

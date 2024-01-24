@@ -6,15 +6,13 @@
                 <div class="row">
                     <div class="col-12 col-md-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0">Liste des consultations</h4>
-
+                            <h4 class="mb-sm-0">Liste des Premiers soins effectués
+                            </h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="me-2"><button class="btn btn-secondary btn-border btn-sm addMembers-modal"
-                                            @click="$router.push('/home/consult/create')"><i
-                                                class="ri-add-fill me-1 align-bottom"></i>
-                                            Nouvelles consultations</button>
+                                    <li class="me-2"><a href="#/home/premiers_soins" class="btn btn-secondary btn-sm"><i
+                                                class="ri-add-line me-1"></i>Administrer prémiers soins</a>
                                     </li>
                                 </ol>
                             </div>
@@ -27,18 +25,17 @@
                         <div class="card">
                             <div class="card-body">
                                 <custom-table v-if="isEmplacementDefined"
-                                    :api-url="`http://127.0.0.1:8000/api/consultations.all/${this.$user().hopital.emplacement.id}`"
-                                    :columns="dataTableColumns" :data-src="'consultations'" ref="dataTableConsult"
+                                    :api-url="`http://127.0.0.1:8000/api/premiersoins.all/${this.$user().hopital.emplacement.id}`"
+                                    :columns="dataTableColumns" :data-src="'results'" ref="dataTableConsult"
                                     :action-buttons="actionButtons" @actionButtonClick="handleActionButtonClick" />
                             </div>
                         </div>
-                    </div> <!-- end col -->
+                    </div>
                 </div>
             </div>
             <!-- container-fluid -->
         </div>
         <!-- End Page-content -->
-
         <footer class="footer">
             <div class="container-fluid">
                 <div class="row">
@@ -53,42 +50,35 @@
                 </div>
             </div>
         </footer>
-
-        <div class="customizer-setting d-block">
-            <div class="btn-secondary text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2"
-                @click.prevent="$router.push('/home/consult/create')">
-                <i class="ri-add-line fs-22"></i>
-            </div>
-        </div>
     </div>
-
-    <!-- modal consult details view -->
-    <consult-details-modal :selected-consult="selectedConsult" />
+    <soins-details-modal :details="soins"></soins-details-modal>
 </template>
 
 <script>
-import consultDetailsModal from '../../modals/modal_consult_details'
+import SoinsDetailsModal from './modals/soins_details_modal';
 export default {
-    name: "ConsulstList",
+    name: 'PremierSoinList',
+
     components: {
-        consultDetailsModal,
+        SoinsDetailsModal,
     },
     data() {
         return {
-            selectedConsult: null,
             dataTableColumns: [
-                { data: 'consult_create_At', title: "Date" },
+                { data: 'premier_soin_date_heure', title: "Date & heure" },
+                { data: 'premier_soin_motif', title: "Motif" },
+                { data: 'premier_soin_obs', title: "Observation" },
                 {
                     data: null,
-                    title: 'Nom complet',
+                    title: 'Patient',
                     render: function (data, type, row) {
                         return row.patient.patient_code + ' ' + row.patient.patient_nom + ' ' + row.patient.patient_prenom;
                     },
                 },
-                { data: 'consult_libelle', title: 'Motif' },
+
                 {
                     data: null,
-                    title: 'Consulté par',
+                    title: 'Effectué par',
                     render: function (data, type, row) {
                         // Concaténer les valeurs de agent_nom et agent_prenom
                         return row.agent.agent_matricule + ' ' + row.agent.agent_nom + ' ' + row.agent.agent_prenom;
@@ -97,29 +87,19 @@ export default {
 
             ],
             actionButtons: [
-                { label: '<i class="ri-edit-2-line"></i>', class: 'btn-secondary me-1', key: 'edit' },
+                { label: '<i class="ri-eye-2-line"></i>', class: 'btn-secondary me-1', key: 'details' },
                 { label: '<i class="ri-delete-bin-3-line"></i>', class: 'btn-soft-danger me-1', key: 'delete' },
             ],
-        }
-    },
-    computed: {
-        consultations() {
-            return this.$store.getters['services/GET_CONSULTATIONS']
-        },
-        isEmplacementDefined() {
-            return this.$user().hopital !== undefined && this.$user().hopital.emplacement !== undefined;
+            soins: []
         }
     },
 
-    mounted() {
-        this.$store.dispatch('services/viewAllConsults');
-    },
     methods: {
         handleActionButtonClick(payload) {
             switch (payload.key) {
                 case 'details':
-                    this.selectedConsult = payload.data;
-                    $showBsModal('detailsModal')
+                    this.soins = payload.data.traitements;
+                    this.$showBsModal('soinsDetailsModal')
                     break;
                 case 'delete':
                     console.log("");
@@ -127,6 +107,10 @@ export default {
             }
         },
     },
-
+    computed: {
+        isEmplacementDefined() {
+            return this.$user().hopital !== undefined && this.$user().hopital.emplacement !== undefined;
+        }
+    },
 }
 </script>

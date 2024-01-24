@@ -22,7 +22,7 @@
                 <!-- end page title -->
                 <div class="row">
                     <div class="col-md-12">
-                        <ul class="nav nav-tabs mb-3 bg-white shadow-sm p-2" role="tablist">
+                        <ul class="nav nav-pills animation-nav mb-3 bg-white shadow-sm p-2" role="tablist">
                             <li class="nav-item active" role="presentation">
                                 <router-link :to="{ name: 'emplacements-config-tab' }" class="nav-link" role="tab"
                                     aria-selected="false" tabindex="-1">

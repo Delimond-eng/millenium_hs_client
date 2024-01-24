@@ -27,7 +27,7 @@
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Veuillez remplir tous les champs requis !</h4>
                             </div>
-                            <ul class="nav nav-tabs nav-tabs-custom nav-success m-3" role="tablist">
+                            <ul class="nav nav-tabs nav-tabs-custom nav-danger m-3" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link active" data-bs-toggle="tab" href="#basic-infos" role="tab"
                                         aria-selected="true">
@@ -37,7 +37,8 @@
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" data-bs-toggle="tab" href="#medic-infos" role="tab"
                                         aria-selected="false" tabindex="-1">
-                                        <i class="ri-stethoscope-line me-2"></i> Signes vitaux
+                                        <i class="ri-stethoscope-line me-2"></i> Signes vitaux <sup
+                                            class="text-danger">*</sup>
                                     </a>
                                 </li>
                             </ul>
@@ -100,8 +101,8 @@
                                             </div>
 
                                             <!-- patient sexe select -->
-                                            <div class="col-md-4">
-                                                <div class="mt-2">
+                                            <div class="col-md-3">
+                                                <div class="mt-3">
                                                     <label class="form-label">Sexe <sup class="text-danger">*</sup></label>
                                                     <div class="form-icon">
                                                         <select class="form-select" id="inputGroupSelect01"
@@ -115,7 +116,7 @@
                                             </div>
 
                                             <!-- telephone input -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-5">
                                                 <div class="mt-3">
                                                     <label class="form-label">Téléphone<sup
                                                             class="text-danger">*</sup></label>
