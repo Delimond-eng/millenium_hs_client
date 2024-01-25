@@ -4,9 +4,9 @@
         <div class="row">
             <div class="col-md-12">
                 <custom-table v-if="isEmplacementDefined"
-                    :api-url="`http://127.0.0.1:8000/api/prescriptions.pending/${$user().hopital.emplacement.id}`"
-                    :columns="dataTableColumns" :data-src="'prescriptions'" ref="dataTablePrescriptions"
-                    :action-buttons="actionButtons" @actionButtonClick="handleActionButtonClick" />
+                    :api-url="`/prescriptions.pending/${$user().hopital.emplacement.id}`" :columns="dataTableColumns"
+                    :data-src="'prescriptions'" ref="dataTablePrescriptions" :action-buttons="actionButtons"
+                    @actionButtonClick="handleActionButtonClick" />
             </div>
         </div>
     </div>

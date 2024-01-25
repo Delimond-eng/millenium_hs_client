@@ -84,7 +84,7 @@
                                                 description="Il n'y a aucun patient dans la liste pour l'instant !"></state-empty>
                                         </div> -->
                                         <custom-table v-if="isEmplacementDefined"
-                                            :api-url="`http://127.0.0.1:8000/api/patients.all/${$user().hopital.emplacement.id}`"
+                                            :api-url="`/patients.all/${$user().hopital.emplacement.id}`"
                                             :columns="dataTableColumns" :data-src="'patients'" ref="customTablePatients"
                                             :action-buttons="actionButtons" />
                                     </div>
@@ -165,7 +165,7 @@
                                                 description="Il n'y a aucune fiche de patient en attente pour l'instant !"></state-empty>
                                         </div> -->
                                         <custom-table v-if="isEmplacementDefined"
-                                            :api-url="`http://127.0.0.1:8000/api/patients.pending/${$user().hopital.emplacement.id}`"
+                                            :api-url="`/patients.pending/${$user().hopital.emplacement.id}`"
                                             :columns="dataTableColumns2" :data-src="'patients'" ref="customTablePatients2"
                                             :action-buttons="actionButtons2" />
                                     </div>

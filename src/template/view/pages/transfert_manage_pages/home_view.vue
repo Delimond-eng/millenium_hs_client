@@ -27,7 +27,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <custom-table v-if="isEmplacementDefined"
-                                    :api-url="`http://127.0.0.1:8000/api/transferts.all/${this.$user().hopital.emplacement.id}`"
+                                    :api-url="`/transferts.all/${this.$user().hopital.emplacement.id}`"
                                     :columns="dataTableColumns" :data-src="'transferts'" ref="dataTableTransferts"
                                     :action-buttons="actionButtons" @actionButtonClick="handleActionButtonClick" />
                             </div>

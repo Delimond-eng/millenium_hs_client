@@ -3,8 +3,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <custom-table v-if="isEmplacementDefined"
-                    :api-url="`http://127.0.0.1:8000/api/consult.examens/${$user().hopital.emplacement.id}`"
+                <custom-table v-if="isEmplacementDefined" :api-url="`/consult.examens/${$user().hopital.emplacement.id}`"
                     :columns="dataTableColumns" :data-src="'examens'" ref="dataTableExamens" :action-buttons="actionButtons"
                     @actionButtonClick="handleActionButtonClick" />
             </div>

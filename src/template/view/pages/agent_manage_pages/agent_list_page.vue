@@ -23,8 +23,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <custom-table v-if="isHopitalDefined"
-                                    :api-url="`http://127.0.0.1:8000/api/agents.all/${$user().hopital.id}`"
+                                <custom-table v-if="isHopitalDefined" :api-url="`/agents.all/${$user().hopital.id}`"
                                     :columns="dataTableColumns" :data-src="'agents'" ref="customTableAgents" />
                                 <!-- <custom-table :api-url="'http://127.0.0.1:8000/api/hospitalisations.all/2'"
                                     :columns="dataTableColumns" :data-src="'hospitalisations'" ref="customDataTable" /> -->

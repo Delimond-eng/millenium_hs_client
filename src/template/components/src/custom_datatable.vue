@@ -50,7 +50,7 @@ export default {
       this.table = $(this.$refs.dataTable).DataTable({
         autoWidth: true,
         ajax: {
-          url: this.apiUrl,
+          url: `${this.$baseURL}${this.apiUrl}`,
           type: 'GET',
           dataType: 'json',
           dataSrc: this.dataSrc,

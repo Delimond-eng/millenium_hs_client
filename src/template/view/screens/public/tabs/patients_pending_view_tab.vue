@@ -2,8 +2,7 @@
     <div class="tab-pane fade" id="patient-pending" role="tabpanel">
         <div class="row">
             <div class="col-md-12">
-                <custom-table v-if="isEmplacementDefined"
-                    :api-url="`http://127.0.0.1:8000/api/patients.pending/${$user().hopital.emplacement.id}`"
+                <custom-table v-if="isEmplacementDefined" :api-url="`/patients.pending/${$user().hopital.emplacement.id}`"
                     :columns="dataTableColumns2" :data-src="'patients'" ref="customTablePatients2"
                     :action-buttons="actionButtons2" />
             </div>

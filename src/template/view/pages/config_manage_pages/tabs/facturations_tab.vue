@@ -75,8 +75,7 @@
                 </div> -->
                 <div class="card">
                     <div class="card-body">
-                        <custom-table v-if="isHopitalDefined"
-                            :api-url="`http://127.0.0.1:8000/api/configs.facturations/all/${$user().hopital.id}`"
+                        <custom-table v-if="isHopitalDefined" :api-url="`/configs.facturations/all/${$user().hopital.id}`"
                             :columns="dataTableColumns" :data-src="'results'" ref="customTableFacturations"
                             :action-buttons="actionButtons" />
                     </div>
