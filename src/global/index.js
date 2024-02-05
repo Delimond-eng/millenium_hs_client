@@ -4,7 +4,9 @@ export default {
   install: (app, opt) => {
     window.Swal = app.config.globalProperties.$swal;
 
-    app.config.globalProperties.$baseURL = "http://127.0.0.1:8000/api";
+    app.config.globalProperties.$baseURL = location.href.includes(".com")
+      ? "http://backend.hospital.milleniumhorizon.com/api"
+      : "http://127.0.0.1:8000/api";
     app.config.globalProperties.$hasPermission = (key) => {
       let user = store.getters["auth/GET_USER"];
       if (
