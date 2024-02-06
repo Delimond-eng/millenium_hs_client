@@ -60,6 +60,20 @@
                     <sup class="text-danger">*</sup>
                   </a>
                 </li>
+
+                <li class="nav-item" role="presentation">
+                  <a
+                    class="nav-link"
+                    data-bs-toggle="tab"
+                    href="#pay-tab"
+                    role="tab"
+                    aria-selected="false"
+                    tabindex="-1"
+                  >
+                    <i class="ri-money-dollar-box-line me-2"></i> Paiement
+                    <sup class="text-danger">*</sup>
+                  </a>
+                </li>
               </ul>
               <!-- Tab panes -->
               <form class="card-body" @submit.prevent="submitForm">
@@ -426,6 +440,36 @@
                       </div>
                     </div>
                   </div>
+                  <div class="tab-pane" id="pay-tab" role="tabpanel">
+                    <div class="row d-flex justify-content-center align-items-center">
+                      <!-- Paiements inputs -->
+                      <div class="mb-2 mt-2 col-md-6">
+                        <label for="hsnom"
+                          >Montant<sup class="text-danger">*</sup>
+                        </label>
+                        <div class="d-flex">
+                          <input
+                            type="number"
+                            v-model="paiement.montant"
+                            class="form-control me-1 flex-fill"
+                            id="exampleInputEmail1"
+                            placeholder="Entrer le montant du paiement..."
+                            required
+                          />
+                          <select
+                            class="form-control flex-grow-0"
+                            style="width: 100px"
+                            v-model="paiement.devise"
+                            required
+                          >
+                            <option value="CDF" selected>CDF</option>
+                            <option value="CDF" selected>USD</option>
+                            <option value="EURO" selected>EURO</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <bs-toast id="errorsToast" :msg="errors_msg" />
                 <div
@@ -520,6 +564,10 @@ export default {
         saturation: "",
         age: "",
       },
+      paiement: {
+        montant: "",
+        devise: "CDF",
+      },
       formLoading: false,
       isOld: false,
       selectPatient: null,
@@ -538,6 +586,7 @@ export default {
       this.form_details.age = age;
       this.form.code = this.pcode;
       this.form.patient_details = this.form_details;
+      this.form.paiement = this.paiement;
 
       /**
        * @var $user Global fonction retourne l'utilisateur courant

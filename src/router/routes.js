@@ -65,6 +65,11 @@ import TransfertPatientPage from "@/template/view/pages/transfert_manage_pages/h
 import FacturesListPage from "@/template/view/pages/facturations_manage_pages/factures_list_page";
 import FactureCreatePage from "@/template/view/pages/facturations_manage_pages/facture_create_page";
 
+/**
+ * Parteners managements
+ */
+import PartenersViewPage from "@/template/view/pages/partener_manage_pages/partener_list_page";
+
 //DataTable Test
 import DatatablesNet from "@/template/view/pages/datatables.net.vue";
 const routes = [
@@ -258,6 +263,11 @@ const routes = [
         path: "/home/factures/list",
         component: FacturesListPage,
         name: "factures-list-route",
+      },
+      {
+        path: "/admin/config/partener",
+        component: PartenersViewPage,
+        name: "partener-view-route",
       },
     ],
   },

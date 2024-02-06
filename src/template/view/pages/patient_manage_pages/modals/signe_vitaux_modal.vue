@@ -13,9 +13,9 @@
                   <tr>
                     <th scope="row">Poids</th>
                     <td>
-                      <span v-if="detail.patient_fiche_poids">
-                        {{ detail.patient_fiche_poids }}
-                        {{ detail.patient_fiche_poids_unite }}
+                      <span v-if="detail.patient_sv_poids">
+                        {{ detail.patient_sv_poids }}
+                        {{ detail.patient_sv_poids_unite }}
                       </span>
                       <span v-else>--</span>
                     </td>
@@ -23,9 +23,9 @@
                   <tr>
                     <th scope="row">Taille</th>
                     <td>
-                      <span v-if="detail.patient_fiche_taille">
-                        {{ detail.patient_fiche_taille }}
-                        {{ detail.patient_fiche_taille_unite }}
+                      <span v-if="detail.patient_sv_taille">
+                        {{ detail.patient_sv_taille }}
+                        {{ detail.patient_sv_taille_unite }}
                       </span>
                       <span v-else>--</span>
                     </td>
@@ -33,9 +33,9 @@
                   <tr>
                     <th scope="row">Temperature</th>
                     <td>
-                      <span v-if="detail.patient_fiche_temperature">
-                        {{ detail.patient_fiche_temperature }}
-                        {{ detail.patient_fiche_temperature_unite }}
+                      <span v-if="detail.patient_sv_temperature">
+                        {{ detail.patient_sv_temperature }}
+                        {{ detail.patient_sv_temperature_unite }}
                       </span>
                       <span v-else>--</span>
                     </td>
@@ -43,9 +43,9 @@
                   <tr>
                     <th scope="row">Tension arterielle</th>
                     <td>
-                      <span v-if="detail.patient_fiche_tension_art">
-                        {{ detail.patient_fiche_tension_art }}
-                        {{ detail.patient_fiche_tension_art_unite }}
+                      <span v-if="detail.patient_sv_tension_art">
+                        {{ detail.patient_sv_tension_art }}
+                        {{ detail.patient_sv_tension_art_unite }}
                       </span>
                       <span v-else>--</span>
                     </td>
@@ -53,9 +53,9 @@
                   <tr>
                     <th scope="row">Pulsation</th>
                     <td>
-                      <span v-if="detail.patient_fiche_freq_cardio">
-                        {{ detail.patient_fiche_freq_cardio }}
-                        {{ detail.patient_fiche_freq_cardio_unite }}
+                      <span v-if="detail.patient_sv_freq_cardio">
+                        {{ detail.patient_sv_freq_cardio }}
+                        {{ detail.patient_sv_freq_cardio_unite }}
                       </span>
                       <span v-else>--</span>
                     </td>
@@ -63,9 +63,9 @@
                   <tr>
                     <th scope="row">Saturation</th>
                     <td>
-                      <span v-if="detail.patient_fiche_saturation">
-                        {{ detail.patient_fiche_saturation }}
-                        {{ detail.patient_fiche_saturation_unite }}
+                      <span v-if="detail.patient_sv_saturation">
+                        {{ detail.patient_sv_saturation }}
+                        {{ detail.patient_sv_saturation_unite }}
                       </span>
                       <span v-else>--</span>
                     </td>

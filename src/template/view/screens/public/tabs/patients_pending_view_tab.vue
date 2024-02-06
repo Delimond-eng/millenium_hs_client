@@ -44,12 +44,6 @@ export default {
                     tooltip: "Voir signes vitaux du patient !",
                 },
                 {
-                    label: '<i class="ri-check-double-fill"></i>',
-                    class: "btn-success me-1",
-                    tooltip: "Validation patient en cours !",
-                    key: "validate",
-                },
-                {
                     label: '<i class="ri-delete-bin-3-line"></i>',
                     class: "btn-soft-danger me-1",
                     tooltip: "Suppression patient en cours !",
