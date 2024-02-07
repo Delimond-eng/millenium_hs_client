@@ -47,7 +47,7 @@
                     <i class="ri-user-3-line me-2"></i> Informations personnelles
                   </a>
                 </li>
-                <li class="nav-item" role="presentation">
+                <li class="nav-item me-2" role="presentation">
                   <a
                     class="nav-link"
                     data-bs-toggle="tab"
@@ -80,9 +80,62 @@
                 <div class="tab-content">
                   <div class="tab-pane active show" id="basic-infos" role="tabpanel">
                     <div class="row">
+                      <div class="col-md-2">
+                        <div class="mt-3">
+                          <label class="form-label"
+                            >Assurance <sup class="text-danger">(Optionnel)</sup></label
+                          >
+                          <select
+                            class="form-select"
+                            @change="
+                              $event.target.value === 'Oui'
+                                ? (isAssured = true)
+                                : (isAssured = false);
+                              form.num_assurance = '';
+                            "
+                          >
+                            <option value="Non" selected>Non</option>
+                            <option value="Oui">Oui</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6" v-if="isAssured">
+                        <div class="mt-3">
+                          <label class="form-label"
+                            >Numéro assurance<sup class="text-danger">*</sup></label
+                          >
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              @input="findAssureInfos"
+                              v-model="form.num_assurance"
+                              class="form-control form-control-icon"
+                              required
+                              :readonly="form.patient_id !== ''"
+                              placeholder="saisir le n° assurance du patient..."
+                            />
+                            <button
+                              type="button"
+                              @click="$showBsModal('assuranceInfoModal')"
+                              v-if="assuranceInfos"
+                              class="btn btn-info"
+                            >
+                              <i class="ri-eye-2-line"></i> Voir détails
+                            </button>
+                            <button
+                              v-else-if="searchLoading"
+                              disabled
+                              class="btn btn-icon btn-dark"
+                            >
+                              <svg-loading size="20"></svg-loading>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                       <!-- patient code input -->
-                      <div class="col-xxl-2 col-md-2">
-                        <div>
+                      <div class="col-md-2">
+                        <div class="mt-3">
                           <label for="patientCode" class="form-label">Patient code</label>
                           <div class="form-icon">
                             <input
@@ -97,8 +150,8 @@
                         </div>
                       </div>
 
-                      <div class="col-xxl-2 col-md-2">
-                        <div>
+                      <div class="col-md-2">
+                        <div class="mt-3">
                           <label for="appelCode" class="form-label"
                             >Code appel <sup class="text-danger">*</sup></label
                           >
@@ -107,6 +160,7 @@
                               type="text"
                               class="form-control form-control-icon"
                               id="appelCode"
+                              placeholder="code d'appel"
                               v-model="form.code_appel"
                               required
                             />
@@ -116,8 +170,8 @@
                       </div>
 
                       <!-- nom input -->
-                      <div class="col-md-4">
-                        <div>
+                      <div class="col-md-6">
+                        <div class="mt-3">
                           <label class="form-label"
                             >Nom <sup class="text-danger">*</sup></label
                           >
@@ -136,8 +190,8 @@
                       </div>
 
                       <!-- prenom input -->
-                      <div class="col-md-4">
-                        <div>
+                      <div class="col-md-6">
+                        <div class="mt-3">
                           <label class="form-label"
                             >Prénom <sup class="text-danger">*</sup></label
                           >
@@ -181,7 +235,7 @@
                       </div>
 
                       <!-- telephone input -->
-                      <div class="col-md-5">
+                      <div class="col-md-3">
                         <div class="mt-3">
                           <label class="form-label"
                             >Téléphone<sup class="text-danger">*</sup></label
@@ -198,7 +252,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-3">
                         <div class="mt-3">
                           <label class="form-label"
                             >Téléphone d'urgence<sup class="text-danger"
@@ -278,40 +332,6 @@
                         </div>
                       </div>
 
-                      <div class="col-md-3">
-                        <div class="mt-3">
-                          <label class="form-label"
-                            >Assurance <sup class="text-danger">(Optionnel)</sup></label
-                          >
-                          <select
-                            class="form-select"
-                            @change="
-                              $event.target.value === 'Oui'
-                                ? (isAssured = true)
-                                : (isAssured = false)
-                            "
-                          >
-                            <option value="Non" selected>Non</option>
-                            <option value="Oui">Oui</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="col-md-3" v-if="isAssured">
-                        <div class="mt-3">
-                          <label class="form-label"
-                            >Numéro assurance<sup class="text-danger">*</sup></label
-                          >
-                          <input
-                            type="text"
-                            v-model="form.num_assurance"
-                            class="form-control form-control-icon"
-                            required
-                            :readonly="form.patient_id !== ''"
-                            placeholder="n° assurance..."
-                          />
-                        </div>
-                      </div>
                       <!-- adresse input -->
                       <div class="col-md-12">
                         <div class="mt-3">
@@ -530,10 +550,13 @@
       </div>
     </div>
   </div>
+  <assurance-modal :detail="assuranceInfos" />
 </template>
 
 <script>
 import { calculateAge } from "@/utils";
+import AssuranceModal from "./modals/assurance_info_modal";
+import { get } from "@/http";
 export default {
   name: "PatientCreate",
   data() {
@@ -574,7 +597,12 @@ export default {
       searchLoading: false,
       isAssured: false,
       errors_msg: "",
+      assuranceInfos: null,
     };
+  },
+
+  components: {
+    AssuranceModal,
   },
 
   methods: {
@@ -626,6 +654,31 @@ export default {
         .catch((err) => {
           this.formLoading = false;
           console.log(JSON.stringify(err));
+        });
+    },
+
+    /**
+     * Find assured infos
+     */
+    findAssureInfos(event) {
+      let query = event.target.value;
+      this.searchLoading = true;
+      get(`/partener.agent.search?query=${query}`)
+        .then(({ data, status }) => {
+          this.searchLoading = false;
+          if (status === 200) {
+            if (data.length > 0) {
+              this.assuranceInfos = data[0];
+            } else {
+              this.assuranceInfos = null;
+            }
+          } else {
+            this.assuranceInfos = null;
+          }
+        })
+        .catch((e) => {
+          this.searchLoading = false;
+          this.assuranceInfos = null;
         });
     },
 
