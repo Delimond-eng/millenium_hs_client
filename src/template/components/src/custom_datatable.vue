@@ -43,7 +43,7 @@ export default {
           createdCell: (cell, cellData, rowData, rowIndex, colIndex) => {
             cell.innerHTML = this.actionButtons
               .map((button) => {
-                return `<button data-id="${rowData.id}" class="btn btn-sm action-btn ${button.class}" data-key="${button.key}" data-bs-toggle="tooltip" title="${button.tooltip}">${button.label}</button>`;
+                return `<button data-id="${rowData.id}" class="btn btn-sm action-btn ${button.class}" data-key="${button.key}" title="${button.tooltip}">${button.label}</button>`;
               })
               .join("");
           },

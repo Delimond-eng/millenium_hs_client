@@ -9,8 +9,8 @@
                             <h4 class="mb-sm-0">Configuration examens médicaux</h4>
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="me-2"><a href="javascript:void(0)"
-                                            class="btn btn-secondary btn-sm btn-border"
+                                    <li class="me-2">
+                                        <a href="javascript:void(0)" class="btn btn-secondary btn-sm btn-border"
                                             @click="$showBsModal('examensCreateModal')"><i class="ri-add-line me-1"></i>
                                             Ajouter nouveau examen</a>
                                     </li>
@@ -25,8 +25,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <custom-table v-if="isHopitalDefined"
-                                    :api-url="`http://127.0.0.1:8000/api/configs.all/${$user().hopital.id}`"
+                                <custom-table v-if="isHopitalDefined" :api-url="`/configs.all/${$user().hopital.id}`"
                                     :columns="dataTableColumns" :data-src="'configs.examens'" ref="customTableExamens"
                                     :action-buttons="actionButtons" />
                                 <!-- <div class="table-responsive table-card mb-3">
@@ -81,9 +80,7 @@
         <footer class="footer">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">
-                        © Millenium HS
-                    </div>
+                    <div class="col-sm-6">© Millenium HS</div>
                     <div class="col-sm-6">
                         <div class="text-sm-end d-none d-sm-block">
                             &copy; Powered by Millenium Horizon
@@ -97,41 +94,48 @@
 </template>
 
 <script>
-import ExamenCreateModal from "./modals/examen_config_add_modal"
+import ExamenCreateModal from "./modals/examen_config_add_modal";
 export default {
-    name: 'ExamensConfigPage',
+    name: "ExamensConfigPage",
     data() {
         return {
             dataTableColumns: [
-                { data: 'examen_labo_libelle', title: "Libelle examen" },
-                { data: 'examen_labo_prix', title: 'Prix' },
-                { data: 'examen_labo_prix_devise', title: 'devise' },
-                { data: 'examen_resultat_type', title: 'Type de resultat' },
-                { data: 'labo.labo_nom', title: 'Laboratoire' },
-                { data: 'emplacement.hopital_emplacement_libelle', title: 'Emplacement' }
+                { data: "examen_labo_libelle", title: "Libelle examen" },
+                { data: "examen_labo_prix", title: "Prix" },
+                { data: "examen_labo_prix_devise", title: "devise" },
+                { data: "examen_resultat_type", title: "Type de resultat" },
+                { data: "labo.labo_nom", title: "Laboratoire" },
+                { data: "emplacement.hopital_emplacement_libelle", title: "Emplacement" },
             ],
             actionButtons: [
-                { label: '<i class="ri-delete-bin-3-line"></i>', class: 'btn-soft-danger me-1', key: 'delete' },
-                { label: '<i class="ri-edit-2-line"></i>', class: 'btn-soft-secondary', key: 'edit' },
+                {
+                    label: '<i class="ri-delete-bin-3-line"></i>',
+                    class: "btn-soft-danger me-1",
+                    key: "delete",
+                },
+                {
+                    label: '<i class="ri-edit-2-line"></i>',
+                    class: "btn-soft-secondary",
+                    key: "edit",
+                },
             ],
-        }
+        };
     },
     components: {
         ExamenCreateModal,
     },
 
     mounted() {
-        this.$store.dispatch('services/showConfigs')
-        this.$store.dispatch('labo/viewLabos');
+        this.$store.dispatch("services/showConfigs");
+        this.$store.dispatch("labo/viewLabos");
     },
     computed: {
         configs() {
-            return this.$store.getters['services/GET_CONFIGS']
+            return this.$store.getters["services/GET_CONFIGS"];
         },
         isHopitalDefined() {
             return this.$user().hopital !== undefined;
         },
-
     },
-}
+};
 </script>

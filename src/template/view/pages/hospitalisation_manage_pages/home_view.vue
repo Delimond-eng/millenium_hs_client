@@ -6,7 +6,8 @@
                 <div class="row">
                     <div class="col-12 col-md-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0">Gestion des hospitalisation des patient<sup
+                            <h4 class="mb-sm-0">
+                                Gestion des hospitalisation des patient<sup
                                     class="text-danger text-lowercase fw-normal"></sup>
                             </h4>
 
@@ -27,7 +28,7 @@
                             <div class="card-body">
                                 <div class="card-body">
                                     <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <ul class="nav nav-pills nav-custom mb-3" role="tablist">
                                         <li class="nav-item active" role="presentation">
                                             <router-link :to="{ name: 'bed-tab' }" class="nav-link" role="tab"
                                                 aria-selected="false" tabindex="-1">
@@ -47,12 +48,6 @@
                                             </router-link>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <router-link :to="{ name: 'facturation-tab' }" class="nav-link" role="tab"
-                                                aria-selected="false" tabindex="-1">
-                                                <i class="ri-file-2-line"></i> Facturations
-                                            </router-link>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
                                             <router-link :to="{ name: 'setting-tab' }" class="nav-link" role="tab"
                                                 aria-selected="false" tabindex="-1">
                                                 <i class="ri-tools-fill"></i> Configurations
@@ -60,7 +55,7 @@
                                         </li>
                                     </ul>
                                     <!-- Tab panes -->
-                                    <div class="tab-content">
+                                    <div class="tab-content mx-3">
                                         <router-view></router-view>
                                     </div>
                                 </div>
@@ -75,9 +70,7 @@
         <footer class="footer">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">
-                        © Millenium HS
-                    </div>
+                    <div class="col-sm-6">© Millenium HS</div>
                     <div class="col-sm-6">
                         <div class="text-sm-end d-none d-sm-block">
                             &copy; Powered by Millenium Horizon
@@ -90,22 +83,18 @@
 </template>
 
 <script>
-
 export default {
-    name: 'HospitalisationManageHome',
+    name: "HospitalisationManageHome",
 
     mounted() {
-        this.$store.dispatch('hospitalisation/viewAllDatas');
-        this.$store.dispatch('services/showConfigs');
+        this.$store.dispatch("hospitalisation/viewAllDatas");
+        this.$store.dispatch("services/showConfigs");
     },
 
     computed: {
         datas() {
-            return this.$store.getters['hospitalisation/GET_ALL_DATAS'];
-        }
-    }
-}
+            return this.$store.getters["hospitalisation/GET_ALL_DATAS"];
+        },
+    },
+};
 </script>
-
-
-

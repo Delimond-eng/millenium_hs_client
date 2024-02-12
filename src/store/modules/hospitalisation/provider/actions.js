@@ -25,6 +25,28 @@ export default {
   },
 
   /**
+   * Créer un nouveau lit
+   * @author Dev.GastonDelimond
+   * @param {Vuex} context
+   * @param {*} form
+   * @returns HttpResponse
+   */
+  async addConfig(context, form) {
+    let user = JSON.parse(localStorage.getItem("user-data"));
+    form.created_by = user.id;
+    try {
+      let { data, status } = await post("/lit.type.config", form);
+      if (status === 200) {
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  /**
    *Créer une nouvelle hospitalisation
    * @author Dev.GastonDelimond
    * @param {Vuex} context

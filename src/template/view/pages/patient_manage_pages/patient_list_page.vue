@@ -5,9 +5,7 @@
         <!-- start page title -->
         <div class="row">
           <div class="col-12 col-md-12">
-            <div
-              class="page-title-box d-sm-flex align-items-center justify-content-between"
-            >
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
               <h4 class="mb-sm-0">Gestion patients</h4>
             </div>
           </div>
@@ -18,32 +16,15 @@
             <div class="step-arrow-nav bg-white shadow-sm mb-2 p-2">
               <ul class="nav nav-pills custom-nav" role="tablist">
                 <li class="nav-item active" role="presentation">
-                  <button
-                    class="nav-link p-3 active"
-                    @click="tab = 'all'"
-                    id="all-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#tab-all"
-                    type="button"
-                    role="tab"
-                    aria-controls="all"
-                    aria-selected="true"
-                  >
+                  <button class="nav-link p-3 active" @click="tab = 'all'" id="all-tab" data-bs-toggle="pill"
+                    data-bs-target="#tab-all" type="button" role="tab" aria-controls="all" aria-selected="true">
                     Tous les patients
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button
-                    class="nav-link p-3"
-                    id="tab-pendings-tab"
-                    @click="tab = 'pending'"
-                    data-bs-toggle="pill"
-                    data-bs-target="#tab-pendings"
-                    type="button"
-                    role="tab"
-                    aria-controls="tab-pendings"
-                    aria-selected="false"
-                  >
+                  <button class="nav-link p-3" id="tab-pendings-tab" @click="tab = 'pending'" data-bs-toggle="pill"
+                    data-bs-target="#tab-pendings" type="button" role="tab" aria-controls="tab-pendings"
+                    aria-selected="false">
                     Patients en attente
                     <span class="badge bg-danger align-middle ms-1">{{
                       pendings.length
@@ -56,26 +37,15 @@
               <div class="card-body">
                 <div class="tab-content">
                   <div class="tab-pane active show w-100" role="tabpanel" id="tab-all">
-                    <custom-table
-                      v-if="isEmplacementDefined"
-                      :api-url="`/patients.all/${$user().hopital.emplacement.id}`"
-                      :columns="dataTableColumns"
-                      :data-src="'patients'"
-                      ref="customTablePatients"
-                      :action-buttons="actionButtons"
-                      @actionButtonClick="handleActionButtonClick"
-                    />
+                    <custom-table v-if="isEmplacementDefined" :api-url="`/patients.all/${$user().hopital.emplacement.id}`"
+                      :columns="dataTableColumns" :data-src="'patients'" ref="customTablePatients"
+                      :action-buttons="actionButtons" @actionButtonClick="handleActionButtonClick" />
                   </div>
                   <div class="tab-pane w-100" role="tabpanel" id="tab-pendings">
-                    <custom-table
-                      v-if="isEmplacementDefined"
-                      :api-url="`/patients.pending/${$user().hopital.emplacement.id}`"
-                      :columns="dataTableColumns2"
-                      :data-src="'patients'"
-                      ref="customTablePatients2"
-                      :action-buttons="actionButtons2"
-                      @actionButtonClick="handleActionButtonClick2"
-                    />
+                    <custom-table v-if="isEmplacementDefined"
+                      :api-url="`/patients.pending/${$user().hopital.emplacement.id}`" :columns="dataTableColumns2"
+                      :data-src="'patients'" ref="customTablePatients2" :action-buttons="actionButtons2"
+                      @actionButtonClick="handleActionButtonClick2" />
                   </div>
                 </div>
               </div>
@@ -102,10 +72,8 @@
     </footer>
 
     <div class="customizer-setting d-block">
-      <div
-        class="btn-success text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2"
-        @click.prevent="$router.push('/home/patient/create')"
-      >
+      <div class="btn-success text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2"
+        @click.prevent="$router.push('/home/patient/create')">
         <i class="ri-add-line fs-22"></i>
       </div>
     </div>
