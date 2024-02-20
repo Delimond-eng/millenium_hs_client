@@ -59,16 +59,19 @@
         </div>
     </div>
     <partener-create-modal @reload-data="refreshData" />
+    <partener-infos-modal  :data="selectedPartenerAgents"/>
     <input type="file" ref="filePicker" class="hidden" />
 </template>
 
 <script>
 import PartenerCreateModal from "./modals/partener_create_modal";
+import PartenerInfosModal from "./modals/partener_infos_modal";
 import { post } from "@/http";
 export default {
     name: "AgentList",
     components: {
         PartenerCreateModal,
+        PartenerInfosModal
     },
     data() {
         return {
@@ -102,6 +105,7 @@ export default {
                     key: "delete",
                 },
             ],
+            selectedPartenerAgents:null
         };
     },
 
@@ -115,7 +119,8 @@ export default {
                     console.log("delete", JSON.stringify(payload.data));
                     break;
                 case "view":
-                    console.log("AGENTS => ", JSON.stringify(payload.data.agents));
+                    this.selectedPartenerAgents = payload.data.agents;
+                    this.$showBsModal('partenerInfosModal');
                     break;
                 case "upload":
                     this.importExcelFile(payload.data);

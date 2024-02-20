@@ -15,7 +15,6 @@ import ConfigLabosPage from "@/template/view/pages/labo_manage_pages/labo_config
  * SERVICES
  */
 import ServiceManagerPage from "@/template/view/pages/service_manage_pages/service_config_page";
-import PharmacieManagerPage from "@/template/view/pages/service_manage_pages/pharmacie_pages/pharmacie_landing_page";
 
 /* patient manage pages */
 import PatientCreatePage from "@/template/view/pages/patient_manage_pages/patient_create_page";
@@ -70,206 +69,246 @@ import FactureCreatePage from "@/template/view/pages/facturations_manage_pages/f
  */
 import PartenersViewPage from "@/template/view/pages/partener_manage_pages/partener_list_page";
 
+/**
+ * Pharmacie manage
+ */
+import PharmacieCreate from "@/template/view/pages/pharmacie_module_pages/pharmacie_create.vue";
+import PharmacieCreateCategories from "@/template/view/pages/pharmacie_module_pages/categorie_create.vue";
+import PharmacieCreateProducts from "@/template/view/pages/pharmacie_module_pages/product_create.vue";
+import PharmacieOperationLanding from "@/template/view/pages/pharmacie_module_pages/operations_landing.vue";
+import ApprovisionnementCreate from "@/template/view/pages/pharmacie_module_pages/subpages/approv_create.vue";
+import TransfertCreate from "@/template/view/pages/pharmacie_module_pages/subpages/transfert_create.vue";
+
 //DataTable Test
 import DatatablesNet from "@/template/view/pages/datatables.net.vue";
-const routes = [
-  {
-    path: "/",
-    component: LoginScreen,
-    name: "login",
-  },
-  {
-    path: "/home/modules",
-    component: HomeModule,
-    name: "modules",
-  },
-  {
-    path: "/home",
-    component: HomeMain,
-    name: "home",
-    redirect: { name: "dash" },
-    children: [
-      {
-        path: "/home/dash",
-        component: Dashboard,
-        name: "dash",
-      },
-      {
-        path: "/home/datatables.net",
-        component: DatatablesNet,
-        name: "datatable-route",
-      },
+const routes = [{
+        path: "/",
+        component: LoginScreen,
+        name: "login",
+    },
+    {
+        path: "/home/modules",
+        component: HomeModule,
+        name: "modules",
+    },
+    {
+        path: "/home",
+        component: HomeMain,
+        name: "home",
+        redirect: { name: "dash" },
+        children: [{
+                path: "/home/dash",
+                component: Dashboard,
+                name: "dash",
+            },
+            {
+                path: "/home/datatables.net",
+                component: DatatablesNet,
+                name: "datatable-route",
+            },
 
-      {
-        path: "/home/transferts",
-        component: TransfertPatientPage,
-        name: "transferts-route",
-      },
+            {
+                path: "/home/transferts",
+                component: TransfertPatientPage,
+                name: "transferts-route",
+            },
 
-      /**
-       * COnfig routes
-       */
-      {
-        path: "/admin/labo/config/examens",
-        component: ConfigExamensPage,
-        name: "admin-config-examens",
-      },
-      {
-        path: "/admin/labo/config",
-        component: ConfigLabosPage,
-        name: "admin-config-labos",
-      },
-      {
-        path: "/admin/manage/pharmacies",
-        component: PharmacieManagerPage,
-        name: "manage-pharmacies",
-      },
+            /**
+             * COnfig routes
+             */
+            {
+                path: "/admin/labo/config/examens",
+                component: ConfigExamensPage,
+                name: "admin-config-examens",
+            },
+            {
+                path: "/admin/labo/config",
+                component: ConfigLabosPage,
+                name: "admin-config-labos",
+            },
 
-      /* patient routes */
-      {
-        path: "/home/patient/create",
-        component: PatientCreatePage,
-        name: "patient-create",
-      },
-      {
-        path: "/home/patients/list",
-        component: PatientListPage,
-        name: "patient-list",
-      },
+            /**
+             * Pharmacie module manage
+             */
+            {
+                path: "/pharmacie/create/product",
+                component: PharmacieCreateProducts,
+                name: "pharma-create-product",
+            },
+            {
+                path: "/pharmacie/create",
+                component: PharmacieCreate,
+                name: "pharma-create",
+            },
+            {
+                path: "/pharmacie/create/category",
+                component: PharmacieCreateCategories,
+                name: "pharma-create-category",
+            },
+            {
+                path: "/pharmacie/operations",
+                component: PharmacieOperationLanding,
+                name: "pharma-operations",
+                redirect: { name: "approv-route" },
+                children: [{
+                        path: "/pharmacie/operations/approvisionnement",
+                        component: ApprovisionnementCreate,
+                        name: "approv-route",
+                    },
+                    {
+                        path: "/pharmacie/operations/transfert",
+                        component: TransfertCreate,
+                        name: "transfert-route",
+                    },
+                ],
+            },
+            /**
+             * End Pharmacie
+             */
 
-      {
-        path: "/home/patients/docs",
-        component: PatientDocMedPage,
-        name: "patient-docs",
-      },
+            /* patient routes */
+            {
+                path: "/home/patient/create",
+                component: PatientCreatePage,
+                name: "patient-create",
+            },
+            {
+                path: "/home/patients/list",
+                component: PatientListPage,
+                name: "patient-list",
+            },
 
-      /* medecins routes */
-      {
-        path: "/home/med/create",
-        component: AgentCreatePage,
-        name: "med-create",
-      },
-      {
-        path: "/home/meds/list",
-        component: AgentListPage,
-        name: "med-list",
-      },
+            {
+                path: "/home/patients/docs",
+                component: PatientDocMedPage,
+                name: "patient-docs",
+            },
 
-      /* consult manage page */
-      {
-        path: "/home/consult/create",
-        component: ConsultCreatePage,
-        name: "consult-create",
-      },
-      {
-        path: "/home/consults/list",
-        component: ConsultListPage,
-        name: "consult-list",
-      },
+            /* medecins routes */
+            {
+                path: "/home/med/create",
+                component: AgentCreatePage,
+                name: "med-create",
+            },
+            {
+                path: "/home/meds/list",
+                component: AgentListPage,
+                name: "med-list",
+            },
 
-      /* prescription routes */
-      {
-        path: "/home/prescription/create",
-        component: PrescriptionCreatePage,
-        name: "prescription-create",
-      },
-      {
-        path: "/home/prescriptions/list",
-        component: PrescriptionListPage,
-        name: "prescriptions-list",
-      },
-      {
-        path: "/home/invoice/fiche",
-        component: FicheInvoice,
-        name: "fiche-invoice",
-      },
-      {
-        path: "/home/hospitalisations.manage",
-        component: HospitalisationHome,
-        name: "hospitalisation-home",
-        redirect: { name: "bed-tab" },
-        children: [
-          {
-            path: "",
-            component: BedTab,
-            name: "bed-tab",
-          },
-          {
-            path: "/home/hospitalisations.manage/hospitalisations",
-            component: HospitalisationTab,
-            name: "hospitalisation-tab",
-          },
-          {
-            path: "/home/hospitalisations.manage/hospitalisations",
-            component: TransfertTab,
-            name: "transfert-tab",
-          },
-          {
-            path: "/home/hospitalisations.manage/facturations",
-            component: FacturationTab,
-            name: "facturation-tab",
-          },
-          {
-            path: "/home/hospitalisations.manage/settings",
-            component: SettingTab,
-            name: "setting-tab",
-          },
+            /* consult manage page */
+            {
+                path: "/home/consult/create",
+                component: ConsultCreatePage,
+                name: "consult-create",
+            },
+            {
+                path: "/home/consults/list",
+                component: ConsultListPage,
+                name: "consult-list",
+            },
+
+            /* prescription routes */
+            {
+                path: "/home/prescription/create",
+                component: PrescriptionCreatePage,
+                name: "prescription-create",
+            },
+            {
+                path: "/home/prescriptions/list",
+                component: PrescriptionListPage,
+                name: "prescriptions-list",
+            },
+            {
+                path: "/home/invoice/fiche",
+                component: FicheInvoice,
+                name: "fiche-invoice",
+            },
+            {
+                path: "/home/hospitalisations.manage",
+                component: HospitalisationHome,
+                name: "hospitalisation-home",
+                redirect: { name: "bed-tab" },
+                children: [{
+                        path: "",
+                        component: BedTab,
+                        name: "bed-tab",
+                    },
+                    {
+                        path: "/home/hospitalisations.manage/hospitalisations",
+                        component: HospitalisationTab,
+                        name: "hospitalisation-tab",
+                    },
+                    {
+                        path: "/home/hospitalisations.manage/hospitalisations",
+                        component: TransfertTab,
+                        name: "transfert-tab",
+                    },
+                    {
+                        path: "/home/hospitalisations.manage/facturations",
+                        component: FacturationTab,
+                        name: "facturation-tab",
+                    },
+                    {
+                        path: "/home/hospitalisations.manage/settings",
+                        component: SettingTab,
+                        name: "setting-tab",
+                    },
+                ],
+            },
+            {
+                path: "/admin/config/all",
+                component: ConfigHome,
+                name: "settings-app",
+                redirect: { name: "emplacements-config-tab" },
+                children: [{
+                        path: "",
+                        component: EmplacementsTab,
+                        name: "emplacements-config-tab",
+                    },
+                    {
+                        path: "/admin/config/services",
+                        component: ServicesTab,
+                        name: "services-config-tab",
+                    },
+                    {
+                        path: "/admin/config/fonctions",
+                        component: FonctionsTab,
+                        name: "fonctions-config-tab",
+                    },
+                    {
+                        path: "/admin/config/facturations",
+                        component: FacturationsTab,
+                        name: "facturations-config-tab",
+                    },
+                ],
+            },
+            {
+                path: "/home/premiers_soins",
+                component: PremierSoinsPage,
+                name: "premiers-soins",
+            },
+            {
+                path: "/home/premiers_soins/list",
+                component: PremierSoinsListPage,
+                name: "premiers-soins-list",
+            },
+            {
+                path: "/home/facture/create",
+                component: FactureCreatePage,
+                name: "facture-create-route",
+            },
+            {
+                path: "/home/factures/list",
+                component: FacturesListPage,
+                name: "factures-list-route",
+            },
+            {
+                path: "/admin/config/partener",
+                component: PartenersViewPage,
+                name: "partener-view-route",
+            },
         ],
-      },
-      {
-        path: "/admin/config/all",
-        component: ConfigHome,
-        name: "settings-app",
-        redirect: { name: "emplacements-config-tab" },
-        children: [
-          {
-            path: "",
-            component: EmplacementsTab,
-            name: "emplacements-config-tab",
-          },
-          {
-            path: "/admin/config/services",
-            component: ServicesTab,
-            name: "services-config-tab",
-          },
-          {
-            path: "/admin/config/fonctions",
-            component: FonctionsTab,
-            name: "fonctions-config-tab",
-          },
-          {
-            path: "/admin/config/facturations",
-            component: FacturationsTab,
-            name: "facturations-config-tab",
-          },
-        ],
-      },
-      {
-        path: "/home/premiers_soins",
-        component: PremierSoinsPage,
-        name: "premiers-soins",
-      },
-      {
-        path: "/home/premiers_soins/list",
-        component: PremierSoinsListPage,
-        name: "premiers-soins-list",
-      },
-      {
-        path: "/home/facture/create",
-        component: FactureCreatePage,
-        name: "facture-create-route",
-      },
-      {
-        path: "/home/factures/list",
-        component: FacturesListPage,
-        name: "factures-list-route",
-      },
-      {
-        path: "/admin/config/partener",
-        component: PartenersViewPage,
-        name: "partener-view-route",
-      },
-    ],
-  },
+    },
 ];
 export default routes;

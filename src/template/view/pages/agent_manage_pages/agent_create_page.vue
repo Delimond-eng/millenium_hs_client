@@ -350,6 +350,7 @@
                             <option>Pharmacies</option>
                             <option>Laboratoires</option>
                             <option>Maternités</option>
+                            <option>Partenaires</option>
                             <option>Gestion utilisateurs</option>
                           </select>
                         </div>
