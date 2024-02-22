@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <h2 class="card-title">Approvisionnement</h2>
+      <h2 class="card-title">Classement des produits défectueux</h2>
     </div>
     <div class="card-body">
       <div>
@@ -13,16 +13,8 @@
       <!-- Basic Input -->
       <div class="mt-2">
         <label for="basiInput" class="form-label">Quantité<sup class="text-danger">*</sup></label>
-        <input type="text" class="form-control" id="basiInput" placeholder="Entrez la qté d'approvisionnement..." />
+        <input type="text" class="form-control" id="basiInput" placeholder="Entrez la qté de classement..." />
       </div>
-
-      <div class="mt-2">
-        <label for="basiInput" class="form-label">Fournisseur <sup class="text-danger">*</sup></label>
-        <select class="form-select">
-          <option label="-- Sélectionnez un fournisseur --"></option>
-        </select>
-      </div>
-
       <!-- Input with Label -->
       <div class="mt-2">
         <label for="labelInput" class="form-label">Observation <small>(optionnel)</small></label>
@@ -32,8 +24,8 @@
       <div class="row">
         <div class="col-md-12">
           <div class="d-flex justify-content-end align-items-end">
-            <load-button btn-type="submit" :loading="formLoading"
-              class-name="btn btn-success btn-lg mt-2">Sauvegarder</load-button>
+            <load-button btn-type="submit" :loading="formLoading" class-name="btn btn-secondary btn-lg mt-2">Classer &
+              sauvegarder</load-button>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <h2 class="card-title">Approvisionnement</h2>
+      <h2 class="card-title">Retour des produits auprès de fournisseur</h2>
     </div>
     <div class="card-body">
       <div>
@@ -13,7 +13,7 @@
       <!-- Basic Input -->
       <div class="mt-2">
         <label for="basiInput" class="form-label">Quantité<sup class="text-danger">*</sup></label>
-        <input type="text" class="form-control" id="basiInput" placeholder="Entrez la qté d'approvisionnement..." />
+        <input type="text" class="form-control" id="basiInput" placeholder="Entrez la qté à retourner..." />
       </div>
 
       <div class="mt-2">
@@ -32,8 +32,8 @@
       <div class="row">
         <div class="col-md-12">
           <div class="d-flex justify-content-end align-items-end">
-            <load-button btn-type="submit" :loading="formLoading"
-              class-name="btn btn-success btn-lg mt-2">Sauvegarder</load-button>
+            <load-button btn-type="submit" :loading="formLoading" class-name="btn btn-secondary btn-lg mt-2">Valider le
+              retour</load-button>
           </div>
         </div>
       </div>
