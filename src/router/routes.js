@@ -73,6 +73,8 @@ import PartenersViewPage from "@/template/view/pages/partener_manage_pages/parte
  * Pharmacie manage
  */
 import PharmacieCreate from "@/template/view/pages/pharmacie_module_pages/pharmacie_create.vue";
+import PharmacieUsersManage from "@/template/view/pages/pharmacie_module_pages/users_manage.vue";
+import PharmacieFournisseurManage from "@/template/view/pages/pharmacie_module_pages/fournisseurs_manage.vue";
 import PharmacieCreateCategories from "@/template/view/pages/pharmacie_module_pages/categorie_create.vue";
 import PharmacieCreateProducts from "@/template/view/pages/pharmacie_module_pages/product_create.vue";
 import PharmacieOperationLanding from "@/template/view/pages/pharmacie_module_pages/operations_landing.vue";
@@ -139,6 +141,16 @@ const routes = [
       /**
        * Pharmacie module manage
        */
+      {
+        path: "/pharmacie/users/manage",
+        component: PharmacieUsersManage,
+        name: "pharma-users-manage",
+      },
+      {
+        path: "/pharmacie/fournisseurs/manage",
+        component: PharmacieFournisseurManage,
+        name: "pharma-fournisseurs-manage",
+      },
       {
         path: "/pharmacie/create/product",
         component: PharmacieCreateProducts,

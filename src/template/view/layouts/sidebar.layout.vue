@@ -334,6 +334,19 @@
                   >
                 </li>
                 <li class="nav-item">
+                  <a href="#/pharmacie/users/manage" class="nav-link" data-key="t-list"
+                    >Gestion des utilisateurs</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="#/pharmacie/fournisseurs/manage"
+                    class="nav-link"
+                    data-key="t-list"
+                    >Gestion des fournisseurs</a
+                  >
+                </li>
+                <li class="nav-item">
                   <a
                     href="#sidebarPharmacie"
                     class="nav-link"

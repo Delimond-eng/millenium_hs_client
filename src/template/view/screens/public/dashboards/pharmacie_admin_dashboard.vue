@@ -168,15 +168,17 @@
             <div class="row g-4 align-items-center">
               <div class="col-sm">
                 <div>
-                  <h2 class="card-title mb-0">Situation du stock</h2>
+                  <h2 class="card-title mb-0 text-uppercase fw-bold">
+                    Situation du stock
+                  </h2>
                 </div>
               </div>
             </div>
           </div>
           <div class="card-body border-bottom-dashed border-bottom">
             <form>
-              <div class="row g-3">
-                <div class="col-xl-6">
+              <div class="row">
+                <div class="col-xl-9">
                   <div class="search-box">
                     <input
                       type="text"
@@ -187,36 +189,24 @@
                   </div>
                 </div>
                 <!--end col-->
-                <div class="col-xl-6">
-                  <div class="row g-3">
-                    <!--end col-->
-                    <div class="col-sm-4">
-                      <div>
-                        <select
-                          class="form-control"
-                          data-plugin="choices"
-                          data-choices
-                          data-choices-search-false
-                          name="choices-single-default"
-                          id="idStatus"
-                        >
-                          <option label="Catégories" hidden selected></option>
-                          <option value="all">Tous</option>
-                          <option value="Antibiotique">Antibiotique</option>
-                          <option value="Anti analgesique">Anti analgesique</option>
-                        </select>
-                      </div>
-                    </div>
-                    <!--end col-->
-
-                    <div class="col-sm-4">
-                      <div>
-                        <button type="button" class="btn btn-secondary btn-icon">
-                          <i class="ri-search-2-line"></i>
-                        </button>
-                      </div>
-                    </div>
-                    <!--end col-->
+                <div class="col-xl-3">
+                  <div class="input-group">
+                    <select
+                      class="form-control"
+                      data-plugin="choices"
+                      data-choices
+                      data-choices-search-false
+                      name="choices-single-default"
+                      id="idStatus"
+                    >
+                      <option label="Catégories" hidden selected></option>
+                      <option value="all">Tous</option>
+                      <option value="Antibiotique">Antibiotique</option>
+                      <option value="Anti analgesique">Anti analgesique</option>
+                    </select>
+                    <button class="btn btn-primary btn-icon">
+                      <i class="ri-search-2-line"></i>
+                    </button>
                   </div>
                 </div>
               </div>

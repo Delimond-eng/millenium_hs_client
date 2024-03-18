@@ -9,7 +9,8 @@
               <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item">
-                    <a href="javascript: void(0);" class="btn btn-sm btn-secondary text-white">Voir liste des produits</a>
+                    <a href="javascript: void(0);" class="btn btn-sm btn-secondary text-white">Voir liste des
+                      produits</a>
                   </li>
                 </ol>
               </div>
@@ -21,39 +22,33 @@
             <div class="card">
               <div class="card-body">
                 <!-- Basic Input -->
-                <div>
+                <div class="mb-2">
                   <label for="basiInput" class="form-label">Code produit <sup class="text-danger">*</sup></label>
                   <input type="text" class="form-control" id="basiInput" placeholder="Entrez le code " />
                 </div>
-                <div>
+                <div class="mb-2">
                   <label for="basiInput" class="form-label">Libellé <sup class="text-danger">*</sup></label>
                   <input type="text" class="form-control" id="basiInput" placeholder="Entrez le libellé du produit" />
                 </div>
 
-                <div>
+                <div class="mb-2">
                   <label for="basiInput" class="form-label">Date d'Expiration <sup class="text-danger">*</sup></label>
                   <input type="date" class="form-control" id="basiInput"
                     placeholder="Entrez le libellé de la categorie" />
                 </div>
 
-                <div>
-                  <label for="basiInput" class="form-label">Libellé <sup class="text-danger">*</sup></label>
-                  <input type="password" class="form-control" id="basiInput"
-                    placeholder="Entrez le libellé de la categorie" />
-                </div>
-
-                <div>
+                <div class="mb-2">
                   <label for="basiInput" class="form-label">Stock quantité <sup class="text-danger">*</sup></label>
                   <input type="number" class="form-control" id="basiInput"
                     placeholder="Entrez le libellé de la categorie" />
                 </div>
-                <div>
+                <div class="mb-2">
                   <label for="basiInput" class="form-label">Quantité minimum <sup class="text-danger">*</sup></label>
                   <input type="number" class="form-control" id="basiInput"
                     placeholder="Entrez le libellé de la categorie" />
                 </div>
 
-                <div>
+                <div class="mb-2">
                   <label for="basiInput" class="form-label">Unité <sup class="text-danger">*</sup></label>
                   <input type="text" class="form-control" id="basiInput"
                     placeholder="Entrez le libellé de la categorie" />
@@ -65,19 +60,26 @@
             <div class="card">
               <div class="card-body">
                 <!-- Basic Input -->
-                <div>
+                <div class="mb-2">
                   <label for="basiInput" class="form-label">Prix Unitaire <sup class="text-danger">*</sup></label>
                   <input type="number" class="form-control" id="basiInput" placeholder="Entrez le prix unitaire " />
                 </div>
-                <div>
+                <div class="mb-2">
                   <label for="basiInput" class="form-label">Catégorie <sup class="text-danger">*</sup></label>
                   <select class="form-control">
                     <option label="Sélectionnez une categorie" selected hidden></option>
                     <option value="Cat1">Categorie</option>
                   </select>
                 </div>
+                <div class="mb-2">
+                  <label for="basiInput" class="form-label">Fournisseur <sup class="text-danger">*</sup></label>
+                  <select class="form-control">
+                    <option label="Sélectionnez un fournisseur" selected hidden></option>
+                    <option value="Cat1">Fournisseur 1</option>
+                  </select>
+                </div>
                 <!-- Input with Label -->
-                <div>
+                <div class="mb-2">
                   <label for="labelInput" class="form-label">Description <small>(optionnel)</small></label>
                   <textarea class="form-control" placeholder="Entrez une description..."></textarea>
                 </div>
@@ -86,7 +88,8 @@
                   <div class="col-md-12">
                     <div class="d-flex justify-content-end align-items-end">
                       <load-button btn-type="submit" :loading="formLoading"
-                        class-name="btn btn-success btn-lg mt-2 text-uppercase">Sauvegarder</load-button>
+                        class-name="btn btn-success mt-4 text-uppercase">
+                        <i class="ri-add-line"></i> Sauvegarder</load-button>
                     </div>
                   </div>
                 </div>

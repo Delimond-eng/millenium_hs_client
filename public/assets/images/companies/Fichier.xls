@@ -41,20 +41,24 @@
             <td width="80"><div align="center">Total</div></td>
         </tr>
                     <tr bgcolor="#FFFFFF">
-                <td>Decembre 2023</td>
-                <td>PALUKU/10312</td>
-                <td>Paluku Amisi Illain</td>
-                <td><span class="style7"> </span>Congolaise</td>
-                <td align="right">40 000</td>
-                <td align="right">1 400</td>
+                <td>Janvier 2024</td>
+                <td>HDHDH/3116</td>
+                <td>HDHDH JHJHD ddd</td>
+                <td><span class="style7"> </span>Cos</td>
+                <td align="right">0</td>
+                <td align="right">0</td>
                 <td><div align="right">
-                        38 600                    </div></td>
+                        0                    </div></td>
                 <td><div align="right" class="style7">
                         0                    </div></td>
                 <td><div align="right">
-                        0                    </div></td>
+                        <br />
+<b>Notice</b>:  Undefined variable: ier in <b>C:\xampp2\htdocs\hrnew-v1\pages\templates\intercalaire.php</b> on line <b>303</b><br />
+0                    </div></td>
                 <td><div align="right"><strong>
-                            0                        </strong></div></td>
+                            <br />
+<b>Notice</b>:  Undefined variable: ier in <b>C:\xampp2\htdocs\hrnew-v1\pages\templates\intercalaire.php</b> on line <b>312</b><br />
+0                        </strong></div></td>
             </tr>
             </table>
     <p align="center">
