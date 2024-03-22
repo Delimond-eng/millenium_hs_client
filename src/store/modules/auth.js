@@ -1,6 +1,6 @@
 import { post } from "@/http";
 
-/**
+/*
  * Vuex state
  * @returns Object state
  * */

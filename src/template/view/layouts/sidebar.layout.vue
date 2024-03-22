@@ -261,16 +261,35 @@
                     fournisseurs</a>
                 </li>
                 <li class="nav-item">
+                  <a href="#sidebarConfigs" class="nav-link" data-bs-toggle="collapse" role="button"
+                    aria-expanded="true" aria-controls="#sidebarConfigs" data-key="t-profile">
+                    Configurations
+                  </a>
+                  <div class="menu-dropdown collapse" id="sidebarConfigs" style="">
+                    <ul class="nav nav-sm flex-column">
+                      <li class="nav-item">
+                        <a href="#/pharmacie/config/category" class="nav-link" data-key="t-simple-page">
+                          Catégories</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#/pharmacie/config/type" class="nav-link" data-key="t-simple-page">
+                          Types</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#/pharmacie/config/unite" class="nav-link" data-key="t-simple-page">
+                          Unités
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="nav-item">
                   <a href="#sidebarStocks" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="true"
                     aria-controls="sidebarStocks" data-key="t-profile">
                     Gestion stock
                   </a>
                   <div class="menu-dropdown collapse" id="sidebarStocks" style="">
                     <ul class="nav nav-sm flex-column">
-                      <li class="nav-item">
-                        <a href="#/pharmacie/create/category" class="nav-link" data-key="t-simple-page">
-                          Création catégories</a>
-                      </li>
                       <li class="nav-item">
                         <a href="#/pharmacie/create/product" class="nav-link" data-key="t-simple-page">
                           Création produits</a>

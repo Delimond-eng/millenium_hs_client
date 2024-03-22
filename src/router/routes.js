@@ -76,6 +76,8 @@ import PharmacieCreate from "@/template/view/pages/pharmacie_module_pages/pharma
 import PharmacieUsersManage from "@/template/view/pages/pharmacie_module_pages/users_manage.vue";
 import PharmacieFournisseurManage from "@/template/view/pages/pharmacie_module_pages/fournisseurs_manage.vue";
 import PharmacieCreateCategories from "@/template/view/pages/pharmacie_module_pages/configs/categorie_create.vue";
+import PharmacieCreateTypes from "@/template/view/pages/pharmacie_module_pages/configs/type_create.vue";
+import PharmacieCreateUnites from "@/template/view/pages/pharmacie_module_pages/configs/unite_create.vue";
 import PharmacieCreateProducts from "@/template/view/pages/pharmacie_module_pages/product_create.vue";
 import PharmacieOperationLanding from "@/template/view/pages/pharmacie_module_pages/operations_landing.vue";
 import PharmacieOperationViewer from "@/template/view/pages/pharmacie_module_pages/operations_viewer.vue";
@@ -160,9 +162,19 @@ const routes = [{
                 name: "pharma-create",
             },
             {
-                path: "/pharmacie/create/category",
+                path: "/pharmacie/config/category",
                 component: PharmacieCreateCategories,
                 name: "pharma-create-category",
+            },
+            {
+                path: "/pharmacie/config/type",
+                component: PharmacieCreateTypes,
+                name: "pharma-create-type",
+            },
+            {
+                path: "/pharmacie/config/unite",
+                component: PharmacieCreateUnites,
+                name: "pharma-create-unite",
             },
             {
                 path: "/pharmacie/operations",
