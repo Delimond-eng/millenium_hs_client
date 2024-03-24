@@ -29,8 +29,8 @@
                     <div class="col-md-12">
                         <div class="card ribbon-box right">
                             <div class="card-header">
-                                <div class="nav nav-pills nav-pills-tab custom-verti-nav-pills text-center" role="tablist"
-                                    aria-orientation="vertical">
+                                <div class="nav nav-pills nav-pills-tab custom-verti-nav-pills text-center"
+                                    role="tablist" aria-orientation="vertical">
                                     <button
                                         class="nav-link d-flex flex-fill me-2 flex-column justify-content-center align-items-center show"
                                         :class="selectedPatient != null ? 'active' : ''" id="custom-v-pills-home-tab"
@@ -83,12 +83,13 @@
 
                                     <button
                                         class="nav-link flex-fill d-flex me-2 flex-column justify-content-center align-items-center"
-                                        id="docs-btn" @click="loadDoc" :disabled="docLoading">
+                                        id="docs-tab" data-bs-toggle="pill" role="tab"
+                                        :disabled="selectedPatient === null" aria-controls="docs-tab"
+                                        aria-selected="false" href="#custom-v-pills-docs">
                                         <!-- <i class="las la-file-alt  d-block fs-20 mb-1"></i> -->
-                                        <img src="assets/images/companies/doc3.png" class="d-block fs-20 mb-1 text-center"
-                                            style="height: 40px" />
-                                        <span v-if="!docLoading">Dossier médical</span>
-                                        <svg-loading v-else color="#000000"></svg-loading>
+                                        <img src="assets/images/companies/doc3.png"
+                                            class="d-block fs-20 mb-1 text-center" style="height: 40px" />
+                                        <span>Dossier médical</span>
                                     </button>
                                 </div>
                             </div>
@@ -146,13 +147,13 @@
                                                                     <div class="col-md-12 mb-1"
                                                                         v-for="(detail, index) in consult_details"
                                                                         :key="index">
-                                                                        <label class="form-label">{{ detail.detail_libelle
-                                                                        }}
+                                                                        <label class="form-label">{{
+                                        detail.detail_libelle }}
                                                                             <sup class="text-danger">(optionnel)</sup>
                                                                         </label>
                                                                         <textarea class="form-control"
                                                                             v-model="detail.detail_valeur" :placeholder="detail.detail_libelle.toLowerCase() + '...'
-                                                                                "></textarea>
+                                        "></textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -169,7 +170,8 @@
                                                     </div>
                                                     <div class="col-md-12 mt-2">
                                                         <bs-toast id="errorsToast4" :msg="errors_msg" />
-                                                        <div class="d-flex align-items-end justify-content-end w-100 mt-4">
+                                                        <div
+                                                            class="d-flex align-items-end justify-content-end w-100 mt-4">
                                                             <button type="button"
                                                                 class="btn btn-light btn-border btn-label right me-2">
                                                                 <i
@@ -198,6 +200,9 @@
                                             <!-- schedules tab -->
                                             <schedules-tab :current-consult="currentConsult"
                                                 :selected-patient="selectedPatient"></schedules-tab>
+
+                                            <docs-tab :current-consult="currentConsult"
+                                                :selected-patient="selectedPatient"></docs-tab>
                                         </div>
                                     </div>
                                     <!-- end col-->
@@ -241,6 +246,7 @@ import TabInfos from "./tabs/infos_tab";
 import PrescriptionsTab from "./tabs/prescriptions_tab";
 import ExamensTab from "./tabs/examens_tab";
 import SchedulesTab from "./tabs/schedules_tab";
+import DocsTab from "./tabs/docs_tab";
 //END Tabs
 
 import ConsultMixins from "../../mixins/consult.mixins";
@@ -253,6 +259,7 @@ export default {
         PrescriptionsTab,
         ExamensTab,
         SchedulesTab,
+        DocsTab,
     },
     mixins: [ConsultMixins],
     data() {

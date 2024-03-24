@@ -331,7 +331,8 @@ export default {
       form: {
         produit_libelle: "",
         produit_code: "",
-        produit_prix_unitaire: "CDF",
+        produit_prix_unitaire: "",
+        produit_prix_devise: "CDF",
         produit_stock_min: "",
         produit_description: "",
         categorie_id: "",

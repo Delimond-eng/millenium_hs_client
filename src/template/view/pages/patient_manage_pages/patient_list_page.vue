@@ -27,8 +27,8 @@
                     aria-selected="false">
                     Patients en attente
                     <span class="badge bg-danger align-middle ms-1">{{
-                      pendings.length
-                    }}</span>
+                    pendings.length
+                  }}</span>
                   </button>
                 </li>
               </ul>
@@ -37,9 +37,10 @@
               <div class="card-body">
                 <div class="tab-content">
                   <div class="tab-pane active show w-100" role="tabpanel" id="tab-all">
-                    <custom-table v-if="isEmplacementDefined" :api-url="`/patients.all/${$user().hopital.emplacement.id}`"
-                      :columns="dataTableColumns" :data-src="'patients'" ref="customTablePatients"
-                      :action-buttons="actionButtons" @actionButtonClick="handleActionButtonClick" />
+                    <custom-table v-if="isEmplacementDefined"
+                      :api-url="`/patients.all/${$user().hopital.emplacement.id}`" :columns="dataTableColumns"
+                      :data-src="'patients'" ref="customTablePatients" :action-buttons="actionButtons"
+                      @actionButtonClick="handleActionButtonClick" />
                   </div>
                   <div class="tab-pane w-100" role="tabpanel" id="tab-pendings">
                     <custom-table v-if="isEmplacementDefined"
@@ -111,9 +112,12 @@ export default {
         { data: "patient_telephone", title: "Téléphone" },
       ],
       actionButtons: [
-        { label: '<i class="ri-edit-2-line"></i>', class: "btn-info me-1", key: "edit" },
-        { label: "Imprimer carte", class: "btn-secondary me-1", key: "print" },
-        { label: "Voir parcours", class: "btn-soft-secondary me-1", key: "view" },
+        {
+          label: '<i class="ri-edit-2-line"></i>',
+          class: "btn-secondary me-1",
+          key: "edit",
+        },
+        { label: "Imprimer carte", class: "btn-outline-secondary me-1", key: "print" },
         {
           label: '<i class="ri-delete-bin-3-line"></i>',
           class: "btn-soft-danger me-1",

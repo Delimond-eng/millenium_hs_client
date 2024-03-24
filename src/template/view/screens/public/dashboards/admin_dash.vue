@@ -58,11 +58,6 @@
                 Nbre des patients
               </p>
             </div>
-            <div class="flex-shrink-0">
-              <h5 class="text-success fs-14 mb-0">
-                <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +16.24 %
-              </h5>
-            </div>
           </div>
           <div class="d-flex align-items-end justify-content-between mt-4">
             <div>
