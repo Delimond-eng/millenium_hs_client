@@ -13,11 +13,19 @@
                     </svg>
                     <h3 class="text-white mx-1 text-uppercase fw-bold">Millenium HS</h3>
                 </span> -->
-        <img src="assets/logo-2.png" class="card-logo card-logo-dark mt-2" alt="logo dark" height="60" />
+        <img
+          src="assets/logo-2.png"
+          class="card-logo card-logo-dark mt-2"
+          alt="logo dark"
+          height="60"
+        />
       </a>
 
-      <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
-        id="vertical-hover">
+      <button
+        type="button"
+        class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+        id="vertical-hover"
+      >
         <i class="ri-record-circle-line"></i>
       </button>
     </div>
@@ -40,8 +48,14 @@
             </a>
           </li>
           <li class="nav-item" v-if="$isAccessMenu('Patients')">
-            <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button"
-              aria-expanded="false" aria-controls="sidebarApps">
+            <a
+              class="nav-link menu-link"
+              href="#sidebarApps"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="sidebarApps"
+            >
               <i class="ri-wheelchair-line"></i> <span data-key="t-apps">Patients</span>
             </a>
             <div class="collapse menu-dropdown" id="sidebarApps">
@@ -60,8 +74,14 @@
             </div>
           </li>
           <li class="nav-item" v-if="$isAccessMenu('Agents')">
-            <a class="nav-link menu-link" href="#med" data-bs-toggle="collapse" role="button" aria-expanded="false"
-              aria-controls="med">
+            <a
+              class="nav-link menu-link"
+              href="#med"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="med"
+            >
               <i class="ri-user-settings-line"></i> <span data-key="t-apps">Agents</span>
             </a>
             <div class="collapse menu-dropdown" id="med">
@@ -85,8 +105,14 @@
             </div>
           </li>
           <li class="nav-item" v-if="$isAccessMenu('Consultations')">
-            <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
-              aria-expanded="false" aria-controls="sidebarLanding">
+            <a
+              class="nav-link menu-link"
+              href="#sidebarLanding"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="sidebarLanding"
+            >
               <i class="ri-stethoscope-line"></i>
               <span data-key="t-landing">Consultations</span>
             </a>
@@ -98,7 +124,11 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#/home/consult/create" class="nav-link" data-key="t-nft-landing">
+                  <a
+                    href="#/home/consult/create"
+                    class="nav-link"
+                    data-key="t-nft-landing"
+                  >
                     Création consultations
                   </a>
                 </li>
@@ -106,8 +136,14 @@
             </div>
           </li>
           <li class="nav-item" v-if="$isAccessMenu('Suivis')">
-            <a class="nav-link menu-link" href="#suiviLanding" data-bs-toggle="collapse" role="button"
-              aria-expanded="false" aria-controls="sidebarLanding">
+            <a
+              class="nav-link menu-link"
+              href="#suiviLanding"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="sidebarLanding"
+            >
               <i class="ri-stethoscope-line"></i> <span data-key="t-landing">Suivis</span>
             </a>
             <div class="collapse menu-dropdown" id="suiviLanding">
@@ -121,8 +157,14 @@
             </div>
           </li>
           <li class="nav-item" v-if="$isAccessMenu('Premiers soins')">
-            <a class="nav-link menu-link" href="#premiersLanding" data-bs-toggle="collapse" role="button"
-              aria-expanded="false" aria-controls="premiersLanding">
+            <a
+              class="nav-link menu-link"
+              href="#premiersLanding"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="premiersLanding"
+            >
               <i class="bx bx-capsule"></i>
               <span data-key="t-landing">Premiers soins</span>
             </a>
@@ -130,11 +172,17 @@
               <ul class="nav nav-sm flex-column">
                 <li class="nav-item">
                   <a href="#/home/premiers_soins" class="nav-link" data-key="t-one-page">
-                    Enregistrement soins</a>
+                    Enregistrement soins</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a href="#/home/premiers_soins/list" class="nav-link" data-key="t-one-page">
-                    Liste des soins</a>
+                  <a
+                    href="#/home/premiers_soins/list"
+                    class="nav-link"
+                    data-key="t-one-page"
+                  >
+                    Liste des soins</a
+                  >
                 </li>
               </ul>
             </div>
@@ -148,35 +196,53 @@
           </li>
 
           <li class="nav-item" v-if="$isAccessMenu('Facturations')">
-            <a class="nav-link menu-link" href="#paiementsLanding" data-bs-toggle="collapse" role="button"
-              aria-expanded="false" aria-controls="paiementsLanding">
+            <a
+              class="nav-link menu-link"
+              href="#paiementsLanding"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="paiementsLanding"
+            >
               <i class="ri-money-dollar-box-line"></i>
               <span data-key="t-landing">Paiements & factures</span>
             </a>
             <div class="collapse menu-dropdown" id="paiementsLanding">
               <ul class="nav nav-sm flex-column">
                 <li class="nav-item">
-                  <a href="#/home/facture/create" class="nav-link" data-key="t-one-page">Nouvelle facture
+                  <a href="#/home/facture/create" class="nav-link" data-key="t-one-page"
+                    >Nouvelle facture
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="#/home/factures/list" class="nav-link" data-key="t-one-page">
-                    Historique factures</a>
+                    Historique factures</a
+                  >
                 </li>
               </ul>
             </div>
           </li>
 
           <li class="nav-item" v-if="$isAccessMenu('Hospitalisations')">
-            <a class="nav-link menu-link" href="#/home/hospitalisations.manage" role="button">
+            <a
+              class="nav-link menu-link"
+              href="#/home/hospitalisations.manage"
+              role="button"
+            >
               <i class="ri-hotel-bed-line"></i>
               <span data-key="t-apps">Hospitalisations</span>
             </a>
           </li>
 
           <li class="nav-item" v-if="$isAccessMenu('Laboratoires')">
-            <a class="nav-link menu-link" href="#lab" data-bs-toggle="collapse" role="button" aria-expanded="false"
-              aria-controls="med">
+            <a
+              class="nav-link menu-link"
+              href="#lab"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="med"
+            >
               <i class="ri-microscope-line"></i>
               <span data-key="t-apps">Laboratoires</span>
             </a>
@@ -212,8 +278,14 @@
           </li>
 
           <li class="nav-item" v-if="$isAccessMenu('Maternites')">
-            <a class="nav-link menu-link" href="#maternite" data-bs-toggle="collapse" role="button"
-              aria-expanded="false" aria-controls="maternite">
+            <a
+              class="nav-link menu-link"
+              href="#maternite"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="maternite"
+            >
               <i class="ri-parent-line"></i> <span data-key="t-apps">Maternité</span>
             </a>
             <div class="collapse menu-dropdown" id="maternite">
@@ -244,39 +316,74 @@
           </li>
 
           <li class="nav-item" v-if="$isAccessMenu('Pharmacies')">
-            <a class="nav-link menu-link" href="#pharmacie" data-bs-toggle="collapse" role="button"
-              aria-expanded="false" aria-controls="pharmacie">
+            <a
+              class="nav-link menu-link"
+              href="#pharmacie"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="pharmacie"
+            >
               <i class="bx bx-first-aid"></i> <span data-key="t-apps">Pharmacies</span>
             </a>
             <div class="collapse menu-dropdown" id="pharmacie">
               <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                  <a href="#/pharmacie/create" class="nav-link" data-key="t-list">Création pharmacie</a>
+                <li class="nav-item" v-if="$user().role.role.includes('admin')">
+                  <a href="#/pharmacie/create" class="nav-link" data-key="t-list"
+                    >Création pharmacie</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a href="#/pharmacie/users/manage" class="nav-link" data-key="t-list">Gestion des utilisateurs</a>
+                  <a href="#/pharmacie/users/manage" class="nav-link" data-key="t-list"
+                    >Gestion des utilisateurs</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a href="#/pharmacie/fournisseurs/manage" class="nav-link" data-key="t-list">Gestion des
-                    fournisseurs</a>
+                  <a
+                    href="#/pharmacie/fournisseurs/manage"
+                    class="nav-link"
+                    data-key="t-list"
+                    >Gestion des fournisseurs</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a href="#sidebarConfigs" class="nav-link" data-bs-toggle="collapse" role="button"
-                    aria-expanded="true" aria-controls="#sidebarConfigs" data-key="t-profile">
+                  <a
+                    href="#sidebarConfigs"
+                    class="nav-link"
+                    data-bs-toggle="collapse"
+                    role="button"
+                    aria-expanded="true"
+                    aria-controls="#sidebarConfigs"
+                    data-key="t-profile"
+                  >
                     Configurations
                   </a>
                   <div class="menu-dropdown collapse" id="sidebarConfigs" style="">
                     <ul class="nav nav-sm flex-column">
                       <li class="nav-item">
-                        <a href="#/pharmacie/config/category" class="nav-link" data-key="t-simple-page">
-                          Catégories</a>
+                        <a
+                          href="#/pharmacie/config/category"
+                          class="nav-link"
+                          data-key="t-simple-page"
+                        >
+                          Catégories</a
+                        >
                       </li>
                       <li class="nav-item">
-                        <a href="#/pharmacie/config/type" class="nav-link" data-key="t-simple-page">
-                          Types</a>
+                        <a
+                          href="#/pharmacie/config/type"
+                          class="nav-link"
+                          data-key="t-simple-page"
+                        >
+                          Types</a
+                        >
                       </li>
                       <li class="nav-item">
-                        <a href="#/pharmacie/config/unite" class="nav-link" data-key="t-simple-page">
+                        <a
+                          href="#/pharmacie/config/unite"
+                          class="nav-link"
+                          data-key="t-simple-page"
+                        >
                           Unités
                         </a>
                       </li>
@@ -284,18 +391,43 @@
                   </div>
                 </li>
                 <li class="nav-item">
-                  <a href="#sidebarStocks" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="true"
-                    aria-controls="sidebarStocks" data-key="t-profile">
+                  <a
+                    href="#sidebarStocks"
+                    class="nav-link"
+                    data-bs-toggle="collapse"
+                    role="button"
+                    aria-expanded="true"
+                    aria-controls="sidebarStocks"
+                    data-key="t-profile"
+                  >
                     Gestion stock
                   </a>
                   <div class="menu-dropdown collapse" id="sidebarStocks" style="">
                     <ul class="nav nav-sm flex-column">
                       <li class="nav-item">
-                        <a href="#/pharmacie/create/product" class="nav-link" data-key="t-simple-page">
-                          Création produits</a>
+                        <a
+                          href="#/pharmacie/create/product"
+                          class="nav-link"
+                          data-key="t-simple-page"
+                        >
+                          Création produits</a
+                        >
                       </li>
                       <li class="nav-item">
-                        <a href="#/pharmacie/operations" class="nav-link" data-key="t-simple-page">
+                        <a
+                          href="#/pharmacie/price/manage"
+                          class="nav-link"
+                          data-key="t-simple-page"
+                        >
+                          Gestion des prix</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href="#/pharmacie/operations"
+                          class="nav-link"
+                          data-key="t-simple-page"
+                        >
                           Opérations
                         </a>
                       </li>
@@ -319,9 +451,19 @@
             </a>
           </li>
 
-          <li class="nav-item" id="users-menu" v-if="$isAccessMenu('Gestion utilisateurs')">
-            <a class="nav-link menu-link" href="#usersLanding" data-bs-toggle="collapse" role="button"
-              aria-expanded="false" aria-controls="usersLanding">
+          <li
+            class="nav-item"
+            id="users-menu"
+            v-if="$isAccessMenu('Gestion utilisateurs')"
+          >
+            <a
+              class="nav-link menu-link"
+              href="#usersLanding"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="usersLanding"
+            >
               <i class="ri-user-settings-line"></i>
               <span data-key="t-landing">Gestion utilisateurs</span>
             </a>

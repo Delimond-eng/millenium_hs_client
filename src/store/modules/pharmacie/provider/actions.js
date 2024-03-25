@@ -2,10 +2,24 @@ import { get, post } from "@/http";
 
 export default {
   /**
-   * Voir toutes les pharmacies pour un hopital
+   * Creation des produits
    */
-  async allPharmacies() {},
-
+  async createPharmacie(context, form) {
+    let user = JSON.parse(localStorage.getItem("user-data"));
+    let hopital_id = user.hopital.id;
+    form.hopital_id = hopital_id;
+    form.created_by = user.id;
+    try {
+      let { data, status } = await post("/pharmacies.create", form);
+      if (status === 200) {
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
   /**
    * Voir toutes les categories pour une pharmacie
    */
@@ -17,6 +31,28 @@ export default {
       if (status === 200) {
         commit("SET_CONFIG", data.datas);
         return data.datas;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  /**
+   * View last stocks info
+   * @param data Object
+   */
+  async viewStockInfo(context, payload) {
+    try {
+      let { data, status } = await get(
+        `/pharmacie.stock.lastinfos/${payload.produit_id}/${payload.pharmacie_id}`
+      );
+      if (status === 200) {
+        if (data.status === "success") {
+          return data.info;
+        }
+        return null;
       } else {
         return null;
       }
@@ -116,6 +152,44 @@ export default {
     form.created_by = user.id;
     try {
       let { data, status } = await post("/pharmacie.create.product", form);
+      if (status === 200) {
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  /**
+   * AJouter le prix à un produit
+   */
+  async addPrice(context, form) {
+    let user = JSON.parse(localStorage.getItem("user-data"));
+    let hopital_id = user.hopital.id;
+    form.hopital_id = hopital_id;
+    form.created_by = user.id;
+    try {
+      let { data, status } = await post("/pharmacie.product.addprices", form);
+      if (status === 200) {
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  /**
+   * AJouter le prix à un produit
+   */
+  async addStock(context, form) {
+    let user = JSON.parse(localStorage.getItem("user-data"));
+    form.created_by = user.id;
+    try {
+      let { data, status } = await post("/pharmacie.stock.add", form);
       if (status === 200) {
         return data;
       } else {
