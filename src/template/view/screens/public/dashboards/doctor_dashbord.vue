@@ -7,8 +7,10 @@
                         <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                             <div class="flex-grow-1">
                                 <h4 class="fs-16 mb-1 fw-bold">
-                                    Bonjour, <span v-if="user.role">{{ user.role.role }}</span>
-                                    {{ user.name }}
+                                    Bienvenue <br />
+                                    <small class="text-uppercase"><span v-if="user.role"
+                                            class="text-secondary-emphasis">{{ user.role.role
+                                            }}</span> {{ user.name }}</small>
                                 </h4>
                                 <p class="text-muted mb-0">
                                     Votre tableau de bord pour vous guider à bien travailler.
@@ -78,12 +80,12 @@
                     <ul class="nav nav-pills nav-justified bg-white custom-nav" role="tablist">
                         <li class="nav-item active" role="presentation">
                             <button class="nav-link p-3 active" id="pills-bill-info-tab" data-bs-toggle="pill"
-                                data-bs-target="#pills-bill-info" type="button" role="tab" aria-controls="pills-bill-info"
-                                aria-selected="true">
+                                data-bs-target="#pills-bill-info" type="button" role="tab"
+                                aria-controls="pills-bill-info" aria-selected="true">
                                 Demandes des examens
                                 <span class="badge bg-danger align-middle ms-1">{{
-                                    examens.length
-                                }}</span>
+                                        examens.length
+                                    }}</span>
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -92,8 +94,8 @@
                                 aria-controls="patient-pending-tab" aria-selected="false">
                                 Patients en attente
                                 <span class="badge bg-danger align-middle ms-1">{{
-                                    pendings.length
-                                }}</span>
+                                            pendings.length
+                                        }}</span>
                             </button>
                         </li>
 
@@ -102,8 +104,8 @@
                                 type="button" role="tab" aria-controls="rdv" aria-selected="false">
                                 Rendez-vous journaliers
                                 <span class="badge bg-danger align-middle ms-1">{{
-                                    schedules.length
-                                }}</span>
+                                            schedules.length
+                                        }}</span>
                             </button>
                         </li>
 
@@ -112,8 +114,8 @@
                                 data-bs-target="#prescription-tab" type="button" role="tab"
                                 aria-controls="pills-bill-address" aria-selected="false">
                                 Prescriptions en attente<span class="badge bg-danger align-middle ms-1">{{
-                                    prescriptions.length
-                                }}</span>
+                                            prescriptions.length
+                                        }}</span>
                             </button>
                         </li>
                     </ul>

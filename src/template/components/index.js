@@ -5,6 +5,7 @@ import StateEmpty from "./src/state_empty";
 import SVGLoading from "./src/loading_svg";
 import CustomDatatable from "./src/custom_datatable.vue";
 import QrcodeBuilder from "./src/qrcode_builder.vue";
+import AutoComplete from "./src/autocomplete.vue";
 export default {
   install: (app, opt) => {
     app.component("load-button", LoadButton);
@@ -14,5 +15,6 @@ export default {
     app.component("state-empty", StateEmpty);
     app.component("custom-table", CustomDatatable);
     app.component("qrcode-builder", QrcodeBuilder);
+    app.component("autocomplete", AutoComplete);
   },
 };

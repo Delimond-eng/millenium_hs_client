@@ -1,19 +1,25 @@
 <template>
   <div class="row">
-    <div class="row mb-3 pb-1">
-      <div class="col-12">
-        <div class="d-flex align-items-lg-center flex-lg-row flex-column">
-          <div class="flex-grow-1">
-            <h4 class="fs-16 mb-1 fw-bold">
-              Bonjour, <span v-if="user.role">{{ user.role.role }}</span>
-              {{ user.name }}
-            </h4>
-            <p class="text-muted mb-0">
-              Votre tableau de bord pour vous guider à bien travailler.
-            </p>
-          </div>
+    <div class="col-md-12 mb-3 pb-1">
+      <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+        <div class="flex-grow-1">
+          <h4 class="fs-16 mb-1 fw-bold">
+            Bienvenue <br />
+            <small class="text-uppercase"><span v-if="user.role" class="text-secondary-emphasis">{{
+              user.role.role
+            }}</span>
+              {{ user.name }}</small>
+          </h4>
+          <p class="text-muted mb-0">
+            Votre tableau de bord pour vous guider à bien travailler.
+          </p>
         </div>
       </div>
+    </div>
+
+    <div class="col-md-12 mt-2 mb-2">
+      <autocomplete :data="config.produits" selected-label="produit_libelle" selected-key="id"
+        @on-selected="onSelected" />
     </div>
     <div class="col-xl-3 col-md-6">
       <!-- card -->
@@ -31,9 +37,7 @@
               <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                 <span class="counter-value">0</span>
               </h4>
-              <a href="#/admin/config/all" class="text-decoration-underline"
-                >Voir les détails</a
-              >
+              <a href="#/admin/config/all" class="text-decoration-underline">Voir les détails</a>
             </div>
             <div class="avatar-sm flex-shrink-0">
               <span class="avatar-title bg-warning-subtle rounded fs-3">
@@ -64,9 +68,7 @@
               <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                 <span class="counter-value">04</span>
               </h4>
-              <a href="javascript:void(0)" class="text-decoration-underline"
-                >Voir les détails</a
-              >
+              <a href="javascript:void(0)" class="text-decoration-underline">Voir les détails</a>
             </div>
             <div class="avatar-sm flex-shrink-0">
               <span class="avatar-title bg-success-subtle rounded fs-3">
@@ -97,9 +99,7 @@
               <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                 <span class="counter-value">0</span>
               </h4>
-              <a href="javascript:void(0)" class="text-decoration-underline"
-                >Voir les détails</a
-              >
+              <a href="javascript:void(0)" class="text-decoration-underline">Voir les détails</a>
             </div>
             <div class="avatar-sm flex-shrink-0">
               <span class="avatar-title bg-info-subtle rounded fs-3">
@@ -130,9 +130,7 @@
               <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                 <span class="counter-value">0</span>
               </h4>
-              <a href="javascript:void(0)" class="text-decoration-underline"
-                >Voir les détails</a
-              >
+              <a href="javascript:void(0)" class="text-decoration-underline">Voir les détails</a>
             </div>
             <div class="avatar-sm flex-shrink-0">
               <span class="avatar-title bg-primary-subtle rounded fs-3">
@@ -154,9 +152,27 @@
 export default {
   name: "AdminDash",
 
+  data() {
+    return {
+      autocomplete: null,
+    };
+  },
+
   computed: {
     user() {
       return this.$store.getters["auth/GET_USER"];
+    },
+    config() {
+      return this.$store.getters["pharmacie/GET_CONFIG"];
+    },
+  },
+  async mounted() {
+    await this.$store.dispatch("pharmacie/allConfigs");
+  },
+
+  methods: {
+    onSelected(e) {
+      console.log(e);
     },
   },
 };

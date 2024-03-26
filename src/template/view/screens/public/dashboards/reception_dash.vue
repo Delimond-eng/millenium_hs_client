@@ -7,8 +7,13 @@
             <div class="d-flex align-items-lg-center flex-lg-row flex-column">
               <div class="flex-grow-1">
                 <h4 class="fs-16 mb-1 fw-bold">
-                  Bonjour, <span v-if="user.role">{{ user.role.role }}</span>
-                  {{ user.name }}
+                  Bienvenue <br />
+                  <small class="text-uppercase"
+                    ><span v-if="user.role" class="text-secondary-emphasis">{{
+                      user.role.role
+                    }}</span>
+                    {{ user.name }}</small
+                  >
                 </h4>
                 <p class="text-muted mb-0">
                   Votre tableau de bord pour vous guider à bien travailler.

@@ -4,22 +4,16 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12 col-md-12">
-            <div
-              class="page-title-box d-sm-flex align-items-center justify-content-between"
-            >
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center">
-                <img
-                  src="assets/images/companies/emplacement.png"
-                  style="height: 30px"
-                  class="me-2"
-                  alt="emplacement icon"
-                />
-                <h4 class="fs-16 fw-bold mb-1 text-uppercase" v-if="user.hopital">
-                  <span v-if="user.hopital" class="fw-bold">
+                <img src="assets/images/companies/emplacement.png" style="height: 30px" class="me-2"
+                  alt="emplacement icon" />
+                <h4 class="fs-16 fw-bold text-secondary-emphasis mb-1 text-uppercase" v-if="user.hopital">
+                  <!-- <span v-if="user.hopital" class="fw-bold">
                     {{ user.hopital.hopital_nom }}
-                  </span>
+                  </span> -->
                   <span v-if="user.hopital.emplacement">
-                    🏥{{ user.hopital.emplacement.hopital_emplacement_libelle }}
+                    {{ user.hopital.emplacement.hopital_emplacement_libelle }}
                   </span>
                 </h4>
               </div>
