@@ -413,15 +413,7 @@
                           Création produits</a
                         >
                       </li>
-                      <li class="nav-item">
-                        <a
-                          href="#/pharmacie/price/manage"
-                          class="nav-link"
-                          data-key="t-simple-page"
-                        >
-                          Gestion des prix</a
-                        >
-                      </li>
+
                       <li class="nav-item">
                         <a
                           href="#/pharmacie/operations"
@@ -430,6 +422,15 @@
                         >
                           Opérations
                         </a>
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href="#/pharmacie/price/manage"
+                          class="nav-link"
+                          data-key="t-simple-page"
+                        >
+                          Gestion des prix</a
+                        >
                       </li>
                     </ul>
                   </div>

@@ -20,7 +20,7 @@
           <div>
             <label for="basiInput" class="form-label">Produit <sup class="text-danger">*</sup></label>
             <select class="form-select" ref="fieldProd" required>
-              <option label=""></option>
+              <option label="Chargement en cours..."></option>
             </select>
           </div>
         </div>
@@ -130,10 +130,8 @@ export default {
       this.$store
         .dispatch("pharmacie/addStock", this.form)
         .then((res) => {
-          console.log(JSON.stringify(res));
           this.formLoading = false;
           if (res.errors !== undefined) {
-            console.log(JSON.stringify(res));
             this.errors_msg = res.errors.toString();
             let toast = document.getElementById("errorsToastApprov");
             new bootstrap.Toast(toast, { delay: 1500 }).show();
@@ -152,6 +150,7 @@ export default {
             this.form.stock_pa = "";
             this.form.stock_pa_devise = "CDF";
             this.form.stock_qte = "";
+            this.form.stock_obs = "";
             $(this.$refs.fieldProd).val("").trigger("change");
           }
         })

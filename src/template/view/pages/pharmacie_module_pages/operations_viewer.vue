@@ -76,106 +76,22 @@
             <!-- Tab panes -->
             <div class="tab-content text-muted">
               <div class="tab-pane active" id="home-1" role="tabpanel">
-                <div class="d-flex">
-                  <div class="flex-shrink-0">
-                    <i class="ri-checkbox-circle-fill text-success"></i>
-                  </div>
-                  <div class="flex-grow-1 ms-2">
-                    Raw denim you probably haven't heard of them jean shorts Austin.
-                    Nesciunt tofu stumptown aliqua, retro synth master cleanse.
-                  </div>
-                </div>
-                <div class="d-flex mt-2">
-                  <div class="flex-shrink-0">
-                    <i class="ri-checkbox-circle-fill text-success"></i>
-                  </div>
-                  <div class="flex-grow-1 ms-2">
-                    Too much or too little spacing, as in the example below, can make
-                    things unpleasant for the reader. The goal is to make your text as
-                    comfortable to read as possible.
-                  </div>
-                </div>
+                <stock-view-tab></stock-view-tab>
               </div>
               <div class="tab-pane" id="profile-1" role="tabpanel">
-                <div class="d-flex">
-                  <div class="flex-shrink-0">
-                    <i class="ri-checkbox-circle-fill text-success"></i>
-                  </div>
-                  <div class="flex-grow-1 ms-2">
-                    In some designs, you might adjust your tracking to create a certain
-                    artistic effect. It can also help you fix fonts that are poorly spaced
-                    to begin with.
-                  </div>
-                </div>
-                <div class="d-flex mt-2">
-                  <div class="flex-shrink-0">
-                    <i class="ri-checkbox-circle-fill text-success"></i>
-                  </div>
-                  <div class="flex-grow-1 ms-2">
-                    A wonderful serenity has taken possession of my entire soul, like
-                    these sweet mornings of spring which I enjoy with my whole heart.
-                  </div>
-                </div>
+                <transfert-view-tab></transfert-view-tab>
               </div>
               <div class="tab-pane" id="messages-1" role="tabpanel">
-                <div class="d-flex">
-                  <div class="flex-shrink-0">
-                    <i class="ri-checkbox-circle-fill text-success"></i>
-                  </div>
-                  <div class="flex-grow-1 ms-2">
-                    Each design is a new, unique piece of art birthed into this world, and
-                    while you have the opportunity to be creative and make your own style
-                    choices.
-                  </div>
-                </div>
-                <div class="d-flex mt-2">
-                  <div class="flex-shrink-0">
-                    <i class="ri-checkbox-circle-fill text-success"></i>
-                  </div>
-                  <div class="flex-grow-1 ms-2">
-                    For that very reason, I went on a quest and spoke to many different
-                    professional graphic designers and asked them what graphic design tips
-                    they live.
-                  </div>
-                </div>
+                <classement-view-tab></classement-view-tab>
               </div>
               <div class="tab-pane" id="settings-1" role="tabpanel">
-                <div class="d-flex mt-2">
-                  <div class="flex-shrink-0">
-                    <i class="ri-checkbox-circle-fill text-success"></i>
-                  </div>
-                  <div class="flex-grow-1 ms-2">
-                    For that very reason, I went on a quest and spoke to many different
-                    professional graphic designers and asked them what graphic design tips
-                    they live.
-                  </div>
-                </div>
-                <div class="d-flex mt-2">
-                  <div class="flex-shrink-0">
-                    <i class="ri-checkbox-circle-fill text-success"></i>
-                  </div>
-                  <div class="flex-grow-1 ms-2">
-                    After gathering lots of different opinions and graphic design basics,
-                    I came up with a list of 30 graphic design tips that you can start
-                    implementing.
-                  </div>
-                </div>
+                <retour-view-tab></retour-view-tab>
               </div>
             </div>
           </div>
           <!-- end card-body -->
         </div>
         <!-- Content operation -->
-        <!-- <div class="row mt-4 d-flex align-items-center justify-content-center">
-                    <div class="col-md-10">
-                        <router-view v-slot="{ Component }">
-                            <transition name="fade-in-up" mode="out-in">
-                                <component :is="Component" />
-                            </transition>
-                        </router-view>
-                    </div>
-                </div> -->
-        <!-- end content -->
       </div>
     </div>
 
@@ -195,8 +111,18 @@
 </template>
 
 <script>
+import stockViewTab from "./tabs/approv_view_tab.vue";
+import transfertViewTab from "./tabs/transfert_view_tab.vue";
+import classementViewTab from "./tabs/classement_view_tab.vue";
+import retourViewTab from "./tabs/retour_view_tab.vue";
 export default {
-  name: "ProductCreate",
+  name: "OperationViewer",
+  components: {
+    transfertViewTab,
+    stockViewTab,
+    retourViewTab,
+    classementViewTab,
+  },
   data() {
     return {
       formLoading: false,

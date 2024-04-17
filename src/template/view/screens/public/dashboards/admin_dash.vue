@@ -17,10 +17,14 @@
       </div>
     </div>
 
-    <div class="col-md-12 mt-2 mb-2">
-      <autocomplete :data="config.produits" selected-label="produit_libelle" selected-key="id"
-        @on-selected="onSelected" />
+    <!-- <div class="col-md-12 mt-2 mb-2" v-if="config.produits">
+      <autocomplete :data="config.produits" placeholder="Search product..." selected-label="produit_libelle"
+        selected-key="id" @on-selected="onSelected" />
     </div>
+    <div class="col-md-12 mt-2 mb-2" v-if="config.produits">
+      <autocomplete :data="config.produits" placeholder="Search product..." selected-label="produit_libelle"
+        selected-key="id" @on-selected="onSelected" />
+    </div> -->
     <div class="col-xl-3 col-md-6">
       <!-- card -->
       <div class="card card-animate">

@@ -46,8 +46,9 @@ export default {
   async viewStockInfo(context, payload) {
     try {
       let { data, status } = await get(
-        `/pharmacie.stock.lastinfos/${payload.produit_id}/${payload.pharmacie_id}`
+        `/pharmacie.stock.infos/${payload.produit_id}/${payload.pharmacie_id}`
       );
+      console.log(JSON.stringify(data));
       if (status === 200) {
         if (data.status === "success") {
           return data.info;
@@ -190,6 +191,26 @@ export default {
     form.created_by = user.id;
     try {
       let { data, status } = await post("/pharmacie.stock.add", form);
+      if (status === 200) {
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  /**
+   * Create operation
+   * @param {*} form
+   * @param {*} context
+   */
+  async createOperation(context, form) {
+    let user = JSON.parse(localStorage.getItem("user-data"));
+    form.created_by = user.id;
+    try {
+      let { data, status } = await post("/pharmacie.operation.create", form);
       if (status === 200) {
         return data;
       } else {
