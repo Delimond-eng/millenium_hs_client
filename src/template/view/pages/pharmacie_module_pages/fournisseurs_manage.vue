@@ -4,7 +4,9 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <div
+              class="page-title-box d-sm-flex align-items-center justify-content-between"
+            >
               <h4 class="mb-sm-0">Gestion des fournisseurs</h4>
 
               <div class="page-title-right">
@@ -35,8 +37,12 @@
                 <div class="row">
                   <div class="col-xl-12">
                     <div class="search-box">
-                      <input type="text" class="form-control search" v-model="search"
-                        placeholder="Recherche fournisseur ..." />
+                      <input
+                        type="text"
+                        class="form-control search"
+                        v-model="search"
+                        placeholder="Recherche fournisseur ..."
+                      />
 
                       <i class="ri-search-line search-icon"></i>
                     </div>
@@ -54,7 +60,12 @@
                         <tr>
                           <th scope="col" style="width: 50px">
                             <div class="form-check">
-                              <input class="form-check-input" type="checkbox" id="checkAll" value="option" />
+                              <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="checkAll"
+                                value="option"
+                              />
                             </div>
                           </th>
 
@@ -74,12 +85,19 @@
                         <tr v-for="(data, index) in config.fournisseurs" :key="index">
                           <th scope="row">
                             <div class="form-check">
-                              <input class="form-check-input" type="checkbox" name="chk_child" value="option1" />
+                              <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="chk_child"
+                                value="option1"
+                              />
                             </div>
                           </th>
 
                           <td class="id" style="display: none">
-                            <a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a>
+                            <a href="javascript:void(0);" class="fw-medium link-primary"
+                              >#VZ2101</a
+                            >
                           </td>
 
                           <td class="customer_name">{{ data.fournisseur_nom }}</td>
@@ -89,21 +107,36 @@
                           <td class="phone">{{ data.fournisseur_telephone }}</td>
 
                           <td class="status">
-                            <span class="badge bg-success-subtle text-success text-uppercase">Active</span>
+                            <span
+                              class="badge bg-success-subtle text-success text-uppercase"
+                              >Active</span
+                            >
                           </td>
 
                           <td>
                             <ul class="list-inline hstack gap-2 mb-0">
-                              <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit">
-                                <a href="#showModal" data-bs-toggle="modal"
-                                  class="text-primary d-inline-block edit-item-btn">
+                              <li
+                                class="list-inline-item edit"
+                                data-bs-toggle="tooltip"
+                                data-bs-trigger="hover"
+                                data-bs-placement="top"
+                                aria-label="Edit"
+                                data-bs-original-title="Edit"
+                              >
+                                <a
+                                  href="#showModal"
+                                  data-bs-toggle="modal"
+                                  class="text-primary d-inline-block edit-item-btn"
+                                >
                                   <i class="ri-pencil-fill fs-16"></i>
                                 </a>
                               </li>
 
                               <li class="list-inline-item">
-                                <a class="text-danger d-inline-block remove-item-btn" href="#deleteRecordModal">
+                                <a
+                                  class="text-danger d-inline-block remove-item-btn"
+                                  href="#deleteRecordModal"
+                                >
                                   <i class="ri-delete-bin-line fs-16"></i>
                                 </a>
                               </li>
@@ -132,31 +165,55 @@
                 <!-- Basic Input -->
 
                 <div class="mb-2">
-                  <label for="basiInput" class="form-label">Nom<sup class="text-danger">*</sup></label>
+                  <label for="basiInput" class="form-label"
+                    >Nom<sup class="text-danger">*</sup></label
+                  >
 
-                  <input type="text" class="form-control" id="basiInput" placeholder="Entrer le nom complet..."
-                    v-model="form.nom" required />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="basiInput"
+                    placeholder="Entrer le nom complet..."
+                    v-model="form.nom"
+                    required
+                  />
                 </div>
 
                 <div class="mb-2">
                   <label for="basiInput" class="form-label">Email</label>
 
-                  <input type="email" class="form-control" id="basiInput" placeholder="Entrer l'adresse email..."
-                    v-model="form.email" />
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="basiInput"
+                    placeholder="Entrer l'adresse email..."
+                    v-model="form.email"
+                  />
                 </div>
 
                 <div class="mb-2">
                   <label for="basiInput" class="form-label">Télephone</label>
 
-                  <input type="text" class="form-control" id="basiInput" placeholder="Entrer le n° de téléphone"
-                    v-model="form.telephone" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="basiInput"
+                    placeholder="Entrer le n° de téléphone"
+                    v-model="form.telephone"
+                  />
                 </div>
 
                 <div class="mb-2">
-                  <label for="basiInput" class="form-label">Adresse<sup class="text-danger">*</sup></label>
+                  <label for="basiInput" class="form-label"
+                    >Adresse<sup class="text-danger">*</sup></label
+                  >
 
-                  <textarea class="form-control" placeholder="Entrer l'adresse physique du fournisseur"
-                    v-model="form.adresse" required></textarea>
+                  <textarea
+                    class="form-control"
+                    placeholder="Entrer l'adresse physique du fournisseur"
+                    v-model="form.adresse"
+                    required
+                  ></textarea>
                 </div>
 
                 <bs-toast id="errorsToastFourn" :msg="errors_msg" />
@@ -164,9 +221,14 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="d-flex justify-content-end align-items-end">
-                      <load-button btn-type="submit" :loading="formLoading"
-                        class-name="btn btn-success mt-2 text-uppercase">
-                        <i class="ri-add-fill"></i>Créer</load-button>
+                      <button class="btn btn-dark mt-2 me-2" type="reset">Annuler</button>
+                      <load-button
+                        btn-type="submit"
+                        :loading="formLoading"
+                        class-name="btn btn-success mt-2 text-uppercase"
+                      >
+                        <i class="ri-add-fill"></i>Créer</load-button
+                      >
                     </div>
                   </div>
                 </div>

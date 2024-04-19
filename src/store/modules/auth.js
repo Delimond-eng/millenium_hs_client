@@ -40,9 +40,9 @@ const actions = {
     try {
       let { data, status } = await post("/login", form);
       if (status === 200) {
-        if (!data.errors) {
-          localStorage.removeItem("user-token");
-          localStorage.removeItem("user-data");
+        console.log(JSON.stringify(data.user));
+        if (data.errors === undefined) {
+          localStorage.clear();
           localStorage.setItem("user-token", data.token);
           localStorage.setItem("user-data", JSON.stringify(data.user));
           return data;
@@ -50,6 +50,28 @@ const actions = {
           return data.errors;
         }
       } else return null;
+    } catch (error) {
+      return null;
+    }
+  },
+
+  /**
+   * Utilisateur Login
+   * @author Dev.GastonDelimond
+   * @param {context vuex} context,
+   * @param {*} form,
+   * @returns HttpResponse
+   * */
+  async register(context, form) {
+    let user = JSON.parse(localStorage.getItem("user-data"));
+    form.created_by = user.id;
+    try {
+      let { data, status } = await post("/users.store", form);
+      if (status === 200) {
+        return data;
+      } else {
+        return null;
+      }
     } catch (error) {
       return null;
     }

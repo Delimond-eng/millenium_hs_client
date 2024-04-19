@@ -347,7 +347,7 @@
                             <option>Facturations</option>
                             <option>Transferts patients</option>
                             <option>Configurations</option>
-                            <option>Pharmacies</option>
+                            <!--<option>Pharmacies</option> -->
                             <option>Laboratoires</option>
                             <option>Maternités</option>
                             <option>Partenaires</option>

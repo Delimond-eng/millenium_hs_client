@@ -1,6 +1,7 @@
 export default {
-  categories: [],
-  produits: [],
-  pharmacies: [],
-  config: {},
+    categories: [],
+    produits: [],
+    pharmacies: [],
+    config: {},
+    users: []
 };

@@ -43,7 +43,7 @@
                     ></option>
                   </select>
                 </div>
-                <div class="mb-2">
+                <div class="mb-2" v-if="user.role.role !== 'Pharmacien'">
                   <label for="basiInput" class="form-label"
                     >Pharmacie<sup class="text-danger">*</sup></label
                   >
@@ -281,11 +281,16 @@ export default {
     config() {
       return this.$store.getters["pharmacie/GET_CONFIG"];
     },
+
+    user() {
+      return this.$store.getters["auth/GET_USER"];
+    },
   },
 
   methods: {
     submitForm(e) {
       this.formLoading = true;
+      this.form.pharmacie_id = this.user.pharmacie.id;
       this.$store
         .dispatch("pharmacie/addPrice", this.form)
         .then((res) => {
@@ -332,7 +337,11 @@ export default {
         return;
       }
       data.produit_id = this.form.produit_id;
-      data.pharmacie_id = e.target.value;
+      if (e.pharmacie_id !== undefined) {
+        data.pharmacie_id = e.pharmacie_id;
+      } else {
+        data.pharmacie_id = e.target.value;
+      }
       let info = await this.$store.dispatch("pharmacie/viewStockInfo", data);
       if (info !== null) {
         this.stockInfos.stock_pa = info.stock_pa;
@@ -386,6 +395,14 @@ export default {
         .on("change", function (e) {
           let id = $(this).val();
           self.form.produit_id = id;
+          if (self.user.role.role === "Pharmacien") {
+            let e = {
+              pharmacie_id: self.user.pharmacie.id,
+            };
+            if (self.form.produit_id !== "") {
+              self.loadStockInfo(e);
+            }
+          }
         });
     },
   },

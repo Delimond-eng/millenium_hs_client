@@ -333,7 +333,7 @@
                     >Création pharmacie</a
                   >
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" v-if="$user().role.role.includes('admin')">
                   <a href="#/pharmacie/users/manage" class="nav-link" data-key="t-list"
                     >Gestion des utilisateurs</a
                   >
@@ -390,7 +390,7 @@
                     </ul>
                   </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" v-if="$user().pharmacie !== undefined">
                   <a
                     href="#sidebarStocks"
                     class="nav-link"

@@ -3,14 +3,9 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <custom-table
-            v-if="isPharmacieDefined"
-            :api-url="`/pharmacie.operations.all/${$user().pharmacie_id}/classement`"
-            :columns="dataTableColumns"
-            :action-buttons="actionButtons"
-            :data-src="'operations'"
-            ref="customTableClassement"
-          />
+          <custom-table v-if="user.pharmacie" :api-url="`/pharmacie.operations.all/${user.pharmacie.id}/classement`"
+            :columns="dataTableColumns" :action-buttons="actionButtons" :data-src="'operations'"
+            ref="customTableClassement" />
         </div>
       </div>
     </div>
@@ -40,8 +35,8 @@ export default {
   },
 
   computed: {
-    isPharmacieDefined() {
-      return this.$user().pharmacie_id !== null;
+    user() {
+      return this.$store.getters["auth/GET_USER"];
     },
   },
 };

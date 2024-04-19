@@ -79,6 +79,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="d-flex justify-content-end align-items-end">
+                      <button class="btn btn-dark mt-4 me-2" type="reset">Annuler</button>
                       <load-button btn-type="submit" :loading="formLoading"
                         class-name="btn btn-success mt-4 text-uppercase">
                         <i class="ri-add-line"></i> Sauvegarder</load-button>

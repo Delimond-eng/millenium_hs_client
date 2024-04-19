@@ -37,6 +37,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="d-flex justify-content-end align-items-end">
+            <button class="btn btn-lg btn-dark mt-2 me-2" type="reset">Annuler</button>
             <load-button btn-type="submit" :loading="formLoading" class-name="btn btn-secondary btn-lg mt-2"><i
                 class="ri-"></i> Transférer</load-button>
           </div>
@@ -59,7 +60,7 @@ export default {
         operation_libelle: "transfert",
         operation_obs: "",
         operation_qte: "",
-        pharmacie_id: "1",
+        pharmacie_id: "",
         pharmacie_dest_id: "",
       },
     };
@@ -102,6 +103,7 @@ export default {
 
     submitForm(e) {
       this.formLoading = true;
+      this.form.pharmacie_id = this.$user().pharmacie.id;
       this.$store
         .dispatch("pharmacie/createOperation", this.form)
         .then((res) => {

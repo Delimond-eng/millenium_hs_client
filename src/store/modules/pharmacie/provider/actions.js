@@ -26,8 +26,11 @@ export default {
   async allConfigs({ commit }) {
     let user = JSON.parse(localStorage.getItem("user-data"));
     let hopital_id = user.hopital.id;
+    let pharmacie_id = user.pharmacie.id;
     try {
-      let { data, status } = await get(`/pharmacie.config.all/${hopital_id}`);
+      let { data, status } = await get(
+        `/pharmacie.config.all/${hopital_id}/${pharmacie_id}`
+      );
       if (status === 200) {
         commit("SET_CONFIG", data.datas);
         return data.datas;
@@ -52,6 +55,28 @@ export default {
       if (status === 200) {
         if (data.status === "success") {
           return data.info;
+        }
+        return null;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  /**
+   * View all users
+   * @param data Object
+   */
+  async viewAllUsers({ commit }) {
+    try {
+      let { data, status } = await get(`/pharmacie.users`);
+      console.log(JSON.stringify(data));
+      if (status === 200) {
+        if (data.status === "success") {
+          commit("SET_USERS", data.users);
+          return data.users;
         }
         return null;
       } else {

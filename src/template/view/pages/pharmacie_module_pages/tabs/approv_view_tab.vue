@@ -3,8 +3,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <custom-table v-if="isPharmacieDefined" :api-url="`/pharmacie.stocks/1`" :columns="dataTableColumns"
-                        :data-src="'stocks'" ref="customTableApprov" />
+                    <custom-table v-if="user.pharmacie" :api-url="`/pharmacie.stocks/${user.pharmacie.id}`"
+                        :columns="dataTableColumns" :data-src="'stocks'" ref="customTableApprov" />
                     <!-- <custom-table v-else :api-url="'/pharmacie.stocks'" :columns="dataTableColumns" :data-src="'stocks'"
                         ref="customTableApprov" /> -->
                 </div>
@@ -35,16 +35,18 @@ export default {
                 { data: "user.name", title: "UTILISATEUR" },
             ],
             /* actionButtons: [
-                                                                                                    { label: '<i class="ri-delete-bin-3-line"></i>', class: 'btn-soft-danger me-1', key: 'delete' },
-                                                                                                    { label: '<i class="ri-edit-2-line"></i>', class: 'btn-soft-secondary', key: 'edit' },
-                                                                                                ], */
+                                                                                                          { label: '<i class="ri-delete-bin-3-line"></i>', class: 'btn-soft-danger me-1', key: 'delete' },
+                                                                                                          { label: '<i class="ri-edit-2-line"></i>', class: 'btn-soft-secondary', key: 'edit' },
+                                                                                                      ], */
         };
     },
 
     computed: {
-        isPharmacieDefined() {
-            return this.$user().pharmacie_id !== null;
-        },
+
+
+        user() {
+            return this.$store.getters['auth/GET_USER'];
+        }
     },
 };
 </script>

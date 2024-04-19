@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <custom-table v-if="isPharmacieDefined" :api-url="`/pharmacie.operations.all/1/transfert`"
+          <custom-table v-if="user.pharmacie" :api-url="`/pharmacie.operations.all/${user.pharmacie.id}/transfert`"
             :columns="dataTableColumns" :action-buttons="actionButtons" :data-src="'operations'"
             ref="customTableTransfert" />
         </div>
@@ -36,8 +36,8 @@ export default {
   },
 
   computed: {
-    isPharmacieDefined() {
-      return this.$user().pharmacie_id !== null;
+    user() {
+      return this.$store.getters["auth/GET_USER"];
     },
   },
 };

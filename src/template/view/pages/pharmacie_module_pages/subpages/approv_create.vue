@@ -5,7 +5,7 @@
     </div>
     <form @submit.prevent="submitForm" class="card-body">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" v-if="user.role.role !== 'Pharmacien'">
           <div>
             <label for="basiInput" class="form-label">Pharmacie <sup class="text-danger">*</sup></label>
             <select class="form-select" v-model="form.pharmacie_id" required>
@@ -74,6 +74,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="d-flex justify-content-end align-items-end">
+            <button class="btn btn-lg btn-dark mt-3 me-2" type="reset">Annuler</button>
             <load-button btn-type="submit" :loading="formLoading" class-name="btn btn-secondary btn-lg mt-3">
               <i class="ri-add-line"></i> Sauvegarder</load-button>
           </div>
@@ -127,6 +128,9 @@ export default {
     //Submit
     submitForm(e) {
       this.formLoading = true;
+      if (this.user.role.role === "Pharmacien") {
+        this.form.pharmacie_id = this.user.pharmacie.id;
+      }
       this.$store
         .dispatch("pharmacie/addStock", this.form)
         .then((res) => {
@@ -166,6 +170,9 @@ export default {
   computed: {
     config() {
       return this.$store.getters["pharmacie/GET_CONFIG"];
+    },
+    user() {
+      return this.$store.getters["auth/GET_USER"];
     },
   },
 };
