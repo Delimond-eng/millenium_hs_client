@@ -5,367 +5,260 @@
     <header-layout />
     <!-- End Header -->
 
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
-    <div class="pos dvh-100 d-flex flex-column mt-5">
-      <div class="pos-content flex-grow-1 bg-200">
-        <div class="product-screen d-flex h-100 bg-100">
-          <div class="leftpane d-flex flex-column mt-5">
-            <!-- if you have data -->
+    <div class="app-menu navbar-menu">
+      <!-- LOGO -->
+      <div class="navbar-brand-box">
+        <!-- Dark Logo-->
+        <a href="index.html" class="logo logo-dark">
+          <span class="logo-sm">
+            <img src="assets/images/logo-sm.png" alt="" height="22" />
+          </span>
+          <span class="logo-lg">
+            <img src="assets/images/logo-dark.png" alt="" height="17" />
+          </span>
+        </a>
+        <!-- Light Logo-->
+        <a href="index.html" class="logo logo-light">
+          <span class="logo-sm">
+            <img src="assets/images/logo-sm.png" alt="" height="22" />
+          </span>
+          <span class="logo-lg">
+            <img src="assets/images/logo-light.png" alt="" height="17" />
+          </span>
+        </a>
+        <button
+          type="button"
+          class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+          id="vertical-hover"
+        >
+          <i class="ri-record-circle-line"></i>
+        </button>
+      </div>
 
-            <div
-              class="order-container overflow-y-auto flex-grow-1 d-flex flex-column text-start"
-            >
-              <div class="d-flex w-100 justify-content-between">
-                <h2 class="fw-bold m-2">
-                  <i class="bx bx-shopping-bag me-2"></i> Panier
-                </h2>
-                <button class="btn btn-sm btn-danger">
-                  <i class="ri-delete-bin-3-line"></i> Effacer tout
-                </button>
-              </div>
-              <hr />
-              <li
-                class="orderline bg-white mb-1 p-3 lh-sm cursor-pointer"
-                v-for="(item, index) in 4"
-                :key="index"
-              >
-                <div class="d-flex justify-content-between">
-                  <div
-                    class="product-name d-inline-block flex-grow-1 fw-bolder pe-1 text-truncate"
-                  >
-                    <span class="text-wrap">Conference Chair (Aluminium)</span>
-                  </div>
-                  <div class="product-price text-end price fw-bolder">
-                    <span class="me-2"> 45,31Fr </span>
-                    <button class="btn btn-soft-danger btn-sm btn-icon">
-                      <i class="ri-delete-bin-6-line"></i>
-                    </button>
-                  </div>
-                </div>
-                <ul class="info-list ms-2">
-                  <li class="price-per-unit">
-                    <em class="qty fst-normal fw-bolder me-1">1,00</em> Unité(s) x 45,31Fr
-                    <span> / Unité(s)</span>
-                  </li>
-                </ul>
-              </li>
-            </div>
-            <!-- total -->
-            <div
-              class="order-summary bg-light w-100 py-2 px-3 bg-100 overflow-hidden text-end fw-bolder fs-2 lh-sm"
-            >
-              Total : <span class="total">235,06Fr</span>
-              <div class="fs-6 text-muted subentry">
-                Taxes : <span class="tax">30,66Fr</span>
-              </div>
-            </div>
-            <div class="pads border-top">
-              <div class="subpads d-flex">
-                <div
-                  class="actionpad d-flex flex-column flex-grow-1 mw-50 p-0 border-end"
+      <div id="scrollbar">
+        <div class="container-fluid">
+          <div id="two-column-menu"></div>
+          <ul class="navbar-nav" id="navbar-nav">
+            <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+            <li class="nav-item">
+              <a class="nav-link menu-link" href="javascript:void(0)">
+                <i class="bx bx-shopping-bag"></i>
+                <span
+                  class="position-absolute topbar-badge cartitem-badge fs-10 translate-middle badge rounded-pill bg-info"
+                  >5</span
                 >
-                  <button
-                    class="button set-partner btn btn-light rounded-0 py-2 flex-shrink-1 fw-bolder"
-                  >
-                    <div class="d-flex justify-content-center align-items-center">
-                      <span
-                        class="d-flex justify-content-center align-items-center rounded-circle me-2 text-bg-dark"
-                        ><i class="ri-user-3-line text-white"></i
-                      ></span>
-                      <div>Client</div>
-                    </div></button
-                  ><button
-                    class="pay validation pay-order-button btn-primary button btn d-flex flex-column flex-fill align-items-center justify-content-center fw-bolder btn-lg rounded-0"
-                  >
-                    <div
-                      class="pay-circle d-flex align-items-center justify-content-center py-2 mb-2"
-                    >
-                      <i class="ri-arrow-right-line"></i>
-                    </div>
-                    Paiement
-                  </button>
-                </div>
-                <div class="w-100 numpad row row-cols-4 gx-0">
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    1
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    2
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    3
-                  </button>
-                  <button
-                    class="col btn btn-light py-3 border fw-bolder rounded-0 active border-primary"
-                  >
-                    Qty
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    4
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    5
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    6
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    % Disc
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    7
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    8
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    9
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    Price
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    +/-
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    0
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    ,
-                  </button>
-                  <button class="col btn btn-light py-3 border fw-bolder rounded-0">
-                    ⌫
-                  </button>
-                </div>
+                <span data-key="t-dashboards">Tableau des ventes</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link menu-link" href="javascript:void(0)">
+                <i class="ri-dashboard-2-line"></i>
+                <span data-key="t-dashboards">Tableau de bord</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Sidebar -->
+      </div>
+
+      <div class="sidebar-background"></div>
+    </div>
+    <!-- Left Sidebar End -->
+    <!-- Vertical Overlay-->
+    <div class="vertical-overlay"></div>
+
+    <div class="page-content">
+      <div class="container-fluid">
+        <!-- start page title -->
+        <div class="row">
+          <div class="col-12">
+            <div
+              class="page-title-box d-sm-flex align-items-center justify-content-between"
+            >
+              <h4 class="mb-sm-0">Ventes des produits pharmaceutiques</h4>
+
+              <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item">
+                    <a href="javascript: void(0);">Pharmacie</a>
+                  </li>
+                  <li class="breadcrumb-item active">ventes</li>
+                </ol>
               </div>
             </div>
           </div>
-          <div class="rightpane overflow-auto d-flex flex-grow-1 flex-column bg-300 w-60">
-            <div class="products-widget d-flex flex-column flex-grow-1 overflow-auto">
-              <div class="product-list-container flex-grow-1 overflow-y-auto">
-                <div class="product-list-empty no-results-message text-center mt-5">
-                  <div class="product-list-container flex-grow-1 overflow-y-auto">
-                    <div class="container mt-0">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="card border shadow-xs mb-4">
-                            <div class="card-header border-bottom pb-0">
-                              <div class="d-sm-flex align-items-center mb-3">
-                                <div class="ms-auto d-flex">
-                                  <div class="input-group flex-fill h-100 me-2">
-                                    <div
-                                      class="form-control input-container d-flex align-items-center py-1 bg-view"
-                                    >
-                                      <i class="ri-search-2-line"></i
-                                      ><input
-                                        class="border-0 mx-2 form-control form-control-sm"
-                                        type="text"
-                                        style="min-width: 60px"
-                                        placeholder="Recherche produit..."
-                                      />
-                                    </div>
-                                  </div>
-                                  <div class="input-group h-100">
-                                    <div
-                                      class="form-control input-container d-flex align-items-center py-1 bg-view"
-                                    >
-                                      <i class="ri-filter-2-line"></i>
-                                      <select
-                                        class="border-0 mx-2 form-control form-control-sm"
-                                        tyle="min-width: 40px"
-                                      >
-                                        <option
-                                          label="Sélectionnez une catégorie"
-                                          selected
-                                          hidden
-                                        ></option>
-                                        <option value="Antibiotique">Antibiotique</option>
-                                        <option value="Antianalgesique">
-                                          Antianalgesique
-                                        </option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              class="card-body overflow-y-auto"
-                              style="max-height: 80vh"
-                            >
-                              <div class="row">
-                                <div
-                                  class="col-md-4 mb-3"
-                                  v-for="(item, index) in 20"
-                                  :key="index"
-                                >
-                                  <div
-                                    class="d-flex rounded-2 p-2 cursor-pointer align-items-center card-animate"
-                                    style="border: 1px solid #dde0e4"
-                                  >
-                                    <div
-                                      class="flex-shrink-0 avatar-md bg-light rounded p-1"
-                                    >
-                                      <img
-                                        src="assets/images/companies/medic.png"
-                                        alt=""
-                                        class="img-fluid d-block"
-                                      />
-                                    </div>
-                                    <div class="flex-grow-1 text-start ms-2">
-                                      <h5 class="fs-15 text-primary">Amoxyciline</h5>
-                                      <p class="text-muted mb-2">Antibiotique</p>
-                                      <p class="text-dark fw-bold mb-0">
-                                        <span class="fw-medium">500,00 Fr </span>
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- <div class="table-responsive p-0">
-                                <table
-                                  class="table align-items-center justify-content-center mb-0"
-                                >
-                                  <thead class="bg-gray-100">
-                                    <tr>
-                                      <th
-                                        class="text-secondary text-xs font-weight-semibold text-black"
-                                      >
-                                        CODE
-                                      </th>
-                                      <th
-                                        class="text-secondary text-xs font-weight-semibold text-black"
-                                      >
-                                        PRODUIT LIBELLE
-                                      </th>
-                                      <th
-                                        class="text-secondary text-xs font-weight-semibold text-black ps-2"
-                                      >
-                                        PU
-                                      </th>
-                                      <th
-                                        class="text-secondary text-xs font-weight-semibold text-black ps-2"
-                                      >
-                                        CATEGORIE
-                                      </th>
-                                      <th
-                                        class="text-secondary text-xs font-weight-semibold text-black ps-2"
-                                      >
-                                        Status
-                                      </th>
+        </div>
+        <!-- end page title -->
 
-                                      <th
-                                        class="text-center text-secondary text-xs font-weight-semibold opacity-7"
-                                      ></th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr v-for="(item, index) in 7" :key="index">
-                                      <td>
-                                        <div class="my-auto">
-                                          <h6 class="mb-0 text-sm">#93920{{ index }}</h6>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <span class="text-sm font-weight-normal"
-                                          >Paracetamol</span
-                                        >
-                                      </td>
-                                      <td>
-                                        <p class="text-sm font-weight-normal mb-0">
-                                          500,00 Fr
-                                        </p>
-                                      </td>
-                                      <td>
-                                        <span class="text-sm font-weight-normal"
-                                          >Anti analgesique</span
-                                        >
-                                      </td>
-                                      <td>
-                                        <span
-                                          class="badge badge-sm border border-success text-success bg-success"
-                                        >
-                                          Actif
-                                        </span>
-                                      </td>
-                                      <td class="align-middle">
-                                        <button
-                                          class="btn btn-sm btn-icon btn-soft-primary font-weight-bold text-xs"
-                                          title="Ajouter au panier"
-                                        >
-                                          <i class="ri-add-line"></i>
-                                        </button>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
-                              <div class="border-top py-3 px-3 d-flex align-items-center">
-                                <button
-                                  class="btn btn-sm btn-white d-sm-block d-none mb-0"
-                                >
-                                  Previous
-                                </button>
-                                <nav aria-label="..." class="ms-auto">
-                                  <ul class="pagination pagination-light mb-0">
-                                    <li class="page-item active" aria-current="page">
-                                      <span class="page-link font-weight-bold">1</span>
-                                    </li>
-                                    <li class="page-item">
-                                      <a
-                                        class="page-link border-0 font-weight-bold"
-                                        href="javascript:;"
-                                        >2</a
-                                      >
-                                    </li>
-                                    <li class="page-item">
-                                      <a
-                                        class="page-link border-0 font-weight-bold d-sm-inline-flex d-none"
-                                        href="javascript:;"
-                                        >3</a
-                                      >
-                                    </li>
-                                    <li class="page-item">
-                                      <a
-                                        class="page-link border-0 font-weight-bold"
-                                        href="javascript:;"
-                                        >...</a
-                                      >
-                                    </li>
-                                    <li class="page-item">
-                                      <a
-                                        class="page-link border-0 font-weight-bold d-sm-inline-flex d-none"
-                                        href="javascript:;"
-                                        >8</a
-                                      >
-                                    </li>
-                                    <li class="page-item">
-                                      <a
-                                        class="page-link border-0 font-weight-bold"
-                                        href="javascript:;"
-                                        >9</a
-                                      >
-                                    </li>
-                                    <li class="page-item">
-                                      <a
-                                        class="page-link border-0 font-weight-bold"
-                                        href="javascript:;"
-                                        >10</a
-                                      >
-                                    </li>
-                                  </ul>
-                                </nav>
-                                <button
-                                  class="btn btn-sm btn-white d-sm-block d-none mb-0 ms-auto"
-                                >
-                                  Next
-                                </button>
-                              </div> -->
-                            </div>
-                          </div>
+        <div class="row mt-4" id="seller-list">
+          <div class="col-md-4">
+            <div class="m-0">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="d-flex">
+                        <div class="flex-grow-1">
+                          <h5 class="card-title mb-0">
+                            <i class="ri-shopping-cart-2-line"></i> Panier
+                          </h5>
                         </div>
+                      </div>
+                    </div>
+                    <div class="card-body overflow-auto" style="height: 300px">
+                      <div class="table-responsive table-card">
+                        <table class="table table-borderless align-middle mb-0">
+                          <thead class="table-light text-muted">
+                            <tr>
+                              <th scope="col">Produit</th>
+                              <th scope="col" class="text-end">PU</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="i in 10" :key="i">
+                              <td>
+                                <h5 class="fs-14">
+                                  <a href="javascript:void(0)" class="text-dark"
+                                    >350 ml Glass Grocery Container</a
+                                  >
+                                </h5>
+                                <p class="text-secondary mb-0">240.99F x 1</p>
+                              </td>
+                              <td class="text-end">240.99F</td>
+                              <td>
+                                <button class="btn btn-soft-danger btn-sm text-end">
+                                  <i class="ri-delete-bin-2-line"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="card-footer p-1">
+                      <div class="table-responsive">
+                        <table class="table table-borderless align-middle mb-0">
+                          <thead></thead>
+                          <tbody>
+                            <tr class="table-active">
+                              <th colspan="2">Total (USD) :</th>
+                              <td class="text-end">
+                                <span class="fw-semibold"> $353.15 </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- end card body -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="pads border-top bg-white">
+                    <div class="subpads d-flex">
+                      <div
+                        class="actionpad d-flex flex-column flex-grow-1 mw-50 p-0 border-end"
+                      >
+                        <button
+                          class="button set-partner btn btn-warning rounded-0 py-2 flex-shrink-1 fw-bolder"
+                        >
+                          <i class="ri-user-add-line me-1"></i>
+                          Client</button
+                        ><button
+                          class="pay validation pay-order-button btn-secondary button btn d-flex flex-column flex-fill align-items-center justify-content-center fw-bolder btn-lg rounded-0"
+                        >
+                          <div
+                            class="pay-circle d-flex align-items-center justify-content-center py-2 mb-2"
+                          >
+                            <i class="ri-arrow-right-line"></i>
+                          </div>
+                          Paiement
+                        </button>
+                      </div>
+                      <div class="w-100 numpad row row-cols-4 gx-0">
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          1
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          2
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          3
+                        </button>
+                        <button
+                          class="col btn btn-outline-primary py-3 border fw-bolder rounded-0"
+                        >
+                          QTE
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          4
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          5
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          6
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          % REMISE
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          7
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          8
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          9
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          PRIX
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          +/-
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          0
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          ,
+                        </button>
+                        <button
+                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
+                        >
+                          ⌫
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -373,10 +266,139 @@
               </div>
             </div>
           </div>
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header border-0 rounded">
+                <div class="row g-2">
+                  <div class="col-xl-3">
+                    <div class="search-box">
+                      <input
+                        type="text"
+                        class="form-control"
+                        autocomplete="off"
+                        id="searchResultList"
+                        placeholder="Recherchez produit"
+                      />
+                      <i class="ri-search-line search-icon"></i>
+                    </div>
+                  </div>
+                  <!--end col-->
+                  <div class="col-xxl-3 ms-auto">
+                    <div>
+                      <select class="form-control" id="category-select">
+                        <option value="All">Selectionnez une catégorie</option>
+                        <option value="All">All</option>
+                        <option value="Retailer">Retailer</option>
+                        <option value="Health & Medicine">Health & Medicine</option>
+                        <option value="Manufacturer">Manufacturer</option>
+                        <option value="Food Service">Food Service</option>
+                        <option value="Computers & Electronics">
+                          Computers & Electronics
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--end col-->
+                  <div class="col-lg-auto">
+                    <div class="hstack gap-2">
+                      <button
+                        class="btn btn-success"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addSeller"
+                      >
+                        <i class="ri-add-fill me-1 align-bottom"></i> Ajout client
+                      </button>
+                    </div>
+                  </div>
+                  <!--end col-->
+                </div>
+                <!--end row-->
+              </div>
+              <div class="card-body overflow-auto" style="height: 700px">
+                <div class="row g-2 mb-4">
+                  <div class="col-md-3" v-for="(item, index) in 20" :key="index">
+                    <div
+                      class="d-flex rounded-2 p-1 cursor-pointer align-items-center card-animate"
+                      style="border: 1px solid #dde0e4"
+                    >
+                      <img
+                        src="assets/images/companies/medic.png"
+                        alt=""
+                        class="img-fluid d-block"
+                        style="height: 50px"
+                      />
+                      <div class="flex-grow-1 text-start ms-2">
+                        <h5 class="fs-15 text-primary">Amoxyciline</h5>
+                        <span class="text-muted fs-10 mb-2">Antibiotique</span><br />
+                        <span class="text-dark fw-bold mb-0"> 500,00F </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="alert border-dashed alert-danger" role="alert">
+                  <div class="d-flex align-items-center">
+                    <lord-icon
+                      src="https://cdn.lordicon.com/nkmsrxys.json"
+                      trigger="loop"
+                      colors="primary:#121331,secondary:#f06548"
+                      style="width: 80px; height: 80px"
+                    ></lord-icon>
+                    <div class="ms-2">
+                      <h5 class="fs-14 text-danger fw-semibold">
+                        Cliquez sur un produit pharmaceutique pour ajouter au panier !
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end row-->
+        <!-- pagination-element -->
+        <!-- <div
+          class="row align-items-center mb-4 text-center text-sm-start"
+          id="pagination-element"
+        >
+          <div class="col-sm">
+            <div class="text-muted">Showing 1 to 8 of 12 entries</div>
+          </div>
+          <div class="col-sm-auto mt-3 mt-sm-0">
+            <div
+              class="pagination-block pagination pagination-separated justify-content-center justify-content-sm-end mb-sm-0"
+            >
+              <div class="page-item">
+                <a href="javascript:void(0);" class="page-link" id="page-prev"
+                  ><i class="mdi mdi-chevron-left"></i
+                ></a>
+              </div>
+              <span id="page-num" class="pagination"></span>
+              <div class="page-item">
+                <a href="javascript:void(0);" class="page-link" id="page-next"
+                  ><i class="mdi mdi-chevron-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- pagination-element -->
+      </div>
+      <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    <!--   <footer class="footer">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6">2024. © Velzon.</div>
+          <div class="col-sm-6">
+            <div class="text-sm-end d-none d-sm-block">
+              Design & Develop by Themesbrand
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- end main content-->
+    </footer> -->
   </div>
   <!-- END layout-wrapper -->
 </template>
@@ -396,13 +418,17 @@ export default {
   mounted() {
     this.addAttributes();
   },
+  unmounted() {
+    this.removeAttributes();
+  },
   methods: {
     addAttributes() {
       // Ajoutez vos attributs à la balise HTML (ici, <html>) ici
       document.documentElement.setAttribute("data-layout", "horizontal");
       document.documentElement.setAttribute("data-layout-style", "");
       document.documentElement.setAttribute("data-layout-position", "fixed");
-      document.documentElement.setAttribute("data-topbar", "light");
+      document.documentElement.setAttribute("data-topbar", "dark");
+      document.body.classList.add("overflow-hidden");
     },
     removeAttributes() {
       // Supprimez vos attributs de la balise HTML (ici, <html>) ici
@@ -410,7 +436,14 @@ export default {
       document.documentElement.removeAttribute("data-layout-style");
       document.documentElement.removeAttribute("data-layout-position");
       document.documentElement.removeAttribute("data-topbar");
+      document.body.classList.remove("overflow-hidden");
     },
   },
 };
 </script>
+
+<style>
+.full-height {
+  height: 100vh;
+}
+</style>
