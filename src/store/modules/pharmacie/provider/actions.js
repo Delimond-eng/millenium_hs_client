@@ -245,4 +245,42 @@ export default {
       return null;
     }
   },
+
+  /**
+   * Voir tous les produits mises en  vente par une pharmacie
+   */
+  async viewPharmacieProducts({ commit }) {
+    let user = JSON.parse(localStorage.getItem("user-data"));
+    let pharmacieId = 2; /* user.pharmacie_id */
+    try {
+      let { data, status } = await get(`/pharmacie.produits/${pharmacieId}`);
+      if (status === 200) {
+        commit("SET_SELL_PRODUCTS", data.produits);
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  /**
+   * voir toutes les categories de produits
+   */
+  async viewAllCategories({ commit }) {
+    let user = JSON.parse(localStorage.getItem("user-data"));
+    let hopitalId = 1; /* user.hopital_id */
+    try {
+      let { data, status } = await get(`/pharmacie.categories/${hopitalId}`);
+      if (status === 200) {
+        commit("SET_CATEGORIES", data.categories);
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
 };

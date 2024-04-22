@@ -105,13 +105,18 @@
                         </div>
                       </div>
                     </div>
-                    <div class="card-body overflow-auto" style="height: 300px">
+                    <div
+                      class="card-body overflow-auto"
+                      data-simplebar-auto-hide="false"
+                      data-simplebar
+                      style="height: 300px"
+                    >
                       <div class="table-responsive table-card">
                         <table class="table table-borderless align-middle mb-0">
                           <thead class="table-light text-muted">
                             <tr>
                               <th scope="col">Produit</th>
-                              <th scope="col" class="text-end">PU</th>
+                              <th scope="col" class="text-end"></th>
                               <th></th>
                             </tr>
                           </thead>
@@ -123,7 +128,22 @@
                                     >350 ml Glass Grocery Container</a
                                   >
                                 </h5>
-                                <p class="text-secondary mb-0">240.99F x 1</p>
+                                <div class="d-flex align-items-center">
+                                  <p class="text-secondary mb-0 me-4 fw-bold">
+                                    240.99F x 1
+                                  </p>
+                                  <div class="input-step">
+                                    <button type="button" class="minus">–</button>
+                                    <input
+                                      type="number"
+                                      class="product-quantity"
+                                      value="1"
+                                      min="0"
+                                      max="100"
+                                    />
+                                    <button type="button" class="plus">+</button>
+                                  </div>
+                                </div>
                               </td>
                               <td class="text-end">240.99F</td>
                               <td>
@@ -163,6 +183,7 @@
                         class="actionpad d-flex flex-column flex-grow-1 mw-50 p-0 border-end"
                       >
                         <button
+                          @click="showOffcanvas"
                           class="button set-partner btn btn-warning rounded-0 py-2 flex-shrink-1 fw-bolder"
                         >
                           <i class="ri-user-add-line me-1"></i>
@@ -286,14 +307,13 @@
                   <div class="col-xxl-3 ms-auto">
                     <div>
                       <select class="form-control" id="category-select">
-                        <option value="All">Selectionnez une catégorie</option>
-                        <option value="All">All</option>
-                        <option value="Retailer">Retailer</option>
-                        <option value="Health & Medicine">Health & Medicine</option>
-                        <option value="Manufacturer">Manufacturer</option>
-                        <option value="Food Service">Food Service</option>
-                        <option value="Computers & Electronics">
-                          Computers & Electronics
+                        <option hidden selected>Selectionnez une catégorie</option>
+                        <option
+                          v-for="(data, index) in categories"
+                          :key="index"
+                          :value="data.id"
+                        >
+                          {{ data.categorie_libelle }}
                         </option>
                       </select>
                     </div>
@@ -303,8 +323,9 @@
                     <div class="hstack gap-2">
                       <button
                         class="btn btn-success"
-                        data-bs-toggle="modal"
-                        data-bs-target="#addSeller"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#client-offcanvas"
+                        aria-controls="client-offcanvas"
                       >
                         <i class="ri-add-fill me-1 align-bottom"></i> Ajout client
                       </button>
@@ -314,9 +335,14 @@
                 </div>
                 <!--end row-->
               </div>
-              <div class="card-body overflow-auto" style="height: 700px">
+              <div
+                class="card-body overflow-auto"
+                data-simplebar-auto-hide="false"
+                data-simplebar
+                style="height: 570px"
+              >
                 <div class="row g-2 mb-4">
-                  <div class="col-md-3" v-for="(item, index) in 20" :key="index">
+                  <div class="col-md-3" v-for="(item, index) in products" :key="index">
                     <div
                       class="d-flex rounded-2 p-1 cursor-pointer align-items-center card-animate"
                       style="border: 1px solid #dde0e4"
@@ -328,25 +354,20 @@
                         style="height: 50px"
                       />
                       <div class="flex-grow-1 text-start ms-2">
-                        <h5 class="fs-15 text-primary">Amoxyciline</h5>
-                        <span class="text-muted fs-10 mb-2">Antibiotique</span><br />
-                        <span class="text-dark fw-bold mb-0"> 500,00F </span>
+                        <h5 class="fs-15 text-primary">
+                          <span v-if="item.produit">{{
+                            item.produit.produit_libelle
+                          }}</span>
+                        </h5>
+                        <span class="text-muted fs-10 mb-2"
+                          ><span v-if="item.produit.categorie">{{
+                            item.produit.categorie.categorie_libelle
+                          }}</span></span
+                        ><br />
+                        <span class="text-dark fw-bold mb-0">
+                          {{ item.produit_prix }} {{ item.produit_prix_devise }}</span
+                        >
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="alert border-dashed alert-danger" role="alert">
-                  <div class="d-flex align-items-center">
-                    <lord-icon
-                      src="https://cdn.lordicon.com/nkmsrxys.json"
-                      trigger="loop"
-                      colors="primary:#121331,secondary:#f06548"
-                      style="width: 80px; height: 80px"
-                    ></lord-icon>
-                    <div class="ms-2">
-                      <h5 class="fs-14 text-danger fw-semibold">
-                        Cliquez sur un produit pharmaceutique pour ajouter au panier !
-                      </h5>
                     </div>
                   </div>
                 </div>
@@ -401,11 +422,13 @@
     </footer> -->
   </div>
   <!-- END layout-wrapper -->
+  <client-offcanvas />
 </template>
 
 <script>
 import HeaderLayout from "./layouts/header.vue";
 import FooterLayout from "./layouts/footer.vue";
+import ClientOffcanvas from "./modals/client_create_modal.vue";
 import "./assets/css/style.css";
 export default {
   name: "Home",
@@ -413,10 +436,13 @@ export default {
   components: {
     HeaderLayout,
     FooterLayout,
+    ClientOffcanvas,
   },
 
   mounted() {
     this.addAttributes();
+    this.$store.dispatch("pharmacie/viewPharmacieProducts");
+    this.$store.dispatch("pharmacie/viewAllCategories");
   },
   unmounted() {
     this.removeAttributes();
@@ -437,6 +463,19 @@ export default {
       document.documentElement.removeAttribute("data-layout-position");
       document.documentElement.removeAttribute("data-topbar");
       document.body.classList.remove("overflow-hidden");
+    },
+
+    showOffcanvas() {
+      $("#client-offcanvas").offcanvas("show");
+    },
+  },
+
+  computed: {
+    products() {
+      return this.$store.getters["pharmacie/GET_SELL_PRODUCTS"];
+    },
+    categories() {
+      return this.$store.getters["pharmacie/GET_CATEGORIES"];
     },
   },
 };

@@ -3,4 +3,5 @@ export default {
   GET_PRODUITS: (state) => state.produits,
   GET_CONFIG: (state) => state.config,
   GET_USERS: (state) => state.users,
+  GET_SELL_PRODUCTS: (state) => state.products,
 };
