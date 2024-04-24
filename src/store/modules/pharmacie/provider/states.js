@@ -1,8 +1,9 @@
 export default {
-  categories: [],
-  produits: [],
-  products: [],
-  pharmacies: [],
-  config: {},
-  users: [],
+    categories: [],
+    produits: [],
+    products: [],
+    pharmacies: [],
+    config: {},
+    users: [],
+    cart: [],
 };

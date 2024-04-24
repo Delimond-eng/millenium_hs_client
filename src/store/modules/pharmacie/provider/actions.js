@@ -283,4 +283,22 @@ export default {
       return null;
     }
   },
+
+  /**
+   * Ajouter un produit au panier
+   */
+  addToCart({ commit, state }, data) {
+    if (data) {
+      let item = {
+        operation_qte: 1,
+        produit_id: data.produit_id,
+        produit_libelle: data.produit.produit_libelle,
+        produit_prix: parseFloat(data.produit_prix),
+        produit_devise: data.produit_prix_devise,
+      };
+      commit("SET_CART", item);
+    } else {
+      return;
+    }
+  },
 };

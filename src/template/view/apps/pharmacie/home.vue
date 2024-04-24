@@ -26,11 +26,8 @@
             <img src="assets/images/logo-light.png" alt="" height="17" />
           </span>
         </a>
-        <button
-          type="button"
-          class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
-          id="vertical-hover"
-        >
+        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+          id="vertical-hover">
           <i class="ri-record-circle-line"></i>
         </button>
       </div>
@@ -44,9 +41,7 @@
               <a class="nav-link menu-link" href="javascript:void(0)">
                 <i class="bx bx-shopping-bag"></i>
                 <span
-                  class="position-absolute topbar-badge cartitem-badge fs-10 translate-middle badge rounded-pill bg-info"
-                  >5</span
-                >
+                  class="position-absolute topbar-badge cartitem-badge fs-10 translate-middle badge rounded-pill bg-info">5</span>
                 <span data-key="t-dashboards">Tableau des ventes</span>
               </a>
             </li>
@@ -72,9 +67,7 @@
         <!-- start page title -->
         <div class="row">
           <div class="col-12">
-            <div
-              class="page-title-box d-sm-flex align-items-center justify-content-between"
-            >
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
               <h4 class="mb-sm-0">Ventes des produits pharmaceutiques</h4>
 
               <div class="page-title-right">
@@ -105,12 +98,8 @@
                         </div>
                       </div>
                     </div>
-                    <div
-                      class="card-body overflow-auto"
-                      data-simplebar-auto-hide="false"
-                      data-simplebar
-                      style="height: 300px"
-                    >
+                    <div class="card-body overflow-auto" data-simplebar-auto-hide="false" data-simplebar
+                      style="height: 300px">
                       <div class="table-responsive table-card">
                         <table class="table table-borderless align-middle mb-0">
                           <thead class="table-light text-muted">
@@ -120,36 +109,64 @@
                               <th></th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr v-for="i in 10" :key="i">
+                          <tbody v-if="cart.length > 0">
+                            <tr class="border-bottom-dashed border" v-for="(data, i) in cart" :key="i">
                               <td>
                                 <h5 class="fs-14">
-                                  <a href="javascript:void(0)" class="text-dark"
-                                    >350 ml Glass Grocery Container</a
-                                  >
+                                  <a href="javascript:void(0)" class="text-dark">{{
+                            data.produit_libelle
+                          }}</a>
                                 </h5>
                                 <div class="d-flex align-items-center">
                                   <p class="text-secondary mb-0 me-4 fw-bold">
-                                    240.99F x 1
+                                    {{ data.produit_prix }}{{ data.produit_devise }} x
+                                    {{ data.operation_qte }}
                                   </p>
                                   <div class="input-step">
-                                    <button type="button" class="minus">–</button>
-                                    <input
-                                      type="number"
-                                      class="product-quantity"
-                                      value="1"
-                                      min="0"
-                                      max="100"
-                                    />
-                                    <button type="button" class="plus">+</button>
+                                    <button type="button" @click="
+                            data.operation_qte === 1
+                              ? (data.operation_qte = 1)
+                              : data.operation_qte--
+                            " class="minus">
+                                      –
+                                    </button>
+                                    <input type="number" class="product-quantity" v-model="data.operation_qte"
+                                      min="0" />
+                                    <button type="button" class="plus" @click="data.operation_qte++">
+                                      +
+                                    </button>
                                   </div>
                                 </div>
                               </td>
-                              <td class="text-end">240.99F</td>
+                              <td class="text-end">
+                                {{ data.produit_prix * data.operation_qte
+                                }}{{ data.produit_devise }}
+                              </td>
                               <td>
-                                <button class="btn btn-soft-danger btn-sm text-end">
-                                  <i class="ri-delete-bin-2-line"></i>
+                                <button class="btn btn-soft-danger btn-sm text-end" @click="cart.splice(i, 1)">
+                                  <i class="ri-close-fill"></i>
                                 </button>
+                              </td>
+                            </tr>
+                          </tbody>
+
+                          <tbody v-else>
+                            <tr style="height: 200px"
+                              class="d-flex flex-column justify-content-center align-items-center">
+                              <td>
+                                <div
+                                  class="text-center empty-cart w-100 d-flex flex-column justify-content-center align-items-center"
+                                  id="empty-cart">
+                                  <div class="avatar-lg">
+                                    <div class="avatar-title bg-danger-subtle text-danger fs-36 rounded-circle">
+                                      <i class="bx bx-cart"></i>
+                                    </div>
+                                  </div>
+                                  <h5 class="mt-2 fs-12">
+                                    Veuillez cliquer sur un produit pour ajouter au panier
+                                    !
+                                  </h5>
+                                </div>
                               </td>
                             </tr>
                           </tbody>
@@ -162,9 +179,9 @@
                           <thead></thead>
                           <tbody>
                             <tr class="table-active">
-                              <th colspan="2">Total (USD) :</th>
+                              <th colspan="2">Total (FC) :</th>
                               <td class="text-end">
-                                <span class="fw-semibold"> $353.15 </span>
+                                <span class="fw-semibold"> {{ cartTotal }}F </span>
                               </td>
                             </tr>
                           </tbody>
@@ -177,142 +194,30 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="pads border-top bg-white">
-                    <div class="subpads d-flex">
-                      <div
-                        class="actionpad d-flex flex-column flex-grow-1 mw-50 p-0 border-end"
-                      >
-                        <button
-                          @click="showOffcanvas"
-                          class="button set-partner btn btn-warning rounded-0 py-2 flex-shrink-1 fw-bolder"
-                        >
-                          <i class="ri-user-add-line me-1"></i>
-                          Client</button
-                        ><button
-                          class="pay validation pay-order-button btn-secondary button btn d-flex flex-column flex-fill align-items-center justify-content-center fw-bolder btn-lg rounded-0"
-                        >
-                          <div
-                            class="pay-circle d-flex align-items-center justify-content-center py-2 mb-2"
-                          >
-                            <i class="ri-arrow-right-line"></i>
-                          </div>
-                          Paiement
-                        </button>
-                      </div>
-                      <div class="w-100 numpad row row-cols-4 gx-0">
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          1
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          2
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          3
-                        </button>
-                        <button
-                          class="col btn btn-outline-primary py-3 border fw-bolder rounded-0"
-                        >
-                          QTE
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          4
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          5
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          6
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          % REMISE
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          7
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          8
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          9
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          PRIX
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          +/-
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          0
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          ,
-                        </button>
-                        <button
-                          class="col btn btn-soft-primary py-3 border fw-bolder rounded-0"
-                        >
-                          ⌫
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  <!-- numeric pad -->
+                  <numeric-pad @on-client-added="showOffcanvas" />
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-8">
             <div class="card">
-              <div class="card-header border-0 rounded">
+              <div class="card-header rounded">
                 <div class="row g-2">
                   <div class="col-xl-3">
                     <div class="search-box">
-                      <input
-                        type="text"
-                        class="form-control"
-                        autocomplete="off"
-                        id="searchResultList"
-                        placeholder="Recherchez produit"
-                      />
+                      <input type="text" class="form-control" autocomplete="off" id="searchResultList"
+                        placeholder="Recherchez produit" v-model="filter_1" />
                       <i class="ri-search-line search-icon"></i>
                     </div>
                   </div>
                   <!--end col-->
                   <div class="col-xxl-3 ms-auto">
                     <div>
-                      <select class="form-control" id="category-select">
-                        <option hidden selected>Selectionnez une catégorie</option>
-                        <option
-                          v-for="(data, index) in categories"
-                          :key="index"
-                          :value="data.id"
-                        >
+                      <select class="form-control" v-model="filter_2" id="category-select">
+                        <option value="" hidden selected>Filtrez par catégorie...</option>
+                        <option value="">Tout</option>
+                        <option v-for="(data, index) in categories" :key="index" :value="data.id">
                           {{ data.categorie_libelle }}
                         </option>
                       </select>
@@ -321,12 +226,8 @@
                   <!--end col-->
                   <div class="col-lg-auto">
                     <div class="hstack gap-2">
-                      <button
-                        class="btn btn-success"
-                        data-bs-toggle="offcanvas"
-                        data-bs-target="#client-offcanvas"
-                        aria-controls="client-offcanvas"
-                      >
+                      <button class="btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#client-offcanvas"
+                        aria-controls="client-offcanvas">
                         <i class="ri-add-fill me-1 align-bottom"></i> Ajout client
                       </button>
                     </div>
@@ -335,38 +236,26 @@
                 </div>
                 <!--end row-->
               </div>
-              <div
-                class="card-body overflow-auto"
-                data-simplebar-auto-hide="false"
-                data-simplebar
-                style="height: 570px"
-              >
+              <div class="card-body overflow-auto" data-simplebar-auto-hide="false" data-simplebar
+                style="height: 570px">
                 <div class="row g-2 mb-4">
                   <div class="col-md-3" v-for="(item, index) in products" :key="index">
-                    <div
+                    <div @click="$store.dispatch('pharmacie/addToCart', item)"
                       class="d-flex rounded-2 p-1 cursor-pointer align-items-center card-animate"
-                      style="border: 1px solid #dde0e4"
-                    >
-                      <img
-                        src="assets/images/companies/medic.png"
-                        alt=""
-                        class="img-fluid d-block"
-                        style="height: 50px"
-                      />
+                      style="border: 1px solid #dde0e4">
+                      <img src="assets/images/companies/medic.png" alt="" class="img-fluid d-block"
+                        style="height: 50px" />
                       <div class="flex-grow-1 text-start ms-2">
                         <h5 class="fs-15 text-primary">
                           <span v-if="item.produit">{{
                             item.produit.produit_libelle
                           }}</span>
                         </h5>
-                        <span class="text-muted fs-10 mb-2"
-                          ><span v-if="item.produit.categorie">{{
+                        <span class="text-muted fs-10 mb-2"><span v-if="item.produit.categorie">{{
                             item.produit.categorie.categorie_libelle
-                          }}</span></span
-                        ><br />
+                          }}</span></span><br />
                         <span class="text-dark fw-bold mb-0">
-                          {{ item.produit_prix }} {{ item.produit_prix_devise }}</span
-                        >
+                          {{ item.produit_prix }} {{ item.produit_prix_devise }}</span>
                       </div>
                     </div>
                   </div>
@@ -422,13 +311,14 @@
     </footer> -->
   </div>
   <!-- END layout-wrapper -->
-  <client-offcanvas />
+  <!-- <client-offcanvas /> -->
 </template>
 
 <script>
 import HeaderLayout from "./layouts/header.vue";
 import FooterLayout from "./layouts/footer.vue";
 import ClientOffcanvas from "./modals/client_create_modal.vue";
+import NumericPad from "./components/numeric_pad.vue";
 import "./assets/css/style.css";
 export default {
   name: "Home",
@@ -437,6 +327,14 @@ export default {
     HeaderLayout,
     FooterLayout,
     ClientOffcanvas,
+    NumericPad,
+  },
+
+  data() {
+    return {
+      filter_1: "",
+      filter_2: "",
+    };
   },
 
   mounted() {
@@ -463,8 +361,8 @@ export default {
       document.documentElement.removeAttribute("data-layout-position");
       document.documentElement.removeAttribute("data-topbar");
       document.body.classList.remove("overflow-hidden");
+      $("#client-offcanvas").offcanvas("show");
     },
-
     showOffcanvas() {
       $("#client-offcanvas").offcanvas("show");
     },
@@ -472,10 +370,34 @@ export default {
 
   computed: {
     products() {
-      return this.$store.getters["pharmacie/GET_SELL_PRODUCTS"];
+      if (this.filter_1) {
+        let arr = this.$store.getters["pharmacie/GET_SELL_PRODUCTS"];
+        let filtered = arr.filter((el) =>
+          el.produit.produit_libelle.toLowerCase().includes(this.filter_1.toLowerCase())
+        );
+        return filtered;
+      } else if (this.filter_2) {
+        let arr = this.$store.getters["pharmacie/GET_SELL_PRODUCTS"];
+        let filtered = arr.filter((el) => el.produit.categorie_id === this.filter_2);
+        return filtered;
+      } else {
+        return this.$store.getters["pharmacie/GET_SELL_PRODUCTS"];
+      }
     },
     categories() {
       return this.$store.getters["pharmacie/GET_CATEGORIES"];
+    },
+
+    cart() {
+      return this.$store.getters["pharmacie/GET_CART"];
+    },
+
+    cartTotal() {
+      let sousTotal = 0;
+      for (let item of this.cart) {
+        sousTotal += parseFloat(item.operation_qte * item.produit_prix);
+      }
+      return sousTotal;
     },
   },
 };

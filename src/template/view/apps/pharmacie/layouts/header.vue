@@ -14,12 +14,12 @@
               </span>
             </a>
 
-            <a href="index.html" class="logo logo-light">
+            <a href="#/pharmacie/seller/home" class="logo logo-light">
               <span class="logo-sm">
-                <img src="assets/images/logo-sm.png" alt="" height="22" />
+                <img src="assets/logos/1.png" alt="" height="50" />
               </span>
               <span class="logo-lg">
-                <img src="assets/images/logo-light.png" alt="" height="17" />
+                <img src="assets/logos/3.png" alt="" height="55" />
               </span>
             </a>
           </div>
@@ -41,8 +41,9 @@
             <div class="position-relative">
               <input
                 type="text"
+                @input="onSearchTrigger"
                 class="form-control"
-                placeholder="Search..."
+                placeholder="Recherche produits"
                 autocomplete="off"
                 id="search-options"
                 value=""
@@ -53,100 +54,88 @@
                 id="search-close-options"
               ></span>
             </div>
-            <div class="dropdown-menu dropdown-menu-lg" id="search-dropdown">
+            <div class="dropdown-menu dropdown-menu-lg" id="search-box" ref="search-box">
               <div data-simplebar style="max-height: 320px">
                 <!-- item-->
                 <div class="dropdown-header">
                   <h6 class="text-overflow text-muted mb-0 text-uppercase">
-                    Recent Searches
+                    RECHERCHES RECENTES
                   </h6>
                 </div>
 
-                <div class="dropdown-item bg-transparent text-wrap">
+                <!-- <div class="dropdown-item bg-transparent text-wrap">
                   <a href="index.html" class="btn btn-soft-secondary btn-sm rounded-pill"
                     >how to setup <i class="mdi mdi-magnify ms-1"></i
                   ></a>
                   <a href="index.html" class="btn btn-soft-secondary btn-sm rounded-pill"
                     >buttons <i class="mdi mdi-magnify ms-1"></i
                   ></a>
-                </div>
+                </div> -->
                 <!-- item-->
-                <div class="dropdown-header mt-2">
+                <!-- <div class="dropdown-header mt-2">
                   <h6 class="text-overflow text-muted mb-1 text-uppercase">Pages</h6>
-                </div>
+                </div> -->
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <!--  <a href="javascript:void(0);" class="dropdown-item notify-item">
                   <i class="ri-bubble-chart-line align-middle fs-18 text-muted me-2"></i>
                   <span>Analytics Dashboard</span>
-                </a>
+                </a> -->
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <!--  <a href="javascript:void(0);" class="dropdown-item notify-item">
                   <i class="ri-lifebuoy-line align-middle fs-18 text-muted me-2"></i>
                   <span>Help Center</span>
-                </a>
+                </a> -->
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                   <i class="ri-user-settings-line align-middle fs-18 text-muted me-2"></i>
                   <span>My account settings</span>
-                </a>
+                </a> -->
 
                 <!-- item-->
                 <div class="dropdown-header mt-2">
-                  <h6 class="text-overflow text-muted mb-2 text-uppercase">Members</h6>
+                  <h6 class="text-overflow text-muted mb-2 text-uppercase">PRODUITS</h6>
                 </div>
 
                 <div class="notification-list">
                   <!-- item -->
-                  <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
+                  <a
+                    href="javascript:void(0);"
+                    class="dropdown-item notify-item py-2"
+                    v-for="(data, index) in products_searched"
+                    :key="index"
+                    @click="$store.dispatch('pharmacie/addToCart', data)"
+                  >
                     <div class="d-flex">
                       <img
-                        src="assets/images/users/avatar-2.jpg"
+                        src="assets/images/companies/medic.png"
                         class="me-3 rounded-circle avatar-xs"
                         alt="user-pic"
                       />
                       <div class="flex-grow-1">
-                        <h6 class="m-0">Angela Bernier</h6>
-                        <span class="fs-11 mb-0 text-muted">Manager</span>
+                        <h6 class="m-0">{{ data.produit.produit_libelle }}</h6>
+                        <span class="fs-11 mb-0 text-muted">{{
+                          data.produit.categorie.categorie_libelle
+                        }}</span>
                       </div>
-                    </div>
-                  </a>
-                  <!-- item -->
-                  <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
-                    <div class="d-flex">
-                      <img
-                        src="assets/images/users/avatar-3.jpg"
-                        class="me-3 rounded-circle avatar-xs"
-                        alt="user-pic"
-                      />
-                      <div class="flex-grow-1">
-                        <h6 class="m-0">David Grasso</h6>
-                        <span class="fs-11 mb-0 text-muted">Web Designer</span>
-                      </div>
-                    </div>
-                  </a>
-                  <!-- item -->
-                  <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
-                    <div class="d-flex">
-                      <img
-                        src="assets/images/users/avatar-5.jpg"
-                        class="me-3 rounded-circle avatar-xs"
-                        alt="user-pic"
-                      />
-                      <div class="flex-grow-1">
-                        <h6 class="m-0">Mike Bunch</h6>
-                        <span class="fs-11 mb-0 text-muted">React Developer</span>
-                      </div>
+                      <h6 class="m-0">
+                        {{ data.produit_prix }}{{ data.produit_prix_devise }}
+                      </h6>
                     </div>
                   </a>
                 </div>
               </div>
 
-              <div class="text-center pt-3 pb-1">
-                <a href="pages-search-results.html" class="btn btn-primary btn-sm"
-                  >View All Results <i class="ri-arrow-right-line ms-1"></i
+              <div
+                class="text-center d-flex justify-content-center align-items-center pt-3 pb-1"
+              >
+                <a href="javascript:void(0)" class="btn btn-soft-danger btn-sm me-2"
+                  >Fermer <i class="ri-close-line ms-1"></i
+                ></a>
+                <a href="#/pharmacie/seller/home" class="btn btn-soft-primary btn-sm"
+                  >Voir tous les produits <i class="ri-arrow-right-line ms-1"></i
                 ></a>
               </div>
             </div>
@@ -199,8 +188,8 @@
             >
               <i class="bx bx-shopping-bag fs-22"></i>
               <span
-                class="position-absolute topbar-badge cartitem-badge fs-10 translate-middle badge rounded-pill bg-info"
-                >5</span
+                class="position-absolute topbar-badge cartitem-badge fs-10 translate-middle badge rounded-pill bg-danger"
+                >{{ cart.length }}</span
               >
             </button>
             <div
@@ -212,203 +201,67 @@
               >
                 <div class="row align-items-center">
                   <div class="col">
-                    <h6 class="m-0 fs-16 fw-semibold">My Cart</h6>
+                    <h6 class="m-0 fs-16 fw-semibold">Panier en attente</h6>
                   </div>
                   <div class="col-auto">
                     <span class="badge bg-warning-subtle text-warning fs-13"
-                      ><span class="cartitem-badge">7</span> items
+                      ><span class="cartitem-badge">{{ cart.length }}</span> items
                     </span>
                   </div>
                 </div>
               </div>
               <div data-simplebar style="max-height: 300px">
-                <div class="p-2">
+                <div class="p-2" v-if="cart.length === 0">
                   <div class="text-center empty-cart" id="empty-cart">
                     <div class="avatar-md mx-auto my-3">
                       <div
-                        class="avatar-title bg-info-subtle text-info fs-36 rounded-circle"
+                        class="avatar-title bg-danger-subtle text-danger fs-36 rounded-circle"
                       >
                         <i class="bx bx-cart"></i>
                       </div>
                     </div>
-                    <h5 class="mb-3">Your Cart is Empty!</h5>
-                    <a
-                      href="apps-ecommerce-products.html"
-                      class="btn btn-success w-md mb-3"
-                      >Shop Now</a
-                    >
+                    <h5 class="mb-3 fs-12">
+                      Panier vide,veuillez cliquer sur un produit pour ajouter au panier !
+                    </h5>
                   </div>
+                </div>
+                <div class="p-2" v-else>
                   <div
                     class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2"
+                    v-for="(data, index) in cart"
+                    :key="index"
                   >
                     <div class="d-flex align-items-center">
                       <img
-                        src="assets/images/products/img-1.png"
+                        src="assets/images/companies/medic.png"
                         class="me-3 rounded-circle avatar-sm p-2 bg-light"
                         alt="user-pic"
                       />
                       <div class="flex-grow-1">
                         <h6 class="mt-0 mb-1 fs-14">
-                          <a href="apps-ecommerce-product-details.html" class="text-reset"
-                            >Branded T-Shirts</a
-                          >
+                          {{ data.produit_libelle }}
                         </h6>
                         <p class="mb-0 fs-12 text-muted">
-                          Quantity: <span>10 x $32</span>
+                          QTE :
+                          <span
+                            >{{ data.operation_qte }} x
+                            {{ data.produit_prix + data.produit_devise }}</span
+                          >
                         </p>
                       </div>
                       <div class="px-2">
                         <h5 class="m-0 fw-normal">
-                          $<span class="cart-item-price">320</span>
+                          <span class="cart-item-price"
+                            >{{ data.operation_qte * data.produit_prix
+                            }}{{ data.produit_devise }}</span
+                          >
                         </h5>
                       </div>
                       <div class="ps-2">
                         <button
                           type="button"
-                          class="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn"
-                        >
-                          <i class="ri-close-fill fs-16"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2"
-                  >
-                    <div class="d-flex align-items-center">
-                      <img
-                        src="assets/images/products/img-2.png"
-                        class="me-3 rounded-circle avatar-sm p-2 bg-light"
-                        alt="user-pic"
-                      />
-                      <div class="flex-grow-1">
-                        <h6 class="mt-0 mb-1 fs-14">
-                          <a href="apps-ecommerce-product-details.html" class="text-reset"
-                            >Bentwood Chair</a
-                          >
-                        </h6>
-                        <p class="mb-0 fs-12 text-muted">
-                          Quantity: <span>5 x $18</span>
-                        </p>
-                      </div>
-                      <div class="px-2">
-                        <h5 class="m-0 fw-normal">
-                          $<span class="cart-item-price">89</span>
-                        </h5>
-                      </div>
-                      <div class="ps-2">
-                        <button
-                          type="button"
-                          class="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn"
-                        >
-                          <i class="ri-close-fill fs-16"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2"
-                  >
-                    <div class="d-flex align-items-center">
-                      <img
-                        src="assets/images/products/img-3.png"
-                        class="me-3 rounded-circle avatar-sm p-2 bg-light"
-                        alt="user-pic"
-                      />
-                      <div class="flex-grow-1">
-                        <h6 class="mt-0 mb-1 fs-14">
-                          <a
-                            href="apps-ecommerce-product-details.html"
-                            class="text-reset"
-                          >
-                            Borosil Paper Cup</a
-                          >
-                        </h6>
-                        <p class="mb-0 fs-12 text-muted">
-                          Quantity: <span>3 x $250</span>
-                        </p>
-                      </div>
-                      <div class="px-2">
-                        <h5 class="m-0 fw-normal">
-                          $<span class="cart-item-price">750</span>
-                        </h5>
-                      </div>
-                      <div class="ps-2">
-                        <button
-                          type="button"
-                          class="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn"
-                        >
-                          <i class="ri-close-fill fs-16"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2"
-                  >
-                    <div class="d-flex align-items-center">
-                      <img
-                        src="assets/images/products/img-6.png"
-                        class="me-3 rounded-circle avatar-sm p-2 bg-light"
-                        alt="user-pic"
-                      />
-                      <div class="flex-grow-1">
-                        <h6 class="mt-0 mb-1 fs-14">
-                          <a href="apps-ecommerce-product-details.html" class="text-reset"
-                            >Gray Styled T-Shirt</a
-                          >
-                        </h6>
-                        <p class="mb-0 fs-12 text-muted">
-                          Quantity: <span>1 x $1250</span>
-                        </p>
-                      </div>
-                      <div class="px-2">
-                        <h5 class="m-0 fw-normal">
-                          $ <span class="cart-item-price">1250</span>
-                        </h5>
-                      </div>
-                      <div class="ps-2">
-                        <button
-                          type="button"
-                          class="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn"
-                        >
-                          <i class="ri-close-fill fs-16"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2"
-                  >
-                    <div class="d-flex align-items-center">
-                      <img
-                        src="assets/images/products/img-5.png"
-                        class="me-3 rounded-circle avatar-sm p-2 bg-light"
-                        alt="user-pic"
-                      />
-                      <div class="flex-grow-1">
-                        <h6 class="mt-0 mb-1 fs-14">
-                          <a href="apps-ecommerce-product-details.html" class="text-reset"
-                            >Stillbird Helmet</a
-                          >
-                        </h6>
-                        <p class="mb-0 fs-12 text-muted">
-                          Quantity: <span>2 x $495</span>
-                        </p>
-                      </div>
-                      <div class="px-2">
-                        <h5 class="m-0 fw-normal">
-                          $<span class="cart-item-price">990</span>
-                        </h5>
-                      </div>
-                      <div class="ps-2">
-                        <button
-                          type="button"
-                          class="btn btn-icon btn-sm btn-ghost-secondary remove-item-btn"
+                          @click="cart.splice(index, 1)"
+                          class="btn btn-icon btn-sm btn-ghost-danger remove-item-btn"
                         >
                           <i class="ri-close-fill fs-16"></i>
                         </button>
@@ -424,7 +277,7 @@
                 <div class="d-flex justify-content-between align-items-center pb-3">
                   <h5 class="m-0 text-muted">Total:</h5>
                   <div class="px-2">
-                    <h5 class="m-0" id="cart-item-total">$1258.58</h5>
+                    <h5 class="m-0" id="cart-item-total">{{ cartTotal }}F</h5>
                   </div>
                 </div>
 
@@ -432,7 +285,7 @@
                   href="apps-ecommerce-checkout.html"
                   class="btn btn-success text-center w-100"
                 >
-                  Checkout
+                  Valider le paiement
                 </a>
               </div>
             </div>
@@ -495,5 +348,54 @@
 <script>
 export default {
   name: "FooterLayout",
+
+  data() {
+    return {
+      search: "",
+    };
+  },
+
+  computed: {
+    cart() {
+      let cart = this.$store.getters["pharmacie/GET_CART"];
+      return cart;
+    },
+    cartTotal() {
+      let sousTotal = 0;
+      for (let item of this.cart) {
+        sousTotal += parseFloat(item.operation_qte * item.produit_prix);
+      }
+      return sousTotal;
+    },
+    products_searched() {
+      if (this.search) {
+        let arr = this.$store.getters["pharmacie/GET_SELL_PRODUCTS"];
+        let filtered = arr.filter((el) =>
+          el.produit.produit_libelle.toLowerCase().includes(this.search.toLowerCase())
+        );
+        console.log(filtered.length);
+        return filtered;
+      } else {
+        return [];
+      }
+    },
+  },
+
+  methods: {
+    onSearchTrigger(event) {
+      let searchBox = document.querySelector("#search-box");
+      let options = document.querySelector("#search-close-options");
+      let value = event.target.value;
+      this.search = value;
+      if (value !== "") {
+        searchBox.classList.add("show");
+        options.classList.remove("d-none");
+      } else {
+        searchBox.classList.remove("show");
+        options.classList.add("d-none");
+      }
+      /* this.$emit("onSearched", value); */
+    },
+  },
 };
 </script>
