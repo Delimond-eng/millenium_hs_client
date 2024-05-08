@@ -295,10 +295,81 @@ export default {
         produit_libelle: data.produit.produit_libelle,
         produit_prix: parseFloat(data.produit_prix),
         produit_devise: data.produit_prix_devise,
+        produit_stocks: data.stock,
       };
       commit("SET_CART", item);
     } else {
       return;
+    }
+  },
+
+  async checkClient({ commit }, payload) {
+    try {
+      let pharmacieId = 2;
+      let { data, status } = await get(
+        `/pharmacie.client/${pharmacieId}/${payload}`
+      );
+      if (status === 200) {
+        commit("SET_CURRENT_CLIENT", data.client);
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  async addClient({ commit }, form) {
+    let user = JSON.parse(localStorage.getItem("user-data"));
+    form.created_by = 6;
+    form.pharmacie_id = 2;
+    try {
+      let { data, status } = await post("/pharmacie.client.create", form);
+      if (status === 200) {
+        commit("SET_CURRENT_CLIENT", data.client);
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  async createNewSell({ getters, state }) {
+    try {
+      const cart = getters.GET_CART;
+      const client = getters.GET_CURRENT_CLIENT;
+      const created_by = 6;
+      const pharmacie_id = 2;
+
+      // Préparation des données du formulaire
+      const form = {
+        cart_datas: cart.map((item) => ({
+          ...item,
+          created_by: created_by,
+          pharmacie_id: pharmacie_id,
+          client_id: client ? client.id : null,
+        })),
+      };
+
+      // Envoi des données au serveur
+      const { data, status } = await post("/pharmacie.sell", form);
+
+      // Gestion de la réponse du serveur
+      if (status === 200 && data.status !== undefined) {
+        // Effacer le panier et les données client actuelles
+        state.cart = [];
+        state.client = null;
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      // Gérer les erreurs
+      console.error("Erreur lors de la création de la vente :", error);
+      return null;
     }
   },
 };

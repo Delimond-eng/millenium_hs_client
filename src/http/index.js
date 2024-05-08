@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const baseURL = "https://backend.hospital.milleniumhorizon.com/api";
-
 /**
  * Create a new axios instance
  * */

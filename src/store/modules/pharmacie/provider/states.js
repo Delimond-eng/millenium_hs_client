@@ -1,9 +1,10 @@
 export default {
-    categories: [],
-    produits: [],
-    products: [],
-    pharmacies: [],
-    config: {},
-    users: [],
-    cart: [],
+  categories: [],
+  produits: [],
+  products: [],
+  pharmacies: [],
+  config: {},
+  users: [],
+  cart: [],
+  client: null,
 };

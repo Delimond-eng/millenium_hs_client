@@ -7,19 +7,19 @@
           <div class="navbar-brand-box horizontal-logo">
             <a href="javascript:void(0)" class="logo logo-dark">
               <span class="logo-sm">
-                <img src="assets/images/logo-sm.png" alt="" height="22" />
+                <img src="assets/logo-2.png" alt="" height="22" />
               </span>
               <span class="logo-lg">
-                <img src="assets/images/logo-dark.png" alt="" height="17" />
+                <img src="assets/logo-2.png" alt="" height="17" />
               </span>
             </a>
 
             <a href="#/pharmacie/seller/home" class="logo logo-light">
               <span class="logo-sm">
-                <img src="assets/logos/1.png" alt="" height="50" />
+                <img src="assets/logo-2.png" alt="" height="50" />
               </span>
               <span class="logo-lg">
-                <img src="assets/logos/3.png" alt="" height="55" />
+                <img src="assets/logo-2.png" alt="" height="55" />
               </span>
             </a>
           </div>
@@ -59,7 +59,7 @@
                 <!-- item-->
                 <div class="dropdown-header">
                   <h6 class="text-overflow text-muted mb-0 text-uppercase">
-                    RECHERCHES RECENTES
+                    Produits trouvés
                   </h6>
                 </div>
 
@@ -96,7 +96,9 @@
 
                 <!-- item-->
                 <div class="dropdown-header mt-2">
-                  <h6 class="text-overflow text-muted mb-2 text-uppercase">PRODUITS</h6>
+                  <h6 class="mb-2 text-info fs-10">
+                    Cliquez sur un produit pour ajouter au panier !
+                  </h6>
                 </div>
 
                 <div class="notification-list">
@@ -131,7 +133,10 @@
               <div
                 class="text-center d-flex justify-content-center align-items-center pt-3 pb-1"
               >
-                <a href="javascript:void(0)" class="btn btn-soft-danger btn-sm me-2"
+                <a
+                  href="javascript:void(0)"
+                  @click="closeSearchViewer"
+                  class="btn btn-soft-danger btn-sm me-2"
                   >Fermer <i class="ri-close-line ms-1"></i
                 ></a>
                 <a href="#/pharmacie/seller/home" class="btn btn-soft-primary btn-sm"
@@ -395,6 +400,13 @@ export default {
         options.classList.add("d-none");
       }
       /* this.$emit("onSearched", value); */
+    },
+
+    closeSearchViewer() {
+      let options = document.querySelector("#search-close-options");
+      let searchBox = document.querySelector("#search-box");
+      searchBox.classList.remove("show");
+      options.classList.add("d-none");
     },
   },
 };

@@ -1,73 +1,139 @@
 <template>
     <teleport to="body">
-        <div class="offcanvas offcanvas-end border-0 show" tabindex="-1" id="client-offcanvas" aria-modal="true"
-            role="dialog">
-            <div class="d-flex align-items-center bg-primary bg-gradient p-3 offcanvas-header">
-                <h5 class="m-0 me-2 text-white">Création nouveau client</h5>
-
-                <button type="button" class="btn-close btn-close-white ms-auto" id="customizerclose-btn"
-                    data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body p-0">
-                <div data-simplebar="init" class="h-100 simplebar-scrollable-y">
-                    <div class="simplebar-wrapper" style="margin: 0px">
-                        <div class="simplebar-height-auto-observer-wrapper">
-                            <div class="simplebar-height-auto-observer"></div>
-                        </div>
-                        <div class="simplebar-mask">
-                            <div class="simplebar-offset" style="right: 0px; bottom: 0px">
-                                <div class="simplebar-content-wrapper" tabindex="0" role="region"
-                                    aria-label="scrollable content" style="height: 100%; overflow: hidden scroll">
-                                    <div class="simplebar-content" style="padding: 0px">
-                                        <div class="p-4">
-                                            <h6 class="mb-0 fw-semibold text-uppercase">
-                                                Enregistrement client en cours
-                                            </h6>
-                                            <p class="text-muted">
-                                                Veuillez renseigner les informations requises pour un client !
-                                            </p>
-
-                                            <div class="mb-3 mt-3">
-                                                <label for="clientNom" class="form-label">Nom du client</label>
-                                                <input class="form-control" placeholder="Entrez le nom du client..."
-                                                    type="text" id="clientNom" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="phoneNumber" class="form-label">Téléphone</label>
-                                                <input class="form-control"
-                                                    placeholder="Entrez le numéro de téléphone..." type="tel"
-                                                    id="phoneNumber" />
-                                            </div>
+        <div id="client-Modal" class="modal fade" tabindex="-1" style="display: none; padding-left: 0px"
+            aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content border-0 overflow-hidden">
+                    <div class="row g-0">
+                        <div class="col-lg-7">
+                            <div class="modal-body p-5">
+                                <h2 class="lh-base">Création ou verification du client !</h2>
+                                <p class="text-muted mb-4">
+                                    Veuillez entrez le numéro de téléphone du client pour verifier sa
+                                    disponibilité dans le système !
+                                </p>
+                                <form @submit.prevent="submitData" class="row g-3">
+                                    <div class="col-md-12">
+                                        <input type="tel" @input="checkClient" class="form-control"
+                                            placeholder="Entrez le numéro de tél..." v-model="form.client_phone"
+                                            required />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" v-model="form.client_nom"
+                                            placeholder="Nom du client(optionnel)..." />
+                                    </div>
+                                    <bs-toast id="errorsToastClient" :msg="errors_msg" />
+                                    <div class="col-md-12">
+                                        <div class="d-flex">
+                                            <button type="button" class="btn btn-dark me-2" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                                Fermer
+                                            </button>
+                                            <load-button :loading="formLoading" btn-type="submit"
+                                                class-name="btn btn-secondary flex-fill">
+                                                <i class="ri-check-double-line"></i> Valider & ajouter
+                                            </load-button>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="simplebar-placeholder" style="width: 400px; height: 1978px"></div>
-                    </div>
-                    <div class="simplebar-track simplebar-horizontal" style="visibility: hidden">
-                        <div class="simplebar-scrollbar" style="width: 0px; display: none"></div>
-                    </div>
-                    <div class="simplebar-track simplebar-vertical" style="visibility: visible">
-                        <div class="simplebar-scrollbar"
-                            style="height: 43px; transform: translate3d(0px, 0px, 0px); display: block"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="offcanvas-footer border-top p-3 text-center">
-                <div class="row">
-                    <div class="col-6">
-                        <button type="reset" data-bs-dismiss="offcanvas" class="btn btn-light w-100" id="reset-layout">
-                            Fermer
-                        </button>
-                    </div>
-                    <div class="col-6">
-                        <button type="submit" class="btn btn-success w-100">
-                            <i class="ri-check-double"></i> Continuer
-                        </button>
+                        <div class="col-lg-5">
+                            <div class="subscribe-modals-cover h-100">
+                                <img src="assets/images/auth-one-bg.jpg" alt="" class="h-100 w-100 object-fit-cover"
+                                    style="
+                    clip-path: polygon(
+                      100% 0%,
+                      100% 100%,
+                      100% 100%,
+                      0% 100%,
+                      25% 50%,
+                      0% 0%
+                    );
+                  " />
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!-- /.modal-content -->
             </div>
+            <!-- /.modal-dialog -->
         </div>
     </teleport>
 </template>
+
+<script>
+export default {
+    name: "ClientModal",
+
+    data() {
+        return {
+            formLoading: false,
+            isClientFound: false,
+            errors_msg: "",
+            form: {
+                client_phone: "",
+                client_nom: "",
+            },
+        };
+    },
+
+    computed: {
+        client() {
+            return this.$store.getters["pharmacie/GET_CURRENT_CLIENT"];
+        },
+    },
+
+    methods: {
+        //checkExisting client
+        checkClient(event) {
+            let val = event.target.value;
+            if (val.length >= 10) {
+                this.$store.dispatch("pharmacie/checkClient", val).then((res) => {
+                    if (res !== null && res.client !== null) {
+                        this.form.client_nom = res.client.client_nom;
+                        this.isClientFound = true;
+                    }
+                });
+            } else {
+                this.form.client_nom = "";
+            }
+        },
+
+        //Create and return client
+        submitData(e) {
+            if (this.isClientFound) {
+                this.form.client_nom = "";
+                this.form.client_phone = "";
+                this.$emit("onValidate", this.client.id);
+                this.$closeBsModal("client-Modal");
+                return;
+            }
+            this.formLoading = true;
+            this.$store
+                .dispatch("pharmacie/addClient", this.form)
+                .then((res) => {
+                    this.formLoading = false;
+                    if (res.errors !== undefined) {
+                        this.errors_msg = res.errors.toString();
+                        let toast = document.getElementById("errorsToastClient");
+                        new bootstrap.Toast(toast, { delay: 1500 }).show();
+                        return;
+                    }
+                    if (res !== null) {
+                        this.form.client_nom = "";
+                        this.form.client_phone = "";
+                        this.$emit("onValidate", res.client.id);
+                        this.$closeBsModal("client-Modal");
+                    }
+                })
+                .catch((err) => {
+                    this.errors_msg = err.toString();
+                    let toast = document.getElementById("errorsToastClient");
+                    new bootstrap.Toast(toast, { delay: 1500 }).show();
+                    this.formLoading = false;
+                });
+        },
+    },
+};
+</script>
