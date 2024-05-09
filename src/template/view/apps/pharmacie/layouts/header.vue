@@ -62,39 +62,6 @@
                     Produits trouvés
                   </h6>
                 </div>
-
-                <!-- <div class="dropdown-item bg-transparent text-wrap">
-                  <a href="index.html" class="btn btn-soft-secondary btn-sm rounded-pill"
-                    >how to setup <i class="mdi mdi-magnify ms-1"></i
-                  ></a>
-                  <a href="index.html" class="btn btn-soft-secondary btn-sm rounded-pill"
-                    >buttons <i class="mdi mdi-magnify ms-1"></i
-                  ></a>
-                </div> -->
-                <!-- item-->
-                <!-- <div class="dropdown-header mt-2">
-                  <h6 class="text-overflow text-muted mb-1 text-uppercase">Pages</h6>
-                </div> -->
-
-                <!-- item-->
-                <!--  <a href="javascript:void(0);" class="dropdown-item notify-item">
-                  <i class="ri-bubble-chart-line align-middle fs-18 text-muted me-2"></i>
-                  <span>Analytics Dashboard</span>
-                </a> -->
-
-                <!-- item-->
-                <!--  <a href="javascript:void(0);" class="dropdown-item notify-item">
-                  <i class="ri-lifebuoy-line align-middle fs-18 text-muted me-2"></i>
-                  <span>Help Center</span>
-                </a> -->
-
-                <!-- item-->
-                <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
-                  <i class="ri-user-settings-line align-middle fs-18 text-muted me-2"></i>
-                  <span>My account settings</span>
-                </a> -->
-
-                <!-- item-->
                 <div class="dropdown-header mt-2">
                   <h6 class="mb-2 text-info fs-10">
                     Cliquez sur un produit pour ajouter au panier !
@@ -286,12 +253,26 @@
                   </div>
                 </div>
 
-                <a
-                  href="apps-ecommerce-checkout.html"
-                  class="btn btn-success text-center w-100"
+                <button
+                  type="button"
+                  :disabled="sellLoading"
+                  class="btn btn-success btn-lg w-100"
+                  @click="makeSell"
                 >
-                  Valider le paiement
-                </a>
+                  <svg
+                    width="22"
+                    v-if="sellLoading"
+                    fill="#FFFFFF"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle class="spinner_S1WN" cx="4" cy="12" r="3" />
+                    <circle class="spinner_S1WN spinner_Km9P" cx="12" cy="12" r="3" />
+                    <circle class="spinner_S1WN spinner_JApP" cx="20" cy="12" r="3" />
+                  </svg>
+                  <i v-else class="ri-check-double-line"></i> Valider le paiement
+                </button>
               </div>
             </div>
           </div>
@@ -348,6 +329,64 @@
       </div>
     </div>
   </header>
+  <div class="app-menu navbar-menu">
+    <!-- LOGO -->
+    <div class="navbar-brand-box">
+      <!-- Dark Logo-->
+      <a href="index.html" class="logo logo-dark">
+        <span class="logo-sm">
+          <img src="assets/images/logo-sm.png" alt="" height="22" />
+        </span>
+        <span class="logo-lg">
+          <img src="assets/images/logo-dark.png" alt="" height="17" />
+        </span>
+      </a>
+      <!-- Light Logo-->
+      <a href="index.html" class="logo logo-light">
+        <span class="logo-sm">
+          <img src="assets/images/logo-sm.png" alt="" height="22" />
+        </span>
+        <span class="logo-lg">
+          <img src="assets/images/logo-light.png" alt="" height="17" />
+        </span>
+      </a>
+      <button
+        type="button"
+        class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+        id="vertical-hover"
+      >
+        <i class="ri-record-circle-line"></i>
+      </button>
+    </div>
+
+    <div id="scrollbar">
+      <div class="container-fluid">
+        <div id="two-column-menu"></div>
+        <ul class="navbar-nav" id="navbar-nav">
+          <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+          <li class="nav-item">
+            <a class="nav-link menu-link" href="#/pharmacie/seller/home">
+              <i class="bx bx-shopping-bag"></i>
+              <span
+                class="position-absolute topbar-badge cartitem-badge fs-10 translate-middle badge rounded-pill bg-info"
+                >5</span
+              >
+              <span data-key="t-dashboards">Tableau des ventes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link menu-link" href="#/pharmacie/seller/dashboard">
+              <i class="ri-dashboard-2-line"></i>
+              <span data-key="t-dashboards">Tableau de bord</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- Sidebar -->
+    </div>
+
+    <div class="sidebar-background"></div>
+  </div>
 </template>
 
 <script>
@@ -357,6 +396,7 @@ export default {
   data() {
     return {
       search: "",
+      sellLoading: false,
     };
   },
 
@@ -407,6 +447,33 @@ export default {
       let searchBox = document.querySelector("#search-box");
       searchBox.classList.remove("show");
       options.classList.add("d-none");
+    },
+
+    makeSell() {
+      this.sellLoading = true;
+      this.$store
+        .dispatch("pharmacie/createNewSell")
+        .then((res) => {
+          this.sellLoading = false;
+          if (res.errors !== undefined) {
+            Swal.fire({
+              icon: "error",
+              title: "Echec de l'opération !",
+              text: res.errors.toString(),
+            });
+            return;
+          } else if (res.status !== undefined) {
+            Swal.fire({
+              icon: "success",
+              title: "Vente effectuée !",
+              text: "Nouvelle vente effectuée avec succès !",
+              timer: 3000,
+              showCancelButton: false,
+              showConfirmButton: false,
+            });
+          }
+        })
+        .catch((err) => (this.sellLoading = false));
     },
   },
 };
