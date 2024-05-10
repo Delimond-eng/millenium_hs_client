@@ -7,10 +7,12 @@
             <div class="flex-grow-1">
               <h4 class="fs-16 mb-1 fw-bold">
                 Bienvenue <br />
-                <small class="text-uppercase"><span v-if="user.role" class="text-secondary-emphasis">{{
-                  user.role.role
-                }}</span>
-                  {{ user.name }}</small>
+                <small v-if="user !== null" class="text-uppercase"
+                  ><span v-if="user.role" class="text-secondary-emphasis">{{
+                    user.role.role
+                  }}</span>
+                  {{ user.name }}</small
+                >
               </h4>
               <p class="text-muted mb-0">
                 Votre tableau de bord pour vous guider à bien travailler.
@@ -27,21 +29,20 @@
             <div class="d-flex align-items-center">
               <div class="flex-grow-1 overflow-hidden">
                 <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                  Total Ventes journalières
+                  Ventes annulés
                 </p>
-              </div>
-              <div class="flex-shrink-0">
-                <h5 class="text-success fs-14 mb-0">
-                  <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +16.24 %
-                </h5>
               </div>
             </div>
             <div class="d-flex align-items-end justify-content-between mt-4">
               <div>
                 <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                  $<span class="counter-value" data-target="559.25">0</span>k
+                  <span class="counter-value" v-if="reports.counts">{{
+                    reports.counts.abort_sells
+                  }}</span>
                 </h4>
-                <a href="javascript:void(0)" class="text-decoration-underline">Voir les détails</a>
+                <a href="javascript:void(0)" class="text-decoration-underline"
+                  >Voir les détails</a
+                >
               </div>
               <div class="avatar-sm flex-shrink-0">
                 <span class="avatar-title bg-success-subtle rounded fs-3">
@@ -66,17 +67,14 @@
                   Factures
                 </p>
               </div>
-              <div class="flex-shrink-0">
-                <h5 class="text-danger fs-14 mb-0">
-                  <i class="ri-arrow-right-down-line fs-13 align-middle"></i> -3.57 %
-                </h5>
-              </div>
             </div>
             <div class="d-flex align-items-end justify-content-between mt-4">
               <div>
-                <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                  <span class="counter-value" data-target="36894">0</span>
-                </h4>
+                <h2 class="fs-22 fw-semibold ff-secondary mb-4">
+                  <span class="counter-value" v-if="reports.counts">{{
+                    reports.counts.tickets
+                  }}</span>
+                </h2>
                 <a href="#" class="text-decoration-underline">Voir les détails</a>
               </div>
               <div class="avatar-sm flex-shrink-0">
@@ -102,17 +100,14 @@
                   Clients
                 </p>
               </div>
-              <div class="flex-shrink-0">
-                <h5 class="text-success fs-14 mb-0">
-                  <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +29.08 %
-                </h5>
-              </div>
             </div>
             <div class="d-flex align-items-end justify-content-between mt-4">
               <div>
-                <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                  <span class="counter-value" data-target="183.35">0</span>M
-                </h4>
+                <h2 class="fs-22 fw-semibold ff-secondary mb-4">
+                  <span v-if="reports.counts" class="counter-value">{{
+                    reports.counts.clients
+                  }}</span>
+                </h2>
                 <a href="#" class="text-decoration-underline">Voir les détails</a>
               </div>
               <div class="avatar-sm flex-shrink-0">
@@ -138,14 +133,14 @@
                   Le balance
                 </p>
               </div>
-              <div class="flex-shrink-0">
-                <h5 class="text-muted fs-14 mb-0">+0.00 %</h5>
-              </div>
             </div>
             <div class="d-flex align-items-end justify-content-between mt-4">
               <div>
                 <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                  $<span class="counter-value" data-target="165.89">0</span>k
+                  <span class="counter-value" v-if="reports.counts">{{
+                    reports.counts.balance
+                  }}</span>
+                  <small>CDF</small>
                 </h4>
                 <a href="#" class="text-decoration-underline">Voir les détails</a>
               </div>
@@ -178,9 +173,14 @@
           </div>
           <div class="card-body">
             <div>
-              <custom-table v-if="user.pharmacie" :api-url="`/pharmacie.reports/${user.pharmacie.id}`"
-                :columns="dataTableColumns" :action-buttons="actionButtons" :data-src="'reports'"
-                ref="customTableReports" />
+              <custom-table
+                v-if="user.pharmacie"
+                :api-url="`/pharmacie.reports/${user.pharmacie.id}`"
+                :columns="dataTableColumns"
+                :action-buttons="actionButtons"
+                :data-src="'reports'"
+                ref="customTableReports"
+              />
             </div>
           </div>
         </div>
@@ -221,8 +221,15 @@ export default {
       ],
     };
   },
-
+  beforeMount() {
+    setInterval(() => {
+      this.$store.dispatch("pharmacie/viewDailySellerReport", "admin");
+    }, 1000);
+  },
   computed: {
+    reports() {
+      return this.$store.getters["pharmacie/GET_SELLER_REPORTS"];
+    },
     user() {
       return this.$store.getters["auth/GET_USER"];
     },

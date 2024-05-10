@@ -5,7 +5,7 @@ import { post } from "@/http";
  * @returns Object state
  * */
 const states = {
-  user: {},
+  user: null,
 };
 
 /**
@@ -36,7 +36,7 @@ const actions = {
    * @param {*} form,
    * @returns HttpResponse
    * */
-  async login(context, form) {
+  async login({ dispatch }, form) {
     try {
       let { data, status } = await post("/login", form);
       if (status === 200) {
@@ -45,6 +45,7 @@ const actions = {
           localStorage.clear();
           localStorage.setItem("user-token", data.token);
           localStorage.setItem("user-data", JSON.stringify(data.user));
+          dispatch("refreshUser");
           return data;
         } else {
           return data.errors;

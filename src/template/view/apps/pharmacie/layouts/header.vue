@@ -293,35 +293,49 @@
                   alt="Header Avatar"
                 />
                 <span class="text-start ms-xl-2">
-                  <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"
-                    >Gaston delimond</span
-                  >
-                  <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text"
-                    >Vendeur</span
-                  >
+                  <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{
+                    user.name
+                  }}</span>
+                  <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">{{
+                    user.pharmacie_role
+                  }}</span>
                 </span>
               </span>
             </button>
-            <div class="dropdown-menu dropdown-menu-end">
+            <div class="dropdown-menu dropdown-menu-end" v-if="user !== null">
               <!-- item-->
-              <h6 class="dropdown-header">Bienvenu Gaston delimond</h6>
-              <a class="dropdown-item" href="pages-profile.html"
+              <h6 class="dropdown-header">Bienvenue {{ user.name }}!</h6>
+              <a class="dropdown-item" href="javascript:void(0)"
                 ><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>
                 <span class="align-middle">Profile</span></a
               >
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="pages-profile.html"
-                ><i class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i>
-                <span class="align-middle">Balance : <b>$5971.67</b></span></a
+              <a class="dropdown-item" href="javascript:void(0)"
+                ><i
+                  class="mdi mdi-wallet text-secondary-emphasis fs-16 align-middle me-1"
+                ></i>
+                <span class="align-middle"
+                  >Balance : <b v-if="reports.counts">{{ reports.counts.balance }}</b>
+                  <small><b>CDF</b></small></span
+                ></a
               >
 
-              <a class="dropdown-item" href="auth-lockscreen-basic.html"
+              <a
+                class="dropdown-item"
+                href="javascript:void(0)"
+                @click="$showBsModal('session-modal')"
                 ><i class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i>
-                <span class="align-middle">Verrouiller la session</span></a
+                <span class="align-middle">Fermeture de la session</span></a
               >
-              <a class="dropdown-item" href="auth-logout-basic.html"
+              <a
+                class="dropdown-item"
+                href="javascript:void(0)"
+                @click.prevent="
+                  $store.dispatch('auth/loggedOut');
+                  $router.push({ name: 'login' });
+                "
                 ><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
-                <span class="align-middle" data-key="t-logout">Deconnexion</span></a
+                <span class="align-middle" data-key="t-logout">Déconnexion</span></a
               >
             </div>
           </div>
@@ -400,7 +414,17 @@ export default {
     };
   },
 
+  beforeMount() {
+    this.$store.dispatch("auth/refreshUser");
+  },
+
   computed: {
+    user() {
+      return this.$store.getters["auth/GET_USER"];
+    },
+    reports() {
+      return this.$store.getters["pharmacie/GET_SELLER_REPORTS"];
+    },
     cart() {
       let cart = this.$store.getters["pharmacie/GET_CART"];
       return cart;

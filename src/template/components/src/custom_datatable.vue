@@ -1,6 +1,6 @@
 <template>
-  <table ref="dataTable" class="table table-bordered dt-responsive nowrap overflow-x-hidden table-striped align-middle"
-    style="width: 100%"></table>
+  <!--  dt-responsive nowrap overflow-x-hidden -->
+  <table ref="dataTable" class="table table-striped align-middle" style="width: 100%"></table>
 </template>
 
 <script>

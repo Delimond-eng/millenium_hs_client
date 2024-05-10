@@ -5,7 +5,9 @@
       <!-- start page title -->
       <div class="row">
         <div class="col-12">
-          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+          <div
+            class="page-title-box d-sm-flex align-items-center justify-content-between"
+          >
             <h4 class="mb-sm-0">Ventes des produits pharmaceutiques</h4>
 
             <div class="page-title-right">
@@ -36,8 +38,12 @@
                       </div>
                     </div>
                   </div>
-                  <div class="card-body overflow-auto" data-simplebar-auto-hide="false" data-simplebar
-                    style="height: 300px">
+                  <div
+                    class="card-body overflow-auto"
+                    data-simplebar-auto-hide="false"
+                    data-simplebar
+                    style="height: 300px"
+                  >
                     <div class="table-responsive table-card">
                       <table class="table table-borderless align-middle mb-0">
                         <thead class="table-light text-muted">
@@ -48,12 +54,16 @@
                           </tr>
                         </thead>
                         <tbody v-if="cart.length > 0">
-                          <tr class="border-bottom-dashed border" v-for="(data, i) in cart" :key="i">
+                          <tr
+                            class="border-bottom-dashed border"
+                            v-for="(data, i) in cart"
+                            :key="i"
+                          >
                             <td>
                               <h5 class="fs-14">
                                 <a href="javascript:void(0)" class="text-dark">{{
-                              data.produit_libelle
-                            }}</a>
+                                  data.produit_libelle
+                                }}</a>
                               </h5>
                               <div class="d-flex align-items-center">
                                 <p class="text-secondary mb-0 me-4 fw-bold">
@@ -61,16 +71,29 @@
                                   {{ data.operation_qte }}
                                 </p>
                                 <div class="input-step">
-                                  <button type="button" @click="
-                              data.operation_qte === 1
-                                ? (data.operation_qte = 1)
-                                : data.operation_qte--
-                              " class="minus">
+                                  <button
+                                    type="button"
+                                    @click="
+                                      data.operation_qte === 1
+                                        ? (data.operation_qte = 1)
+                                        : data.operation_qte--
+                                    "
+                                    class="minus"
+                                  >
                                     –
                                   </button>
-                                  <input type="number" class="product-quantity" v-model="data.operation_qte"
-                                    @input="checkQty($event, data)" min="0" />
-                                  <button type="button" class="plus" @click="data.operation_qte++">
+                                  <input
+                                    type="number"
+                                    class="product-quantity"
+                                    v-model="data.operation_qte"
+                                    @input="checkQty($event, data)"
+                                    min="0"
+                                  />
+                                  <button
+                                    type="button"
+                                    class="plus"
+                                    @click="data.operation_qte++"
+                                  >
                                     +
                                   </button>
                                 </div>
@@ -81,7 +104,10 @@
                               }}{{ data.produit_devise }}
                             </td>
                             <td>
-                              <button class="btn btn-soft-danger btn-sm text-end" @click="cart.splice(i, 1)">
+                              <button
+                                class="btn btn-soft-danger btn-sm text-end"
+                                @click="cart.splice(i, 1)"
+                              >
                                 <i class="ri-close-fill"></i>
                               </button>
                             </td>
@@ -89,14 +115,19 @@
                         </tbody>
 
                         <tbody v-else>
-                          <tr style="height: 200px"
-                            class="d-flex flex-column justify-content-center align-items-center">
+                          <tr
+                            style="height: 200px"
+                            class="d-flex flex-column justify-content-center align-items-center"
+                          >
                             <td>
                               <div
                                 class="text-center empty-cart w-100 d-flex flex-column justify-content-center align-items-center"
-                                id="empty-cart">
+                                id="empty-cart"
+                              >
                                 <div class="avatar-lg">
-                                  <div class="avatar-title bg-danger-subtle text-danger fs-36 rounded-circle">
+                                  <div
+                                    class="avatar-title bg-danger-subtle text-danger fs-36 rounded-circle"
+                                  >
                                     <i class="bx bx-cart"></i>
                                   </div>
                                 </div>
@@ -126,18 +157,47 @@
                     </div>
 
                     <div class="d-flex m-2" v-if="cart.length > 0">
-                      <button class="btn me-2 btn-info btn-lg" @click="$showBsModal('client-Modal')">
+                      <button
+                        class="btn me-2 btn-info btn-lg"
+                        @click="$showBsModal('client-Modal')"
+                      >
                         <i class="ri-user-add-line"></i> Client
                       </button>
-                      <button type="button" :disabled="sellLoading" class="btn btn-success btn-lg flex-fill"
-                        @click="makeSell">
-                        <svg width="22" v-if="sellLoading" fill="#FFFFFF" height="22" viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg">
+                      <button
+                        type="button"
+                        :disabled="sellLoading"
+                        class="btn me-2 btn-success btn-lg flex-fill"
+                        @click="makeSell"
+                      >
+                        <svg
+                          width="22"
+                          v-if="sellLoading"
+                          fill="#FFFFFF"
+                          height="22"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <circle class="spinner_S1WN" cx="4" cy="12" r="3" />
-                          <circle class="spinner_S1WN spinner_Km9P" cx="12" cy="12" r="3" />
-                          <circle class="spinner_S1WN spinner_JApP" cx="20" cy="12" r="3" />
+                          <circle
+                            class="spinner_S1WN spinner_Km9P"
+                            cx="12"
+                            cy="12"
+                            r="3"
+                          />
+                          <circle
+                            class="spinner_S1WN spinner_JApP"
+                            cx="20"
+                            cy="12"
+                            r="3"
+                          />
                         </svg>
                         <i v-else class="ri-check-double-line"></i> Valider le paiement
+                      </button>
+                      <button
+                        class="btn me-2 btn-dark btn-lg"
+                        @click="$store.dispatch('pharmacie/cancelCart')"
+                      >
+                        <i class="ri-close-line"></i> Annuler
                       </button>
                     </div>
                   </div>
@@ -159,8 +219,14 @@
               <div class="row g-2">
                 <div class="col-xl-3">
                   <div class="search-box">
-                    <input type="text" class="form-control" autocomplete="off" id="searchResultList"
-                      placeholder="Recherchez produit" v-model="filter_1" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      autocomplete="off"
+                      id="searchResultList"
+                      placeholder="Recherchez produit"
+                      v-model="filter_1"
+                    />
                     <i class="ri-search-line search-icon"></i>
                   </div>
                 </div>
@@ -170,7 +236,11 @@
                     <select class="form-control" v-model="filter_2" id="category-select">
                       <option value="" hidden selected>Filtrez par catégorie...</option>
                       <option value="">Tout</option>
-                      <option v-for="(data, index) in categories" :key="index" :value="data.id">
+                      <option
+                        v-for="(data, index) in categories"
+                        :key="index"
+                        :value="data.id"
+                      >
                         {{ data.categorie_libelle }}
                       </option>
                     </select>
@@ -188,31 +258,48 @@
               </div>
               <!--end row-->
             </div>
-            <div class="card-body overflow-auto" data-simplebar-auto-hide="false" data-simplebar v-if="!dataLoading">
+            <div
+              class="card-body overflow-auto"
+              data-simplebar-auto-hide="false"
+              data-simplebar
+              v-if="!dataLoading"
+            >
               <div class="row g-2 mb-4">
                 <div class="col-md-3" v-for="(item, index) in products" :key="index">
-                  <div @click="$store.dispatch('pharmacie/addToCart', item)"
+                  <div
+                    @click="$store.dispatch('pharmacie/addToCart', item)"
                     class="d-flex rounded-2 p-1 cursor-pointer align-items-center card-animate"
-                    style="border: 1px solid #dde0e4">
-                    <img src="assets/images/companies/medic.png" alt="" class="img-fluid d-block"
-                      style="height: 50px" />
+                    style="border: 1px solid #dde0e4"
+                  >
+                    <img
+                      src="assets/images/companies/medic.png"
+                      alt=""
+                      class="img-fluid d-block"
+                      style="height: 50px"
+                    />
                     <div class="flex-grow-1 text-start ms-2">
                       <h5 class="fs-15 text-primary">
                         <span v-if="item.produit">{{
-                              item.produit.produit_libelle
-                            }}</span>
+                          item.produit.produit_libelle
+                        }}</span>
                       </h5>
-                      <span class="text-muted fs-10 mb-2"><span v-if="item.produit.categorie">{{
-                              item.produit.categorie.categorie_libelle
-                            }}</span></span><br />
+                      <span class="text-muted fs-10 mb-2"
+                        ><span v-if="item.produit.categorie">{{
+                          item.produit.categorie.categorie_libelle
+                        }}</span></span
+                      ><br />
                       <span class="text-dark fw-bold mb-0">
-                        {{ item.produit_prix }} {{ item.produit_prix_devise }}</span>
+                        {{ item.produit_prix }} {{ item.produit_prix_devise }}</span
+                      >
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div v-else class="card-body d-flex justify-content-center align-items-center">
+            <div
+              v-else
+              class="card-body d-flex justify-content-center align-items-center"
+            >
               <div class="h-75 m-5">
                 <loader />
               </div>
@@ -245,6 +332,20 @@ export default {
       filter_2: "",
       sellLoading: false,
     };
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.$nextTick(() => {
+        vm.$store.dispatch("auth/refreshUser");
+        let session = localStorage.getItem("pharmacist-session");
+        if (session === null) {
+          var sessionModal = new bootstrap.Modal(
+            document.getElementById("session-modal")
+          );
+          sessionModal.show();
+        }
+      });
+    });
   },
 
   methods: {

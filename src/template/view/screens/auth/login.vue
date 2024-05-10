@@ -30,10 +30,9 @@
                                     </svg>
                                     <h1 class="text-white text-uppercase fw-bold mx-2">Millenium HS</h1> -->
                                     <img src="assets/logo-2.png" class="card-logo card-logo-dark" alt="logo dark"
-                                        height="70">
+                                        height="70" />
                                 </a>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -42,18 +41,17 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="card mt-2">
-
                             <div class="card-body p-4">
                                 <div class="text-center">
-                                    <img src="assets/images/companies/user.png" style="height:70px" class="mb-1" alt="">
-
+                                    <img src="assets/images/companies/user.png" style="height: 70px" class="mb-1"
+                                        alt="" />
                                 </div>
                                 <div class="p-2">
                                     <form @submit.prevent="loggedIn">
                                         <div class="mb-2">
                                             <label for="username" class="form-label">Identifiant </label>
                                             <input type="text" class="form-control" id="username" v-model="form.email"
-                                                placeholder="Entrer identifiant utilisateur" required>
+                                                placeholder="Entrer identifiant utilisateur" required />
                                         </div>
 
                                         <div class="mb-2">
@@ -64,12 +62,13 @@
                                             <div class="position-relative auth-pass-inputgroup mb-2">
                                                 <input :type="inputType" class="form-control pe-5 password-input"
                                                     placeholder="Entrer mot de passe" id="password-input"
-                                                    v-model="form.password" required>
+                                                    v-model="form.password" required />
                                                 <button
                                                     class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
                                                     type="button" id="password-addon" @mousedown="inputType = 'text'"
                                                     @mouseup="inputType = 'password'">
-                                                    <i v-if="inputType === 'password'" class="ri-eye-fill align-middle"></i>
+                                                    <i v-if="inputType === 'password'"
+                                                        class="ri-eye-fill align-middle"></i>
                                                     <i v-else class="ri-eye-off-fill align-middle"></i>
                                                 </button>
                                             </div>
@@ -81,8 +80,9 @@
                                                 <span class="text-uppercase fw-semibold">Connecter</span></load-button>
                                             <button type="button"
                                                 class="btn btn-primary btn-border w-100 mt-2 text-uppercase"
-                                                @click.prevent="$showBsModal('hostoCreateModal')">Création
-                                                hôpital</button>
+                                                @click.prevent="$showBsModal('hostoCreateModal')">
+                                                Création hôpital
+                                            </button>
                                         </div>
                                         <div id="borderedToast4"
                                             class="toast toast-border-danger overflow-hidden w-100 mt-2" role="alert"
@@ -92,11 +92,10 @@
                                                     <div class="flex-shrink-0 me-2">
                                                         <lord-icon src="https://cdn.lordicon.com/tdrtiskw.json"
                                                             trigger="loop" colors="primary:#f06548,secondary:#F7704B"
-                                                            style="width:30px;height:30px"></lord-icon>
+                                                            style="width: 30px; height: 30px"></lord-icon>
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                        <h6 class="mb-0">Identifiant ou mot de passe invalide !
-                                                        </h6>
+                                                        <h6 class="mb-0">Identifiant ou mot de passe invalide !</h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -114,64 +113,51 @@
             <!-- end container -->
         </div>
         <!-- end auth page content -->
-
-        <!-- footer -->
-        <!--  <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center">
-                            <p class="mb-0 text-muted">&copy;
-                                Powered by Millenium Horizon
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer> -->
-        <!-- end Footer -->
     </div>
     <hosto-create-modal />
 </template>
 
 <script>
-import HostoCreateModal from './modals/create-hospital-modal'
+import HostoCreateModal from "./modals/create-hospital-modal";
 export default {
-    name: 'Login',
+    name: "Login",
     components: {
-        HostoCreateModal
+        HostoCreateModal,
     },
     data() {
         return {
             form: {
-                email: '',
-                password: ''
+                email: "",
+                password: "",
             },
-            inputType: 'password',
-            formLoading: false
-        }
+            inputType: "password",
+            formLoading: false,
+        };
     },
-
 
     methods: {
         loggedIn(e) {
             this.formLoading = true;
-            this.$store.dispatch('auth/login', this.form)
+            this.$store
+                .dispatch("auth/login", this.form)
                 .then((res) => {
                     this.formLoading = false;
                     if (res !== null) {
-                        this.$router.push({ name: 'home' });
-                    }
-                    else {
-                        let toast = document.getElementById("borderedToast4")
+                        if (res.user.pharmacie_role === "Vendeur") {
+                            this.$router.push({ name: "seller-home-route" });
+                        } else {
+                            this.$router.push({ name: "home" });
+                        }
+                    } else {
+                        let toast = document.getElementById("borderedToast4");
                         new bootstrap.Toast(toast, { delay: 1000 }).show();
                     }
                 })
                 .catch((err) => {
                     console.log(err);
                     this.formLoading = false;
-                })
-        }
+                });
+        },
     },
-}
+};
 </script>

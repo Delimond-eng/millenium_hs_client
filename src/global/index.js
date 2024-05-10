@@ -19,6 +19,7 @@ export default {
     };
 
     app.config.globalProperties.$isAccessMenu = (menuName) => {
+      store.dispatch("auth/refreshUser");
       let user = store.getters["auth/GET_USER"];
       let myList = [];
       console.log("user menus", user.menus);

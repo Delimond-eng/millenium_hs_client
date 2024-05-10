@@ -11,22 +11,27 @@
 
     <footer-layout />
   </div>
+  <pharmacist-session-modal />
 </template>
 
 <script>
 import HeaderLayout from "./layouts/header.vue";
 import FooterLayout from "./layouts/footer.vue";
+import PharmacistSessionModal from "./modals/session_modal";
 export default {
   name: "SellerHome",
   components: {
     HeaderLayout,
     FooterLayout,
+    PharmacistSessionModal,
   },
-  mounted() {
-    this.addAttributes();
+  beforeMount() {
     this.$store.dispatch("pharmacie/viewPharmacieProducts");
     this.$store.dispatch("pharmacie/viewAllCategories");
     this.$store.dispatch("pharmacie/viewDailySellerReport");
+  },
+  mounted() {
+    this.addAttributes();
   },
   unmounted() {
     this.removeAttributes();
