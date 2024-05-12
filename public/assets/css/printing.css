@@ -19,4 +19,8 @@
     .print-section * {
         visibility: visible;
     }
+
+    #aitopia-sidebar-opener {
+        display: none;
+    }
 }

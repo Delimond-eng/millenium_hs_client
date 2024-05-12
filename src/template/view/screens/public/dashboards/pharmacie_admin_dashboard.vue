@@ -7,12 +7,11 @@
             <div class="flex-grow-1">
               <h4 class="fs-16 mb-1 fw-bold">
                 Bienvenue <br />
-                <small v-if="user !== null" class="text-uppercase"
-                  ><span v-if="user.role" class="text-secondary-emphasis">{{
-                    user.role.role
-                  }}</span>
-                  {{ user.name }}</small
-                >
+                <small v-if="user !== null" class="text-uppercase"><span v-if="user.role"
+                    class="text-secondary-emphasis">{{
+                  user.role.role
+                }}</span>
+                  {{ user.name }}</small>
               </h4>
               <p class="text-muted mb-0">
                 Votre tableau de bord pour vous guider à bien travailler.
@@ -37,16 +36,14 @@
               <div>
                 <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                   <span class="counter-value" v-if="reports.counts">{{
-                    reports.counts.abort_sells
-                  }}</span>
+                  `${reports.counts.abort_sells}`.padStart(2, "0")
+                }}</span>
                 </h4>
-                <a href="javascript:void(0)" class="text-decoration-underline"
-                  >Voir les détails</a
-                >
+                <a href="javascript:void(0)" class="text-decoration-underline">Voir les détails</a>
               </div>
               <div class="avatar-sm flex-shrink-0">
-                <span class="avatar-title bg-success-subtle rounded fs-3">
-                  <i class="bx bx-dollar-circle text-success"></i>
+                <span class="avatar-title bg-warning-subtle rounded fs-3">
+                  <i class="ri-error-warning-line text-warning"></i>
                 </span>
               </div>
             </div>
@@ -72,8 +69,8 @@
               <div>
                 <h2 class="fs-22 fw-semibold ff-secondary mb-4">
                   <span class="counter-value" v-if="reports.counts">{{
-                    reports.counts.tickets
-                  }}</span>
+                  `${reports.counts.tickets}`.padStart(2, "0")
+                }}</span>
                 </h2>
                 <a href="#" class="text-decoration-underline">Voir les détails</a>
               </div>
@@ -105,8 +102,8 @@
               <div>
                 <h2 class="fs-22 fw-semibold ff-secondary mb-4">
                   <span v-if="reports.counts" class="counter-value">{{
-                    reports.counts.clients
-                  }}</span>
+                  `${reports.counts.clients}`.padStart(2, "0")
+                }}</span>
                 </h2>
                 <a href="#" class="text-decoration-underline">Voir les détails</a>
               </div>
@@ -138,9 +135,9 @@
               <div>
                 <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                   <span class="counter-value" v-if="reports.counts">{{
-                    reports.counts.balance
-                  }}</span>
-                  <small>CDF</small>
+                  `${reports.counts.balance}`.padStart(2, "0")
+                }}</span>
+                  <small v-if="reports.counts">CDF</small>
                 </h4>
                 <a href="#" class="text-decoration-underline">Voir les détails</a>
               </div>
@@ -173,14 +170,9 @@
           </div>
           <div class="card-body">
             <div>
-              <custom-table
-                v-if="user.pharmacie"
-                :api-url="`/pharmacie.reports/${user.pharmacie.id}`"
-                :columns="dataTableColumns"
-                :action-buttons="actionButtons"
-                :data-src="'reports'"
-                ref="customTableReports"
-              />
+              <custom-table v-if="user.pharmacie" :api-url="`/pharmacie.reports/${user.pharmacie.id}`"
+                :columns="dataTableColumns" :action-buttons="actionButtons" :data-src="'reports'"
+                ref="customTableReports" />
             </div>
           </div>
         </div>
@@ -198,6 +190,7 @@ export default {
 
   data() {
     return {
+      timer: null,
       dataTableColumns: [
         { data: "produit.produit_code", title: "CODE" },
         { data: "produit.produit_libelle", title: "PRODUIT" },
@@ -221,10 +214,15 @@ export default {
       ],
     };
   },
-  beforeMount() {
-    setInterval(() => {
-      this.$store.dispatch("pharmacie/viewDailySellerReport", "admin");
-    }, 1000);
+  unmounted() {
+    clearInterval(this.timer);
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.timer = setInterval(() => {
+        this.$store.dispatch("pharmacie/viewDailySellerReport", "admin");
+      }, 2000);
+    });
   },
   computed: {
     reports() {

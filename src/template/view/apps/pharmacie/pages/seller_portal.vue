@@ -92,7 +92,7 @@
                                   <button
                                     type="button"
                                     class="plus"
-                                    @click="data.operation_qte++"
+                                    @click="cartIncrease(data)"
                                   >
                                     +
                                   </button>
@@ -311,12 +311,14 @@
     </div>
     <!-- container-fluid -->
   </div>
+  <ticket-invoice :item="invoice" />
   <client-modal />
 </template>
 
 <script>
 import ClientModal from "../modals/client_create_modal.vue";
 import NumericPad from "../components/numeric_pad.vue";
+import TicketInvoice from "../invoices/ticket_invoice.vue";
 import "../assets/css/style.css";
 export default {
   name: "Home",
@@ -324,6 +326,7 @@ export default {
   components: {
     ClientModal,
     NumericPad,
+    TicketInvoice,
   },
 
   data() {
@@ -331,6 +334,7 @@ export default {
       filter_1: "",
       filter_2: "",
       sellLoading: false,
+      invoice: {},
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -374,18 +378,40 @@ export default {
               text: res.errors.toString(),
             });
             return;
-          } else if (res.status !== undefined) {
-            Swal.fire({
-              icon: "success",
-              title: "Vente effectuée !",
-              text: "Nouvelle vente effectuée avec succès !",
-              timer: 3000,
-              showCancelButton: false,
-              showConfirmButton: false,
+          }
+          if (res.status !== undefined) {
+            this.invoice = res.invoice;
+            this.$nextTick(() => {
+              window.print();
             });
+            setTimeout(() => {
+              Swal.fire({
+                icon: "success",
+                title: "Vente effectuée !",
+                text: "Nouvelle vente effectuée avec succès !",
+                timer: 3000,
+                showCancelButton: false,
+                showConfirmButton: false,
+              });
+              this.$store.dispatch("pharmacie/viewPharmacieProducts");
+              this.$store.dispatch("pharmacie/viewDailySellerReport");
+            }, 500);
           }
         })
         .catch((err) => (this.sellLoading = false));
+    },
+
+    cartIncrease(data) {
+      data.operation_qte++;
+      let inputQte = parseInt(data.operation_qte);
+      if (inputQte > data.produit_stocks) {
+        data.operation_qte = data.produit_stocks;
+        Swal({
+          icon: "warning",
+          title: "Avertissement de stock !",
+          text: `le stock actuel pour ce produit est de ${data.produit_stocks} unités !`,
+        });
+      }
     },
   },
 

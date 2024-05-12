@@ -363,19 +363,13 @@ export default {
         client_id: client ? client.id : null,
         created_by: created_by,
       };
-
-      console.log(JSON.stringify(form));
-
       // Envoi des données au serveur
       const { data, status } = await post("/pharmacie.sell", form);
-
       // Gestion de la réponse du serveur
       if (status === 200) {
         // Effacer le panier et les données client actuelles
         state.cart = [];
         state.client = null;
-        dispatch("viewPharmacieProducts");
-        dispatch("viewDailySellerReport");
         return data;
       } else {
         return null;
@@ -397,7 +391,7 @@ export default {
         role === undefined
           ? await get(`/pharmacie.seller.reports/${pharmacie_id}/${created_by}`)
           : await get(
-              `/pharmacie.seller.reports/${pharmacie_id}/${created_by}/${role}`
+              `/pharmacie.seller.reports/${pharmacie_id}/${created_by}?role=${role}`
             );
       if (status === 200) {
         commit("SET_SELLER_REPORTS", data);
@@ -413,7 +407,12 @@ export default {
   //Suppression ou annulation d'une vente deja effectué
   async deleteSell({ dispatch }, payload) {
     try {
-      let { data, status } = await get(`/pharmacie.sell.delete/${payload}`);
+      let { data, status } =
+        payload.table !== undefined
+          ? await get(`/pharmacie.sell.delete/${payload.id}/${payload.table}`)
+          : await get(`/pharmacie.sell.delete/${payload.id}`);
+
+      console.log(JSON.stringify(data));
       if (status === 200) {
         dispatch("viewDailySellerReport");
         dispatch("viewPharmacieProducts");
