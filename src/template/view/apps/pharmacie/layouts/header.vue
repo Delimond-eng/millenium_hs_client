@@ -255,6 +255,7 @@
 
                 <button
                   type="button"
+                  v-if="cart.length > 0"
                   :disabled="sellLoading"
                   class="btn btn-success btn-lg w-100"
                   @click="makeSell"

@@ -237,7 +237,7 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch("pharmacie/allConfigs");
+    this.$store.dispatch("pharmacie/showConfigs");
   },
 
   computed: {

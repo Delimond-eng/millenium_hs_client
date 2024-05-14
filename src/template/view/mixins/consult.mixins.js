@@ -40,11 +40,19 @@ export default {
     };
   },
 
-  async mounted() {
-    this.$nextTick(() => {
-      this.$showBsModal("patientsPendingModal");
-    });
+  mounted() {
     this.$store.dispatch("services/viewAllExamens");
+  },
+
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.$nextTick(() => {
+        var patientPendingModal = new bootstrap.Modal(
+          document.getElementById("patientsPendingModal")
+        );
+        patientPendingModal.show();
+      });
+    });
   },
 
   unmounted() {

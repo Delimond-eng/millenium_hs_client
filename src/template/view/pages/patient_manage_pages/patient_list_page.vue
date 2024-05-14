@@ -117,6 +117,11 @@ export default {
           class: "btn-secondary me-1",
           key: "edit",
         },
+        {
+          label: '<i class="ri-time-line me-1"></i>Nouvelle visite',
+          class: "btn-success me-1",
+          key: "new",
+        },
         { label: "Imprimer carte", class: "btn-outline-secondary me-1", key: "print" },
         {
           label: '<i class="ri-delete-bin-3-line"></i>',
@@ -140,6 +145,7 @@ export default {
       ],
       actionButtons2: [
         { label: "Voir signes vitaux", class: "btn-secondary me-1", key: "view" },
+        { label: "Consulter", class: "btn-info me-1", key: "consult" },
         {
           label: '<i class="ri-delete-bin-3-line"></i>',
           class: "btn-soft-danger me-1",

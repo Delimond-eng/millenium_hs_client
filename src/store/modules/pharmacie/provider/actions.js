@@ -26,11 +26,13 @@ export default {
   async allConfigs({ commit }) {
     let user = JSON.parse(localStorage.getItem("user-data"));
     let hopital_id = user.hopital.id;
-    let pharmacie_id = user.pharmacie.id;
+    let pharmacie_id =
+      user.pharmacie !== undefined ? user.pharmacie.id : undefined;
     try {
-      let { data, status } = await get(
-        `/pharmacie.config.all/${hopital_id}/${pharmacie_id}`
-      );
+      let { data, status } =
+        pharmacie_id === undefined
+          ? await get(`/pharmacie.config.all/${hopital_id}`)
+          : await get(`/pharmacie.config.all/${hopital_id}/${pharmacie_id}`);
       if (status === 200) {
         commit("SET_CONFIG", data.datas);
         return data.datas;

@@ -9,8 +9,10 @@
                                 <h4 class="fs-16 mb-1 fw-bold">
                                     Bienvenue <br />
                                     <small class="text-uppercase"><span v-if="user.role"
-                                            class="text-secondary-emphasis">{{ user.role.role
-                                            }}</span> {{ user.name }}</small>
+                                            class="text-secondary-emphasis">{{
+                                        user.role.role
+                                    }}</span>
+                                        {{ user.name }}</small>
                                 </h4>
                                 <p class="text-muted mb-0">
                                     Votre tableau de bord pour vous guider à bien travailler.
@@ -94,8 +96,8 @@
                                 aria-controls="patient-pending-tab" aria-selected="false">
                                 Patients en attente
                                 <span class="badge bg-danger align-middle ms-1">{{
-                                            pendings.length
-                                        }}</span>
+                                    pendings.length
+                                    }}</span>
                             </button>
                         </li>
 
@@ -104,12 +106,12 @@
                                 type="button" role="tab" aria-controls="rdv" aria-selected="false">
                                 Rendez-vous journaliers
                                 <span class="badge bg-danger align-middle ms-1">{{
-                                            schedules.length
-                                        }}</span>
+                                    schedules.length
+                                    }}</span>
                             </button>
                         </li>
 
-                        <li class="nav-item" role="presentation">
+                        <!-- <li class="nav-item" role="presentation">
                             <button class="nav-link p-3" id="prescription_tab-btn" data-bs-toggle="pill"
                                 data-bs-target="#prescription-tab" type="button" role="tab"
                                 aria-controls="pills-bill-address" aria-selected="false">
@@ -117,7 +119,7 @@
                                             prescriptions.length
                                         }}</span>
                             </button>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
 
@@ -127,7 +129,7 @@
                             <pending-examens-tab></pending-examens-tab>
                             <pending-patients-tab></pending-patients-tab>
                             <schedules-tab></schedules-tab>
-                            <pending-prescriptions-tab></pending-prescriptions-tab>
+                            <!-- <pending-prescriptions-tab></pending-prescriptions-tab> -->
                         </div>
                     </div>
                 </div>

@@ -9,20 +9,22 @@ export default {
       : "http://127.0.0.1:8000/api";
     app.config.globalProperties.$hasPermission = (key) => {
       let user = store.getters["auth/GET_USER"];
-      if (
-        user.role.role.toLocaleLowerCase().includes(key.toLocaleLowerCase())
-      ) {
-        return true;
-      } else {
-        return false;
+      if (user) {
+        if (
+          user.role.role.toLocaleLowerCase().includes(key.toLocaleLowerCase())
+        ) {
+          return true;
+        } else {
+          return false;
+        }
       }
+      return false;
     };
 
     app.config.globalProperties.$isAccessMenu = (menuName) => {
       store.dispatch("auth/refreshUser");
       let user = store.getters["auth/GET_USER"];
       let myList = [];
-      console.log("user menus", user.menus);
       if (user.menus !== undefined) {
         myList = user.menus.split(",");
       }

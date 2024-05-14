@@ -2,7 +2,8 @@
     <div class="tab-pane fade active show" id="custom-v-pills-home" role="tabpanel"
         aria-labelledby="custom-v-pills-home-tab">
         <div>
-            <div class="d-flex justify-content-between mt-3 align-items-center align-content-center" v-if="selectedPatient">
+            <div class="d-flex justify-content-between mt-3 align-items-center align-content-center"
+                v-if="selectedPatient">
                 <h6 class="fs-14 text-primary fw-bold">Infos récentes du patient</h6>
                 <!-- <button class="btn btn-info btn-border btn-sm"> <i
                                                                 class="ri-folder-5-line "></i> Voir le parcours du
@@ -10,8 +11,8 @@
                 <div class="d-flex align-content-end align-items-center" v-if="selectedPatient">
                     <span class="me-1">N° Jeton :</span>
                     <span class="fw-bold text-primary fs-17">{{
-                        selectedPatient.patient_code_appel
-                    }}</span>
+                    selectedPatient.patient_code_appel
+                }}</span>
                 </div>
             </div>
             <div class="border-1 border-bottom mb-2" v-if="selectedPatient"></div>
@@ -35,6 +36,10 @@
                                     <td>{{ selectedPatient.patient_telephone }}</td>
                                 </tr>
                                 <tr>
+                                    <th scope="row">Contact d'urgence</th>
+                                    <td>{{ selectedPatient.patient_contact_urgence }}</td>
+                                </tr>
+                                <tr>
                                     <th scope="row">Adresse</th>
                                     <td>{{ selectedPatient.patient_adresse }}</td>
                                 </tr>
@@ -50,9 +55,9 @@
                                     <th scope="row">Age</th>
                                     <td>
                                         {{
-                                            selectedPatient.details[selectedPatient.details.length - 1]
-                                                .patient_sv_age
-                                        }}
+                    selectedPatient.details[selectedPatient.details.length - 1]
+                        .patient_sv_age
+                }}
                                         ans
                                     </td>
                                 </tr>
@@ -60,13 +65,13 @@
                                     <th scope="row">Taille</th>
                                     <td>
                                         {{
-                                            selectedPatient.details[selectedPatient.details.length - 1]
-                                                .patient_sv_taille
-                                        }}
+                        selectedPatient.details[selectedPatient.details.length - 1]
+                            .patient_sv_taille
+                    }}
                                         {{
-                                            selectedPatient.details[selectedPatient.details.length - 1]
-                                                .patient_sv_taille_unite
-                                        }}
+                        selectedPatient.details[selectedPatient.details.length - 1]
+                            .patient_sv_taille_unite
+                    }}
                                     </td>
                                 </tr>
 
@@ -74,13 +79,13 @@
                                     <th scope="row">Poids</th>
                                     <td>
                                         {{
-                                            selectedPatient.details[selectedPatient.details.length - 1]
-                                                .patient_sv_poids
-                                        }}
+                        selectedPatient.details[selectedPatient.details.length - 1]
+                            .patient_sv_poids
+                    }}
                                         {{
-                                            selectedPatient.details[selectedPatient.details.length - 1]
-                                                .patient_sv_poids_unite
-                                        }}
+                        selectedPatient.details[selectedPatient.details.length - 1]
+                            .patient_sv_poids_unite
+                    }}
                                     </td>
                                 </tr>
 
@@ -88,25 +93,25 @@
                                     <th scope="row">Temperature</th>
                                     <td>
                                         {{
-                                            selectedPatient.details[selectedPatient.details.length - 1]
-                                                .patient_sv_temperature
-                                        }}
+                        selectedPatient.details[selectedPatient.details.length - 1]
+                            .patient_sv_temperature
+                    }}
                                         {{
-                                            selectedPatient.details[selectedPatient.details.length - 1]
-                                                .patient_sv_temperature_unite
-                                        }}
+                        selectedPatient.details[selectedPatient.details.length - 1]
+                            .patient_sv_temperature_unite
+                    }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Tension arterielle</th>
                                     <td>
                                         {{
-                                            selectedPatient.details[selectedPatient.details.length - 1]
-                                                .patient_sv_tension_art
-                                        }}
+                        selectedPatient.details[selectedPatient.details.length - 1]
+                            .patient_sv_tension_art
+                    }}
                                         {{
-                                            selectedPatient.details[selectedPatient.details.length - 1]
-                                                .patient_sv_tension_art_unite
+                        selectedPatient.details[selectedPatient.details.length - 1]
+                                        .patient_sv_tension_art_unite
                                         }}
                                     </td>
                                 </tr>
@@ -115,12 +120,12 @@
                                     <th scope="row">Fréquence cardiaque</th>
                                     <td>
                                         {{
-                                            selectedPatient.details[selectedPatient.details.length - 1]
-                                                .patient_sv_freq_cardio
+                                        selectedPatient.details[selectedPatient.details.length - 1]
+                                        .patient_sv_freq_cardio
                                         }}
                                         {{
-                                            selectedPatient.details[selectedPatient.details.length - 1]
-                                                .patient_sv_freq_cardio_unite
+                                        selectedPatient.details[selectedPatient.details.length - 1]
+                                        .patient_sv_freq_cardio_unite
                                         }}
                                     </td>
                                 </tr>
