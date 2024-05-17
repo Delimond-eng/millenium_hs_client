@@ -219,6 +219,9 @@ export default {
     submitFormPrescriptions(e, isPrintOnly = false) {
       if (this.latestPrescription.length > 0) {
         $("#examens-tab").click();
+        if (this.isPrinted) {
+          window.print();
+        }
         return;
       }
       if (this.currentConsult === null) {
@@ -259,6 +262,7 @@ export default {
                 timer: 3000,
                 showCloseButton: false,
               });
+              this.$store.dispatch("services/viewPatientDoc", this.selectedPatient.id);
               if (this.latestPrescription) {
                 $("#examens-tab").click();
               }

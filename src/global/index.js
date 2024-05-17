@@ -25,15 +25,18 @@ export default {
       store.dispatch("auth/refreshUser");
       let user = store.getters["auth/GET_USER"];
       let myList = [];
-      if (user.menus !== undefined) {
-        myList = user.menus.split(",");
+      if (user !== null) {
+        if (user.menus !== undefined) {
+          myList = user.menus.split(",");
+        }
+        let searchString = menuName.toLowerCase();
+        if (myList.find((item) => item.toLowerCase().includes(searchString))) {
+          return true;
+        } else {
+          return false;
+        }
       }
-      let searchString = menuName.toLowerCase();
-      if (myList.find((item) => item.toLowerCase().includes(searchString))) {
-        return true;
-      } else {
-        return false;
-      }
+      return false;
     };
     app.config.globalProperties.$user = () => store.getters["auth/GET_USER"];
 

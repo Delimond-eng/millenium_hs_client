@@ -33,6 +33,7 @@ export default {
       symptomes: [
         {
           libelle: "",
+          is_other: false,
         },
       ],
 
@@ -42,16 +43,10 @@ export default {
 
   mounted() {
     this.$store.dispatch("services/viewAllExamens");
-  },
-
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      vm.$nextTick(() => {
-        var patientPendingModal = new bootstrap.Modal(
-          document.getElementById("patientsPendingModal")
-        );
-        patientPendingModal.show();
-      });
+    this.$nextTick(() => {
+      if (this.selectedPatient) {
+        this.$store.dispatch("services/viewMedicDocs", this.selectedPatient.id);
+      }
     });
   },
 
@@ -116,6 +111,10 @@ export default {
               showCloseButton: false,
             });
             this.currentConsult = res.consultation;
+            this.$store.dispatch(
+              "services/viewPatientDoc",
+              this.selectedPatient.id
+            );
             $("#prescriptions-tab").click();
           }
           if (res.errors !== undefined) {

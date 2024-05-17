@@ -1,7 +1,7 @@
 <template>
     <teleport to="body">
         <div id="patientsPendingModal" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content border-0 overflow-hidden">
                     <div class="modal-body login-modal p-4">
                         <h5 class="text-white fs-20">Patients en attente</h5>
@@ -86,6 +86,7 @@ export default {
                     .dispatch("services/showPatient", data.id)
                     .then((result) => {
                         this.id = "";
+                        this.$store.dispatch("services/viewMedicDocs", result.id);
                         this.$emit("onSelect", result);
                         this.$closeBsModal("patientsPendingModal");
                     })

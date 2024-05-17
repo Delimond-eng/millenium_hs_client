@@ -83,6 +83,10 @@ export default {
                             showCloseButton: false,
                         });
                         this.$store.dispatch("services/viewAllConsultsExamens");
+                        this.$store.dispatch(
+                            "services/viewPatientDoc",
+                            this.selectedPatient.id
+                        );
                     }
                     if (res.errors !== undefined) {
                         this.errors_msg = res.errors.toString();

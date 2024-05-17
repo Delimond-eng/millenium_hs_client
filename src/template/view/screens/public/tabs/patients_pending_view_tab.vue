@@ -2,9 +2,10 @@
     <div class="tab-pane fade" id="patient-pending" role="tabpanel">
         <div class="row">
             <div class="col-md-12">
-                <custom-table v-if="isEmplacementDefined" :api-url="`/patients.pending/${$user().hopital.emplacement.id}`"
-                    :columns="dataTableColumns" :data-src="'patients'" ref="customTablePatients2"
-                    :action-buttons="actionButtons" @actionButtonClick="handleActionButtonClick" />
+                <custom-table v-if="isEmplacementDefined"
+                    :api-url="`/patients.pending/${$user().hopital.emplacement.id}`" :columns="dataTableColumns"
+                    :data-src="'patients'" ref="customTablePatients2" :action-buttons="actionButtons"
+                    @actionButtonClick="handleActionButtonClick" />
             </div>
         </div>
     </div>
@@ -37,6 +38,12 @@ export default {
                 { data: "patient_telephone", title: "Téléphone" },
             ],
             actionButtons: [
+                {
+                    label: "Consulter",
+                    class: "btn-success me-1",
+                    key: "consult",
+                    tooltip: "Consultation du patient !",
+                },
                 {
                     label: "Voir signes vitaux",
                     class: "btn-secondary me-1",

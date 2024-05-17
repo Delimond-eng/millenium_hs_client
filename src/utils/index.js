@@ -14,3 +14,9 @@ export function calculateAge(dateNaissance) {
   }
   return age;
 }
+
+export function dateConvertor(dateString) {
+  const [day, month, year] = dateString.split("/");
+  const jsDate = new Date(year, month - 1, day);
+  return jsDate;
+}

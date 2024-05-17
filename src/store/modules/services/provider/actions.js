@@ -145,6 +145,7 @@ export default {
    * @returns HttpResponse
    */
   async createPatient(context, form) {
+    console.log(JSON.stringify(form));
     let user = JSON.parse(localStorage.getItem("user-data"));
     let hostoId = user.hopital.id;
     let locationId = user.hopital.emplacement.id;
@@ -395,6 +396,29 @@ export default {
     try {
       let { data, status } = await post("/configs.facturations", form);
       if (status === 200) {
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  },
+
+  /**
+   * View patient medical Docs
+   * @param patientId
+   * @return HttpResponse
+   */
+  async viewMedicDocs({ commit }, patientID) {
+    let user = JSON.parse(localStorage.getItem("user-data"));
+    let hopitalID = user.hopital.id;
+    try {
+      let { data, status } = await get(
+        `/medical.docs/${patientID}/${hopitalID}`
+      );
+      if (status === 200) {
+        commit("SET_PATIENT_DOCS", data.dossiers);
         return data;
       } else {
         return null;

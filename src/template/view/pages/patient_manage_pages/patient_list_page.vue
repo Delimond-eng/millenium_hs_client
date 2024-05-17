@@ -81,15 +81,18 @@
   </div>
   <patient-card-print :data="selectedPatient" />
   <signe-vitaux-modal :detail="signes" />
+  <patient-visite-modal-create :patient="selectedPatient" @on-refresh="$refs.customTablePatients2.reloadData()" />
 </template>
 <script>
 import PatientCardPrint from "../invoices/patient_medical_card";
+import PatientVisiteModalCreate from "../../modals/modal_visite_medical_create.vue";
 import signeVitauxModal from "@/template/view/pages/patient_manage_pages/modals/signe_vitaux_modal.vue";
 export default {
   name: "PatientListPage",
   components: {
     PatientCardPrint,
     signeVitauxModal,
+    PatientVisiteModalCreate,
   },
   data() {
     return {
@@ -118,11 +121,15 @@ export default {
           key: "edit",
         },
         {
-          label: '<i class="ri-time-line me-1"></i>Nouvelle visite',
-          class: "btn-success me-1",
+          label: '<i class="bx bx-body me-1"></i>Nouvelle visite',
+          class: "btn-info me-1",
           key: "new",
         },
-        { label: "Imprimer carte", class: "btn-outline-secondary me-1", key: "print" },
+        {
+          label: '<i class="ri-printer-line me-1"></i>  Imprimer carte',
+          class: "btn-dark me-1",
+          key: "print",
+        },
         {
           label: '<i class="ri-delete-bin-3-line"></i>',
           class: "btn-soft-danger me-1",
@@ -171,6 +178,12 @@ export default {
           setTimeout(() => {
             window.print();
           }, 1000);
+          break;
+        case "new":
+          this.selectedPatient = payload.data;
+          this.$nextTick(() => {
+            this.$showBsModal("modalCreateVisite");
+          });
           break;
         case "details":
           break;

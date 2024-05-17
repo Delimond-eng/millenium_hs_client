@@ -17,5 +17,5 @@ export default {
   GET_SCHEDULES: (state) => state.schedules,
   GET_ALL_FACTURATIONS: (state) => state.all_facturations,
   GET_SITE_FACTURATIONS: (state) => state.site_facturations,
-  GET_PATIENT_DOC: (state) => state.patient_doc,
+  GET_PATIENT_DOCS: (state) => state.patient_docs,
 };
