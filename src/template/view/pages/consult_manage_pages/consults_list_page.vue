@@ -5,18 +5,14 @@
         <!-- start page title -->
         <div class="row">
           <div class="col-12 col-md-12">
-            <div
-              class="page-title-box d-sm-flex align-items-center justify-content-between"
-            >
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
               <h4 class="mb-sm-0">Liste des consultations</h4>
 
               <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                   <li class="me-2">
-                    <button
-                      class="btn btn-secondary btn-border btn-sm addMembers-modal"
-                      @click="$router.push('/home/consult/create')"
-                    >
+                    <button class="btn btn-secondary btn-border btn-sm addMembers-modal"
+                      @click="$router.push('/home/consult/create')">
                       <i class="ri-add-fill me-1 align-bottom"></i> Nouvelles
                       consultations
                     </button>
@@ -31,15 +27,10 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-body">
-                <custom-table
-                  v-if="isEmplacementDefined"
-                  :api-url="`/consultations.all/${this.$user().hopital.emplacement.id}`"
-                  :columns="dataTableColumns"
-                  :data-src="'consultations'"
-                  ref="dataTableConsult"
-                  :action-buttons="actionButtons"
-                  @actionButtonClick="handleActionButtonClick"
-                />
+                <custom-table v-if="isEmplacementDefined"
+                  :api-url="`/consultations.all/${this.$user().hopital.emplacement.id}`" :columns="dataTableColumns"
+                  :data-src="'consultations'" ref="dataTableConsult" :action-buttons="actionButtons"
+                  @actionButtonClick="handleActionButtonClick" />
               </div>
             </div>
           </div>
@@ -64,10 +55,8 @@
     </footer>
 
     <div class="customizer-setting d-block">
-      <div
-        class="btn-secondary text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2"
-        @click.prevent="$router.push('/home/consult/create')"
-      >
+      <div class="btn-secondary text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2"
+        @click.prevent="$router.push('/home/consult/create')">
         <i class="ri-add-line fs-22"></i>
       </div>
     </div>
@@ -125,7 +114,7 @@ export default {
           key: "edit",
         },
         {
-          label: '<i class="Voir détails',
+          label: "Voir détails",
           class: "btn-info me-1",
           key: "details",
         },

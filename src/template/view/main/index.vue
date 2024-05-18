@@ -1,7 +1,6 @@
 <template>
     <!-- Begin page -->
     <div id="layout-wrapper">
-
         <!-- header -->
         <header-layout></header-layout>
         <!-- sidebar -->
@@ -15,19 +14,15 @@
         <!-- ============================================================== -->
         <router-view />
         <!-- end main content-->
-
-
     </div>
 
     <!-- END layout-wrapper -->
 </template>
 
 <script>
-
 import HeaderLayout from "@/template/view/layouts/header.layout";
-
 import sidebarLayout from "@/template/view/layouts/sidebar.layout";
-import ServiceSettingsCanvas from "../modals/modal_setting_service"
+import ServiceSettingsCanvas from "../modals/modal_setting_service";
 
 export default {
     name: "HomeSecure",
@@ -35,10 +30,9 @@ export default {
         HeaderLayout,
         sidebarLayout,
         ServiceSettingsCanvas,
-        
     },
     mounted() {
-        this.$store.dispatch('services/showConfigs');
-    }
-}
+        this.$store.dispatch("services/showConfigs");
+    },
+};
 </script>

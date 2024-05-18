@@ -1,6 +1,7 @@
 <template>
   <!--  dt-responsive nowrap overflow-x-hidden -->
-  <table ref="dataTable" class="table table-striped align-middle" style="width: 100%"></table>
+  <table ref="dataTable" class="table table-striped dt-body-nowrap dt-responsive nowrap overflow-x-hidden align-middle"
+    style="width: 100%"></table>
 </template>
 
 <script>
@@ -36,16 +37,22 @@ export default {
   methods: {
     initializeDataTable() {
       const columnsWithButtons = [...this.columns];
+      let actionColumnIndex = -1;
+
       if (this.actionButtons.length > 0) {
+        actionColumnIndex = columnsWithButtons.length;
         columnsWithButtons.push({
           title: this.actionsHeaderLabel,
           data: null,
-          createdCell: (cell, cellData, rowData, rowIndex, colIndex) => {
-            cell.innerHTML = this.actionButtons
-              .map((button) => {
-                return `<button data-id="${rowData.id}" class="btn btn-sm action-btn ${button.class}" data-key="${button.key}" title="${button.tooltip}">${button.label}</button>`;
-              })
-              .join("");
+          render: (data, type, row, meta) => {
+            if (type === "display") {
+              return this.actionButtons
+                .map((button) => {
+                  return `<button data-id="${row.id}" class="btn btn-sm d-button action-btn ${button.class}" data-key="${button.key}" title="${button.tooltip}">${button.label}</button>`;
+                })
+                .join("");
+            }
+            return data;
           },
         });
       }
@@ -94,7 +101,55 @@ export default {
           },
         },
         dom: "Bfrtip",
-        buttons: ["copy", "csv", "excel", "print"],
+        buttons: [
+          {
+            extend: "copy",
+            exportOptions: {
+              columns:
+                actionColumnIndex === -1
+                  ? ":visible"
+                  : ":visible:not(:eq(" + actionColumnIndex + "))",
+            },
+          },
+          {
+            extend: "csv",
+            exportOptions: {
+              columns:
+                actionColumnIndex === -1
+                  ? ":visible"
+                  : ":visible:not(:eq(" + actionColumnIndex + "))",
+            },
+          },
+          {
+            extend: "excel",
+            exportOptions: {
+              columns:
+                actionColumnIndex === -1
+                  ? ":visible"
+                  : ":visible:not(:eq(" + actionColumnIndex + "))",
+            },
+          },
+          {
+            extend: "print",
+            exportOptions: {
+              columns:
+                actionColumnIndex === -1
+                  ? ":visible"
+                  : ":visible:not(:eq(" + actionColumnIndex + "))",
+            },
+            customize: function (win) {
+              $(win.document.body)
+                .css("font-size", "12pt")
+                .prepend("<style>table { width: 100% !important; }</style>");
+              $(win.document.body)
+                .find("table")
+                .addClass("display")
+                .css("font-size", "12pt");
+              // Ajoutez la classe print-section au body pour l'impression
+              $(win.document.body).addClass("print-section");
+            },
+          },
+        ],
       });
 
       if (this.actionButtons.length > 0) {

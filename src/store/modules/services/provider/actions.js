@@ -802,6 +802,7 @@ export default {
   },
   async createPaiement(context, form) {
     let user = JSON.parse(localStorage.getItem("user-data"));
+    form.hopital_id = user.hopital.id;
     form.hopital_emplacement_id = user.hopital.emplacement.id;
     form.created_by = user.id;
     try {

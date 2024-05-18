@@ -61,7 +61,7 @@ import TransfertPatientPage from "@/template/view/pages/transfert_manage_pages/h
 /**
  * Facturations & paiements
  */
-import FacturesListPage from "@/template/view/pages/facturations_manage_pages/factures_list_page";
+import FacturesListPage from "@/template/view/pages/facturations_manage_pages/factures_history_list_page.vue";
 import FactureCreatePage from "@/template/view/pages/facturations_manage_pages/facture_create_page";
 
 /**
@@ -351,7 +351,7 @@ const routes = [{
                 name: "facture-create-route",
             },
             {
-                path: "/home/factures/list",
+                path: "/home/payments/list",
                 component: FacturesListPage,
                 name: "factures-list-route",
             },

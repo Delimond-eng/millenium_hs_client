@@ -23,58 +23,107 @@
                 </div>
 
                 <div class="row mb-2">
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="dropdown float-end">
-                                    <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <span class="text-muted fs-18"><i class="mdi mdi-dots-vertical"></i></span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="#/home/patient/create">
-                                            <i class="ri-add-line me-1"></i> Nouveau patient</a>
-                                        <a class="dropdown-item" href="#/home/patients/list"><i
-                                                class="ri-list-check-2 me-1"></i>Liste des patients</a>
+                    <div class="col-xl-12">
+                        <div class="card crm-widget">
+                            <div class="card-body p-0">
+                                <div class="row row-cols-xxl-5 row-cols-md-3 row-cols-1 g-0">
+                                    <!-- end col -->
+                                    <div class="col">
+                                        <div class="mt-3 mt-md-0 py-4 px-3">
+                                            <h5 class="text-muted text-uppercase fs-13">Nb des patients</h5>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <i class="ri-group-2-line display-6 text-secondary"></i>
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h2 class="mb-0">
+                                                        <span class="counter-value">00</span>
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="mb-2 pb-2">
-                                    <img src="assets/images/companies/patient_1.png" alt="" class="avatar-sm" />
-                                </div>
-                                <h6 class="fs-15 fw-semibold">0</h6>
-                                <p class="text-muted mb-0">
-                                    <i class="ri-wheelchair-line align-bottom"></i> Nombre des patients
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                                    <!-- end col -->
+                                    <div class="col">
+                                        <div class="mt-3 mt-md-0 py-4 px-3">
+                                            <h5 class="text-muted text-uppercase fs-13">
+                                                Patients en attente de consultation
+                                            </h5>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <i class="bx bx-body display-6 text-warning"></i>
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h2 class="mb-0">
+                                                        <span class="counter-value">00</span>
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end col -->
+                                    <div class="col">
+                                        <div class="mt-3 mt-lg-0 py-4 px-3">
+                                            <h5 class="text-muted text-uppercase fs-13">
+                                                Mes consultations journalières
+                                            </h5>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <i class="ri-stethoscope-fill display-6 text-secondary"></i>
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h2 class="mb-0">
+                                                        <span class="counter-value">00</span>
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end col -->
+                                    <div class="col">
+                                        <div class="mt-3 mt-lg-0 py-4 px-3">
+                                            <h5 class="text-muted text-uppercase fs-13">
+                                                Mes rendez-vous journaliers
+                                            </h5>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <i class="ri-calendar-2-line display-6 text-primary"></i>
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h2 class="mb-0">
+                                                        <span class="counter-value">00</span>
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end col -->
 
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="mb-2 pb-2">
-                                    <img src="assets/images/companies/doc-sante.png" alt="" class="avatar-sm" />
+                                    <!-- end col -->
+                                    <div class="col">
+                                        <div class="mt-3 mt-lg-0 py-4 px-3">
+                                            <h5 class="text-muted text-uppercase fs-13">
+                                                Mes demandes d'examens
+                                            </h5>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <i class="ri-microscope-line display-6 text-info-emphasis"></i>
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h2 class="mb-0">
+                                                        <span class="counter-value">00</span>
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end col -->
                                 </div>
-                                <h6 class="fs-15 fw-semibold">0</h6>
-                                <p class="text-muted mb-0">
-                                    <i class="ri-wheelchair-line align-bottom"></i>Rendez-vous en attente
-                                </p>
+                                <!-- end row -->
                             </div>
+                            <!-- end card body -->
                         </div>
-                    </div>
-
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="mb-2 pb-2">
-                                    <img src="assets/images/companies/doc3.png" alt="" class="avatar-sm" />
-                                </div>
-                                <h6 class="fs-15 fw-semibold">0</h6>
-                                <p class="text-muted mb-0">
-                                    <i class="ri-wheelchair-line align-bottom"></i>Prescription en attente
-                                </p>
-                            </div>
-                        </div>
+                        <!-- end card -->
                     </div>
                 </div>
 

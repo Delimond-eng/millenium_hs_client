@@ -121,7 +121,7 @@ export default {
           key: "edit",
         },
         {
-          label: '<i class="bx bx-body me-1"></i>Nouvelle visite',
+          label: '<i class="ri-add-fill me-1"></i>Nouvelle visite',
           class: "btn-info me-1",
           key: "new",
         },

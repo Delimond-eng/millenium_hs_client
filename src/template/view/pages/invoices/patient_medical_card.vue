@@ -1,6 +1,6 @@
 <template>
   <div class="print-section" style="position: fixed; top: 0; width: 100%; padding: 20px">
-    <div class="mx-20 my-20 card w-100 rounded-0" style="border: 4px solid #000000">
+    <div class="mx-20 my-20 card w-100 rounded-0" style="border: 5px solid #000000; border-radius: 0%">
       <div class="card-header">
         <div class="d-flex align-items-start justify-content-between" v-if="data">
           <div class="flex-shrink-0 text-start">
@@ -52,7 +52,6 @@
           <qrcode-builder :content="JSON.stringify(data)" :size="150"></qrcode-builder>
         </div>
       </div>
-      <!-- end card div elem -->
     </div>
   </div>
 </template>

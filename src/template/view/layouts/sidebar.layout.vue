@@ -13,12 +13,17 @@
                     </svg>
                     <h3 class="text-white mx-1 text-uppercase fw-bold">Millenium HS</h3>
                 </span> -->
-        <img
-          src="assets/logo-2.png"
-          class="card-logo card-logo-dark mt-2"
-          alt="logo dark"
-          height="60"
-        />
+
+        <span class="logo-sm">
+          <img src="assets/images/logo-sm-h.png" alt="" height="22" />
+        </span>
+        <span class="logo-lg"
+          ><img
+            src="assets/logo-2.png"
+            class="card-logo card-logo-dark mt-2"
+            alt="logo dark"
+            height="60"
+        /></span>
       </a>
 
       <button
@@ -144,13 +149,19 @@
               aria-expanded="false"
               aria-controls="sidebarLanding"
             >
-              <i class="ri-stethoscope-line"></i> <span data-key="t-landing">Suivis</span>
+              <i class="ri-shield-cross-line"></i>
+              <span data-key="t-landing">Suivis</span>
             </a>
             <div class="collapse menu-dropdown" id="suiviLanding">
               <ul class="nav nav-sm flex-column">
                 <li class="nav-item">
                   <a href="javascript:void(0)" class="nav-link" data-key="t-one-page">
                     Suivi patient
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="javascript:void(0)" class="nav-link" data-key="t-one-page">
+                    Historique des suivis
                   </a>
                 </li>
               </ul>
@@ -483,6 +494,41 @@
                 <li class="nav-item">
                   <a href="#" class="nav-link" data-key="t-nft-landing">
                     Historique de navigation
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item" id="users-menu">
+            <a
+              class="nav-link menu-link"
+              href="#facturationMain"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="facturationMain"
+            >
+              <i class="ri-money-dollar-circle-line"></i>
+              <span data-key="t-landing">Facturations & paiements</span>
+            </a>
+            <div class="collapse menu-dropdown" id="facturationMain">
+              <ul class="nav nav-sm flex-column">
+                <li class="nav-item">
+                  <a
+                    href="#/admin/config/facturations"
+                    class="nav-link"
+                    data-key="t-nft-landing"
+                  >
+                    Configurations
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="#/home/payments/list"
+                    class="nav-link"
+                    data-key="t-nft-landing"
+                  >
+                    Historique des paiements
                   </a>
                 </li>
               </ul>

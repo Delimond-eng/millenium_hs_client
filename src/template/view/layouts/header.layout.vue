@@ -24,7 +24,8 @@
                         </a>
                     </div>
 
-                    <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
+                    <button type="button" @click="collapseMenu"
+                        class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
                         id="topnav-hamburger-icon">
                         <span class="hamburger-icon">
                             <span></span>
@@ -165,10 +166,10 @@
                                     src="assets/images/users/avatar-doctor.png" alt="Header Avatar" />
                                 <span class="text-start ms-xl-2">
                                     <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{
-                            user.name
-                        }}</span>
+                        user.name
+                    }}</span>
                                     <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text" v-if="user.role">{{
-                            user.role.role }}</span>
+                        user.role.role }}</span>
                                 </span>
                             </span>
                         </button>
@@ -192,8 +193,8 @@
                                     class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i>
                                 <span class="align-middle">Verrouillage session</span></a>
                             <a class="dropdown-item" href="javascript:void(0)" @click.prevent="
-                            $store.dispatch('auth/loggedOut');
-                        $router.push({ name: 'login' });
+                        $store.dispatch('auth/loggedOut');
+                  $router.push({ name: 'login' });
                 "><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
                                 <span class="align-middle" data-key="t-logout">Déconnexion</span></a>
                         </div>
@@ -206,6 +207,73 @@
 
 <script>
 export default {
+    methods: {
+        collapseMenu(e) {
+            // Ajouter le comportement spécifié en haut
+            console.log(e);
+            var screenWidth = document.documentElement.clientWidth;
+            // Toggle hamburger icon
+            if (screenWidth > 767) {
+                document.querySelector(".hamburger-icon").classList.toggle("open");
+            }
+
+            // Toggle menu class based on layout
+            var layout = document.documentElement.getAttribute("data-layout");
+            if (layout === "horizontal") {
+                document.body.classList.toggle("menu");
+            }
+
+            if (screenWidth > 767) {
+                var sidebarSize = document.documentElement.getAttribute("data-sidebar-size");
+                // Vérifier si la valeur actuelle est "lg"
+                if (sidebarSize === "lg") {
+                    // Changer la valeur en "sm"
+                    document.documentElement.setAttribute("data-sidebar-size", "sm");
+                } else if (sidebarSize === "sm") {
+                    // Changer la valeur en "lg"
+                    document.documentElement.setAttribute("data-sidebar-size", "lg");
+                }
+            } else {
+                if (document.body.classList.contains("vertical-sidebar-enable")) {
+                    document.body.classList.remove("vertical-sidebar-enable");
+                } else {
+                    document.body.classList.add("vertical-sidebar-enable");
+                }
+            }
+
+            // Réaliser le reste de la fonction collapseMenu()
+        },
+    },
+    mounted() {
+        var screenWidth = document.documentElement.clientWidth;
+        // Toggle hamburger icon
+        if (screenWidth < 767) {
+            document.querySelector(".hamburger-icon").classList.toggle("open");
+        }
+
+        // Sélectionner tous les éléments avec la classe vertical-overlay
+        var verticalOverlayElements = document.querySelectorAll(".vertical-overlay");
+
+        if (verticalOverlayElements.length) {
+            // Ajouter un gestionnaire d'événements click à chaque élément
+            verticalOverlayElements.forEach(function (element) {
+                element.addEventListener("click", function () {
+                    // Supprimer la classe vertical-sidebar-enable du corps du document
+                    document.body.classList.remove("vertical-sidebar-enable");
+                });
+            });
+        }
+
+        window.addEventListener("resize", function (e) {
+            var screenWidth = document.documentElement.clientWidth;
+            // Toggle hamburger icon
+            if (screenWidth < 767) {
+                document.querySelector(".hamburger-icon").classList.add("open");
+            } else {
+                document.querySelector(".hamburger-icon").classList.remove("open");
+            }
+        });
+    },
     beforemount() {
         this.$store.dispatch("auth/refreshUser");
     },

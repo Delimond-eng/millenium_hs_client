@@ -20,6 +20,11 @@
         visibility: visible;
     }
 
+    /*  .dataTables_wrapper,
+    .dataTables_wrapper * {
+        visibility: hidden;
+    }
+ */
     #aitopia-sidebar-opener {
         display: none;
     }
