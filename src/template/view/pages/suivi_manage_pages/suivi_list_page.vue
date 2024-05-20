@@ -57,13 +57,20 @@
       </div>
     </footer>
   </div>
+  <suivi-details-modal :traitements="traitements" />
 </template>
 
 <script>
+import SuiviDetailsModal from "../../modals/modal_suivi_details.vue";
 export default {
   name: "PremierSoinList",
+
+  components: {
+    SuiviDetailsModal,
+  },
   data() {
     return {
+      traitements: [],
       dataTableColumns: [
         { data: "created_at", title: "Date & heure" },
         {
@@ -116,8 +123,8 @@ export default {
     handleActionButtonClick(payload) {
       switch (payload.key) {
         case "details":
-          this.soins = payload.data.traitements;
-          this.$showBsModal("soinsDetailsModal");
+          this.traitements = payload.data.traitements;
+          this.$showBsModal("suiviDetailsModal");
           break;
         case "delete":
           console.log("");

@@ -1,19 +1,26 @@
 <template>
   <div class="print-section" style="position: fixed; top: 0; width: 100%; padding: 20px">
-    <div class="mx-20 my-20 card w-100 rounded-0" style="border: 5px solid #000000; border-radius: 0%">
-      <div class="card-header">
+    <div
+      class="mx-20 my-20 card w-100 rounded-0"
+      style="border: 5px solid #000000; border-radius: 0%"
+    >
+      <div class="card-header bg-dark-subtle">
         <div class="d-flex align-items-start justify-content-between" v-if="data">
           <div class="flex-shrink-0 text-start">
-            <img :src="$user().hopital.hopital_logo" alt="patientQrcode" style="height: 50px" />
+            <img
+              :src="$user().hopital.hopital_logo"
+              alt="patientQrcode"
+              style="height: 50px"
+            />
           </div>
           <div class="flex-shrink-0 text-end w-25">
-            <h5 class="fs-18 fw-semibold text-bg-dark mb-2">
+            <h5 class="fs-18 fw-semibold text-dark mb-2">
               <i class="ri-map-pin-2-line me-2"></i>
               {{ $user().hopital.emplacement.hopital_emplacement_libelle }}
             </h5>
-            <small class="fw-normal mt-1">{{
-          $user().hopital.emplacement.hopital_emplacement_adresse
-        }}</small>
+            <small class="fw-normal text-muted mt-1">{{
+              $user().hopital.emplacement.hopital_emplacement_adresse
+            }}</small>
           </div>
         </div>
       </div>
@@ -62,7 +69,7 @@ export default {
   props: {
     data: {
       type: Object,
-      default: () => { },
+      default: () => {},
     },
   },
 };

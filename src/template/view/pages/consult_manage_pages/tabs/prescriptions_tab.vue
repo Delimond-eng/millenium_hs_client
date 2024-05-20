@@ -126,6 +126,7 @@
               <button
                 class="btn btn-soft-danger"
                 type="button"
+                :disabled="tempPrescriptions.length === 1"
                 @click="index !== 0 ? tempPrescriptions.splice(index, 1) : () => null"
               >
                 <i class="ri-close-line"></i>
