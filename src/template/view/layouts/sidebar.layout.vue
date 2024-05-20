@@ -155,12 +155,12 @@
             <div class="collapse menu-dropdown" id="suiviLanding">
               <ul class="nav nav-sm flex-column">
                 <li class="nav-item">
-                  <a href="javascript:void(0)" class="nav-link" data-key="t-one-page">
+                  <a href="#/home/suivi/make" class="nav-link" data-key="t-one-page">
                     Suivi patient
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="javascript:void(0)" class="nav-link" data-key="t-one-page">
+                  <a href="#/home/suivi/view" class="nav-link" data-key="t-one-page">
                     Historique des suivis
                   </a>
                 </li>
@@ -440,7 +440,7 @@
                           class="nav-link"
                           data-key="t-simple-page"
                         >
-                          Gestion des prix</a
+                          Produits & prix</a
                         >
                       </li>
                     </ul>

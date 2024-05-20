@@ -119,16 +119,6 @@
                   placeholder="Quantité ...ex: 1"
                   required
                 />
-                <div class="mx-1">/</div>
-                <input
-                  type="text"
-                  style="width: 100px"
-                  v-model="input.dosage_unite"
-                  class="form-control"
-                  placeholder="unité"
-                  disabled
-                  required
-                />
               </div>
             </td>
 

@@ -52,6 +52,12 @@ import FonctionsTab from "@/template/view/pages/config_manage_pages/tabs/fonctio
 import FacturationsTab from "@/template/view/pages/config_manage_pages/tabs/facturations_tab";
 
 /**
+ * Suivi routes
+ */
+import SuiviCreatePage from "@/template/view/pages/suivi_manage_pages/suivi_make_page.vue";
+import SuiviListPage from "@/template/view/pages/suivi_manage_pages/suivi_list_page.vue";
+
+/**
  * Pages qui gerent le cas d'urgence
  */
 import PremierSoinsPage from "@/template/view/pages/urgence_manage_pages/premier_soins_page";
@@ -334,6 +340,16 @@ const routes = [{
                         name: "facturations-config-tab",
                     },
                 ],
+            },
+            {
+                path: "/home/suivi/make",
+                component: SuiviCreatePage,
+                name: "suivi-route-create",
+            },
+            {
+                path: "/home/suivi/view",
+                component: SuiviListPage,
+                name: "suivi-route-list",
             },
             {
                 path: "/home/premiers_soins",

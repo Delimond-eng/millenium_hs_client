@@ -4,20 +4,14 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div
-              class="page-title-box d-sm-flex align-items-center justify-content-between"
-            >
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
               <h4 class="mb-sm-0">Situation des opérations</h4>
 
               <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item">
-                    <a
-                      href="javascript: void(0);"
-                      class="btn btn-sm btn-light"
-                      @click.prevent="$router.go(-1)"
-                      >Retour</a
-                    >
+                    <a href="javascript: void(0);" class="btn btn-sm btn-light"
+                      @click.prevent="$router.go(-1)">Retour</a>
                   </li>
                 </ol>
               </div>
@@ -30,47 +24,20 @@
             <!-- Nav tabs -->
             <ul class="nav nav-pills animation-nav nav-secondary mb-3" role="tablist">
               <li class="nav-item waves-effect waves-light" role="presentation">
-                <a
-                  class="nav-link active"
-                  data-bs-toggle="tab"
-                  href="#home-1"
-                  role="tab"
-                  aria-selected="true"
-                  >Approvisionnements</a
-                >
+                <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab"
+                  aria-selected="true">Approvisionnements</a>
               </li>
               <li class="nav-item waves-effect waves-light" role="presentation">
-                <a
-                  class="nav-link"
-                  data-bs-toggle="tab"
-                  href="#profile-1"
-                  role="tab"
-                  aria-selected="false"
-                  tabindex="-1"
-                  >Transferts</a
-                >
+                <a class="nav-link" data-bs-toggle="tab" href="#profile-1" role="tab" aria-selected="false"
+                  tabindex="-1">Transferts</a>
               </li>
               <li class="nav-item waves-effect waves-light" role="presentation">
-                <a
-                  class="nav-link"
-                  data-bs-toggle="tab"
-                  href="#messages-1"
-                  role="tab"
-                  aria-selected="false"
-                  tabindex="-1"
-                  >Classements</a
-                >
+                <a class="nav-link" data-bs-toggle="tab" href="#messages-1" role="tab" aria-selected="false"
+                  tabindex="-1">Classements</a>
               </li>
               <li class="nav-item waves-effect waves-light" role="presentation">
-                <a
-                  class="nav-link"
-                  data-bs-toggle="tab"
-                  href="#settings-1"
-                  role="tab"
-                  aria-selected="false"
-                  tabindex="-1"
-                  >Retournés</a
-                >
+                <a class="nav-link" data-bs-toggle="tab" href="#settings-1" role="tab" aria-selected="false"
+                  tabindex="-1">Retournés</a>
               </li>
             </ul>
             <!-- Tab panes -->

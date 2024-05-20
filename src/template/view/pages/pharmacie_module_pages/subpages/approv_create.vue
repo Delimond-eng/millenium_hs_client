@@ -4,14 +4,14 @@
       <h2 class="card-title">Approvisionnement</h2>
     </div>
     <form @submit.prevent="submitForm" class="card-body">
-      <div class="row">
+      <div class="row g-2">
         <div class="col-md-6" v-if="user.role.role !== 'Pharmacien'">
           <div>
             <label for="basiInput" class="form-label">Pharmacie <sup class="text-danger">*</sup></label>
             <select class="form-select" v-model="form.pharmacie_id" required>
               <option label="Sélectionnez une pharmacie..." hidden selected></option>
               <option v-for="(data, index) in config.pharmacies" :key="index" :value="data.id">
-                {{ data.pharmacie_nom }}
+                div {{ data.pharmacie_nom }}
               </option>
             </select>
           </div>
@@ -24,18 +24,16 @@
             </select>
           </div>
         </div>
-      </div>
-      <!-- Basic Input -->
-      <div class="row">
-        <div class="mt-2 col-md-6">
+
+        <div class="col-md-6">
           <label for="basiInput" class="form-label">Quantité<sup class="text-danger">*</sup></label>
-          <input type="text" v-model="form.stock_qte" class="form-control" id="basiInput"
+          <input type="number" v-model="form.stock_qte" class="form-control" id="basiInput"
             placeholder="Entrez la qté d'approvisionnement..." required />
         </div>
-        <div class="mt-2 col-md-6">
+        <div class="col-md-6">
           <label for="basiInput" class="form-label">Prix d'achat unitaire<sup class="text-danger">*</sup></label>
           <div class="d-flex">
-            <input type="text" v-model="form.stock_pa" class="form-control me-2" id="basiInput"
+            <input type="number" v-model="form.stock_pa" class="form-control me-2" id="basiInput"
               placeholder="Entrez le prix d'achat du stock..." required />
             <select v-model="form.stock_pa_devise" class="form-control" style="width: 100px" required>
               <option value="CDF" selected>CDF</option>
@@ -44,15 +42,20 @@
             </select>
           </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="mt-2 col-md-6">
+        <div class="col-md-6">
           <label for="basiInput" class="form-label">Stock Date d'Expiration <sup class="text-danger">*</sup></label>
           <input type="date" v-model="form.stock_date_exp" class="form-control me-2" id="basiInput"
             placeholder="Entrez le libellé de la categorie" required />
         </div>
-        <div class="mt-2 col-md-6">
+        <div class="col-md-6">
+          <label for="margeBenef" class="form-label">Marge bénéficiaire(en %)<sup class="text-danger">*</sup></label>
+          <div class="d-flex">
+            <input type="number" v-model="form.marge" class="form-control me-2" id="margeBenef"
+              placeholder="Entrez le prix d'achat du stock..." required />
+          </div>
+        </div>
+        <div class="col-md-6">
           <label for="basiInput" class="form-label">Fournisseur <sup class="text-danger">*</sup></label>
           <select class="form-select" v-model="form.fournisseur_id" required>
             <option label="Sélectionnez un fournisseur..." hidden selected></option>
@@ -61,12 +64,10 @@
             </option>
           </select>
         </div>
-      </div>
-
-      <!-- Input with Label -->
-      <div class="mt-2">
-        <label for="labelInput" class="form-label">Observation <small>(optionnel)</small></label>
-        <textarea class="form-control" v-model="form.stock_obs" placeholder="Entrez une observation..."></textarea>
+        <div class="col-md-12">
+          <label for="labelInput" class="form-label">Observation <small>(optionnel)</small></label>
+          <textarea class="form-control" v-model="form.stock_obs" placeholder="Entrez une observation..."></textarea>
+        </div>
       </div>
 
       <bs-toast id="errorsToastApprov" :msg="errors_msg" />
@@ -97,6 +98,7 @@ export default {
         stock_date_exp: "",
         stock_pa: "",
         stock_pa_devise: "CDF",
+        marge: "",
         stock_obs: "",
         produit_id: "",
         fournisseur_id: "",
@@ -152,6 +154,7 @@ export default {
             this.form.produit_id = "";
             this.form.stock_date_exp = "";
             this.form.stock_pa = "";
+            this.form.marge = "";
             this.form.stock_pa_devise = "CDF";
             this.form.stock_qte = "";
             this.form.stock_obs = "";
