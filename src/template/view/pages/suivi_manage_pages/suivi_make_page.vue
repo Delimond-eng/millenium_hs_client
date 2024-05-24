@@ -263,6 +263,7 @@ export default {
     },
     checkAll(e) {
       const checked = e.target.checked;
+      this.traitements = [];
       for (let i = 0; i < this.prescriptions.length; i++) {
         let v = document.getElementById(`inlineCheckbox${i}`);
         v.checked = checked;
@@ -315,7 +316,7 @@ export default {
   },
 
   beforeMount() {
-    this.$store.dispatch("services/viewAllPatients");
+    this.$store.dispatch("services/viewPatientsSousTraitement");
   },
 
   computed: {
@@ -324,7 +325,7 @@ export default {
     },
 
     patients() {
-      const patients = this.$store.getters["services/GET_PATIENTS"];
+      const patients = this.$store.getters["services/GET_PATIENTS_SOUS_TRAITEMENT"];
       let formattedOptions = [];
       if (patients) {
         formattedOptions = patients.map((item) => {

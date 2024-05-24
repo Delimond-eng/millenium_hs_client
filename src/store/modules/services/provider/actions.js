@@ -215,6 +215,32 @@ export default {
         }
     },
 
+
+    /**
+     * Afficher les patients sous traitements
+     * @author Dev.GastonDelimond
+     * @param {Vuex} commit
+     * @returns HttpResponse
+     * */
+    async viewPatientsSousTraitement({ commit, dispatch }) {
+        let user = JSON.parse(localStorage.getItem("user-data"));
+        let agentId = user.agent_id;
+        /* let hostoId = user.hopital.id; */
+        let locationId = user.hopital.emplacement.id;
+        try {
+            dispatch("triggerLoading", true);
+            let { data, status } = await get(`/patients.sous_traitement/${locationId}`);
+            dispatch("triggerLoading", false);
+            if (status === 200) {
+                commit("SET_PATIENTS_SOUS_TRAITEMENT", data.patients);
+                return data.patients;
+            } else return [];
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    },
+
     /**
      * Afficher la liste des patients recents
      * @author Dev.GastonDelimond

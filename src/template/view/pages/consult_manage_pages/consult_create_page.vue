@@ -162,7 +162,11 @@
                   <!-- end col-->
                   <div class="col-lg-12">
                     <div class="tab-content text-muted mt-3 mt-lg-0">
-                      <tab-infos :selected-patient="selectedPatient"></tab-infos>
+                      <tab-infos
+                        :selected-patient="selectedPatient"
+                        :current-consult="currentConsult"
+                      >
+                      </tab-infos>
                       <!--end tab-pane-->
 
                       <div
@@ -396,21 +400,33 @@ export default {
   beforeRouteEnter(to, from, next) {
     const cachedConsult = localStorage.getItem("cached-consult");
 
-    console.log(cachedConsult);
     next((vm) => {
       vm.$nextTick(() => {
-        var patientPendingModal = new bootstrap.Modal(
-          document.getElementById("patientsPendingModal")
-        );
+        // Assurez-vous que l'élément avec l'ID 'patientsPendingModal' existe dans le DOM
+        const modalElement = document.getElementById("patientsPendingModal");
+        if (!modalElement) {
+          console.error("L'élément 'patientsPendingModal' n'existe pas dans le DOM.");
+          return;
+        }
+        var patientPendingModal = new bootstrap.Modal(modalElement);
         if (cachedConsult === null) {
           patientPendingModal.show();
+        } else {
+          //console.log(cachedConsult);
+          const consult = JSON.parse(cachedConsult);
+          // Utilisation de 'vm' pour accéder à l'instance Vue
+          vm.selectedPatient = consult.patient;
+          vm.currentConsult = consult;
+          console.log(JSON.stringify(vm.currentConsult));
         }
       });
     });
   },
+
   data() {
     return {
       docLoading: false,
+      currentConsult: null,
     };
   },
   computed: {

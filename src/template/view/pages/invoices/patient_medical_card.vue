@@ -23,6 +23,9 @@
             }}</small>
           </div>
         </div>
+        <h1 class="text-center fw-bold text-decoration-underline m-2">
+          CARTE DE PATIENT
+        </h1>
       </div>
       <div class="card-body d-flex justify-content-between align-items-center">
         <div class="text-bg-light bg-gradient p-4 rounded-3 mb-3" v-if="data">
@@ -31,7 +34,7 @@
           </div>
           <div class="row mt-3">
             <div class="col-4">
-              <div class="fs-12 fw-semibold text-uppercase">n° ID</div>
+              <div class="fs-12 fw-semibold text-uppercase">P/ID</div>
               <div id="card-holder-elem" class="fw-semibold fs-14">
                 {{ data.patient_code }}
               </div>

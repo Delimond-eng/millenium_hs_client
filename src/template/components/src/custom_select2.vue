@@ -94,6 +94,13 @@ export default {
       .on("select2:select select2:unselect", (ev) => {
         this.$emit("update:modelValue", this.select2.val());
         this.$emit("select", ev["params"]["data"]);
+      })
+      .on("select2:open", function () {
+        $(".select2-search__field").attr("placeholder", "Rechercher...");
+        $(".select2-dropdown").css(
+          "box-shadow",
+          "rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px"
+        );
       });
     this.setValue(this.modelValue);
   },
