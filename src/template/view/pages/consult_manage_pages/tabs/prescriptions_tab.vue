@@ -1,16 +1,56 @@
 <template>
   <!--end tab-pane-->
-  <div
-    class="tab-pane fade"
-    id="custom-v-pills-messages"
-    role="tabpanel"
-    aria-labelledby="custom-v-pills-messages-tab"
-  >
+  <div class="tab-pane fade" id="custom-v-pills-messages" role="tabpanel" aria-labelledby="custom-v-pills-messages-tab">
+    <div class="card shadow-none border-light bg-light" v-if="currentConsult">
+      <div class="card-body" v-if="currentConsult.prescriptions">
+        <!-- Small Tables -->
+        <table class="table table-sm table-nowrap">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Produit</th>
+              <th scope="col">Dosage</th>
+              <th scope="col">Fréquence</th>
+              <th scope="col">Durée</th>
+              <th scope="col">Quantité</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in currentConsult.prescriptions" :key="index">
+              <th scope="row">{{ `${index + 1}`.padStart(2, "0") }}</th>
+              <td>
+                <span v-if="item.produit">{{ item.produit.produit_libelle }}</span>
+              </td>
+              <td>
+                {{ item.prescription_traitement_dosage }}
+                {{ item.prescription_traitement_dosage_unite }}
+              </td>
+              <td>
+                {{ item.prescription_traitement_freq }}/
+                {{ item.prescription_traitement_freq_unite }}
+              </td>
+              <td>
+                {{ item.prescription_traitement_duree }}
+                {{ item.prescription_traitement_duree_unite }}
+              </td>
+              <td>
+                {{ item.prescription_traitement_qte }}
+              </td>
+              <td>
+                <button type="button" class="btn btn-soft-danger btn-icon btn-sm">
+                  <i class="ri-close-line"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <h6 class="fs-14 text-start mb-2 mt-3 text-primary">
       Veuillez prescrire le patient !
     </h6>
     <div class="border border-dashed"></div>
-
     <form @submit.prevent="submitFormPrescriptions">
       <!-- Tables Border Colors -->
       <table class="table table-bordered border-dark-subtle table-nowrap">
@@ -32,30 +72,15 @@
                 <option value="Paracetamol | Comprimé">Paracetamol | Comprimé</option>
                 <option value="Ibuprofène | Comprimé">Ibuprofène | Comprimé</option>
               </select> -->
-              <select2
-                placeholder="Sélectionnez un produit..."
-                v-model="input.produit_id"
-                :options="produits"
-                :settings="{ settingOption: value, settingOption: value }"
-                :required="true"
-              />
+              <select2 placeholder="Sélectionnez un produit..." v-model="input.produit_id" :options="produits"
+                :settings="{ settingOption: value, settingOption: value }" :required="true" />
             </td>
             <td>
               <div class="d-flex">
-                <input
-                  type="text"
-                  v-model="input.dosage"
-                  class="form-control w-100 me-1"
-                  placeholder="dosage...ex: 1"
-                  required
-                />
+                <input type="text" v-model="input.dosage" class="form-control w-100 me-1" placeholder="dosage...ex: 1"
+                  required />
 
-                <select
-                  class="form-select"
-                  style="width: 100px"
-                  v-model="input.dosage_unite"
-                  required
-                >
+                <select class="form-select" style="width: 100px" v-model="input.dosage_unite" required>
                   <option label="Unité" selected hidden></option>
                   <option value="mg">mg</option>
                   <option value="ml">ml</option>
@@ -68,20 +93,10 @@
             </td>
             <td>
               <div class="d-flex align-items-center">
-                <input
-                  type="text"
-                  v-model="input.frequence"
-                  class="form-control w-100"
-                  placeholder="Fréquence...ex: 1"
-                  required
-                />
+                <input type="text" v-model="input.frequence" class="form-control w-100" placeholder="Fréquence...ex: 1"
+                  required />
                 <div class="mx-1">/</div>
-                <select
-                  class="form-select"
-                  style="width: 100px"
-                  v-model="input.frequence_unite"
-                  required
-                >
+                <select class="form-select" style="width: 100px" v-model="input.frequence_unite" required>
                   <option value="Jour" selected>Jour</option>
                   <option value="Semaine">Semaine</option>
                   <option value="Mois">Mois</option>
@@ -90,20 +105,10 @@
             </td>
             <td>
               <div class="d-flex align-items-center">
-                <input
-                  type="text"
-                  v-model="input.duree"
-                  class="form-control w-100 me-1"
-                  placeholder="Durée...ex: 1"
-                  required
-                />
+                <input type="text" v-model="input.duree" class="form-control w-100 me-1" placeholder="Durée...ex: 1"
+                  required />
                 <div class="mx-1">/</div>
-                <select
-                  class="form-select"
-                  style="width: 100px"
-                  v-model="input.duree_unite"
-                  required
-                >
+                <select class="form-select" style="width: 100px" v-model="input.duree_unite" required>
                   <option value="Jours" selected>Jours</option>
                   <option value="Semaines">Semaines</option>
                   <option value="Mois">Mois</option>
@@ -112,23 +117,14 @@
             </td>
             <td>
               <div class="d-flex align-items-center">
-                <input
-                  type="text"
-                  v-model="input.qte"
-                  class="form-control w-100"
-                  placeholder="Quantité ...ex: 1"
-                  required
-                />
+                <input type="text" v-model="input.qte" class="form-control w-100" placeholder="Quantité ...ex: 1"
+                  required />
               </div>
             </td>
 
             <td>
-              <button
-                class="btn btn-soft-danger"
-                type="button"
-                :disabled="tempPrescriptions.length === 1"
-                @click="index !== 0 ? tempPrescriptions.splice(index, 1) : () => null"
-              >
+              <button class="btn btn-soft-danger" type="button" :disabled="tempPrescriptions.length === 1"
+                @click="index !== 0 ? tempPrescriptions.splice(index, 1) : () => null">
                 <i class="ri-close-line"></i>
               </button>
             </td>
@@ -147,15 +143,8 @@
       <bs-toast id="errorsToast5" :msg="errors_msg" />
       <div class="d-flex align-items-end justify-content-end w-100 mt-4">
         <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="formCheck2"
-            v-model="isPrinted"
-          />
-          <label class="form-check-label" for="formCheck2"
-            >Lancer l'impression après validation</label
-          >
+          <input class="form-check-input" type="checkbox" id="formCheck2" v-model="isPrinted" />
+          <label class="form-check-label" for="formCheck2">Lancer l'impression après validation</label>
         </div>
       </div>
       <div class="d-flex align-items-end justify-content-end w-100 mt-4">
@@ -163,13 +152,10 @@
           <i class="ri-restart-line label-icon align-middle fs-16 ms-2"></i> Annuler
         </button>
 
-        <load-button
-          btn-type="submit"
-          :loading="formLoadingPrescriptions"
-          class-name="btn-success btn-border btn-label right nexttab nexttab "
-          ><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Valider
-          Soumettre la préscription</load-button
-        >
+        <load-button btn-type="submit" :loading="formLoadingPrescriptions"
+          class-name="btn-success btn-border btn-label right nexttab nexttab "><i
+            class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Valider
+          Soumettre la préscription</load-button>
       </div>
     </form>
   </div>
@@ -336,11 +322,11 @@ export default {
   props: {
     currentConsult: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     selectedPatient: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
   },
 };

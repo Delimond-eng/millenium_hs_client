@@ -5,18 +5,13 @@
         <!-- start page title -->
         <div class="row">
           <div class="col-12 col-md-12">
-            <div
-              class="page-title-box d-sm-flex align-items-center justify-content-between"
-            >
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
               <h4 class="mb-sm-0">Création patient</h4>
               <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item">
-                    <a
-                      href="#/home/patients/list"
-                      class="btn btn-info btn-border btn-sm text-white"
-                      ><i class="ri-list-check-2"></i> Voir la liste des patients</a
-                    >
+                    <a href="#/home/patients/list" class="btn btn-info btn-border btn-sm text-white"><i
+                        class="ri-list-check-2"></i> Voir la liste des patients</a>
                   </li>
                 </ol>
               </div>
@@ -32,44 +27,23 @@
                   Veuillez remplir tous les champs requis !
                 </h4>
               </div>
-              <ul
-                class="nav nav-pills nav-custom nav-custom-light animation-nav m-3"
-                role="tablist"
-              >
+              <ul class="nav nav-pills nav-custom nav-custom-light animation-nav m-3" role="tablist">
                 <li class="nav-item me-2" role="presentation">
-                  <a
-                    class="nav-link active"
-                    data-bs-toggle="tab"
-                    href="#basic-infos"
-                    role="tab"
-                    aria-selected="true"
-                  >
+                  <a class="nav-link active" data-bs-toggle="tab" href="#basic-infos" role="tab" aria-selected="true">
                     <i class="ri-user-3-line me-2"></i> Informations personnelles
                   </a>
                 </li>
                 <li class="nav-item me-2" role="presentation">
-                  <a
-                    class="nav-link"
-                    data-bs-toggle="tab"
-                    href="#medic-infos"
-                    role="tab"
-                    aria-selected="false"
-                    tabindex="-1"
-                  >
+                  <a class="nav-link" data-bs-toggle="tab" href="#medic-infos" role="tab" aria-selected="false"
+                    tabindex="-1">
                     <i class="ri-stethoscope-line me-2"></i> Signes vitaux
                     <sup class="text-danger">*</sup>
                   </a>
                 </li>
 
                 <li class="nav-item" role="presentation">
-                  <a
-                    class="nav-link"
-                    data-bs-toggle="tab"
-                    href="#pay-tab"
-                    role="tab"
-                    aria-selected="false"
-                    tabindex="-1"
-                  >
+                  <a class="nav-link" data-bs-toggle="tab" href="#pay-tab" role="tab" aria-selected="false"
+                    tabindex="-1">
                     <i class="ri-money-dollar-box-line me-2"></i> Paiement
                     <sup class="text-danger">*</sup>
                   </a>
@@ -82,52 +56,26 @@
                     <div class="row">
                       <div class="col-md-2">
                         <div class="mt-3">
-                          <label class="form-label"
-                            >Assurance <sup class="text-danger">(Optionnel)</sup></label
-                          >
-                          <select
-                            class="form-select"
-                            @change="
-                              $event.target.value === 'Oui'
-                                ? (isAssured = true)
-                                : (isAssured = false);
-                              form.num_assurance = '';
-                            "
-                          >
+                          <label class="form-label">Assurance <sup class="text-danger">(Optionnel)</sup></label>
+                          <select class="form-select" v-model="form.assure">
                             <option value="Non" selected>Non</option>
                             <option value="Oui">Oui</option>
                           </select>
                         </div>
                       </div>
 
-                      <div class="col-md-6" v-if="isAssured">
+                      <div class="col-md-6" v-if="form.assure === 'Oui'">
                         <div class="mt-3">
-                          <label class="form-label"
-                            >Numéro assurance<sup class="text-danger">*</sup></label
-                          >
+                          <label class="form-label">Numéro assurance<sup class="text-danger">*</sup></label>
                           <div class="input-group">
-                            <input
-                              type="text"
-                              @input="findAssureInfos"
-                              v-model="form.num_assurance"
-                              class="form-control form-control-icon"
-                              required
-                              :readonly="form.patient_id !== ''"
-                              placeholder="saisir le n° assurance du patient..."
-                            />
-                            <button
-                              type="button"
-                              @click="$showBsModal('assuranceInfoModal')"
-                              v-if="assuranceInfos"
-                              class="btn btn-info"
-                            >
+                            <input type="text" @input="findAssureInfos" v-model="form.num_assurance"
+                              class="form-control form-control-icon" required :readonly="form.patient_id !== ''"
+                              placeholder="saisir le n° assurance du patient..." />
+                            <button type="button" @click="$showBsModal('assuranceInfoModal')" v-if="assuranceInfos"
+                              class="btn btn-info">
                               <i class="ri-eye-2-line"></i> Voir détails
                             </button>
-                            <button
-                              v-else-if="searchLoading"
-                              disabled
-                              class="btn btn-icon btn-dark"
-                            >
+                            <button v-else-if="searchLoading" disabled class="btn btn-icon btn-dark">
                               <svg-loading size="20"></svg-loading>
                             </button>
                           </div>
@@ -138,13 +86,8 @@
                         <div class="mt-3">
                           <label for="patientCode" class="form-label">Patient code</label>
                           <div class="form-icon">
-                            <input
-                              type="text"
-                              class="form-control form-control-icon"
-                              id="patientCode"
-                              v-model="pcode"
-                              disabled
-                            />
+                            <input type="text" class="form-control form-control-icon" id="patientCode" v-model="pcode"
+                              disabled />
                             <i class="bx bx-hash"></i>
                           </div>
                         </div>
@@ -152,18 +95,10 @@
 
                       <div class="col-md-2">
                         <div class="mt-3">
-                          <label for="appelCode" class="form-label"
-                            >Code appel <sup class="text-danger">*</sup></label
-                          >
+                          <label for="appelCode" class="form-label">Code appel <sup class="text-danger">*</sup></label>
                           <div class="form-icon">
-                            <input
-                              type="text"
-                              class="form-control form-control-icon"
-                              id="appelCode"
-                              placeholder="code d'appel"
-                              v-model="form.code_appel"
-                              required
-                            />
+                            <input type="text" class="form-control form-control-icon" id="appelCode"
+                              placeholder="code d'appel" v-model="form.code_appel" required />
                             <i class="bx bx-hash"></i>
                           </div>
                         </div>
@@ -172,18 +107,11 @@
                       <!-- nom input -->
                       <div class="col-md-6">
                         <div class="mt-3">
-                          <label class="form-label"
-                            >Nom <sup class="text-danger">*</sup></label
-                          >
+                          <label class="form-label">Nom <sup class="text-danger">*</sup></label>
                           <div class="form-icon">
-                            <input
-                              type="text"
-                              v-model="form.nom"
-                              class="form-control form-control-icon"
-                              placeholder="Saisir le nom du patient...ex:KAYEMBE"
-                              required
-                              :readonly="form.patient_id !== ''"
-                            />
+                            <input type="text" v-model="form.nom" class="form-control form-control-icon"
+                              placeholder="Saisir le nom du patient...ex:KAYEMBE" required
+                              :readonly="form.patient_id !== ''" />
                             <i class="ri-user-2-line"></i>
                           </div>
                         </div>
@@ -192,18 +120,11 @@
                       <!-- prenom input -->
                       <div class="col-md-6">
                         <div class="mt-3">
-                          <label class="form-label"
-                            >Prénom <sup class="text-danger">*</sup></label
-                          >
+                          <label class="form-label">Prénom <sup class="text-danger">*</sup></label>
                           <div class="form-icon">
-                            <input
-                              type="text"
-                              v-model="form.prenom"
-                              class="form-control form-control-icon"
-                              placeholder="Saisir le prénom du patient...ex:Lionnel"
-                              required
-                              :readonly="form.patient_id !== ''"
-                            />
+                            <input type="text" v-model="form.prenom" class="form-control form-control-icon"
+                              placeholder="Saisir le prénom du patient...ex:Lionnel" required
+                              :readonly="form.patient_id !== ''" />
                             <i class="ri-user-2-line"></i>
                           </div>
                         </div>
@@ -212,21 +133,11 @@
                       <!-- patient sexe select -->
                       <div class="col-md-3">
                         <div class="mt-3">
-                          <label class="form-label"
-                            >Sexe <sup class="text-danger">*</sup></label
-                          >
+                          <label class="form-label">Sexe <sup class="text-danger">*</sup></label>
                           <div class="form-icon">
-                            <select
-                              class="form-select"
-                              id="inputGroupSelect01"
-                              v-model="form.sexe"
-                              :readonly="form.patient_id !== ''"
-                            >
-                              <option
-                                selected
-                                label="Sélectionner un sexe"
-                                hidden
-                              ></option>
+                            <select class="form-select" id="inputGroupSelect01" v-model="form.sexe"
+                              :readonly="form.patient_id !== ''">
+                              <option selected label="Sélectionner un sexe" hidden></option>
                               <option value="M">Masculin</option>
                               <option value="F">Féminin</option>
                             </select>
@@ -237,36 +148,21 @@
                       <!-- telephone input -->
                       <div class="col-md-3">
                         <div class="mt-3">
-                          <label class="form-label"
-                            >Téléphone<sup class="text-danger">*</sup></label
-                          >
+                          <label class="form-label">Téléphone<sup class="text-danger">*</sup></label>
                           <div class="form-icon">
-                            <input
-                              type="text"
-                              v-model="form.telephone"
-                              class="form-control form-control-icon"
-                              placeholder="Saisir le tél... ex: +(243) 810000000"
-                              :readonly="form.patient_id !== ''"
-                            />
+                            <input type="text" v-model="form.telephone" class="form-control form-control-icon"
+                              placeholder="Saisir le tél... ex: +(243) 810000000" :readonly="form.patient_id !== ''" />
                             <i class="ri-phone-line"></i>
                           </div>
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="mt-3">
-                          <label class="form-label"
-                            >Téléphone d'urgence<sup class="text-danger"
-                              >(optionnel)</sup
-                            ></label
-                          >
+                          <label class="form-label">Téléphone d'urgence<sup
+                              class="text-danger">(optionnel)</sup></label>
                           <div class="form-icon">
-                            <input
-                              type="text"
-                              v-model="form.telephone_urgence"
-                              class="form-control form-control-icon"
-                              placeholder="Saisir le tél... ex: +(243) 810000000"
-                              :readonly="form.patient_id !== ''"
-                            />
+                            <input type="text" v-model="form.telephone_urgence" class="form-control form-control-icon"
+                              placeholder="Saisir le tél... ex: +(243) 810000000" :readonly="form.patient_id !== ''" />
                             <i class="ri-phone-line"></i>
                           </div>
                         </div>
@@ -275,17 +171,10 @@
                       <!-- sate naissance input -->
                       <div class="col-md-3">
                         <div class="mt-3">
-                          <label class="form-label"
-                            >Date de naissance<sup class="text-danger">*</sup></label
-                          >
+                          <label class="form-label">Date de naissance<sup class="text-danger">*</sup></label>
                           <div class="form-icon">
-                            <input
-                              type="date"
-                              v-model="form.datenais"
-                              class="form-control form-control-icon"
-                              required
-                              :readonly="form.patient_id !== ''"
-                            />
+                            <input type="date" v-model="form.datenais" class="form-control form-control-icon" required
+                              :readonly="form.patient_id !== ''" />
                             <i class="ri-phone-line"></i>
                           </div>
                         </div>
@@ -293,15 +182,9 @@
 
                       <div class="col-md-3">
                         <div class="mt-3">
-                          <label class="form-label"
-                            >Etat civil<sup class="text-danger">*</sup></label
-                          >
+                          <label class="form-label">Etat civil<sup class="text-danger">*</sup></label>
                           <select class="form-select" v-model="form.etat_civil" required>
-                            <option
-                              selected
-                              hidden
-                              label="Sélectionner Etat civil"
-                            ></option>
+                            <option selected hidden label="Sélectionner Etat civil"></option>
                             <option value="Célibataire">Célibataire</option>
                             <option value="Marié">Marié(e)</option>
                             <option value="Divorcé">Divorcé(e)</option>
@@ -311,17 +194,9 @@
                       </div>
                       <div class="col-md-3">
                         <div class="mt-3">
-                          <label class="form-label"
-                            >Groupe sanguin<sup class="text-danger"
-                              >(Optionnel)</sup
-                            ></label
-                          >
+                          <label class="form-label">Groupe sanguin<sup class="text-danger">(Optionnel)</sup></label>
                           <select class="form-select" v-model="form.groupe_sang">
-                            <option
-                              selected
-                              hidden
-                              label="Sélectionner le groupe sanguin"
-                            ></option>
+                            <option selected hidden label="Sélectionner le groupe sanguin"></option>
                             <option value="A">A</option>
                             <option value="B">B</option>
                             <option value="AB">AB</option>
@@ -335,14 +210,9 @@
                       <!-- adresse input -->
                       <div class="col-md-12">
                         <div class="mt-3">
-                          <label class="form-label"
-                            >Adresse<sup class="text-danger">*</sup></label
-                          >
-                          <textarea
-                            class="form-control"
-                            v-model="form.adresse"
-                            placeholder="Saisir l'adresse du patient... ex: n°.. av.. Q.. C.."
-                          ></textarea>
+                          <label class="form-label">Adresse<sup class="text-danger">*</sup></label>
+                          <textarea class="form-control" v-model="form.adresse"
+                            placeholder="Saisir l'adresse du patient... ex: n°.. av.. Q.. C.."></textarea>
                         </div>
                       </div>
                     </div>
@@ -352,17 +222,10 @@
                       <!-- patient poids input -->
                       <div class="col-md-4">
                         <div>
-                          <label class="form-label"
-                            >Poids<sup class="text-danger">*</sup></label
-                          >
+                          <label class="form-label">Poids<sup class="text-danger">*</sup></label>
                           <div class="form-icon">
-                            <input
-                              type="number"
-                              v-model="form_details.poids"
-                              class="form-control form-control-icon"
-                              placeholder="Saisir le poids... ex: 63.3"
-                              required
-                            />
+                            <input type="number" v-model="form_details.poids" class="form-control form-control-icon"
+                              placeholder="Saisir le poids... ex: 63.3" required />
                             <i class="ri-scales-line"></i>
                           </div>
                         </div>
@@ -371,17 +234,11 @@
                       <!-- Temperature input -->
                       <div class="col-md-4">
                         <div>
-                          <label class="form-label"
-                            >Temperature<sup class="text-danger">*</sup></label
-                          >
+                          <label class="form-label">Temperature<sup class="text-danger">*</sup></label>
                           <div class="form-icon">
-                            <input
-                              type="number"
-                              v-model="form_details.temperature"
+                            <input type="number" v-model="form_details.temperature"
                               class="form-control form-control-icon rounded-end-0"
-                              placeholder="Saisir le T°... ex: 34.5"
-                              required
-                            />
+                              placeholder="Saisir le T°... ex: 34.5" required />
                             <i class="ri-contrast-drop-2-line"></i>
                           </div>
                         </div>
@@ -390,16 +247,10 @@
                       <!-- taille input -->
                       <div class="col-md-4">
                         <div>
-                          <label class="form-label"
-                            >Taille<sup class="text-danger"> (optionnelle)</sup></label
-                          >
+                          <label class="form-label">Taille<sup class="text-danger"> (optionnelle)</sup></label>
                           <div class="form-icon">
-                            <input
-                              type="text"
-                              v-model="form_details.taille"
-                              class="form-control form-control-icon"
-                              placeholder="Saisir la taille... ex: 170"
-                            />
+                            <input type="text" v-model="form_details.taille" class="form-control form-control-icon"
+                              placeholder="Saisir la taille... ex: 170" />
                             <i class="ri-ruler-line"></i>
                           </div>
                         </div>
@@ -408,18 +259,11 @@
                       <!-- tension arterielle input -->
                       <div class="col-md-4 mt-3">
                         <div>
-                          <label class="form-label"
-                            >Tension arterielle<sup class="text-danger"
-                              >(Optionnelle)</sup
-                            ></label
-                          >
+                          <label class="form-label">Tension arterielle<sup
+                              class="text-danger">(Optionnelle)</sup></label>
                           <div class="form-icon">
-                            <input
-                              type="text"
-                              v-model="form_details.tension_art"
-                              class="form-control form-control-icon"
-                              placeholder="tension arterielle..."
-                            />
+                            <input type="text" v-model="form_details.tension_art" class="form-control form-control-icon"
+                              placeholder="tension arterielle..." />
                             <i class="bx bx-pulse"></i>
                           </div>
                         </div>
@@ -428,32 +272,20 @@
                       <!-- frequence cardio input -->
                       <div class="col-md-4 mt-3">
                         <div>
-                          <label class="form-label"
-                            >Pulsation<sup class="text-danger">(Optionnelle)</sup></label
-                          >
+                          <label class="form-label">Pulsation<sup class="text-danger">(Optionnelle)</sup></label>
                           <div class="form-icon">
-                            <input
-                              type="text"
-                              v-model="form_details.freq_cardio"
-                              class="form-control form-control-icon"
-                              placeholder="Entrer le pouls du patient..."
-                            />
+                            <input type="text" v-model="form_details.freq_cardio" class="form-control form-control-icon"
+                              placeholder="Entrer le pouls du patient..." />
                             <i class="bx bx-pulse"></i>
                           </div>
                         </div>
                       </div>
                       <div class="col-md-4 mt-3">
                         <div>
-                          <label class="form-label"
-                            >Saturation<sup class="text-danger">(Optionnelle)</sup></label
-                          >
+                          <label class="form-label">Saturation<sup class="text-danger">(Optionnelle)</sup></label>
                           <div class="form-icon">
-                            <input
-                              type="text"
-                              v-model="form_details.saturation"
-                              class="form-control form-control-icon"
-                              placeholder="Entrer la saturation du patient..."
-                            />
+                            <input type="text" v-model="form_details.saturation" class="form-control form-control-icon"
+                              placeholder="Entrer la saturation du patient..." />
                             <i class="bx bx-pulse"></i>
                           </div>
                         </div>
@@ -464,51 +296,26 @@
                     <div class="row d-flex justify-content-center align-items-center">
                       <!-- Paiements inputs -->
                       <div class="mb-2 mt-2 col-md-6">
-                        <label for="hsnom"
-                          >Facturation type<sup class="text-danger">*</sup>
+                        <label for="hsnom">Facturation type<sup class="text-danger">*</sup>
                         </label>
                         <div class="d-flex">
-                          <select
-                            class="form-select flex-grow-0"
-                            v-model="selectedConfig"
-                            @change="updatePaiement"
-                            required
-                          >
-                            <option
-                              value=""
-                              label="Sélectionnez une facturation ..."
-                              selected
-                              hidden
-                            ></option>
-                            <option
-                              v-for="(item, index) in config.facturations"
-                              :value="item"
-                              :key="index"
-                            >
+                          <select class="form-select flex-grow-0" v-model="selectedConfig" @change="updatePaiement"
+                            required>
+                            <option value="" label="Sélectionnez une facturation ..." selected hidden></option>
+                            <option v-for="(item, index) in config.facturations" :value="item" :key="index">
                               {{ item.facturation_config_libelle }}
                             </option>
                           </select>
                         </div>
                       </div>
                       <div class="mb-2 mt-2 col-md-6">
-                        <label for="hsnom"
-                          >Montant<sup class="text-danger">*</sup>
+                        <label for="hsnom">Montant<sup class="text-danger">*</sup>
                         </label>
                         <div class="d-flex">
-                          <input
-                            type="number"
-                            v-model="paiement.montant"
-                            class="form-control me-1 flex-fill"
-                            id="exampleInputEmail1"
-                            placeholder="Entrer le montant du paiement..."
-                            required
-                          />
-                          <select
-                            class="form-control flex-grow-0"
-                            style="width: 100px"
-                            v-model="paiement.devise"
-                            required
-                          >
+                          <input type="number" v-model="paiement.montant" class="form-control me-1 flex-fill"
+                            id="exampleInputEmail1" placeholder="Entrer le montant du paiement..." required />
+                          <select class="form-control flex-grow-0" style="width: 100px" v-model="paiement.devise"
+                            required>
                             <option value="CDF" selected>CDF</option>
                             <option value="CDF" selected>USD</option>
                             <option value="EURO" selected>EURO</option>
@@ -519,28 +326,12 @@
                   </div>
                 </div>
                 <bs-toast id="errorsToast" :msg="errors_msg" />
-                <div
-                  div
-                  class="d-flex align-items-end justify-content-end mt-4"
-                  v-if="$user().agent_id !== 0"
-                >
-                  <load-button
-                    btn-type="submit"
-                    :loading="formLoading"
-                    class-name="btn-success btn-border btn-label right nexttab nexttab me-2"
-                  >
-                    <span
-                      ><i
-                        class="ri-check-double-fill label-icon align-middle fs-16 ms-2"
-                      ></i
-                      >Enregistrer</span
-                    >
+                <div div class="d-flex align-items-end justify-content-end mt-4" v-if="$user().agent_id !== 0">
+                  <load-button btn-type="submit" :loading="formLoading"
+                    class-name="btn-success btn-border btn-label right nexttab nexttab me-2">
+                    <span><i class="ri-check-double-fill label-icon align-middle fs-16 ms-2"></i>Enregistrer</span>
                   </load-button>
-                  <button
-                    type="button"
-                    class="btn btn-light btn-border btn-label right"
-                    @click.prevent="cleanField"
-                  >
+                  <button type="button" class="btn btn-light btn-border btn-label right" @click.prevent="cleanField">
                     <i class="ri-restart-line label-icon align-middle fs-16 ms-2"></i>
                     Annuler
                   </button>
@@ -569,10 +360,8 @@
     </footer>
 
     <div class="customizer-setting d-block">
-      <div
-        class="btn-info text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2"
-        @click.prevent="$router.push('/home/patients/list')"
-      >
+      <div class="btn-info text-white rounded-pill shadow-lg btn btn-icon btn-lg p-2"
+        @click.prevent="$router.push('/home/patients/list')">
         <i class="ri-list-check-2 fs-22"></i>
       </div>
     </div>
@@ -596,6 +385,7 @@ export default {
         sexe: "",
         telephone: "",
         telephone_urgence: "",
+        assure: "Non",
         adresse: "",
         datenais: "",
         patient_id: "",
@@ -711,72 +501,6 @@ export default {
         });
     },
 
-    /**
-     * SHOW SELECTED PATIENTS
-     */
-    loadCachedPatient() {
-      this.$nextTick(() => {
-        let patient = JSON.parse(localStorage.getItem("current-patient"));
-        if (patient !== null && patient !== undefined) {
-          this.$store.commit("services/SET_CODE", patient.patient_code);
-          this.form.code = patient.patient_code;
-          this.form.nom = patient.patient_nom;
-          this.form.prenom = patient.patient_prenom;
-          this.form.sexe = patient.patient_sexe;
-          this.form.adresse = patient.patient_adresse;
-          this.form.datenais = patient.patient_datenais;
-          this.form.patient_id = patient.id;
-          this.form.telephone = patient.patient_telephone;
-        } else {
-          this.$store.dispatch("services/showCode");
-        }
-      });
-    },
-
-    async loadPatientsList() {
-      let self = this;
-      let patients = await this.$store.dispatch("services/viewAllPatients");
-      /**
-       * DESTROY AND SELECT PATIENTS
-       */
-      if (this.selectPatient !== null) this.selectPatient.select2("destroy");
-      this.selectPatient = $(".patient-select2")
-        .select2({
-          placeholder: "Veuillez sélectionner un patient...",
-          data: $.map(patients, function (item) {
-            return {
-              text: `${item.patient_code} : ${item.patient_nom} ${item.patient_prenom}`,
-              id: item.id,
-            };
-          }),
-        })
-        .on("change", function () {
-          let id = $(this).val();
-          if (id !== "") {
-            self.searchLoading = true;
-            self.$store.dispatch("services/showPatient", id).then((patient) => {
-              self.searchLoading = false;
-              /**
-               * SHOW PATIENT DATA
-               */
-              if (patient !== null) {
-                self.$store.commit("services/SET_CODE", patient.patient_code);
-                self.form.code = patient.patient_code;
-                self.form.nom = patient.patient_nom;
-                self.form.prenom = patient.patient_prenom;
-                self.form.sexe = patient.patient_sexe;
-                self.form.adresse = patient.patient_adresse;
-                self.form.datenais = patient.patient_datenais;
-                self.form.patient_id = patient.id;
-                self.form.telephone = patient.patient_telephone;
-              } else {
-                self.cleanField();
-              }
-            });
-          }
-        });
-    },
-
     updatePaiement() {
       if (this.selectedConfig) {
         this.paiement.facturation_id = this.selectedConfig.id;
@@ -813,18 +537,33 @@ export default {
   },
 
   unmounted() {
-    /*  if (this.selectPatient !== null) this.selectPatient.select2('destroy'); */
-    /**
-     * renitialise les données dans le cache !
-     */
-    localStorage.removeItem("current-patient");
+    localStorage.removeItem("cached-patient");
   },
 
-  async mounted() {
-    /**
-     * Charge les données du patient qui se trouve dans le cache !
-     */
-    this.loadCachedPatient();
+  beforeRouteEnter(to, from, next) {
+    const cachedPatient = localStorage.getItem("cached-patient");
+    next((vm) => {
+      vm.$nextTick(() => {
+        if (cachedPatient !== null) {
+          const patient = JSON.parse(cachedPatient);
+          vm.$store.commit("services/SET_CODE", patient.patient_code);
+          vm.form.patient_id = patient.id;
+          vm.form.code = patient.patient_code;
+          vm.form.nom = patient.patient_nom;
+          vm.form.prenom = patient.patient_prenom;
+          vm.form.sexe = patient.patient_sexe;
+          vm.form.adresse = patient.patient_adresse;
+          vm.form.telephone_urgence = patient.patient_contact_urgence;
+          if (patient.patient_num_assurance !== null) {
+            vm.form.assure = "Oui";
+            vm.form.num_assurance = patient.patient_num_assurance;
+          }
+          vm.form.datenais = patient.patient_datenais;
+          vm.form.patient_id = patient.id;
+          vm.form.telephone = patient.patient_telephone;
+        }
+      });
+    });
   },
 
   computed: {

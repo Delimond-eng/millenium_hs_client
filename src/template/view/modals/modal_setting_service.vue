@@ -17,7 +17,7 @@
                                 <div class="col-lg">
                                     <div class="form-icon">
                                         <input type="text" class="form-control form-control-icon" id="serviceLibelle"
-                                            placeholder="Entrez libellé service...">
+                                            placeholder="Entrez libellé service..." />
                                         <i class="ri-settings-2-line"></i>
                                     </div>
                                 </div>
@@ -27,8 +27,9 @@
                                     </button>
                                 </div>
                             </div>
-                            <button class="btn btn-success btn-border text-uppercase w-100 mt-2">Soumettre &
-                                valider</button>
+                            <button class="btn btn-success btn-border text-uppercase w-100 mt-2">
+                                Soumettre & valider
+                            </button>
                         </div>
                     </div>
 
@@ -45,16 +46,16 @@
                                     <td>Annette Black</td>
                                     <td>
                                         <div class="d-flex">
-                                            <button class="btn btn-info btn-sm btn-border me-1"><i
-                                                    class=" ri-edit-box-line"></i></button>
-                                            <button class="btn btn-light btn-sm btn-border"><i
-                                                    class=" ri-delete-bin-3-line"></i></button>
+                                            <button class="btn btn-info btn-sm btn-border me-1">
+                                                <i class="ri-edit-box-line"></i>
+                                            </button>
+                                            <button class="btn btn-light btn-sm btn-border">
+                                                <i class="ri-delete-bin-3-line"></i>
+                                            </button>
                                         </div>
                                     </td>
-
                                 </tr>
                             </tbody>
-
                         </table>
                     </div>
                 </div>

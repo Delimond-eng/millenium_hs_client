@@ -1,11 +1,6 @@
 <template>
   <!--end tab-pane-->
-  <div
-    class="tab-pane fade"
-    id="custom-v-pills-docs"
-    role="tabpanel"
-    aria-labelledby="custom-v-pills-docs-tab"
-  >
+  <div class="tab-pane fade" id="custom-v-pills-docs" role="tabpanel" aria-labelledby="custom-v-pills-docs-tab">
     <div v-if="docs.length > 0">
       <div class="d-flex w-100 justify-content-between">
         <h2 class="fs-18 text-start fw-bold text-uppercase mb-2 mt-3 text-primary">
@@ -19,24 +14,11 @@
 
       <div class="row">
         <div class="col-md-3">
-          <div
-            class="nav flex-column p-2 nav-pills text-center"
-            id="v-pills-tab"
-            role="tablist"
-            aria-orientation="vertical"
-          >
-            <div
-              class="w-100"
-              v-for="(data, index) in docs"
-              :key="index"
-              :id="`consult${data.id}`"
-            >
-              <button
-                type="button"
-                :class="index === selectedIndex ? 'btn-secondary' : 'btn-light'"
-                @click="selectedIndex = index"
-                class="btn btn-lg bg-gradient waves-effect waves-light w-100"
-              >
+          <div class="nav flex-column p-2 nav-pills text-center" id="v-pills-tab" role="tablist"
+            aria-orientation="vertical">
+            <div class="w-100" v-for="(data, index) in docs" :key="index" :id="`consult${data.id}`">
+              <button type="button" :class="index === selectedIndex ? 'btn-secondary' : 'btn-light'"
+                @click="selectedIndex = index" class="btn btn-lg bg-gradient waves-effect waves-light w-100">
                 <i v-if="index === selectedIndex" class="ri-play-mini-fill me-3"></i>
                 Consultation du {{ data.consult_create_At }}
               </button>
@@ -46,27 +28,55 @@
         </div>
         <!-- end col -->
         <div class="col-md-9" v-if="docs.length > 0">
-          <div class="tab-content text-muted mt-4 mt-md-0" id="v-pills-tabContent">
-            <div
-              class="tab-pane fade show active"
-              id="v-pills-home"
-              role="tabpanel"
-              aria-labelledby="v-pills-home-tab"
-            >
-              <div class="d-flex justify-content-between w-100">
-                <h1 class="fs-36 fw-bold text-secondary">
-                  Consultation du {{ docs[selectedIndex].consult_create_At }}
-                </h1>
+          <div class="card shadow-none border-light">
+            <div class="card-header align-items-xl-center d-xl-flex">
+              <h1 class="fs-18 fw-bold text-secondary flex-grow-1 mb-xl-0">
+                Consultation du {{ docs[selectedIndex].consult_create_At }}
+              </h1>
+              <div class="flex-shrink-0">
+                <ul class="nav nav-pills card-header-pills" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#infos" role="tab" aria-selected="true">
+                      Infos médicales
+                    </a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" data-bs-toggle="tab" href="#antecedents" role="tab" aria-selected="false"
+                      tabindex="-1">
+                      Antécedents
+                    </a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" data-bs-toggle="tab" href="#prescriptions" role="tab" aria-selected="false"
+                      tabindex="-1">
+                      Prescriptions
+                    </a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" data-bs-toggle="tab" href="#examens2" role="tab" aria-selected="false"
+                      tabindex="-1">
+                      Examens
+                    </a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" data-bs-toggle="tab" href="#hospitalisations" role="tab" aria-selected="false"
+                      tabindex="-1">
+                      Hospitalisations
+                    </a>
+                  </li>
+                </ul>
               </div>
-              <div class="card border shadow-none mb-2">
-                <div class="card-body">
-                  <h6
-                    class="fs-14 fw-bold text-start mb-1 mt-3 text-primary bg-primary-subtle p-2 text-uppercase"
-                  >
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+              <!-- Tab panes -->
+              <div class="tab-content text-muted">
+                <div class="tab-pane active show" id="infos" role="tabpanel">
+                  <h6 class="fs-14 fw-bold text-start mb-1 mt-3 text-primary bg-primary-subtle p-2 text-uppercase">
                     Informations personnelles
                   </h6>
                   <div class="border border border-primary-subtle mb-3"></div>
-                  <div class="table-responsive">
+                  <div class="table-responsive text-dark">
                     <table class="table mb-0">
                       <tbody class="text-black">
                         <tr>
@@ -92,56 +102,49 @@
                         <tr>
                           <th scope="row">Temperature</th>
                           <td>
-                            <span v-if="docs[selectedIndex].signe"
-                              >{{ docs[selectedIndex].signe.patient_sv_temperature }}
+                            <span v-if="docs[selectedIndex].signe">{{ docs[selectedIndex].signe.patient_sv_temperature
+                              }}
                               {{
                                 docs[selectedIndex].signe.patient_sv_temperature_unite
-                              }}</span
-                            >
+                              }}</span>
                           </td>
                         </tr>
                         <tr>
                           <th scope="row">Taille</th>
                           <td>
-                            <span v-if="docs[selectedIndex].signe"
-                              >{{ docs[selectedIndex].signe.patient_sv_taille }}
+                            <span v-if="docs[selectedIndex].signe">{{ docs[selectedIndex].signe.patient_sv_taille }}
                               {{
                                 docs[selectedIndex].signe.patient_sv_taille_unite
-                              }}</span
-                            >
+                              }}</span>
                           </td>
                         </tr>
                         <tr>
                           <th scope="row">Fréquence cardiaque</th>
                           <td>
-                            <span v-if="docs[selectedIndex].signe"
-                              >{{ docs[selectedIndex].signe.patient_sv_freq_cardio }}
+                            <span v-if="docs[selectedIndex].signe">{{ docs[selectedIndex].signe.patient_sv_freq_cardio
+                              }}
                               {{
                                 docs[selectedIndex].signe.patient_sv_freq_cardio_unite
-                              }}</span
-                            >
+                              }}</span>
                           </td>
                         </tr>
                         <tr>
                           <th scope="row">Saturation</th>
                           <td>
-                            <span v-if="docs[selectedIndex].signe"
-                              >{{ docs[selectedIndex].signe.patient_sv_saturation }}
+                            <span v-if="docs[selectedIndex].signe">{{ docs[selectedIndex].signe.patient_sv_saturation }}
                               {{
                                 docs[selectedIndex].signe.patient_sv_saturation_unite
-                              }}</span
-                            >
+                              }}</span>
                           </td>
                         </tr>
                         <tr>
                           <th scope="row">Tension arterielle</th>
                           <td>
-                            <span v-if="docs[selectedIndex].signe"
-                              >{{ docs[selectedIndex].signe.patient_sv_tension_art }}
+                            <span v-if="docs[selectedIndex].signe">{{ docs[selectedIndex].signe.patient_sv_tension_art
+                              }}
                               {{
                                 docs[selectedIndex].signe.patient_sv_tension_art_unite
-                              }}</span
-                            >
+                              }}</span>
                           </td>
                         </tr>
                         <tr>
@@ -150,53 +153,19 @@
                             <span v-if="docs[selectedIndex].agent">
                               {{ docs[selectedIndex].agent.agent_matricule }}|
                               {{ docs[selectedIndex].agent.agent_nom }}
-                              {{ docs[selectedIndex].agent.agent_prenom }}</span
-                            >
+                              {{ docs[selectedIndex].agent.agent_prenom }}</span>
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-              </div>
-              <div
-                class="card border shadow-none mb-2"
-                v-if="docs[selectedIndex].symptomes.length > 0"
-              >
-                <div class="card-body">
-                  <h6
-                    class="fs-14 fw-bold text-start mb-1 mt-3 text-primary bg-primary-subtle p-2 text-uppercase"
-                  >
-                    Symptômes
-                  </h6>
-                  <div class="border border border-primary-subtle mb-3"></div>
-                  <ul class="list-group">
-                    <li
-                      v-for="(s, k) in docs[selectedIndex].symptomes"
-                      :key="k"
-                      class="list-group-item"
-                    >
-                      <i
-                        class="ri-checkbox-circle-line align-middle me-2 text-success"
-                      ></i>
-                      {{ s.consult_symptome_libelle }}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div
-                v-if="docs[selectedIndex].antecedents.length > 0"
-                class="card border shadow-none mb-lg-0"
-              >
-                <div class="card-body">
-                  <h6
-                    class="fs-14 fw-bold text-start mb-1 mt-3 text-primary bg-primary-subtle p-2 text-uppercase"
-                  >
+                <div class="tab-pane" id="antecedents" role="tabpanel">
+                  <h6 class="fs-14 fw-bold text-start mb-1 mt-3 text-primary bg-primary-subtle p-2 text-uppercase">
                     Antécedents
                   </h6>
                   <div class="border border border-primary-subtle mb-3"></div>
-                  <div class="table-responsive">
+                  <div class="table-responsive text-dark">
                     <table class="table mb-0">
                       <tbody class="text-black">
                         <tr v-for="(ant, l) in docs[selectedIndex].antecedents" :key="l">
@@ -209,23 +178,13 @@
                     </table>
                   </div>
                 </div>
-              </div>
-
-              <div
-                v-if="docs[selectedIndex].prescriptions.length > 0"
-                class="card border shadow-none mb-2"
-              >
-                <div class="card-body">
-                  <h6
-                    class="fs-14 fw-bold text-start mb-1 mt-3 text-primary bg-primary-subtle p-2 text-uppercase"
-                  >
+                <div class="tab-pane" id="prescriptions" role="tabpanel">
+                  <h6 class="fs-14 fw-bold text-start mb-1 mt-3 text-primary bg-primary-subtle p-2 text-uppercase">
                     Préscriptions
                   </h6>
                   <div class="border border border-primary-subtle mb-3"></div>
-                  <table
-                    class="table table-striped table-nowrap"
-                    v-if="docs[selectedIndex].prescriptions.length > 0"
-                  >
+                  <table class="table table-striped text-dark table-nowrap"
+                    v-if="docs[selectedIndex].prescriptions.length > 0">
                     <thead>
                       <tr class="text-dark text-uppercase">
                         <th scope="col">Medicament</th>
@@ -234,10 +193,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr
-                        v-for="(prescription, j) in docs[selectedIndex].prescriptions"
-                        :key="j"
-                      >
+                      <tr v-for="(prescription, j) in docs[selectedIndex].prescriptions" :key="j">
                         <td>
                           <span v-if="prescription.produit">{{
                             prescription.produit.produit_libelle
@@ -253,26 +209,17 @@
                         </td>
                         <td>
                           {{ prescription.prescription_traitement_qte }}
-                          {{ prescription.prescription_traitement_qte_unite }}
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-              </div>
-
-              <div
-                v-if="docs[selectedIndex].examens.length > 0"
-                class="card border shadow-none mb-2"
-              >
-                <div class="card-body">
-                  <h6
-                    class="fs-14 fw-bold text-start mb-1 mt-3 text-primary bg-primary-subtle p-2 text-uppercase"
-                  >
+                <div class="tab-pane" id="examens2" role="tabpanel">
+                  <h6 class="fs-14 fw-bold text-start mb-1 mt-3 text-primary bg-primary-subtle p-2 text-uppercase">
                     Examens
                   </h6>
                   <div class="border border border-primary-subtle mb-3"></div>
-                  <table class="table table-striped table-nowrap">
+                  <table class="table table-striped table-nowrap text-dark">
                     <thead>
                       <tr class="text-dark text-uppercase">
                         <th scope="col">Examen</th>
@@ -293,22 +240,17 @@
                     </tbody>
                   </table>
                 </div>
+                <div class="tab-pane" id="hospitalisations" role="tabpanel"></div>
               </div>
             </div>
+            <!-- end card-body -->
           </div>
         </div>
         <!--  end col -->
       </div>
     </div>
-    <div
-      v-else
-      class="d-flex justify-content-center align-items-center m-5 h-100 w-100 flex-column"
-    >
-      <img
-        src="assets/images/companies/doc3.png"
-        class="img-fluid mb-2"
-        alt="empty docs"
-      />
+    <div v-else class="d-flex justify-content-center align-items-center m-5 h-100 w-100 flex-column">
+      <img src="assets/images/companies/doc3.png" class="img-fluid mb-2" alt="empty docs" />
       <h1 class="fs-18">Aucun dossier disponible</h1>
     </div>
   </div>
@@ -334,7 +276,7 @@ export default {
   props: {
     selectedPatient: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
   },
 };

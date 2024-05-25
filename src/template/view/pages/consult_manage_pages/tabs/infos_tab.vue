@@ -11,9 +11,6 @@
         v-if="selectedPatient"
       >
         <h6 class="fs-14 text-primary fw-bold">Informations personnelles</h6>
-        <!-- <button class="btn btn-info btn-border btn-sm"> <i
-                                                                class="ri-folder-5-line "></i> Voir le parcours du
-                                                            patient</button> -->
         <div class="d-flex align-content-end align-items-center" v-if="selectedPatient">
           <span class="me-1">N° Jeton :</span>
           <span class="fw-bold text-primary fs-17">{{
@@ -138,7 +135,7 @@
               </tbody>
             </table>
           </div>
-          <div class="table-responsive" v-if="currentConsult !== null">
+          <div class="table-responsive" v-if="currentConsult">
             <table class="table mb-0">
               <tbody class="text-black">
                 <tr>
