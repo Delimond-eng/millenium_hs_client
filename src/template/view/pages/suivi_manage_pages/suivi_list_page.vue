@@ -73,10 +73,14 @@ export default {
           title: "Consulté par",
           render: function (data, type, row) {
             // Concaténer les valeurs de agent_nom et agent_prenom
-            return (
-              'Dr. ' + row.suivis[0].traitements[0].prescription.user.agent.agent_nom
-              + ' ' + row.suivis[0].traitements[0].prescription.user.agent.agent_prenom
-            );
+            if (row.suivis !== undefined && row.suivis.length > 0) {
+              return (
+                'Dr. ' + row.suivis[0].traitements[0].prescription.user.agent.agent_nom
+                + ' ' + row.suivis[0].traitements[0].prescription.user.agent.agent_prenom
+              );
+            }
+            return null;
+
           },
         },
       ],

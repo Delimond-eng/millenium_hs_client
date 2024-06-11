@@ -6,22 +6,22 @@
           <div class="modal-body login-modal p-4">
             <h5 class="text-white fs-20">Encaissement d'une prescription</h5>
             <p class="text-white-50 mb-1">
-              Veuillez sélectionner le produit disponible !
+              Veuillez entrer le code de la prescription pour voir les produits prescrits !
             </p>
           </div>
           <div class="modal-body p-4">
-            <div class="d-flex mb-3">
+            <form @submit.prevent="onSearch" class="d-flex mb-3">
               <div class="search-box flex-fill me-2">
                 <input type="text" class="form-control form-control-lg" id="searchProductList"
-                  placeholder="Entrez le code de la prescription..." v-model="search" />
+                  placeholder="Entrez le code de la prescription..." v-model="search" required />
                 <i class="ri-search-line search-icon"></i>
               </div>
-              <button class="btn btn-secondary btn-icon btn-lg">
+              <button type="submit" class="btn btn-secondary btn-icon btn-lg">
                 <i class="ri-search-2-line"></i>
               </button>
-            </div>
+            </form>
             <div class="table-responsive">
-              <table v-if="false" class="table align-middle table-nowrap mb-0">
+              <table v-if="prescriptions.length > 0" class="table align-middle table-nowrap mb-0">
                 <thead class="table-info">
                   <tr>
                     <th scope="col" style="width: 50px"></th>
@@ -29,31 +29,21 @@
                     <th class="sort fw-bold" style="width: 200px" scope="col">
                       Quantité
                     </th>
+                    <th></th>
                   </tr>
                 </thead>
-                <tbody class="list form-check-all">
-                  <!-- <tr v-for="(patient, index) in patients" :key="index">
-                                        <th scope="row">
-                                            <span class="spinner-border spinner-border-sm"
-                                                v-if="id === patient.id"></span>
-                                            <div class="form-check form-radio-success" v-else>
-                                                <input :disabled="id !== ''" class="form-check-input"
-                                                    @change.prevent="onSelect($event, patient)" type="radio"
-                                                    name="formradiocolor3" id="formradioRight7" />
-                                            </div>
-                                        </th>
-                                        <td class="id">
-                                            <a href="javascript:void(0);" class="fw-medium link-primary">{{
-                                        patient.patient_code_appel
-                                    }}</a>
-                                        </td>
-                                        <td class="name">
-                                            {{ patient.patient_nom }} {{ patient.patient_prenom }}
-                                        </td>
-                                    </tr> -->
+                <tbody>
+                  <tr v-for="(data, index) in prescriptions" :key="index">
+                    <td>{{ `${index + 1}`.padStart(2, "0") }}</td>
+                    <td><span v-if="data.produit">{{ data.produit.produit_libelle }} - {{ data.produit.type.type_libelle
+                        }}</span></td>
+                    <td>{{ data.prescription_traitement_qte }}</td>
+                    <td><button class="btn btn-icon btn-secondary" @click="onSelect(data)"><i class="ri-add-line"></i>
+                      </button></td>
+                  </tr>
                 </tbody>
               </table>
-              <state-empty title="Encaissement prescription médicale !" :expanded="false"
+              <state-empty v-else title="Encaissement prescription médicale !" :expanded="false"
                 description="Veuillez entrez le code sur la prescription pour voir le produit !"></state-empty>
             </div>
           </div>
@@ -72,34 +62,58 @@ export default {
     return {
       search: "",
       id: "",
+      prescriptions: []
     };
   },
   methods: {
-    onSelect(e, data) {
-      let checked = e.target.checked;
-      if (checked) {
-        this.id = data.id;
-        this.$store
-          .dispatch("services/showPatient", data.id)
-          .then((result) => {
-            this.id = "";
-            this.$emit("onSelect", result);
-            this.$closeBsModal("patientsPendingModal");
-          })
-          .catch((e) => {
-            this.id = "";
+    onSelect(data) {
+      for (var item of this.produits) {
+        if (item.stock < data.prescription_traitement_qte) {
+          Swal({
+            icon: "warning",
+            title: "Avertissement de stock !",
+            text: `le stock actuel pour ce produit est de ${item.stock} unités !`,
           });
+          return;
+        }
+        else if (item.produit_id === data.produit_id && item.stocks) {
+          item.operation_qte = data.prescription_traitement_qte;
+          this.$store.dispatch('pharmacie/addToCart', item);
+          let index = this.prescriptions.indexOf(data);
+          this.prescriptions.splice(index, 1);
+          if (this.prescriptions.length === 0) {
+            this.$closeBsModal("prescription-view-modal");
+          }
+        } else {
+          Swal({
+            icon: "warning",
+            title: "Produit non disponible!",
+            text: `le produit sélectionné n'est pas disponible dans la pharmacie ! !`,
+          });
+        }
       }
     },
-  },
-  mounted() {
-    let self = this;
-    $("#patientsPendingModal").on("hidden.bs.modal", function (e) {
-      const radios = document.querySelectorAll('input[type="radio"]');
-      radios.forEach((radio) => {
-        radio.checked = false;
+
+    onSearch(e) {
+      Swal.fire({
+        text: 'Chargement...',
+        timerProgressBar: true,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
       });
-    });
+      this.$store.dispatch('pharmacie/showPrescription', this.search).then((res) => {
+        this.prescriptions = res;
+        Swal.close();
+      })
+    }
+  },
+
+  computed: {
+    produits() {
+      return this.$store.getters['pharmacie/GET_SELL_PRODUCTS'];
+    }
   },
 };
 </script>

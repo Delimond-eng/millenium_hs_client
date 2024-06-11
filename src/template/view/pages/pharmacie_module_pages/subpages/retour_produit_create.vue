@@ -91,7 +91,7 @@ export default {
           placeholder: "Sélectionner un produit...",
           data: $.map(self.config.produits, function (item) {
             return {
-              text: `#${item.produit_code} | ${item.produit_libelle}`,
+              text: `#${item.produit_code} | ${item.produit_libelle} - ${item.type.type_libelle}`,
               id: item.id,
             };
           }),

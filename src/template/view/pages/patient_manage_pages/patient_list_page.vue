@@ -98,6 +98,7 @@
   <patient-card-print :data="selectedPatient" />
   <signe-vitaux-modal :detail="signes" />
   <patient-visite-modal-create :patient="selectedPatient" @on-refresh="$refs.customTablePatients2.reloadData()" />
+  <dossier-medical-modal :selectedPatient="selectedPatient" />
 </template>
 <script>
 import { get } from "@/http";
@@ -105,19 +106,22 @@ import PatientCardPrint from "../invoices/patient_medical_card";
 import PatientEditModal from "../../modals/modal_patient_edit.vue";
 import PatientVisiteModalCreate from "../../modals/modal_visite_medical_create.vue";
 import signeVitauxModal from "@/template/view/pages/patient_manage_pages/modals/signe_vitaux_modal.vue";
+import DossierMedicalModal from '../../modals/modal_dossier_medical.vue'
 export default {
   name: "PatientListPage",
   components: {
     PatientCardPrint,
     signeVitauxModal,
     PatientVisiteModalCreate,
-    PatientEditModal
+    PatientEditModal,
+    DossierMedicalModal
   },
   data() {
     return {
       tab: "all",
       search: "",
       selectedPatient: null,
+
       signes: null,
       dataTableColumns: [
         { data: "patient_code", title: "Code" },
@@ -142,7 +146,7 @@ export default {
         {
           label: "Dossier méd.",
           class: "btn-success me-1",
-          key: "edit",
+          key: "viewdocs",
         },
         {
           label: '<i class="ri-add-fill me-1"></i>Nouvelle visite',
@@ -176,7 +180,7 @@ export default {
       ],
       actionButtons2: [
         { label: "Voir signes vitaux", class: "btn-secondary me-1", key: "view" },
-        { label: "Consulter", class: "btn-info me-1", key: "consult" },
+        /*{ label: "Consulter", class: "btn-info me-1", key: "consult" },*/
         {
           label: '<i class="ri-delete-bin-3-line"></i>',
           class: "btn-soft-danger me-1",
@@ -229,7 +233,20 @@ export default {
             this.$showBsModal("modalCreateVisite");
           });
           break;
-        case "details":
+        case "viewdocs":
+          this.selectedPatient = payload.data;
+          Swal.fire({
+            text: 'Chargement...',
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            didOpen: () => {
+              Swal.showLoading();
+            }
+          });
+          this.$store.dispatch("services/viewMedicDocs", payload.data.id).then((res) => {
+            Swal.close();
+            this.$showBsModal('patient-docs-modal');
+          });
           break;
         default:
           break;

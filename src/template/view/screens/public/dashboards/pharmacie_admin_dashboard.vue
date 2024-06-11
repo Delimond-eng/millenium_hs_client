@@ -9,8 +9,8 @@
                 Bienvenue <br />
                 <small v-if="user !== null" class="text-uppercase"><span v-if="user.role"
                     class="text-secondary-emphasis">{{
-                  user.role.role
-                }}</span>
+                      user.role.role
+                    }}</span>
                   {{ user.name }}</small>
               </h4>
               <p class="text-muted mb-0">
@@ -28,7 +28,7 @@
             <div class="d-flex align-items-center">
               <div class="flex-grow-1 overflow-hidden">
                 <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                  Ventes annulés
+                  Ventes journalières annulés
                 </p>
               </div>
             </div>
@@ -36,8 +36,8 @@
               <div>
                 <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                   <span class="counter-value" v-if="reports.counts">{{
-                  `${reports.counts.abort_sells}`.padStart(2, "0")
-                }}</span>
+                    `${reports.counts.abort_sells}`.padStart(2, "0")
+                    }}</span>
                 </h4>
                 <a href="javascript:void(0)" class="text-decoration-underline">Voir les détails</a>
               </div>
@@ -61,7 +61,7 @@
             <div class="d-flex align-items-center">
               <div class="flex-grow-1 overflow-hidden">
                 <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                  Factures
+                  Factures journalières
                 </p>
               </div>
             </div>
@@ -69,8 +69,8 @@
               <div>
                 <h2 class="fs-22 fw-semibold ff-secondary mb-4">
                   <span class="counter-value" v-if="reports.counts">{{
-                  `${reports.counts.tickets}`.padStart(2, "0")
-                }}</span>
+                    `${reports.counts.tickets}`.padStart(2, "0")
+                    }}</span>
                 </h2>
                 <a href="#" class="text-decoration-underline">Voir les détails</a>
               </div>
@@ -94,7 +94,7 @@
             <div class="d-flex align-items-center">
               <div class="flex-grow-1 overflow-hidden">
                 <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                  Clients
+                  Clients journalières
                 </p>
               </div>
             </div>
@@ -102,8 +102,8 @@
               <div>
                 <h2 class="fs-22 fw-semibold ff-secondary mb-4">
                   <span v-if="reports.counts" class="counter-value">{{
-                  `${reports.counts.clients}`.padStart(2, "0")
-                }}</span>
+                    `${reports.counts.clients}`.padStart(2, "0")
+                    }}</span>
                 </h2>
                 <a href="#" class="text-decoration-underline">Voir les détails</a>
               </div>
@@ -127,7 +127,7 @@
             <div class="d-flex align-items-center">
               <div class="flex-grow-1 overflow-hidden">
                 <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                  Le balance
+                  La balance journalière
                 </p>
               </div>
             </div>
@@ -135,8 +135,8 @@
               <div>
                 <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                   <span class="counter-value" v-if="reports.counts">{{
-                  `${reports.counts.balance}`.padStart(2, "0")
-                }}</span>
+                    `${reports.counts.balance}`.padStart(2, "0")
+                    }}</span>
                   <small v-if="reports.counts">CDF</small>
                 </h4>
                 <a href="#" class="text-decoration-underline">Voir les détails</a>
@@ -171,8 +171,8 @@
           <div class="card-body">
             <div>
               <custom-table v-if="user.pharmacie" :api-url="`/pharmacie.reports/${user.pharmacie.id}`"
-                :columns="dataTableColumns" :action-buttons="actionButtons" :data-src="'reports'"
-                ref="customTableReports" />
+                :columns="dataTableColumns" :action-buttons="actionButtons" @actionButtonClick="handleActionButtonClick"
+                :data-src="'reports'" ref="customTableReports" />
             </div>
           </div>
         </div>
@@ -180,7 +180,6 @@
       <!--end col-->
     </div>
   </div>
-
   <!-- end row-->
 </template>
 
@@ -191,9 +190,17 @@ export default {
   data() {
     return {
       timer: null,
+      produit: null,
       dataTableColumns: [
         { data: "produit.produit_code", title: "CODE" },
         { data: "produit.produit_libelle", title: "PRODUIT" },
+        {
+          title: "PRODUIT",
+          data: null,
+          render: function (data, type, row) {
+            return row.produit.produit_libelle + ' - ' + row.produit.type.type_libelle;
+          },
+        },
         { data: "produit.categorie.categorie_libelle", title: "CATEGORIE" },
         { data: "qte_entree", title: "QTE ENTREES" },
         { data: "qte_sortie", title: "QTE SORTIES" },
@@ -217,12 +224,15 @@ export default {
   unmounted() {
     clearInterval(this.timer);
   },
-  mounted() {
+  beforeMount() {
     this.$nextTick(() => {
-      this.timer = setInterval(() => {
-        this.$store.dispatch("pharmacie/viewDailySellerReport", "admin");
-      }, 2000);
+      this.$store.dispatch("pharmacie/viewDailySellerReport", "admin");
     });
+  },
+  methods: {
+    handleActionButtonClick(payload) {
+      this.$router.push({ name: 'pharma-operation-product-route', params: { id: payload.data.produit.id } })
+    },
   },
   computed: {
     reports() {
@@ -230,7 +240,7 @@ export default {
     },
     user() {
       return this.$store.getters["auth/GET_USER"];
-    },
+    }
   },
 };
 </script>

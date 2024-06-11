@@ -95,7 +95,7 @@
                           <td>
                             <span v-if="docs[selectedIndex].signe">{{
                               docs[selectedIndex].signe.patient_sv_age
-                            }}</span>
+                              }}</span>
                             ans
                           </td>
                         </tr>
@@ -197,11 +197,11 @@
                         <td>
                           <span v-if="prescription.produit">{{
                             prescription.produit.produit_libelle
-                          }}</span>
+                            }}</span>
                           |
                           <span v-if="prescription.produit.type">{{
                             prescription.produit.type.type_libelle
-                          }}</span>
+                            }}</span>
                         </td>
                         <td>
                           {{ prescription.prescription_traitement_dosage }}
@@ -232,7 +232,7 @@
                         <td>
                           <span v-if="ex.examen">{{
                             ex.examen.examen_labo_libelle
-                          }}</span>
+                            }}</span>
                         </td>
                         <td>.....</td>
                         <td>.....</td>
@@ -250,7 +250,7 @@
       </div>
     </div>
     <div v-else class="d-flex justify-content-center align-items-center m-5 h-100 w-100 flex-column">
-      <img src="assets/images/companies/doc3.png" class="img-fluid mb-2" alt="empty docs" />
+      <img src="assets/images/companies/doc3.png" class="img-fluid mb-2" alt="empty docs" style="height: 120px;" />
       <h1 class="fs-18">Aucun dossier disponible</h1>
     </div>
   </div>

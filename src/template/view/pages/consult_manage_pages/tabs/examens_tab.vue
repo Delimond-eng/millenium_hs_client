@@ -38,62 +38,58 @@
 
     <form @submit.prevent="submitFormExamens">
       <div class="row mt-3 p-2">
-        <div
-          class="form-check form-check-success col-md-3"
-          v-for="(exam, index) in examens"
-          :key="index"
-        >
+        <div class="form-check form-check-success col-md-3" v-for="(exam, index) in examens" :key="index">
           <label
             class="card p-2 shadow-none border-1 border-dark-subtle d-flex justify-content-between flex-row align-items-center"
-            :for="'checkList_' + index"
-          >
+            :for="'checkList_' + index">
             <h6 class="form-check-label text-dark fw-medium flex-fill">
               {{ exam.examen_labo_libelle }}
             </h6>
-            <input
-              class="form-check-input"
-              type="checkbox"
-              @change="triggerSelectExamen($event, exam)"
-              :id="'checkList_' + index"
-            />
+            <input class="form-check-input" type="checkbox" @change="triggerSelectExamen($event, exam)"
+              :id="'checkList_' + index" />
           </label>
         </div>
       </div>
-      <state-empty
-        v-if="examens.length === 0"
-        title="Aucun informations répertorié !"
-        :expanded="false"
-        description="Il y a aucun examen pour cet emplacement !"
-      ></state-empty>
+      <state-empty v-if="examens.length === 0" title="Aucun informations répertorié !" :expanded="false"
+        description="Il y a aucun examen pour cet emplacement !"></state-empty>
+
       <bs-toast id="errorsToastExamen" :msg="errors_msg" />
-      <div
-        class="d-flex align-items-end justify-content-end w-100 mt-4"
-        v-show="form_examens.length > 0"
-      >
+      <div class="d-flex align-items-end justify-content-end w-100 mt-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="formCheck2" v-model="isPrinted" />
+          <label class="form-check-label" for="formCheck2">Lancer l'impression après validation</label>
+        </div>
+      </div>
+      <div class="d-flex align-items-end justify-content-end w-100 mt-4" v-show="form_examens.length > 0">
         <button type="button" class="btn btn-light btn-border btn-label right me-2">
           <i class="ri-restart-line label-icon align-middle fs-16 ms-2"></i> Annuler
         </button>
 
-        <load-button
-          btn-type="submit"
-          :loading="formLoadingExamens"
-          class-name="btn-success btn-border btn-label right nexttab nexttab "
-          ><i class="ri-check-double-line label-icon align-middle fs-16 ms-2"></i>Valider
+        <load-button btn-type="submit" :loading="formLoadingExamens"
+          class-name="btn-success btn-border btn-label right nexttab nexttab "><i
+            class="ri-check-double-line label-icon align-middle fs-16 ms-2"></i>Valider
           & imprimer
         </load-button>
       </div>
     </form>
   </div>
+  <invoice :item="latestInvoice" />
 </template>
 
 <script>
+import Invoice from '../../invoices/examen_invoice.vue'
 export default {
   name: "ExamensTab",
+  components: {
+    Invoice,
+  },
   data() {
     return {
       formLoadingExamens: false,
       errors_msg: "",
       form_examens: [],
+      latestInvoice: [],
+      isPrinted: false
     };
   },
 
@@ -102,6 +98,12 @@ export default {
      * Crée la prescription des examens pour un patient
      */
     submitFormExamens(e) {
+      if (this.latestInvoice.length > 0) {
+        if (this.isPrinted) {
+          window.print();
+        }
+        return;
+      }
       if (this.currentConsult === null) {
         this.errors_msg = "Veuillez consulter le patient avant de le prescrire !";
         let toast = document.getElementById("errorsToastExamen");
@@ -120,19 +122,26 @@ export default {
       this.$store
         .dispatch("services/addExamens", this.form_examens)
         .then((res) => {
-          console.log(JSON.stringify(res));
           this.formLoadingExamens = false;
           if (res.status !== undefined) {
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Demandes d'examens effectuées avec succès !",
-              showConfirmButton: false,
-              timer: 3000,
-              showCloseButton: false,
+            this.latestInvoice = res.result;
+            this.$nextTick(() => {
+              if (this.isPrinted) {
+                window.print();
+              }
             });
-            this.$store.dispatch("services/viewAllConsultsExamens");
-            this.$store.dispatch("services/viewPatientDoc", this.selectedPatient.id);
+            setTimeout(() => {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Demandes d'examens effectuées avec succès !",
+                showConfirmButton: false,
+                timer: 3000,
+                showCloseButton: false,
+              });
+              this.$store.dispatch("services/viewAllConsultsExamens");
+              this.$store.dispatch("services/viewPatientDoc", this.selectedPatient.id);
+            }, 500);
           }
           if (res.errors !== undefined) {
             this.errors_msg = res.errors.toString();
@@ -183,11 +192,11 @@ export default {
   props: {
     currentConsult: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     selectedPatient: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
   },
 };

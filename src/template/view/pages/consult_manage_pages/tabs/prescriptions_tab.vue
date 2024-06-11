@@ -27,7 +27,7 @@
                 {{ item.prescription_traitement_dosage_unite }}
               </td>
               <td>
-                {{ item.prescription_traitement_freq }}/
+                {{ item.prescription_traitement_freq }}X
                 {{ item.prescription_traitement_freq_unite }}
               </td>
               <td>
@@ -88,6 +88,7 @@
                   <option value="UI">UI</option>
                   <option value="dose">dose</option>
                   <option value="patch">patch</option>
+                  <option value="patch">comprimé</option>
                 </select>
               </div>
             </td>
@@ -95,7 +96,7 @@
               <div class="d-flex align-items-center">
                 <input type="text" v-model="input.frequence" class="form-control w-100" placeholder="Fréquence...ex: 1"
                   required />
-                <div class="mx-1">/</div>
+                <div class="mx-1">X</div>
                 <select class="form-select" style="width: 100px" v-model="input.frequence_unite" required>
                   <option value="Jour" selected>Jour</option>
                   <option value="Semaine">Semaine</option>
@@ -107,7 +108,7 @@
               <div class="d-flex align-items-center">
                 <input type="text" v-model="input.duree" class="form-control w-100 me-1" placeholder="Durée...ex: 1"
                   required />
-                <div class="mx-1">/</div>
+
                 <select class="form-select" style="width: 100px" v-model="input.duree_unite" required>
                   <option value="Jours" selected>Jours</option>
                   <option value="Semaines">Semaines</option>
@@ -160,7 +161,7 @@
     </form>
   </div>
   <!--end tab-pane-->
-  <prescription-invoice :item="latestPrescription" />
+  <prescription-invoice v-if="latestPrescription.length > 0" :item="latestPrescription" />
 </template>
 
 <script>
@@ -199,6 +200,9 @@ export default {
         if (this.isPrinted) {
           window.print();
         }
+        setTimeout(() => {
+          this.latestPrescription = [];
+        }, 500);
         return;
       }
       if (this.currentConsult === null) {
@@ -242,6 +246,7 @@ export default {
               this.$store.dispatch("services/viewPatientDoc", this.selectedPatient.id);
               if (this.latestPrescription) {
                 $("#examens-tab").click();
+                this.latestPrescription = [];
               }
             }, 500);
           }

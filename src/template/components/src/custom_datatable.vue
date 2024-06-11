@@ -67,7 +67,7 @@ export default {
         },
         columns: columnsWithButtons,
         language: {
-          searchPlaceholder: "Recherche personnalisée...",
+          searchPlaceholder: "Recherche...",
           search: "",
           buttons: {
             copy: "Copier",

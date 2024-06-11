@@ -536,34 +536,8 @@ export default {
     },
   },
 
-  unmounted() {
-    localStorage.removeItem("cached-patient");
-  },
-
-  beforeRouteEnter(to, from, next) {
-    const cachedPatient = localStorage.getItem("cached-patient");
-    next((vm) => {
-      vm.$nextTick(() => {
-        if (cachedPatient !== null) {
-          const patient = JSON.parse(cachedPatient);
-          vm.$store.commit("services/SET_CODE", patient.patient_code);
-          vm.form.patient_id = patient.id;
-          vm.form.code = patient.patient_code;
-          vm.form.nom = patient.patient_nom;
-          vm.form.prenom = patient.patient_prenom;
-          vm.form.sexe = patient.patient_sexe;
-          vm.form.adresse = patient.patient_adresse;
-          vm.form.telephone_urgence = patient.patient_contact_urgence;
-          if (patient.patient_num_assurance !== null) {
-            vm.form.assure = "Oui";
-            vm.form.num_assurance = patient.patient_num_assurance;
-          }
-          vm.form.datenais = patient.patient_datenais;
-          vm.form.patient_id = patient.id;
-          vm.form.telephone = patient.patient_telephone;
-        }
-      });
-    });
+  mounted() {
+    this.$store.dispatch('services/showCode')
   },
 
   computed: {

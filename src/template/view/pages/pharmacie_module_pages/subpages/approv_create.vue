@@ -48,11 +48,19 @@
           <input type="date" v-model="form.stock_date_exp" class="form-control me-2" id="basiInput"
             placeholder="Entrez le libellé de la categorie" required />
         </div>
-        <div class="col-md-6">
-          <label for="margeBenef" class="form-label">Marge bénéficiaire(en %)<sup class="text-danger">*</sup></label>
+        <div class="col-md-3 col-6">
+          <label for="margeBenef" class="form-label">Marge bénéf(en %)<sup class="text-danger">(Optionnelle)</sup>
+            Ou</label>
           <div class="d-flex">
             <input type="number" v-model="form.marge" class="form-control me-2" id="margeBenef"
-              placeholder="Entrez le prix d'achat du stock..." required />
+              placeholder="marge benef..." />
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <label for="margeBenef" class="form-label">Prix de vente<sup class="text-danger"></sup></label>
+          <div class="d-flex">
+            <input type="number" v-model="form.stock_pv" class="form-control me-2" id="margeBenef"
+              placeholder="Prix de vente..." />
           </div>
         </div>
         <div class="col-md-6">
@@ -99,6 +107,7 @@ export default {
         stock_pa: "",
         stock_pa_devise: "CDF",
         marge: "",
+        stock_pv: "",
         stock_obs: "",
         produit_id: "",
         fournisseur_id: "",
@@ -116,7 +125,7 @@ export default {
           placeholder: "Sélectionner un produit...",
           data: $.map(self.config.produits, function (item) {
             return {
-              text: `#${item.produit_code} | ${item.produit_libelle}`,
+              text: `#${item.produit_code} | ${item.produit_libelle} - ${item.type.type_libelle}`,
               id: item.id,
             };
           }),
