@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-12 col-md-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center">
+              <div class="d-flex align-items-center" v-if="user">
                 <img src="assets/images/companies/emplacement.png" style="height: 30px" class="me-2"
                   alt="emplacement icon" />
                 <h4 class="fs-16 fw-bold text-secondary-emphasis mb-1 text-uppercase" v-if="user.hopital">
@@ -21,22 +21,24 @@
           </div>
         </div>
 
-        <div v-if="user.role">
-          <!-- admin dash -->
-          <admin-dash v-if="user.role.role.toLowerCase().includes('admin')" />
-          <!-- end admin -->
+        <div v-if="user">
+          <div v-if="user.role">
+            <!-- admin dash -->
+            <admin-dash v-if="user.role.role.toLowerCase().includes('admin')" />
+            <!-- end admin -->
 
-          <!-- dashboard pharmacie content here -->
-          <pharmacie-dash v-if="user.role.role.includes('Pharmacien')" />
-          <!-- end dashboard content -->
+            <!-- dashboard pharmacie content here -->
+            <pharmacie-dash v-if="user.role.role.includes('Pharmacien')" />
+            <!-- end dashboard content -->
 
-          <!-- dashboard reception -->
-          <reception-dash v-if="user.role.role.includes('Réceptionniste')" />
-          <!-- end dashboard -->
+            <!-- dashboard reception -->
+            <reception-dash v-if="user.role.role.includes('Réceptionniste')" />
+            <!-- end dashboard -->
 
-          <!-- doctor dashboard -->
-          <doctor-dash v-if="user.role.role.toLowerCase().includes('docteur')" />
-          <!-- end doctor dashboard -->
+            <!-- doctor dashboard -->
+            <doctor-dash v-if="user.role.role.toLowerCase().includes('docteur')" />
+            <!-- end doctor dashboard -->
+          </div>
         </div>
       </div>
     </div>

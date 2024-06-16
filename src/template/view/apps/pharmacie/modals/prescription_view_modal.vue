@@ -76,7 +76,7 @@ export default {
           });
           return;
         }
-        else if (item.produit_id === data.produit_id && item.stocks) {
+        if (item.produit_id === data.produit_id) {
           item.operation_qte = data.prescription_traitement_qte;
           this.$store.dispatch('pharmacie/addToCart', item);
           let index = this.prescriptions.indexOf(data);
@@ -84,12 +84,6 @@ export default {
           if (this.prescriptions.length === 0) {
             this.$closeBsModal("prescription-view-modal");
           }
-        } else {
-          Swal({
-            icon: "warning",
-            title: "Produit non disponible!",
-            text: `le produit sélectionné n'est pas disponible dans la pharmacie ! !`,
-          });
         }
       }
     },

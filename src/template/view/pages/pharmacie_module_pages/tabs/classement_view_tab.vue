@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
+      <div class="card shadow-none">
         <div class="card-body">
           <custom-table v-if="user.pharmacie" :api-url="`/pharmacie.operations.all/${user.pharmacie.id}/classement`"
             :columns="dataTableColumns" :action-buttons="actionButtons" :data-src="'operations'"

@@ -44,7 +44,7 @@
                             <li class="nav-item" role="presentation">
                                 <router-link :to="{ name: 'facturations-config-tab' }" class="nav-link" role="tab"
                                     aria-selected="false" tabindex="-1">
-                                    <i class="ri-file-settings-line"></i> Facturations
+                                    <i class="ri-file-settings-line"></i> Prestations
                                 </router-link>
                             </li>
                         </ul>
@@ -79,10 +79,12 @@
 export default {
     name: 'HomeView',
 
-    mounted() {
-        this.$store.dispatch('services/viewFacturations', 'all');
-        this.$store.dispatch('services/viewAllEmplacements');
-        this.$store.dispatch('services/showConfigs');
+    async mounted() {
+        await Promise.all([
+            this.$store.dispatch('services/viewFacturations', 'all'),
+            this.$store.dispatch('services/viewAllEmplacements'),
+            this.$store.dispatch('services/showConfigs')
+        ]);
     },
 }
 </script>

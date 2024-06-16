@@ -22,6 +22,17 @@ const setters = {
  * */
 const getters = {
   GET_USER: (state) => state.user,
+  HAS_ACCESS: (state) => (menuName) => {
+    const user = state.user;
+    if (user && user.menus) {
+      const myList = user.menus.split(",");
+      const hasAccess = myList.some((item) =>
+        item.toLowerCase().includes(menuName.toLowerCase())
+      );
+      return hasAccess;
+    }
+    return false;
+  },
 };
 
 /**
@@ -120,8 +131,7 @@ const actions = {
    * */
   async loggedOut({ commit }) {
     localStorage.removeItem("user-data");
-    console.log(localStorage.getItem("user-data"));
-    commit("SET_USER", {});
+    commit("SET_USER", null);
   },
 };
 

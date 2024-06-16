@@ -3,11 +3,11 @@
     <div class="col-md-12 mb-3 pb-1">
       <div class="d-flex align-items-lg-center flex-lg-row flex-column">
         <div class="flex-grow-1">
-          <h4 class="fs-16 mb-1 fw-bold">
+          <h4 class="fs-16 mb-1 fw-bold" v-if="user">
             Bienvenue <br />
             <small class="text-uppercase"><span v-if="user.role" class="text-secondary-emphasis">{{
               user.role.role
-            }}</span>
+                }}</span>
               {{ user.name }}</small>
           </h4>
           <p class="text-muted mb-0">

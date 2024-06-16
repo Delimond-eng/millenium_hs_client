@@ -7,10 +7,9 @@
             <div class="flex-grow-1">
               <h4 class="fs-16 mb-1 fw-bold">
                 Bienvenue <br />
-                <small v-if="user !== null" class="text-uppercase"><span v-if="user.role"
-                    class="text-secondary-emphasis">{{
-                      user.role.role
-                    }}</span>
+                <small v-if="user" class="text-uppercase"><span v-if="user.role" class="text-secondary-emphasis">{{
+                  user.role.role
+                }}</span>
                   {{ user.name }}</small>
               </h4>
               <p class="text-muted mb-0">
@@ -37,7 +36,7 @@
                 <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                   <span class="counter-value" v-if="reports.counts">{{
                     `${reports.counts.abort_sells}`.padStart(2, "0")
-                    }}</span>
+                  }}</span>
                 </h4>
                 <a href="javascript:void(0)" class="text-decoration-underline">Voir les détails</a>
               </div>
@@ -70,7 +69,7 @@
                 <h2 class="fs-22 fw-semibold ff-secondary mb-4">
                   <span class="counter-value" v-if="reports.counts">{{
                     `${reports.counts.tickets}`.padStart(2, "0")
-                    }}</span>
+                  }}</span>
                 </h2>
                 <a href="#" class="text-decoration-underline">Voir les détails</a>
               </div>
@@ -103,7 +102,7 @@
                 <h2 class="fs-22 fw-semibold ff-secondary mb-4">
                   <span v-if="reports.counts" class="counter-value">{{
                     `${reports.counts.clients}`.padStart(2, "0")
-                    }}</span>
+                  }}</span>
                 </h2>
                 <a href="#" class="text-decoration-underline">Voir les détails</a>
               </div>
@@ -136,7 +135,7 @@
                 <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                   <span class="counter-value" v-if="reports.counts">{{
                     `${reports.counts.balance}`.padStart(2, "0")
-                    }}</span>
+                  }}</span>
                   <small v-if="reports.counts">CDF</small>
                 </h4>
                 <a href="#" class="text-decoration-underline">Voir les détails</a>
@@ -169,7 +168,7 @@
             </div>
           </div>
           <div class="card-body">
-            <div>
+            <div v-if="user">
               <custom-table v-if="user.pharmacie" :api-url="`/pharmacie.reports/${user.pharmacie.id}`"
                 :columns="dataTableColumns" :action-buttons="actionButtons" @actionButtonClick="handleActionButtonClick"
                 :data-src="'reports'" ref="customTableReports" />

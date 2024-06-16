@@ -25,10 +25,12 @@ export default {
     FooterLayout,
     PharmacistSessionModal,
   },
-  beforeMount() {
-    this.$store.dispatch("pharmacie/viewPharmacieProducts");
-    this.$store.dispatch("pharmacie/viewAllCategories");
-    this.$store.dispatch("pharmacie/viewDailySellerReport");
+  async beforeMount() {
+    await Promise.all([
+      this.$store.dispatch("pharmacie/viewPharmacieProducts"),
+      this.$store.dispatch("pharmacie/viewAllCategories"),
+      this.$store.dispatch("pharmacie/viewDailySellerReport")
+    ]);
   },
   mounted() {
     this.addAttributes();

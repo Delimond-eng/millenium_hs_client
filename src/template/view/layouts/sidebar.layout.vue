@@ -30,7 +30,7 @@
     <div data-simplebar-auto-hide="false" data-simplebar class="h-100">
       <div class="container-fluid">
         <div id="two-column-menu"></div>
-        <ul class="navbar-nav" id="navbar-nav" v-if="$isAccessMenu('Tableau de bord')">
+        <ul class="navbar-nav" id="navbar-nav" v-if="hasAccess('Tableau de bord')">
           <li class="menu-title"><span data-key="t-menu">Menu</span></li>
           <li class="nav-item">
             <a class="nav-link menu-link" href="#/home/dash">
@@ -39,12 +39,12 @@
             </a>
           </li>
           <!-- end Dashboard Menu -->
-          <li class="nav-item" v-if="$isAccessMenu('modules')">
+          <li class="nav-item" v-if="hasAccess('modules')">
             <a class="nav-link menu-link" href="#/home/modules">
               <i class="ri-apps-fill"></i> <span data-key="t-dashboards">Modules</span>
             </a>
           </li>
-          <li class="nav-item" v-if="$isAccessMenu('Patients')">
+          <li class="nav-item" v-if="hasAccess('Patients')">
             <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button"
               aria-expanded="false" aria-controls="sidebarApps">
               <i class="ri-wheelchair-line"></i> <span data-key="t-apps">Patients</span>
@@ -64,7 +64,7 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item" v-if="$isAccessMenu('Agents')">
+          <li class="nav-item" v-if="hasAccess('Agents')">
             <a class="nav-link menu-link" href="#med" data-bs-toggle="collapse" role="button" aria-expanded="false"
               aria-controls="med">
               <i class="ri-user-settings-line"></i> <span data-key="t-apps">Agents</span>
@@ -89,7 +89,7 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item" v-if="$isAccessMenu('Consultations')">
+          <li class="nav-item" v-if="hasAccess('Consultations')">
             <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
               aria-expanded="false" aria-controls="sidebarLanding">
               <i class="ri-stethoscope-line"></i>
@@ -110,7 +110,7 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item" v-if="$isAccessMenu('Suivis')">
+          <li class="nav-item" v-if="hasAccess('Suivis')">
             <a class="nav-link menu-link" href="#suiviLanding" data-bs-toggle="collapse" role="button"
               aria-expanded="false" aria-controls="sidebarLanding">
               <i class="ri-shield-cross-line"></i>
@@ -131,7 +131,7 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item" v-if="$isAccessMenu('Premiers soins')">
+          <li class="nav-item" v-if="hasAccess('Premiers soins')">
             <a class="nav-link menu-link" href="#premiersLanding" data-bs-toggle="collapse" role="button"
               aria-expanded="false" aria-controls="premiersLanding">
               <i class="bx bx-capsule"></i>
@@ -151,7 +151,7 @@
             </div>
           </li>
 
-          <li class="nav-item" v-if="$isAccessMenu('Transferts patients')">
+          <li class="nav-item" v-if="hasAccess('Transferts patients')">
             <a class="nav-link menu-link" href="#/home/transferts" role="button">
               <i class="ri-arrow-left-right-fill"></i>
               <span data-key="t-apps">Transferts patients</span>
@@ -160,14 +160,14 @@
 
 
 
-          <li class="nav-item" v-if="$isAccessMenu('Hospitalisations')">
+          <li class="nav-item" v-if="hasAccess('Hospitalisations')">
             <a class="nav-link menu-link" href="#/home/hospitalisations.manage" role="button">
               <i class="ri-hotel-bed-line"></i>
               <span data-key="t-apps">Hospitalisations</span>
             </a>
           </li>
 
-          <li class="nav-item" v-if="$isAccessMenu('Laboratoires')">
+          <li class="nav-item" v-if="hasAccess('Laboratoires')">
             <a class="nav-link menu-link" href="#lab" data-bs-toggle="collapse" role="button" aria-expanded="false"
               aria-controls="med">
               <i class="ri-microscope-line"></i>
@@ -204,7 +204,7 @@
             </div>
           </li>
 
-          <li class="nav-item" v-if="$isAccessMenu('Maternites')">
+          <li class="nav-item" v-if="hasAccess('Maternites')">
             <a class="nav-link menu-link" href="#maternite" data-bs-toggle="collapse" role="button"
               aria-expanded="false" aria-controls="maternite">
               <i class="ri-parent-line"></i> <span data-key="t-apps">Maternité</span>
@@ -236,7 +236,7 @@
             </div>
           </li>
 
-          <li class="nav-item" v-if="$isAccessMenu('Pharmacies')">
+          <li class="nav-item" v-if="hasAccess('Pharmacies')">
             <a class="nav-link menu-link" href="#pharmacie" data-bs-toggle="collapse" role="button"
               aria-expanded="false" aria-controls="pharmacie">
               <i class="bx bx-first-aid"></i> <span data-key="t-apps">Pharmacies</span>
@@ -304,20 +304,20 @@
             </div>
           </li>
 
-          <li class="nav-item" id="config-menu" v-if="$isAccessMenu('Configurations')">
+          <li class="nav-item" id="config-menu" v-if="hasAccess('Configurations')">
             <a class="nav-link menu-link" href="#/admin/config/all" role="button">
               <i class="ri-settings-2-line"></i>
               <span data-key="t-landing">Configurations</span>
             </a>
           </li>
-          <li class="nav-item" id="config-menu" v-if="$isAccessMenu('Partenaires')">
+          <li class="nav-item" id="config-menu" v-if="hasAccess('Partenaires')">
             <a class="nav-link menu-link" href="#/admin/config/partener" role="button">
               <i class="ri-contacts-book-line"></i>
               <span data-key="t-landing">Partenaires</span>
             </a>
           </li>
 
-          <li class="nav-item" id="users-menu" v-if="$isAccessMenu('Gestion utilisateurs')">
+          <li class="nav-item" id="users-menu" v-if="hasAccess('Gestion utilisateurs')">
             <a class="nav-link menu-link" href="#usersLanding" data-bs-toggle="collapse" role="button"
               aria-expanded="false" aria-controls="usersLanding">
               <i class="ri-user-settings-line"></i>
@@ -343,7 +343,7 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item" id="users-menu" v-if="$isAccessMenu('Facturations')">
+          <li class="nav-item" id="users-menu" v-if="hasAccess('Facturations')">
             <a class="nav-link menu-link" href="#facturationMain" data-bs-toggle="collapse" role="button"
               aria-expanded="false" aria-controls="facturationMain">
               <i class="ri-money-dollar-circle-line"></i>
@@ -387,6 +387,20 @@ export default {
       this.actionKey = tag;
       this.$showBsModal("serviceConfigModal");
     },
+    refreshUser() {
+      this.$store.dispatch('auth/refreshUser')
+    }
+  },
+  created() {
+    this.refreshUser();
+  },
+
+  computed: {
+    hasAccess() {
+      return (menuName) => {
+        return this.$store.getters["auth/HAS_ACCESS"](menuName);
+      };
+    }
   },
 };
 </script>

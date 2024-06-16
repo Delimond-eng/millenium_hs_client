@@ -31,8 +31,8 @@ export default {
         sidebarLayout,
         ServiceSettingsCanvas,
     },
-    mounted() {
-        this.$store.dispatch("services/showConfigs");
+    async mounted() {
+        await this.$store.dispatch("services/showConfigs");
     },
 };
 </script>

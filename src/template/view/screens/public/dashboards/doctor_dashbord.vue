@@ -4,14 +4,14 @@
             <div class="h-100">
                 <div class="row mb-3 pb-1">
                     <div class="col-12">
-                        <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+                        <div v-if="user" class="d-flex align-items-lg-center flex-lg-row flex-column">
                             <div class="flex-grow-1">
                                 <h4 class="fs-16 mb-1 fw-bold">
                                     Bienvenue <br />
                                     <small class="text-uppercase"><span v-if="user.role"
                                             class="text-secondary-emphasis">{{
-                                        user.role.role
-                                    }}</span>
+                                                user.role.role
+                                            }}</span>
                                         {{ user.name }}</small>
                                 </h4>
                                 <p class="text-muted mb-0">
@@ -135,7 +135,7 @@
                                 aria-controls="pills-bill-info" aria-selected="true">
                                 Demandes des examens
                                 <span class="badge bg-danger align-middle ms-1">{{
-                                        examens.length
+                                    examens.length
                                     }}</span>
                             </button>
                         </li>
@@ -208,21 +208,24 @@ export default {
             selectedPrescription: null,
         };
     },
-    mounted() {
-        this.$store.dispatch("services/viewAllConsultsExamens");
-        this.$store.dispatch("services/viewPatientsPending");
-        this.$store.dispatch("services/viewAllLaboExamensPendings");
-        this.$store.dispatch("services/viewAllPrescriptionsPendings");
-        this.$store.dispatch("services/viewSchedules");
+    async mounted() {
+        await this.loadData();
     },
-
     methods: {
+        async loadData() {
+            await Promise.all([
+                this.$store.dispatch("services/viewAllConsultsExamens"),
+                this.$store.dispatch("services/viewPatientsPending"),
+                this.$store.dispatch("services/viewAllLaboExamensPendings"),
+                this.$store.dispatch("services/viewAllPrescriptionsPendings"),
+                this.$store.dispatch("services/viewSchedules"),
+            ]);
+        },
         setPatient(data) {
             localStorage.setItem("current-patient", JSON.stringify(data));
             this.$router.push({ name: "patient-create" });
         },
     },
-
     computed: {
         user() {
             return this.$store.getters["auth/GET_USER"];
